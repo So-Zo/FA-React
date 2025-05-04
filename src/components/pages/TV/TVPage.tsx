@@ -10,10 +10,10 @@ const TVPage: React.FC = () => {
   return (
     <div className="tv-page">
       {/* Introduction Section */}
-      <section className="intro-section">
+      <section className="section-content">
         <div className="container">
           <h2>Binge-Worthy Series & Cult Classics</h2>
-          <p className="intro-text">
+          <p>
             Explore character development, plot analysis, and behind-the-scenes insights from your favorite TV productions.
             From sci-fi epics to gripping dramas, discover what makes these stories resonate with audiences worldwide.
           </p>
@@ -36,7 +36,7 @@ const TVPage: React.FC = () => {
       </section>
 
       {/* Golden Age Section */}
-      <section className="golden-age-section">
+      <section className="section-content">
         <div className="container">
           <h2>The Golden Age of Television</h2>
           <p>
@@ -215,7 +215,7 @@ const TVPage: React.FC = () => {
       </section>
 
       {/* Streaming Revolution Section */}
-      <section className="streaming-section">
+      <section className="section-content">
         <div className="container">
           <h2>The Streaming Revolution</h2>
           <p>

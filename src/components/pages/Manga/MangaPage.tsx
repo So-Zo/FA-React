@@ -10,10 +10,10 @@ const MangaPage: React.FC = () => {
   return (
     <div className="manga-page">
       {/* Introduction Section */}
-      <section className="intro-section">
+      <section className="section-content">
         <div className="container">
           <h2>Discover the World of Manga</h2>
-          <p className="intro-text">
+          <p>
             Manga are Japanese comics or graphic novels with a distinctive art style, typically published in black and white.
             With a rich history dating back to the 19th century, manga has evolved into a global phenomenon that influences
             art, storytelling, and popular culture worldwide.
@@ -77,7 +77,7 @@ const MangaPage: React.FC = () => {
       </section>
 
       {/* Popular Genres Section */}
-      <section className="genres-section">
+      <section className="section-content">
         <div className="container">
           <h2>Popular Manga Genres</h2>
           <p>

@@ -38,19 +38,7 @@
   text-align: center;
 }
 
-/* Intro section */
-.intro-section {
-  background: var(--tv-gradient);
-  padding: var(--spacing-xl) 0;
-  text-align: center;
-}
-
-.intro-text {
-  max-width: 50rem;
-  margin: 0 auto var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-loose);
-}
+/* Note: Intro section styles moved to sections.css */
 
 .quick-links {
   display: flex;
@@ -81,33 +69,7 @@
   margin-right: var(--spacing-sm);
 }
 
-/* Golden Age section */
-.golden-age-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-primary);
-}
-
-.golden-age-section h2 {
-  margin-bottom: var(--spacing-lg);
-  position: relative;
-  display: inline-block;
-}
-
-.golden-age-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.3125rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: var(--fanarc-secondary-color);
-}
-
-.golden-age-section > .container > p {
-  max-width: 50rem;
-  margin-bottom: var(--spacing-xl);
-  line-height: var(--line-height-loose);
-}
+/* Note: Golden Age section styles moved to sections.css */
 
 .era-features {
   display: grid;
@@ -274,33 +236,7 @@
   color: var(--text-primary);
 }
 
-/* Streaming section */
-.streaming-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-secondary);
-}
-
-.streaming-section h2 {
-  margin-bottom: var(--spacing-lg);
-  position: relative;
-  display: inline-block;
-}
-
-.streaming-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.3125rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: var(--fanarc-secondary-color);
-}
-
-.streaming-section > .container > p {
-  max-width: 50rem;
-  margin-bottom: var(--spacing-xl);
-  line-height: var(--line-height-loose);
-}
+/* Note: Streaming section styles moved to sections.css */
 
 .streaming-impact {
   display: grid;

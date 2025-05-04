@@ -10,10 +10,10 @@ const VideoGamesPage: React.FC = () => {
   return (
     <div className="video-games-page">
       {/* Introduction Section */}
-      <section className="intro-section">
+      <section className="section-content">
         <div className="container">
           <h2>Level Up Your Gaming Knowledge</h2>
-          <p className="intro-text">
+          <p>
             Explore the origins, inspirations, and development processes behind your favorite games and gaming technology.
             From retro classics to cutting-edge releases, discover the artistry and innovation that drives the gaming industry.
           </p>
@@ -36,7 +36,7 @@ const VideoGamesPage: React.FC = () => {
       </section>
 
       {/* Evolution of Gaming Section */}
-      <section className="evolution-section">
+      <section className="section-content">
         <div className="container">
           <h2>The Evolution of Gaming</h2>
           <p>
@@ -131,7 +131,7 @@ const VideoGamesPage: React.FC = () => {
       </section>
 
       {/* Game Genres Section */}
-      <section className="genres-section">
+      <section className="section-content">
         <div className="container">
           <h2>Exploring Game Genres</h2>
           <p>
@@ -208,7 +208,7 @@ const VideoGamesPage: React.FC = () => {
       </section>
 
       {/* Game Development Section */}
-      <section className="development-section">
+      <section className="section-content">
         <div className="container">
           <h2>The Art of Game Development</h2>
           <p>

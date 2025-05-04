@@ -6,27 +6,11 @@
 
 /* Note: Hero section styles moved to sections.css */
 
-/* Intro section */
-.intro-section {
-  background: var(--comics-gradient);
-  padding: var(--spacing-xl) 0;
-  text-align: center;
-}
-
-.intro-text {
-  max-width: 50rem;
-  margin: 0 auto var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-loose);
-}
+/* Note: Intro section styles moved to sections.css */
 
 /* Note: Quick link styles moved to links.css */
 
-/* Publishers section */
-.publishers-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-primary);
-}
+/* Note: Publishers section styles moved to sections.css */
 
 .publishers-grid {
   display: grid;
@@ -87,11 +71,7 @@
   color: var(--text-primary);
 }
 
-/* Characters section */
-.characters-section {
-  background: var(--comics-gradient);
-  padding: var(--spacing-xxl) 0;
-}
+/* Note: Characters section styles moved to sections.css */
 
 .characters-showcase {
   margin-top: var(--spacing-xl);

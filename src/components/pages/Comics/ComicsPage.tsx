@@ -10,10 +10,10 @@ const ComicsPage: React.FC = () => {
   return (
     <div className="comics-page">
       {/* Introduction Section */}
-      <section className="intro-section">
+      <section className="section-content">
         <div className="container">
           <h2>Explore the World of Comics</h2>
-          <p className="intro-text">
+          <p>
             Comics are a vibrant medium that combines visual art and storytelling to create immersive narratives.
             From superhero epics to indie masterpieces, comics have evolved into a sophisticated art form with
             global influence on culture, film, television, and literature.
@@ -37,7 +37,7 @@ const ComicsPage: React.FC = () => {
       </section>
 
       {/* Publishers Section */}
-      <section className="publishers-section">
+      <section className="section-content">
         <div className="container">
           <h2>Major Publishers</h2>
           <p>
@@ -119,7 +119,7 @@ const ComicsPage: React.FC = () => {
       </section>
 
       {/* Iconic Characters Section */}
-      <section className="characters-section">
+      <section className="section-content">
         <div className="container">
           <h2>Iconic Characters</h2>
           <p>

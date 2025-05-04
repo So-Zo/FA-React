@@ -10,10 +10,10 @@ const WorldsUniversesPage: React.FC = () => {
   return (
     <div className="worlds-universes-page">
       {/* Introduction Section */}
-      <section className="intro-section">
+      <section className="section-content">
         <div className="container">
           <h2>Journey Through Fictional Realms</h2>
-          <p className="intro-text">
+          <p>
             Explore interconnected worlds, crossover potential, and the most popular characters across different media franchises.
             Discover how creators build consistent worlds and how these universes evolve across different storytelling mediums.
           </p>
@@ -36,7 +36,7 @@ const WorldsUniversesPage: React.FC = () => {
       </section>
 
       {/* World-Building Section */}
-      <section className="worldbuilding-section">
+      <section className="section-content">
         <div className="container">
           <h2>The Art of World-Building</h2>
           <p>

@@ -38,19 +38,7 @@
   text-align: center;
 }
 
-/* Intro section */
-.intro-section {
-  background: var(--worlds-gradient);
-  padding: var(--spacing-xl) 0;
-  text-align: center;
-}
-
-.intro-text {
-  max-width: 50rem;
-  margin: 0 auto var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-loose);
-}
+/* Note: Intro section styles moved to sections.css */
 
 .quick-links {
   display: flex;
@@ -81,33 +69,7 @@
   margin-right: var(--spacing-sm);
 }
 
-/* World-building section */
-.worldbuilding-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-primary);
-}
-
-.worldbuilding-section h2 {
-  margin-bottom: var(--spacing-lg);
-  position: relative;
-  display: inline-block;
-}
-
-.worldbuilding-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.3125rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: var(--fanarc-secondary-color);
-}
-
-.worldbuilding-section > .container > p {
-  max-width: 50rem;
-  margin-bottom: var(--spacing-xl);
-  line-height: var(--line-height-loose);
-}
+/* Note: World-building section styles moved to sections.css */
 
 .worldbuilding-elements {
   display: grid;
@@ -159,17 +121,7 @@
   color: var(--fanarc-secondary-color);
 }
 
-/* Universes section */
-.universes-section {
-  background: var(--worlds-gradient);
-  padding: var(--spacing-xxl) 0;
-}
-
-.universes-section > .container > p {
-  max-width: 50rem;
-  margin-bottom: var(--spacing-xl);
-  line-height: var(--line-height-loose);
-}
+/* Note: Universes section styles moved to sections.css */
 
 .universes-showcase {
   display: grid;
@@ -277,33 +229,7 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Crossovers section */
-.crossovers-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-secondary);
-}
-
-.crossovers-section h2 {
-  margin-bottom: var(--spacing-lg);
-  position: relative;
-  display: inline-block;
-}
-
-.crossovers-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.3125rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: var(--fanarc-secondary-color);
-}
-
-.crossovers-section > .container > p {
-  max-width: 50rem;
-  margin-bottom: var(--spacing-xl);
-  line-height: var(--line-height-loose);
-}
+/* Note: Crossovers section styles moved to sections.css */
 
 .crossover-types {
   display: grid;
@@ -350,38 +276,9 @@
   margin-bottom: 0;
 }
 
-/* Content section */
-.content-section {
-  padding: var(--spacing-xxl) 0;
-  background-color: var(--bg-primary);
-}
+/* Note: Content section styles moved to sections.css */
 
-/* Section divider */
-.section-divider {
-  text-align: center;
-  margin: var(--spacing-xl) 0;
-  position: relative;
-}
-
-.section-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 0.0625rem;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-  z-index: 1;
-}
-
-.section-divider span {
-  position: relative;
-  background-color: var(--bg-primary);
-  padding: 0 var(--spacing-md);
-  z-index: 2;
-  color: var(--fanarc-secondary-color);
-  font-style: italic;
-}
+/* Note: Section divider styles moved to sections.css */
 
 /* Responsive styles */
 @media (max-width: 768px) {
