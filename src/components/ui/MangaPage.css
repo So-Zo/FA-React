@@ -1,6 +1,7 @@
 /* MangaPage styles */
 .manga-page {
   color: var(--text-primary);
+  background-image: var(--manga-gradient);
 }
 
 /* Note: Hero section styles moved to sections.css */

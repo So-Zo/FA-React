@@ -1,6 +1,7 @@
 /* ComicsPage styles */
 .comics-page {
   color: var(--text-primary);
+  background-image: var(--comics-gradient);
 }
 
 /* Note: Hero section styles moved to sections.css */

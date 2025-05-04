@@ -17,12 +17,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </a>
 
       <Header />
-      <Navigation />
 
       <main id="main-content" className="main-content">
         {children}
       </main>
 
+      <Navigation />
       <Footer />
     </div>
   );

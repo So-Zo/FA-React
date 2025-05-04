@@ -96,29 +96,31 @@ body {
 }
 
 .guide-section {
-  background-image: var(--guide-section-gradient);
-  border-radius: 0.5rem;
-  padding: 1.25rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-image: var(--base-purple-gradient);
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  color: white;
 }
 
 .guide-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.3125rem);
+  box-shadow: var(--shadow-md);
 }
 
 .guide-section h3 {
-  color: var(--fanarc-primary-color, #0F084B);
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
-  border-bottom: 2px solid var(--fanarc-secondary-color, #A997DF);
-  padding-bottom: 0.5rem;
+  color: var(--fanarc-secondary-color);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-lg);
+  border-bottom: var(--border-width-base) solid rgba(255, 255, 255, 0.2);
+  padding-bottom: var(--spacing-sm);
 }
 
 .guide-section p {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: white;
 }
 
 /* Responsive adjustments for welcome guide */
@@ -147,8 +149,12 @@ body {
 .section-content {
   padding: var(--spacing-lg) var(--spacing-md);
   text-align: center;
+  background-image: var(--base-light-gradient);
+  border-radius: var(--border-radius-base);
+  margin: var(--spacing-md);
 }
 
 .section-content h1 {
   margin-bottom: var(--spacing-md);
+  color: var(--fanarc-primary-color);
 }

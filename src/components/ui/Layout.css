@@ -7,4 +7,5 @@
 
 .main-content {
   flex: 1;
+  padding-bottom: 3.5rem; /* Add padding to account for the bottom navigation bar */
 }

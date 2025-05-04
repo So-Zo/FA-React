@@ -1,6 +1,7 @@
 /* TVPage styles */
 .tv-page {
   color: var(--text-primary);
+  background-image: var(--tv-gradient);
 }
 
 /* Hero section */
@@ -402,26 +403,26 @@
   .hero-section {
     height: 12.5rem;
   }
-  
+
   .hero-section h1 {
     font-size: var(--font-size-xxl);
   }
-  
+
   .quick-links {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .quick-link {
     width: 100%;
     max-width: 18.75rem;
   }
-  
+
   .examples-list {
     flex-direction: column;
     gap: var(--spacing-xs);
   }
-  
+
   .examples-list li {
     display: inline-block;
   }
