@@ -1,0 +1,142 @@
+/*
+ * Link Styles for FanArcs React
+ * This file contains styling for links across the website
+ * Consolidated from multiple link style files
+ */
+
+/* Default link styling */
+.default-links {
+  color: #4a2bfd;
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-base);
+  display: inline-block;
+  background-image: var(--base-light-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+/* Add arrow symbol after links */
+.default-links::after {
+  content: " →";
+  display: inline-block;
+  margin-left: 0.25rem;
+  transition: transform var(--transition-base);
+}
+
+/* Hover effect for links */
+.default-links:hover {
+  background-image: var(--base-light-gradient-alt);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Hover effect for arrow - slight movement */
+.default-links:hover::after {
+  transform: translateX(0.1875rem);
+}
+
+/* Underline animation */
+.default-links::before {
+  content: "";
+  position: absolute;
+  bottom: -0.125rem;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background-color: #4B3F72;
+  transition: width var(--transition-base);
+}
+
+/* Expand underline on hover */
+.default-links:hover::before {
+  width: 100%;
+}
+
+/* Visited links */
+.default-links:visited {
+  color: var(--fanarc-primary-color);
+}
+
+/* Active links */
+.default-links:active {
+  color: var(--fanarc-secondary-color);
+}
+
+/* Focus state for accessibility */
+.default-links:focus {
+  outline: 0.125rem dotted var(--fanarc-secondary-color);
+  outline-offset: 0.125rem;
+}
+
+/* Quick links */
+.quick-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform var(--transition-base), background-color var(--transition-base);
+}
+
+.quick-link:hover {
+  transform: translateY(-0.3125rem);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.quick-link .icon {
+  font-size: var(--font-size-xl);
+  margin-right: var(--spacing-sm);
+}
+
+/* CTA links */
+.cta-link {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.cta-link a {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color var(--transition-base);
+}
+
+.cta-link a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .default-links {
+    padding: 0.25rem 0;
+  }
+
+  .quick-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quick-link {
+    width: 100%;
+    max-width: 18.75rem;
+  }
+}

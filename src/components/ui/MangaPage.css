@@ -1,0 +1,124 @@
+/* MangaPage styles */
+.manga-page {
+  color: var(--text-primary);
+}
+
+/* Note: Hero section styles moved to sections.css */
+
+/* Intro section */
+.intro-section {
+  background: var(--manga-gradient);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.intro-text {
+  max-width: 50rem;
+  margin: 0 auto var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-loose);
+}
+
+/* Note: Quick link styles moved to links.css */
+
+/* Note: Content section styles moved to sections.css */
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.content-text p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-loose);
+}
+
+.content-text h3 {
+  margin: var(--spacing-lg) 0 var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  position: relative;
+}
+
+.feature-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--fanarc-secondary-color);
+}
+
+.image-placeholder {
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 18.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-base);
+  color: var(--fanarc-secondary-color);
+  font-style: italic;
+}
+
+/* Genres section */
+.genres-section {
+  background: var(--manga-gradient);
+  padding: var(--spacing-xxl) 0;
+}
+
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+}
+
+/* Note: Genre card styles moved to cards.css */
+
+.genre-card h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+.genre-card p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-base);
+}
+
+/* Note: CTA link styles moved to links.css */
+
+/* Note: Section divider styles moved to sections.css */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 12.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: var(--font-size-xxl);
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quick-link {
+    width: 100%;
+    max-width: 18.75rem;
+  }
+}

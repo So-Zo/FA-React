@@ -1,0 +1,197 @@
+/*
+ * Card Styles for FanArcs React
+ * This file contains consolidated card styles from across the application
+ */
+
+/* Base card styles */
+.card {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.card:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: var(--shadow-md);
+}
+
+/* Figure card styles */
+.figure-card {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.figure-card:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: var(--shadow-md);
+}
+
+.figure-card h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-secondary-color);
+}
+
+.figure-card p {
+  margin-bottom: 0;
+  line-height: var(--line-height-base);
+}
+
+/* Figure cards grid layout */
+.figure-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+}
+
+/* Info box styles */
+.info-box {
+  background-image: var(--base-purple-gradient);
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.info-box h4 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+/* Timeline content styles */
+.timeline-content {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.timeline-content h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-secondary-color);
+}
+
+/* Community connection styles */
+.community-connection {
+  background-image: var(--base-purple-gradient);
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.community-connection h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-secondary-color);
+}
+
+/* Publisher card styles */
+.publisher-card {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.publisher-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+/* Character item styles */
+.character-item {
+  background-image: var(--base-purple-gradient);
+  border-radius: var(--border-radius-base);
+  overflow: hidden;
+  transition: transform var(--transition-base);
+  color: white;
+}
+
+.character-item:hover {
+  transform: translateY(-0.3125rem);
+}
+
+/* Genre card styles */
+.genre-card {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+  color: white;
+}
+
+.genre-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+/* Universe card styles */
+.universe-card {
+  background-image: var(--base-purple-gradient);
+  border-radius: var(--border-radius-base);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.universe-card:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: var(--shadow-md);
+}
+
+/* Element card styles */
+.element-card {
+  background-image: var(--base-purple-gradient);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  color: white;
+}
+
+.element-card:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: var(--shadow-md);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .card,
+  .figure-card,
+  .info-box,
+  .timeline-content,
+  .community-connection,
+  .universe-card,
+  .element-card,
+  .publisher-card,
+  .genre-card {
+    padding: var(--spacing-md);
+  }
+
+  .universe-card {
+    grid-template-columns: 1fr;
+  }
+
+  .publisher-card {
+    height: auto;
+  }
+
+  .publisher-highlights {
+    margin-top: var(--spacing-md);
+  }
+}

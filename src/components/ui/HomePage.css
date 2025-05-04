@@ -1,0 +1,154 @@
+/* HomePage styles - Matching the original FanArcs styling */
+body {
+  background: var(--home-body-gradient);
+}
+
+.content_intro {
+  background-image: var(--content-intro-gradient);
+}
+
+/* Common styles for all media sections */
+.section-anime,
+.section-manga,
+.section-tv,
+.section-video-games,
+.section-worlds-universes,
+.section-comics,
+.section-power-room {
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  color: white; /* Set all text in sections to white */
+  text-align: center; /* Center all text in sections */
+}
+
+/* Section paragraph styling */
+.section-anime p,
+.section-manga p,
+.section-tv p,
+.section-video-games p,
+.section-worlds-universes p,
+.section-comics p,
+.section-power-room p {
+  color: white;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-loose);
+  margin-bottom: var(--spacing-sm);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Individual section backgrounds */
+.section-anime {
+  background-image: var(--anime-gradient);
+}
+
+.section-manga {
+  background: var(--manga-gradient);
+}
+
+.section-tv {
+  background-image: var(--tv-gradient);
+}
+
+.section-video-games {
+  background-image: var(--video-games-gradient);
+}
+
+.section-worlds-universes {
+  background: var(--worlds-gradient);
+}
+
+.section-comics {
+  background-image: var(--comics-gradient);
+}
+
+.section-power-room {
+  background: var(--power-room-gradient);
+}
+
+.header-logo img {
+  max-width: 100%; /* Ensures the container doesn't exceed the width of the screen */
+  overflow: hidden; /* Prevents anything from spilling outside the container */
+}
+
+/* Media queries to limit header logo size on larger screens */
+@media (min-width: 992px) {
+  .header-logo img {
+    max-width: 300px; /* Limit width on laptop screens */
+    margin: 0 auto; /* Center the image */
+  }
+}
+
+@media (min-width: 1200px) {
+  .header-logo img {
+    max-width: 250px; /* Further limit width on very large screens */
+  }
+}
+
+/* Welcome Guide Styles */
+.welcome-guide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.guide-section {
+  background-image: var(--guide-section-gradient);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guide-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.guide-section h3 {
+  color: var(--fanarc-primary-color, #0F084B);
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  border-bottom: 2px solid var(--fanarc-secondary-color, #A997DF);
+  padding-bottom: 0.5rem;
+}
+
+.guide-section p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments for welcome guide */
+@media (max-width: 768px) {
+  .welcome-guide {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Link styles */
+.index-page-link {
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-size-xxl);
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+  transition: color var(--transition-base);
+}
+
+.index-page-link:hover {
+  color: var(--fanarc-secondary-color);
+}
+
+/* Section content styles */
+.section-content {
+  padding: var(--spacing-lg) var(--spacing-md);
+  text-align: center;
+}
+
+.section-content h1 {
+  margin-bottom: var(--spacing-md);
+}

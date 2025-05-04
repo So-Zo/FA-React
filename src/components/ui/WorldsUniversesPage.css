@@ -1,0 +1,412 @@
+/* WorldsUniversesPage styles */
+.worlds-universes-page {
+  color: var(--text-primary);
+}
+
+/* Hero section */
+.hero-section {
+  position: relative;
+  height: 18.75rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7);
+}
+
+.hero-section h1 {
+  font-size: var(--font-size-xxxl);
+  text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0 var(--spacing-md);
+  text-align: center;
+}
+
+/* Intro section */
+.intro-section {
+  background: var(--worlds-gradient);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.intro-text {
+  max-width: 50rem;
+  margin: 0 auto var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-loose);
+}
+
+.quick-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: transform var(--transition-base), background-color var(--transition-base);
+}
+
+.quick-link:hover {
+  transform: translateY(-0.3125rem);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.quick-link .icon {
+  font-size: var(--font-size-xl);
+  margin-right: var(--spacing-sm);
+}
+
+/* World-building section */
+.worldbuilding-section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--bg-primary);
+}
+
+.worldbuilding-section h2 {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  display: inline-block;
+}
+
+.worldbuilding-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.3125rem;
+  left: 0;
+  width: 100%;
+  height: 0.125rem;
+  background: var(--fanarc-secondary-color);
+}
+
+.worldbuilding-section > .container > p {
+  max-width: 50rem;
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-loose);
+}
+
+.worldbuilding-elements {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.element-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  transition: transform var(--transition-base);
+}
+
+.element-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.element-card h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+.element-card p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-base);
+}
+
+.examples h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-secondary-color);
+  font-size: var(--font-size-base);
+}
+
+.examples ul {
+  list-style: none;
+  padding-left: var(--spacing-md);
+}
+
+.examples li {
+  margin-bottom: var(--spacing-xs);
+  position: relative;
+}
+
+.examples li::before {
+  content: '•';
+  position: absolute;
+  left: -1rem;
+  color: var(--fanarc-secondary-color);
+}
+
+/* Universes section */
+.universes-section {
+  background: var(--worlds-gradient);
+  padding: var(--spacing-xxl) 0;
+}
+
+.universes-section > .container > p {
+  max-width: 50rem;
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-loose);
+}
+
+.universes-showcase {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.universe-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-base);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  transition: transform var(--transition-base);
+}
+
+.universe-card:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.universe-image {
+  height: 100%;
+  min-height: 15.625rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.universe-image.placeholder {
+  color: var(--fanarc-secondary-color);
+  font-style: italic;
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.universe-content {
+  padding: var(--spacing-lg);
+}
+
+.universe-content h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+.universe-content p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-base);
+}
+
+.universe-stats {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-small);
+  margin-bottom: var(--spacing-md);
+}
+
+.stat {
+  display: flex;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat:last-child {
+  margin-bottom: 0;
+}
+
+.stat-label {
+  font-weight: bold;
+  width: 7.5rem;
+  color: var(--fanarc-secondary-color);
+}
+
+.universe-link {
+  display: inline-block;
+  color: var(--fanarc-secondary-color);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color var(--transition-base);
+}
+
+.universe-link:hover {
+  color: var(--text-primary);
+}
+
+/* CTA links */
+.cta-link {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+}
+
+.cta-link a {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color var(--transition-base);
+}
+
+.cta-link a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Crossovers section */
+.crossovers-section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--bg-secondary);
+}
+
+.crossovers-section h2 {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  display: inline-block;
+}
+
+.crossovers-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.3125rem;
+  left: 0;
+  width: 100%;
+  height: 0.125rem;
+  background: var(--fanarc-secondary-color);
+}
+
+.crossovers-section > .container > p {
+  max-width: 50rem;
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-loose);
+}
+
+.crossover-types {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+}
+
+.crossover-type {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+}
+
+.crossover-type h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+}
+
+.crossover-type p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-base);
+}
+
+.crossover-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.crossover-example {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-small);
+}
+
+.crossover-example h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-secondary-color);
+}
+
+.crossover-example p {
+  font-size: var(--font-size-sm);
+  margin-bottom: 0;
+}
+
+/* Content section */
+.content-section {
+  padding: var(--spacing-xxl) 0;
+  background-color: var(--bg-primary);
+}
+
+/* Section divider */
+.section-divider {
+  text-align: center;
+  margin: var(--spacing-xl) 0;
+  position: relative;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0.0625rem;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+  z-index: 1;
+}
+
+.section-divider span {
+  position: relative;
+  background-color: var(--bg-primary);
+  padding: 0 var(--spacing-md);
+  z-index: 2;
+  color: var(--fanarc-secondary-color);
+  font-style: italic;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 12.5rem;
+  }
+  
+  .hero-section h1 {
+    font-size: var(--font-size-xxl);
+  }
+  
+  .quick-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .quick-link {
+    width: 100%;
+    max-width: 18.75rem;
+  }
+  
+  .universe-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .universe-image {
+    min-height: 9.375rem;
+  }
+}

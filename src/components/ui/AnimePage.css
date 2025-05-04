@@ -1,0 +1,116 @@
+/* AnimePage styles */
+.anime-page {
+  color: white;
+  background-color: var(--bg-primary);
+}
+
+/* Note: Hero section and Section content styles moved to sections.css */
+
+/* Table of Contents */
+/* Note: Table of Contents styles moved to sections.css */
+
+/* Note: Community connection and Info box styles moved to cards.css */
+
+/* Using default-links class from links.css */
+.community-connection a {
+  margin-right: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Additional info box styles */
+.info-box ul {
+  padding-left: var(--spacing-lg);
+}
+
+.info-box li {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Timeline */
+.timeline-container {
+  margin: var(--spacing-xl) 0;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 8.125rem 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-date {
+  font-weight: bold;
+  color: var(--fanarc-secondary-color);
+  font-size: var(--font-size-lg);
+}
+
+/* Note: Timeline content styles moved to cards.css */
+
+.timeline-content p {
+  margin-bottom: 0;
+}
+
+/* Key figures */
+.key-figures {
+  margin: var(--spacing-xl) 0;
+}
+
+/* Note: Figure cards grid layout moved to cards.css */
+
+/* Note: Figure card styles moved to cards.css */
+
+/* Terminology */
+.terminology-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+}
+
+.terminology-category h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-secondary-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: var(--spacing-sm);
+}
+
+.terminology-list {
+  margin: 0;
+}
+
+.terminology-list dt {
+  font-weight: bold;
+  color: var(--fanarc-secondary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.terminology-list dd {
+  margin-left: 0;
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-base);
+  color: white;
+}
+
+/* Note: Section divider styles moved to sections.css */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  /* Note: Hero section responsive styles moved to sections.css */
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-date {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .terminology-container {
+    grid-template-columns: 1fr;
+  }
+}
