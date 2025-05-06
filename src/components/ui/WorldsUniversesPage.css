@@ -1,7 +1,89 @@
 /* WorldsUniversesPage styles */
 .worlds-universes-page {
-  color: var(--text-primary);
+  color: var(--text-color);
   background-image: var(--worlds-gradient);
+  padding-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+/* Add an overlay to ensure text readability */
+.worlds-universes-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+}
+
+/* Ensure content appears above the overlay */
+.worlds-universes-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Custom section styling for Worlds & Universes page */
+.worlds-universes-page .section-content {
+  border-top: none;
+  border-left: 4px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add gradient border using pseudo-element */
+.worlds-universes-page .section-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -4px;
+  bottom: 0;
+  width: 4px;
+  background-image: var(--worlds-gradient);
+}
+
+/* Add subtle gradient accent at the top */
+.worlds-universes-page .section-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-image: var(--worlds-gradient);
+}
+
+/* Link styles for Worlds & Universes page */
+.worlds-universes-page .default-links {
+  color: #61a7d4; /* Sky blue from worlds gradient */
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-base);
+}
+
+.worlds-universes-page .default-links::after {
+  content: " →";
+  display: inline-block;
+  margin-left: 0.25rem;
+  transition: transform var(--transition-base);
+}
+
+.worlds-universes-page .default-links:hover {
+  color: #568a3e; /* Forest green from worlds gradient */
+}
+
+.worlds-universes-page .default-links:hover::after {
+  transform: translateX(0.25rem);
+}
+
+/* Heading styles for Worlds & Universes page */
+.worlds-universes-page h1,
+.worlds-universes-page h2,
+.worlds-universes-page h3,
+.worlds-universes-page h4 {
+  color: var(--fanarc-primary-color); /* Standardized heading color */
 }
 
 /* Hero section */
@@ -40,34 +122,7 @@
 
 /* Note: Intro section styles moved to sections.css */
 
-.quick-links {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
-}
-
-.quick-link {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-base);
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: transform var(--transition-base), background-color var(--transition-base);
-}
-
-.quick-link:hover {
-  transform: translateY(-0.3125rem);
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.quick-link .icon {
-  font-size: var(--font-size-xl);
-  margin-right: var(--spacing-sm);
-}
+/* Quick links styles - Removed */
 
 /* Note: World-building section styles moved to sections.css */
 
@@ -78,40 +133,40 @@
 }
 
 .element-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius-base);
-  transition: transform var(--transition-base);
-}
-
-.element-card:hover {
-  transform: translateY(-0.3125rem);
+  /* Simplified styling without card appearance */
+  padding: var(--spacing-md) 0;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-color);
 }
 
 .element-card h3 {
   margin-bottom: var(--spacing-md);
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
 }
 
 .element-card p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-base);
+  color: var(--text-color);
 }
 
 .examples h4 {
   margin-bottom: var(--spacing-sm);
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
   font-size: var(--font-size-base);
 }
 
 .examples ul {
   list-style: none;
   padding-left: var(--spacing-md);
+  color: var(--text-color);
 }
 
 .examples li {
   margin-bottom: var(--spacing-xs);
   position: relative;
+  color: var(--text-color);
 }
 
 .examples li::before {
@@ -124,65 +179,54 @@
 /* Note: Universes section styles moved to sections.css */
 
 .universes-showcase {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
 }
 
 .universe-card {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: var(--border-radius-base);
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  transition: transform var(--transition-base);
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
 }
 
-.universe-card:hover {
-  transform: translateY(-0.3125rem);
+.universe-card:last-child {
+  border-bottom: none;
 }
 
 .universe-image {
-  height: 100%;
-  min-height: 15.625rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.universe-image.placeholder {
-  color: var(--fanarc-secondary-color);
-  font-style: italic;
-  text-align: center;
-  padding: var(--spacing-md);
+  display: none; /* Simplify by removing the image placeholder */
 }
 
 .universe-content {
-  padding: var(--spacing-lg);
+  color: var(--text-color);
 }
 
 .universe-content h3 {
   margin-bottom: var(--spacing-md);
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
 }
 
 .universe-content p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-base);
+  color: var(--text-color);
 }
 
 .universe-stats {
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-small);
   margin-bottom: var(--spacing-md);
+  border-left: 2px solid var(--fanarc-primary-color);
+  padding-left: var(--spacing-md);
 }
 
 .stat {
   display: flex;
   margin-bottom: var(--spacing-xs);
+  color: var(--text-color);
 }
 
 .stat:last-child {
@@ -192,19 +236,19 @@
 .stat-label {
   font-weight: bold;
   width: 7.5rem;
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
 }
 
 .universe-link {
   display: inline-block;
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
   text-decoration: none;
   font-weight: bold;
   transition: color var(--transition-base);
 }
 
 .universe-link:hover {
-  color: var(--text-primary);
+  color: var(--fanarc-secondary-color);
 }
 
 /* CTA links */
@@ -214,71 +258,352 @@
   margin-top: var(--spacing-xl);
 }
 
-.cta-link a {
+.worlds-universes-page .cta-link a {
   display: inline-block;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-image: var(--worlds-gradient);
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--border-radius-base);
-  color: var(--text-primary);
+  color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color var(--transition-base);
+  transition: filter var(--transition-base), transform var(--transition-base);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.cta-link a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Note: Crossovers section styles moved to sections.css */
-
-.crossover-types {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-}
-
-.crossover-type {
+.worlds-universes-page .cta-link a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(255, 255, 255, 0.1);
-  padding: var(--spacing-lg);
-  border-radius: var(--border-radius-base);
+  z-index: -1;
+  transform: translateY(100%);
+  transition: transform var(--transition-base);
 }
 
-.crossover-type h3 {
+.worlds-universes-page .cta-link a:hover {
+  filter: brightness(1.1);
+  transform: translateY(-0.3125rem);
+}
+
+.worlds-universes-page .cta-link a:hover::before {
+  transform: translateY(0);
+}
+
+/* Note: Crossovers section styles removed */
+
+/* Note: Content section styles moved to sections.css */
+
+/* Note: Section divider styles moved to sections.css */
+
+/* Genre navigation styles - Removed */
+
+.genre-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.genre-section h3 {
+  color: var(--fanarc-primary-color);
   margin-bottom: var(--spacing-md);
-  color: var(--fanarc-secondary-color);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.crossover-type p {
+.genre-directory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Genre category styles */
+.genre-category {
+  /* Apply the standard card style */
+  background-color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  margin-bottom: var(--spacing-md);
+  transition: transform var(--transition-base);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--fanarc-primary-color);
+  color: var(--text-color);
+}
+
+.genre-category:hover {
+  transform: translateY(-0.3125rem);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.genre-category h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+}
+
+.genre-category p {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-color);
+}
+
+.show-list {
+  list-style: none;
+  padding: 0;
+  color: var(--text-color);
+}
+
+.show-list li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-color);
+}
+
+
+/* Simplified styling for Worlds & Universes page */
+/* No card styling - just basic text formatting */
+.worlds-standard-card {
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-color);
+}
+
+.worlds-standard-card h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.worlds-standard-card h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+}
+
+.worlds-standard-card p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-base);
+  color: var(--text-color);
 }
 
-.crossover-examples {
+/* Apply standard card styling to all card types */
+/* Removed border-left and gradient styling from all cards */
+
+/* Impact areas styles */
+.impact-areas {
+  margin-top: var(--spacing-lg);
+}
+
+.impact-area {
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-color);
+}
+
+.impact-area h3 {
+  color: var(--fanarc-primary-color);
+  margin-bottom: var(--spacing-md);
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.impact-area p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.impact-area ul {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+  padding-left: 1.5rem;
+}
+
+.impact-area li {
+  margin-bottom: 0.5rem;
+}
+
+.impact-area li strong {
+  color: var(--fanarc-primary-color);
+}
+
+/* Terminology styles */
+.terminology-container {
+  margin-top: var(--spacing-lg);
+}
+
+.terminology-category {
+  margin-bottom: var(--spacing-lg);
+}
+
+.terminology-category h3 {
+  color: var(--fanarc-primary-color);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.terminology-list {
+  /* Simplified styling without card appearance */
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.terminology-list dt {
+  font-weight: bold;
+  color: var(--fanarc-primary-color);
+  margin-bottom: 0.25rem;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.terminology-list dd {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  color: var(--text-color);
+}
+
+.terminology-list dd:last-child {
+  margin-bottom: 0;
+}
+
+/* Resource styles */
+.resource-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.resource-category {
+  margin-bottom: var(--spacing-lg);
+}
+
+.resource-category h3 {
+  color: var(--fanarc-primary-color);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.resource-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: var(--spacing-md);
+}
+
+.resource-item {
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.resource-item h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.resource-item p {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+.community-resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
 }
 
-.crossover-example {
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: var(--spacing-md);
-  border-radius: var(--border-radius-small);
+.community-resource {
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
 }
 
-.crossover-example h4 {
+.community-resource h4 {
   margin-bottom: var(--spacing-sm);
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
 }
 
-.crossover-example p {
-  font-size: var(--font-size-sm);
+.community-resource p {
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-color);
+}
+
+.resource-links {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--spacing-md);
+}
+
+.resource-links li {
+  margin-bottom: var(--spacing-sm);
+  padding: 0.5rem 0;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.1);
+}
+
+/* Audience categories styles */
+.audience-categories {
+  margin-top: var(--spacing-lg);
+}
+
+.audience-category {
+  /* Simplified styling without card appearance */
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-color);
+}
+
+.audience-category h3 {
+  color: var(--fanarc-primary-color);
+  margin-bottom: var(--spacing-md);
+  font-weight: bold;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: var(--spacing-xs);
+}
+
+.audience-category p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recommendation-list li {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.recommendation-list li:last-child {
+  border-bottom: none;
   margin-bottom: 0;
+  padding-bottom: 0;
 }
 
-/* Note: Content section styles moved to sections.css */
+.recommendation-list li strong {
+  color: var(--fanarc-primary-color);
+  display: block;
+  margin-bottom: 0.25rem;
+}
 
-/* Note: Section divider styles moved to sections.css */
+.recommendation-list li a {
+  display: block;
+  margin-top: 0.5rem;
+}
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -300,11 +625,16 @@
     max-width: 18.75rem;
   }
 
-  .universe-card {
-    grid-template-columns: 1fr;
+  .universes-showcase {
+    gap: var(--spacing-md);
   }
 
-  .universe-image {
-    min-height: 9.375rem;
+  .stat {
+    flex-direction: column;
+  }
+
+  .stat-label {
+    width: 100%;
+    margin-bottom: 0.25rem;
   }
 }

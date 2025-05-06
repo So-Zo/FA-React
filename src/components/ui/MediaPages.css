@@ -1,0 +1,217 @@
+/*
+ * Media Pages Shared Styles for FanArcs React
+ * This file contains consolidated styles for all media pages (Anime, Manga, Comics, TV, Video Games)
+ */
+
+/* Content grid layout - used across media pages */
+.content-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--spacing-xl);
+  align-items: center;
+}
+
+.content-text p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-loose);
+}
+
+.content-text h3 {
+  margin: var(--spacing-lg) 0 var(--spacing-md);
+  color: var(--fanarc-primary-color);
+}
+
+/* Feature lists - used in multiple media pages */
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  position: relative;
+}
+
+.feature-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--fanarc-primary-color);
+}
+
+/* Image placeholders */
+.image-placeholder {
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 18.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-base);
+  color: var(--fanarc-primary-color);
+  font-style: italic;
+}
+
+/* Grid layouts - used across media pages */
+.genres-grid,
+.genre-directory,
+.publishers-grid,
+.character-list,
+.shows-grid,
+.platforms-grid,
+.era-features,
+.streaming-impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+/* Note: Genre category styles moved to cards.css */
+
+.show-list {
+  list-style: none;
+  padding: 0;
+}
+
+.show-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Production stages styling - used across media pages */
+.production-stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+.production-stage h3 {
+  color: var(--fanarc-secondary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Impact areas styling - used across media pages */
+.impact-areas {
+  margin: var(--spacing-lg) 0;
+}
+
+.impact-area {
+  margin-bottom: var(--spacing-lg);
+}
+
+.impact-area h3 {
+  color: var(--fanarc-secondary-color);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Note: Info box styles moved to cards.css */
+
+/* Format items - used for publication formats, demographics, etc. */
+.format-section {
+  margin: var(--spacing-lg) 0;
+}
+
+.format-item {
+  margin-bottom: var(--spacing-md);
+}
+
+.format-item h4 {
+  color: var(--fanarc-secondary-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Note: Character image styles moved to cards.css */
+
+/* Note: Quick links styles moved to links.css */
+
+/* Examples list - used in genre sections */
+.examples-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-md);
+}
+
+.examples-list li {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-small);
+}
+
+/* Publisher highlights - used in publisher sections */
+.publisher-highlights {
+  margin-top: auto;
+  margin-bottom: var(--spacing-lg);
+}
+
+.publisher-highlights h4 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-primary-color);
+  font-size: var(--font-size-base);
+}
+
+.publisher-highlights ul {
+  list-style: none;
+  padding-left: var(--spacing-md);
+}
+
+.publisher-highlights li {
+  margin-bottom: var(--spacing-xs);
+  position: relative;
+}
+
+.publisher-highlights li::before {
+  content: '•';
+  position: absolute;
+  left: -1rem;
+  color: var(--fanarc-primary-color);
+}
+
+/* Note: Era feature styles moved to cards.css */
+
+/* Note: Show card styles moved to cards.css */
+
+/* Note: Genre tabs styles moved to sections.css */
+
+/* Note: Impact item styles moved to cards.css */
+
+/* Note: Platform card styles moved to cards.css */
+
+/* Note: Section divider styles moved to sections.css */
+
+/* Note: Media page specific background colors moved to individual page CSS files */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  /* Grid layouts */
+  .content-grid,
+  .genres-grid,
+  .genre-directory,
+  .publishers-grid,
+  .character-list,
+  .shows-grid,
+  .platforms-grid,
+  .era-features,
+  .streaming-impact,
+  .production-stages,
+  .resource-items,
+  .studio-grid,
+  .community-resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Examples list */
+  .examples-list {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .examples-list li {
+    display: inline-block;
+  }
+
+  /* Note: Quick links responsive styles moved to links.css */
+  /* Note: Publisher highlights responsive styles moved to cards.css */
+}

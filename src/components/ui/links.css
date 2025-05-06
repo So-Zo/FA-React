@@ -6,15 +6,11 @@
 
 /* Default link styling */
 .default-links {
-  color: #4a2bfd;
+  color: var(--fanarc-primary-color);
   text-decoration: none;
   position: relative;
   transition: color var(--transition-base);
   display: inline-block;
-  background-image: var(--base-light-gradient);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
   font-weight: bold;
 }
 
@@ -28,10 +24,7 @@
 
 /* Hover effect for links */
 .default-links:hover {
-  background-image: var(--base-light-gradient-alt);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: var(--fanarc-secondary-color);
 }
 
 /* Hover effect for arrow - slight movement */
