@@ -3,6 +3,60 @@ body {
   background: var(--home-body-gradient);
 }
 
+.home-page {
+  color: var(--text-primary);
+  background: var(--home-body-gradient);
+}
+
+/* Header styles */
+.page-header {
+  background: var(--home-body-gradient);
+  color: white;
+  padding-bottom: var(--spacing-md);
+  position: relative;
+  text-align: center;
+}
+
+.header-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.header-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#site-search-bar {
+  width: 80%;
+  max-width: 600px;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) auto;
+  border-radius: var(--border-radius-base);
+  border: none;
+  display: block;
+  font-size: var(--font-size-base);
+}
+
+.wiki-edit-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-sm);
+  transition: background-color var(--transition-base);
+}
+
+.wiki-edit-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .content_intro {
   background-image: var(--content-intro-gradient);
 }
@@ -96,31 +150,22 @@ body {
 }
 
 .guide-section {
-  background-image: var(--base-purple-gradient);
-  border-radius: var(--border-radius-base);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-  color: white;
-}
-
-.guide-section:hover {
-  transform: translateY(-0.3125rem);
-  box-shadow: var(--shadow-md);
+  padding: var(--spacing-md) 0;
+  color: var(--text-primary);
 }
 
 .guide-section h3 {
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-lg);
-  border-bottom: var(--border-width-base) solid rgba(255, 255, 255, 0.2);
+  border-bottom: var(--border-width-base) solid rgba(0, 0, 0, 0.1);
   padding-bottom: var(--spacing-sm);
 }
 
 .guide-section p {
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
-  color: white;
+  color: var(--text-primary);
 }
 
 /* Responsive adjustments for welcome guide */
@@ -130,20 +175,7 @@ body {
   }
 }
 
-/* Link styles */
-.index-page-link {
-  color: white;
-  text-decoration: none;
-  font-size: var(--font-size-xxl);
-  font-weight: bold;
-  display: inline-block;
-  margin-bottom: var(--spacing-sm);
-  transition: color var(--transition-base);
-}
-
-.index-page-link:hover {
-  color: var(--fanarc-secondary-color);
-}
+/* Link styles moved to links.css */
 
 /* Section content styles */
 .section-content {

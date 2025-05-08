@@ -2,6 +2,12 @@
  * Link Styles for FanArcs React
  * This file contains styling for links across the website
  * Consolidated from multiple link style files
+ *
+ * Link Types:
+ * - default-links: Regular links with arrow (→) for navigation
+ * - toc-quick-link: Table of contents links that stay on the same page (✓)
+ * - toc-deep-link: Table of contents links that go to different pages (→)
+ * - non-existent-link: Links to pages that don't exist yet (+)
  */
 
 /* Default link styling */
@@ -115,6 +121,126 @@
 
 .cta-link a:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Non-existent link styling */
+.non-existent-link {
+  color: var(--non-existent-link-color);
+  text-decoration: none;
+  position: relative;
+  transition: color var(--transition-base);
+  display: inline-block;
+  border-bottom: 1px dashed var(--non-existent-link-border);
+  cursor: pointer;
+}
+
+/* Add plus symbol after non-existent links */
+.non-existent-link::after {
+  content: " +";
+  display: inline-block;
+  margin-left: 0.25rem;
+  font-weight: bold;
+  transition: transform var(--transition-base);
+}
+
+/* Hover effect for non-existent links */
+.non-existent-link:hover {
+  color: var(--non-existent-link-hover-color);
+}
+
+/* Hover effect for plus symbol - slight movement */
+.non-existent-link:hover::after {
+  transform: scale(1.2);
+}
+
+/* Tooltip for non-existent links */
+.non-existent-link::before {
+  content: "Create this page";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--fanarc-primary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-small);
+  font-size: var(--font-size-xs);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-base), visibility var(--transition-base);
+  white-space: nowrap;
+  z-index: var(--z-index-tooltip);
+  pointer-events: none;
+}
+
+/* Show tooltip on hover */
+.non-existent-link:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Focus state for accessibility */
+.non-existent-link:focus {
+  outline: 0.125rem dotted var(--non-existent-link-color);
+  outline-offset: 0.125rem;
+}
+
+/* Home page index links */
+.index-page-link {
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-size-xxl);
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+  transition: transform var(--transition-base), text-shadow var(--transition-base);
+  text-align: center;
+  position: relative;
+}
+
+/* Underline animation */
+.index-page-link::before {
+  content: "";
+  position: absolute;
+  bottom: -0.125rem;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background-color: white;
+  transition: width var(--transition-base);
+}
+
+/* Expand underline on hover */
+.index-page-link:hover::before {
+  width: 100%;
+}
+
+.index-page-link:hover {
+  transform: scale(1.03);
+  text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.7);
+}
+
+.index-page-link:focus {
+  outline: 0.125rem dotted white;
+  outline-offset: 0.25rem;
+}
+
+/* TOC quick link style - same page links */
+.toc-quick-link {
+  color: var(--fanarc-primary-color);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  display: inline-block;
+  font-weight: bold;
+}
+
+.toc-quick-link::before {
+  content: "✓ ";
+  color: var(--fanarc-secondary-color);
+}
+
+.toc-quick-link:hover {
+  color: var(--fanarc-secondary-color);
 }
 
 /* Media queries for responsive design */

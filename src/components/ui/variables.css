@@ -13,6 +13,12 @@
   --fanarc-primary-color: #0F084B;
   --fanarc-secondary-color: #A997DF;
 
+  /* Link Colors */
+  --non-existent-link-color: #FF6B6B;
+  --non-existent-link-hover-color: #FF8E8E;
+  --non-existent-link-border: #FF6B6B;
+  --non-existent-link-icon-color: #FF6B6B;
+
   /* UI Colors */
   --shadow-color: rgba(0, 0, 0, 0.2);
   --accent-color: #4b0082;
