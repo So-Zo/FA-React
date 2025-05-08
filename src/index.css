@@ -1,3 +1,17 @@
+/*
+* DEPRECATED FILE - This is the default Vite/React CSS file.
+* Most styles are now redundant with our custom styling system.
+* All reset styles have been moved to css/core/reset.css.
+* This file is kept for reference but should not be used for new styles.
+* Consider removing this import from main.tsx after confirming no styles are needed.
+*/
+
+/* Reset styles are now imported through global.css */
+
+/* The following styles are from the default Vite/React template */
+/* They have been commented out as they conflict with our custom styling */
+
+/*
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -51,7 +65,9 @@ button:focus,
 button:focus-visible {
   outline: 0.25rem auto -webkit-focus-ring-color;
 }
+*/
 
+/*
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,3 +80,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+*/
