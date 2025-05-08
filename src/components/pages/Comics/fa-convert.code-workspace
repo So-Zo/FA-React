@@ -7,5 +7,7 @@
 			"path": "../../../../../../Desktop/FanArcs"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.cursorBlinking": "smooth"
+	}
 }
