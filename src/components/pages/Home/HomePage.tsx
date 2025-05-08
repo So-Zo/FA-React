@@ -7,8 +7,23 @@ import '../../../components/ui/links.css';
 // This is the main homepage component that corresponds to the original index.html
 const HomePage: React.FC = () => {
   return (
-    <main id="main-content" role="main">
-      <hr />
+    <div className="home-page">
+      <header className="page-header" role="banner">
+        <div className="header-image">
+          <img src="/images/home/HomeHeader.jpg" alt="FanArcs Home" />
+        </div>
+
+        <input
+          type="search"
+          id="site-search-bar"
+          aria-label="Search FanArcs"
+          placeholder="Search for media, characters, universes, etc."
+        />
+
+        <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
+      </header>
+
+      <main id="main-content" role="main">
       {/* Main Body sections */}
       <section className="section-content">
         <h1>Welcome to FanArcs</h1>
@@ -112,6 +127,7 @@ const HomePage: React.FC = () => {
         </p>
       </section>
     </main>
+    </div>
   );
 };
 
