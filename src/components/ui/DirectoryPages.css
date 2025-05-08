@@ -1,0 +1,206 @@
+/*
+ * Directory Pages Shared Styles for FanArcs React
+ * This file contains consolidated styles for all directory pages (Anime, Manga, Comics, TV, Video Games)
+ */
+
+/* Directory page container */
+.manga-directory-page,
+.anime-directory-page,
+.comics-directory-page,
+.tv-directory-page,
+.video-games-directory-page {
+  color: var(--text-color);
+}
+
+/* Directory intro section */
+.directory-intro {
+  text-align: center;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-sm);
+}
+
+.directory-intro h1 {
+  font-size: var(--font-size-xxl);
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-primary-color);
+}
+
+.directory-intro p {
+  margin-bottom: var(--spacing-lg);
+  line-height: var(--line-height-loose);
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Directory navigation */
+.directory-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.directory-navigation a {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: all var(--transition-base);
+  font-weight: bold;
+}
+
+/* Directory section */
+.directory-section {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-sm);
+}
+
+.directory-section h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-primary-color);
+  border-bottom: 2px solid var(--fanarc-secondary-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.directory-section p {
+  margin-bottom: var(--spacing-lg);
+  line-height: var(--line-height-base);
+}
+
+/* View more container */
+.view-more-container {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.view-more-container a {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-base);
+  background-color: var(--fanarc-primary-color);
+  color: white;
+  transition: all var(--transition-base);
+  display: inline-block;
+}
+
+.view-more-container a:hover {
+  background-color: var(--fanarc-secondary-color);
+}
+
+/* Genre directory */
+.genre-directory,
+.demographic-directory,
+.publisher-directory {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+}
+
+.genre-category,
+.demographic-category,
+.publisher-category {
+  background-color: white;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-xs);
+  border-left: 4px solid var(--fanarc-primary-color);
+}
+
+.genre-category h3,
+.demographic-category h3,
+.publisher-category h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--fanarc-primary-color);
+  font-weight: bold;
+}
+
+.show-list {
+  list-style: none;
+  padding: 0;
+}
+
+.show-list li {
+  margin-bottom: var(--spacing-xs);
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.show-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--fanarc-secondary-color);
+}
+
+/* Help section */
+.directory-help {
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.directory-help h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--fanarc-primary-color);
+}
+
+.help-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.help-option {
+  padding: var(--spacing-md);
+  background-color: white;
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-xs);
+  border-left: 4px solid var(--fanarc-primary-color);
+}
+
+.help-option h3 {
+  margin-bottom: var(--spacing-sm);
+  color: var(--fanarc-primary-color);
+}
+
+.help-option p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .directory-intro,
+  .directory-section,
+  .directory-help {
+    padding: var(--spacing-md);
+  }
+
+  .directory-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .directory-navigation a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .genre-directory,
+  .demographic-directory,
+  .publisher-directory,
+  .help-options {
+    grid-template-columns: 1fr;
+  }
+}
