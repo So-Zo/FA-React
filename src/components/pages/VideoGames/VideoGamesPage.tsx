@@ -5,11 +5,47 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const VideoGamesPage: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history-of-games" },
+        { label: "Terms", anchor: "#terminology-guide" }
+      ],
+      deepLinks: [
+        { label: "Full History", path: "/video-games/history", exists: true }
+      ]
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genres", anchor: "#game-genres" },
+        { label: "Worlds", anchor: "#gaming-worlds" },
+        { label: "Audience", anchor: "#audience-categories" }
+      ],
+      deepLinks: [
+        { label: "Directory", path: "/video-games/directory", exists: true }
+      ]
+    },
+    {
+      title: "BEHIND THE SCENES",
+      quickLinks: [
+        { label: "Development", anchor: "#development-process" },
+        { label: "Impact", anchor: "#cultural-impact" },
+        { label: "Resources", anchor: "#learning-resources" }
+      ],
+      deepLinks: []
+    }
+  ];
+
   return (
     <div className="video-games-page">
-      <header>
+        <header>
         <div className="image-header">
           <img src="/images/video-games/VideoGamesHeader.jpg" alt="Video Games Overview" />
         </div>
@@ -20,61 +56,30 @@ const VideoGamesPage: React.FC = () => {
           aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-      </header>
 
-      <div className="accessibility-container">
-        <a href="#main-content" className="skip-link">Skip to content</a>
-        <button className="keyboard-shortcuts-link" onClick={() => console.log('Keyboard shortcuts')}>
-          <span>⌨️</span> Keyboard shortcuts
-        </button>
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
-      </div>
+      </header>
 
       <main id="main-content">
         <hr />
 
-        {/* Table of Contents */}
-        <section id="table-of-contents" className="section-content">
-        <div className="container">
-          <h2>Video Games Encyclopedia</h2>
-          <p>Welcome to our comprehensive guide to video games. Use this table of contents to navigate to different sections.</p>
+        {/* New Table of Contents */}
+        <TableOfContents
+          sections={tocSections}
+          title="Video Games Encyclopedia"
+          description="Use this table of contents to navigate through the video games guide."
+        />
 
-          <div className="toc-container">
-            <div className="toc-column">
-              <h3>Fundamentals</h3>
-              <ul className="toc-list">
-                <li><a href="#the-basics" className="default-links">The Basics</a></li>
-                <li><a href="#history-of-games" className="default-links">History of Video Games</a></li>
-                <li><a href="#terminology-guide" className="default-links">Terminology Guide</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Categories & Styles</h3>
-              <ul className="toc-list">
-                <li><a href="#game-genres" className="default-links">Game Genres Guide</a></li>
-                <li><a href="#gaming-worlds" className="default-links">Gaming Worlds & Universes</a></li>
-                <li><a href="#audience-categories" className="default-links">Games for Different Audiences</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Behind the Scenes</h3>
-              <ul className="toc-list">
-                <li><a href="#development-process" className="default-links">Game Development Process</a></li>
-                <li><a href="#cultural-impact" className="default-links">Cultural Impact</a></li>
-                <li><a href="#learning-resources" className="default-links">Learning Resources</a></li>
-              </ul>
+        {/* Community Connection */}
+        <section className="section-content">
+          <div className="container">
+            <div className="community-connection">
+              <h4>Looking for specific games or characters?</h4>
+              <p>Browse our <Link to="/video-games/directory" className="default-links">Video Games Directory</Link> to find official pages for your favorite games and characters.</p>
+              <p>You can also visit our <Link to="/community#video-games-section" className="default-links">Community Section</Link> to explore fan-created content about games, characters, and more!</p>
             </div>
           </div>
-
-          <div className="community-connection">
-            <h4>Looking for specific games or characters?</h4>
-            <p>Browse our <Link to="/video-games/directory" className="default-links">Video Games Directory</Link> to find official pages for your favorite games and characters.</p>
-            <p>You can also visit our <Link to="/community#video-games-section" className="default-links">Community Section</Link> to explore fan-created content about games, characters, and more!</p>
-          </div>
-        </div>
-      </section>
+        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -285,14 +290,7 @@ const VideoGamesPage: React.FC = () => {
             This guide will help you understand the different types of games and find titles that match your interests.
           </p>
 
-          <div className="genre-navigation">
-            <h3>Quick Navigation</h3>
-            <div className="genre-nav-buttons">
-              <a href="#popular-genres" className="default-links">Popular Genres</a>
-              <a href="#emerging-genres" className="default-links">Emerging Genres</a>
-              <Link to="/video-games/directory#genres" className="default-links">Full Genre Directory →</Link>
-            </div>
-          </div>
+
 
           <div id="popular-genres" className="genre-section">
             <h3>Popular Game Genres</h3>
@@ -304,7 +302,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games focused on physical challenges, exploration, and combat.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Legend of Zelda, Uncharted, God of War</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Action & Adventure Games →</Link></li>
                 </ul>
               </div>
 
@@ -313,7 +310,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games where players assume the roles of characters in a fictional setting, developing their abilities and navigating complex narratives.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Final Fantasy, The Elder Scrolls, Mass Effect</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore RPGs →</Link></li>
                 </ul>
               </div>
 
@@ -322,7 +318,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Action games where players experience the game from a first-person perspective, typically focused on weapon-based combat.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> DOOM, Half-Life, Call of Duty</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore FPS Games →</Link></li>
                 </ul>
               </div>
 
@@ -331,7 +326,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games that emphasize skillful thinking and planning to achieve victory.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> StarCraft, Civilization, XCOM</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Strategy Games →</Link></li>
                 </ul>
               </div>
 
@@ -340,7 +334,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games designed to closely simulate real-world activities or systems.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Sims, Microsoft Flight Simulator, Cities: Skylines</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Simulation Games →</Link></li>
                 </ul>
               </div>
 
@@ -349,13 +342,12 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games where the primary challenge is navigating the character through a series of platforms and obstacles.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Super Mario Bros., Celeste, Hollow Knight</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Platformers →</Link></li>
                 </ul>
               </div>
             </div>
 
             <div className="view-more-container">
-              <Link to="/video-games/directory#genres" className="view-more-button">View All Genres in Directory</Link>
+              <Link to="/video-games/directory" className="default-links">View All Genres in Directory</Link>
             </div>
           </div>
 
@@ -369,7 +361,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Competitive games where many players fight to be the last person or team standing.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Fortnite, PUBG, Apex Legends</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Battle Royale Games →</Link></li>
                 </ul>
               </div>
 
@@ -378,7 +369,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games featuring procedurally generated levels and permanent death mechanics.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Hades, Dead Cells, The Binding of Isaac</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Roguelikes →</Link></li>
                 </ul>
               </div>
 
@@ -387,7 +377,6 @@ const VideoGamesPage: React.FC = () => {
                 <p>Challenging action RPGs inspired by FromSoftware's Dark Souls series.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Bloodborne, Sekiro, Elden Ring</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Souls-like Games →</Link></li>
                 </ul>
               </div>
 
@@ -396,21 +385,12 @@ const VideoGamesPage: React.FC = () => {
                 <p>Games emphasizing player choice, emergent gameplay, and simulation systems.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Deus Ex, Dishonored, Prey</li>
-                  <li><Link to="/video-games/directory#genres" className="default-links">Explore Immersive Sims →</Link></li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div className="genre-resources">
-            <h3>Finding Your Perfect Games</h3>
-            <p>Not sure where to start? Here are some resources to help you discover games based on your interests:</p>
-            <ul className="resource-links">
-              <li><Link to="/video-games/directory" className="default-links">Browse Our Video Games Directory</Link></li>
-              <li><Link to="/video-games/directory#popular-games" className="default-links">Popular Games for Beginners</Link></li>
-              <li><Link to="/video-games/directory#genres" className="default-links">Browse by Genre</Link></li>
-            </ul>
-          </div>
+
         </div>
       </section>
       <hr />
@@ -587,13 +567,11 @@ const VideoGamesPage: React.FC = () => {
                 <div className="world-example">
                   <h4>The Elder Scrolls: Tamriel</h4>
                   <p>A continent with diverse regions, cultures, and thousands of years of detailed history</p>
-                  <Link to="/video-games/directory#universes" className="default-links">Explore Tamriel in Games Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>Red Dead Redemption: The American Frontier</h4>
                   <p>A meticulously detailed recreation of the American West during the end of the outlaw era</p>
-                  <Link to="/video-games/directory#universes" className="default-links">Discover the Frontier in Games Directory →</Link>
                 </div>
               </div>
             </div>
@@ -605,13 +583,11 @@ const VideoGamesPage: React.FC = () => {
                 <div className="world-example">
                   <h4>BioShock: Rapture</h4>
                   <p>An underwater city built as a libertarian utopia that descended into chaos</p>
-                  <Link to="/video-games/directory#universes" className="default-links">Explore Rapture in Games Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>Dark Souls: Lordran</h4>
                   <p>A decaying fantasy realm where architecture and item placement tell environmental stories</p>
-                  <Link to="/video-games/directory#universes" className="default-links">Discover Lordran in Games Directory →</Link>
                 </div>
               </div>
             </div>
@@ -629,9 +605,8 @@ const VideoGamesPage: React.FC = () => {
           </div>
 
           <div className="community-connection">
-            <h4>Explore Gaming Worlds in Our Directory</h4>
-            <p>Our games directory features official information about your favorite gaming universes, including character profiles, location guides, timelines, and more!</p>
-            <Link to="/video-games/directory" className="default-links">Browse All Game Worlds →</Link>
+            <h4>Explore Gaming Worlds</h4>
+            <p>Video games create some of the most immersive and detailed fictional worlds in any medium.</p>
           </div>
         </div>
       </section>
@@ -652,15 +627,12 @@ const VideoGamesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Portal</strong> - A first-person puzzle game with a gradual learning curve and engaging story
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>Mario Kart 8</strong> - A racing game that's easy to learn but offers depth for those who want to master it
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>Minecraft</strong> - A sandbox game that allows players to explore and create at their own pace
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
               </ul>
             </div>
@@ -671,15 +643,12 @@ const VideoGamesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>The Legend of Zelda: Ocarina of Time</strong> - A groundbreaking adventure that defined 3D action games
-                  <Link to="/video-games/directory#classics" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>Final Fantasy VII</strong> - A JRPG that brought the genre to mainstream Western audiences
-                  <Link to="/video-games/directory#classics" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>Half-Life 2</strong> - A first-person shooter that revolutionized storytelling and physics in games
-                  <Link to="/video-games/directory#classics" className="default-links">View Game Details →</Link>
                 </li>
               </ul>
             </div>
@@ -690,15 +659,12 @@ const VideoGamesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Elden Ring</strong> - An open-world action RPG that combines exploration with challenging combat
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>God of War Ragnarök</strong> - An action-adventure game with a focus on combat and narrative
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
                 <li>
                   <strong>Hades</strong> - A roguelike action game with exceptional storytelling and character development
-                  <Link to="/video-games/directory#popular-games" className="default-links">View Game Details →</Link>
                 </li>
               </ul>
             </div>
@@ -706,210 +672,34 @@ const VideoGamesPage: React.FC = () => {
 
           <div className="community-connection">
             <h4>Find Your Next Favorite Game</h4>
-            <p>Looking for more games to play? Browse our comprehensive directory to discover titles based on your interests and preferences.</p>
-            <Link to="/video-games/directory" className="default-links">Browse All Games →</Link>
+            <p>These are just a few examples of the diverse games available to players of all interests.</p>
           </div>
         </div>
       </section>
       <hr />
 
-      {/* Learning Resources Section */}
+      {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
         <div className="container">
           <h2>Learning Resources</h2>
           <p>
-            Whether you're new to gaming or looking to deepen your knowledge, these resources will help you navigate and appreciate the world of video games.
+            Understanding video games as a medium can enhance your appreciation of the art form.
           </p>
 
           <div className="resource-categories">
             <div className="resource-category">
-              <h3>Getting Started</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Gaming for Beginners</h4>
-                  <p>A comprehensive introduction to video games for complete beginners, covering basic controls, common genres, and recommended first games.</p>
-                  <Link to="/community#gaming-beginners-guide" className="default-links">Read the Guide →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Gaming Platforms Explained</h4>
-                  <p>Information about different gaming platforms (PC, consoles, mobile) and their strengths and weaknesses.</p>
-                  <Link to="/community#gaming-platforms" className="default-links">Read the Guide →</Link>
-                </div>
-              </div>
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>"The Ultimate History of Video Games" by Steven L. Kent - Comprehensive overview of the industry's development</li>
+                <li>"Blood, Sweat, and Pixels" by Jason Schreier - Behind-the-scenes look at game development</li>
+                <li>"Rules of Play" by Katie Salen and Eric Zimmerman - Foundational text on game design theory</li>
+              </ul>
             </div>
-
-            <div className="resource-category">
-              <h3>Finding What to Play</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Game Recommendation Tool</h4>
-                  <p>An interactive tool to help you find games based on your preferences and interests.</p>
-                  <Link to="/community#game-finder" className="default-links">Use the Tool →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>New Release Guide</h4>
-                  <p>Information about new and upcoming game releases across all platforms.</p>
-                  <Link to="/community#game-releases" className="default-links">View Current Releases →</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="resource-category">
-              <h3>Deepening Your Knowledge</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Game Analysis Resources</h4>
-                  <p>Guides to understanding games on a deeper level, including design principles, narrative techniques, and artistic elements.</p>
-                  <Link to="/community#game-analysis" className="default-links">Explore Analysis Resources →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Game Development Basics</h4>
-                  <p>Introduction to how games are made, for those interested in the creative process behind their favorite titles.</p>
-                  <Link to="/community#game-dev-basics" className="default-links">Learn More →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-resources">
-            <h3>Community-Created Resources</h3>
-            <p>Our community members have created valuable resources to help fellow gamers:</p>
-            <div className="community-resource-grid">
-              <div className="community-resource">
-                <h4>Game Guides & Walkthroughs</h4>
-                <p>Detailed guides to help navigate challenging games and discover hidden content</p>
-                <Link to="/community#game-guides" className="default-links">See Game Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Game Collections</h4>
-                <p>Curated lists of games based on themes, genres, or recommendations for specific interests</p>
-                <Link to="/community#game-collections" className="default-links">Browse Collections →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Gaming Discussion Guides</h4>
-                <p>Resources for hosting game clubs or discussion groups</p>
-                <Link to="/community#discussion-guides" className="default-links">Get Discussion Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Gaming Glossary</h4>
-                <p>An extensive dictionary of gaming-related terms maintained by community members</p>
-                <Link to="/community#gaming-glossary" className="default-links">View Glossary →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Contribute Your Knowledge</h4>
-            <p>Have expertise or insights about games you'd like to share? Join our community and contribute to our growing collection of gaming resources!</p>
-            <Link to="/community#contribute-resources" className="default-links">Contribute to Resources →</Link>
           </div>
         </div>
       </section>
       <hr />
       </main>
-
-      {/* Footer Section */}
-      <footer className="site-footer">
-        <div className="footer-container">
-          <div className="footer-section footer-about">
-            <img src="/images/logo-image.jpg" alt="FanArcs Logo" className="footer-logo" />
-            <p>FanArcs is your go-to platform for exploring and sharing content across anime, manga, comics, TV, and more. Join our community of passionate fans!</p>
-            <div className="social-links">
-              <a href="#" className="social-icon" aria-label="Facebook">📘</a>
-              <a href="#" className="social-icon" aria-label="Twitter">🐦</a>
-              <a href="#" className="social-icon" aria-label="Instagram">📷</a>
-              <a href="#" className="social-icon" aria-label="Discord">💬</a>
-            </div>
-          </div>
-
-          <div className="footer-section footer-contact">
-            <h3>Contact Us</h3>
-            <p><span>📧</span> contact@fanarcs.com</p>
-            <p><span>📱</span> (555) 123-4567</p>
-            <p><span>🏢</span> 123 Fan Street, Anime City</p>
-
-            <h3>Newsletter</h3>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" aria-label="Email for newsletter" />
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>&copy; 2025 FanArcs. All rights reserved.</p>
-          <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-        </div>
-
-        {/* Bottom navigation bar */}
-        <div className="bottom-navigation">
-          <Link to="/" className="nav-home-button" aria-label="Go Home">🏠</Link>
-          <Link to="/community" className="nav-social-button" aria-label="Go to Community">👥</Link>
-          <Link to="/profile" className="nav-profile-button" aria-label="Profile Page">👤</Link>
-          <div className="nav-search-popup" onClick={() => console.log('Toggle search popup')}>
-            <span>🔍</span>
-          </div>
-
-          <div className="hamburger-menu-icon" aria-label="Open navigation menu">
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-          </div>
-        </div>
-
-        {/* The navigation menu that will show/hide */}
-        <nav className="main-navigation">
-          <ul>
-            {/* Categories dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="categories-dropdown"
-              >
-                Categories <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="categories-dropdown">
-                <li><Link to="/anime">Anime 🌸</Link></li>
-                <hr />
-                <li><Link to="/comics">Comics 💥</Link></li>
-                <hr />
-                <li><Link to="/manga">Manga 📖</Link></li>
-                <hr />
-                <li><Link to="/tv">Television 📺</Link></li>
-                <hr />
-                <li><Link to="/video-games">Video Games 🎮</Link></li>
-                <hr />
-                <li>
-                  <Link to="/worlds-universes">Worlds & Universes 🌌</Link>
-                </li>
-              </ul>
-            </li>
-
-            {/* FanArcs Info dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="info-dropdown"
-              >
-                FanArcs Info <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="info-dropdown">
-                <li><Link to="/about">About 🔎</Link></li>
-                <li><Link to="/contribute">Help FanArcs ⁉️</Link></li>
-                <li><Link to="/community">Community 👥</Link></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </footer>
     </div>
   );
 };
