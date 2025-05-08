@@ -6,76 +6,81 @@ import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
 import '../../../components/ui/MediaPages.css';
 import '../../../components/ui/TVPage.css';
+import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const TVPage: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history-of-tv" },
+        { label: "Terms", anchor: "#terminology-guide" }
+      ],
+      deepLinks: [
+        { label: "Full History", path: "/tv/history", exists: true }
+      ]
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genres", anchor: "#tv-genres" },
+        { label: "Worlds", anchor: "#tv-worlds" },
+        { label: "Audience", anchor: "#audience-categories" }
+      ],
+      deepLinks: [
+        { label: "Directory", path: "/tv/directory", exists: true }
+      ]
+    },
+    {
+      title: "BEHIND THE SCENES",
+      quickLinks: [
+        { label: "Process", anchor: "#production-process" },
+        { label: "Impact", anchor: "#cultural-impact" },
+        { label: "Resources", anchor: "#learning-resources" }
+      ],
+      deepLinks: []
+    }
+  ];
+
   return (
     <div className="tv-page">
       <header>
         <div className="image-header">
-          <img src="/images/tv/TVHeader.jpg" alt="Television Overview" />
+          <img src="/images/TV/TVHeader.jpg" alt="Television Overview" />
         </div>
 
         <input
           type="search"
           id="site-search-bar"
-          aria-label="Search From TV Page"
+          aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-      </header>
 
-      <div className="accessibility-container">
-        <a href="#main-content" className="skip-link">Skip to content</a>
-        <button className="keyboard-shortcuts-link" onClick={() => console.log('Keyboard shortcuts')}>
-          <span>⌨️</span> Keyboard shortcuts
-        </button>
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
-      </div>
+      </header>
 
       <main id="main-content">
         <hr />
 
-        {/* Table of Contents */}
-        <section id="table-of-contents" className="section-content">
+        {/* New Table of Contents */}
+        <TableOfContents
+          sections={tocSections}
+          title="TV Encyclopedia"
+          description="Use this table of contents to navigate through the TV guide."
+        />
+
+        {/* Community Connection */}
+        <section className="section-content">
           <div className="container">
-            <h2>Television Encyclopedia</h2>
-            <p>Welcome to our comprehensive guide to television. Use this table of contents to navigate to different sections.</p>
-
-          <div className="toc-container">
-            <div className="toc-column">
-              <h3>Fundamentals</h3>
-              <ul className="toc-list">
-                <li><a href="#the-basics" className="default-links">The Basics</a></li>
-                <li><a href="#history-of-tv" className="default-links">History of Television</a></li>
-                <li><a href="#terminology-guide" className="default-links">Terminology Guide</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Categories & Styles</h3>
-              <ul className="toc-list">
-                <li><a href="#tv-genres" className="default-links">TV Genres Guide</a></li>
-                <li><a href="#tv-worlds" className="default-links">TV Worlds & Universes</a></li>
-                <li><a href="#audience-categories" className="default-links">TV for Different Audiences</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Behind the Scenes</h3>
-              <ul className="toc-list">
-                <li><a href="#production-process" className="default-links">Production Process</a></li>
-                <li><a href="#cultural-impact" className="default-links">Cultural Impact</a></li>
-                <li><a href="#learning-resources" className="default-links">Learning Resources</a></li>
-              </ul>
+            <div className="community-connection">
+              <h4>Looking for specific TV shows or characters?</h4>
+              <p>Browse our <Link to="/tv/directory" className="default-links">TV Shows Directory</Link> to find official pages for your favorite series and characters.</p>
+              <p>You can also visit our <Link to="/community#tv-section" className="default-links">Community Section</Link> to explore fan-created content about TV series, characters, and more!</p>
             </div>
           </div>
-
-          <div className="community-connection">
-            <h4>Looking for specific TV shows or characters?</h4>
-            <p>Browse our <Link to="/tv/directory" className="default-links">TV Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-            <p>You can also visit our <Link to="/community#tv-section" className="default-links">Community Section</Link> to explore fan-created content about TV series, characters, and more!</p>
-          </div>
-        </div>
-      </section>
+        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -191,8 +196,7 @@ const TVPage: React.FC = () => {
           </div>
 
           <div className="community-connection">
-            <Link to="/community#tv-history" className="default-links">Explore Fan Discussions on Television History →</Link>
-            <Link to="/community#legendary-tv-creators" className="default-links">See Fan Tributes to Legendary Creators →</Link>
+            <Link to="/tv/history" className="default-links">Read Full History of Television →</Link>
           </div>
         </div>
       </section>
@@ -268,10 +272,7 @@ const TVPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#tv-terminology" className="default-links">See Fan Discussions on TV Terminology →</Link>
-            <Link to="/community#tv-viewing-guide" className="default-links">Explore Fan-Created TV Viewing Guide →</Link>
-          </div>
+
         </div>
       </section>
       <hr />
@@ -285,14 +286,7 @@ const TVPage: React.FC = () => {
             This guide will help you understand the different types of TV shows and find series that match your interests.
           </p>
 
-          <div className="genre-navigation">
-            <h3>Quick Navigation</h3>
-            <div className="genre-nav-buttons">
-              <a href="#scripted-genres" className="default-links">Scripted Genres</a>
-              <a href="#unscripted-genres" className="default-links">Unscripted Genres</a>
-              <Link to="/tv/directory#genres" className="default-links">Full Genre Directory →</Link>
-            </div>
-          </div>
+
 
           <div id="scripted-genres" className="genre-section">
             <h3>Scripted Genres</h3>
@@ -304,7 +298,6 @@ const TVPage: React.FC = () => {
                 <p>Character-driven narratives that explore complex emotions, relationships, and conflicts.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Breaking Bad, The Crown, This Is Us</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Drama TV →</Link></li>
                 </ul>
               </div>
 
@@ -313,7 +306,6 @@ const TVPage: React.FC = () => {
                 <p>Shows designed to make viewers laugh, typically with humorous situations and characters.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Office, Friends, Brooklyn Nine-Nine</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Comedy TV →</Link></li>
                 </ul>
               </div>
 
@@ -322,7 +314,6 @@ const TVPage: React.FC = () => {
                 <p>Shows that explore speculative concepts, futuristic technology, and alternate realities.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Star Trek, The Expanse, Doctor Who</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Science Fiction TV →</Link></li>
                 </ul>
               </div>
 
@@ -331,7 +322,6 @@ const TVPage: React.FC = () => {
                 <p>Focuses on solving crimes, often with a case-of-the-week format.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Law & Order, CSI, Criminal Minds</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Crime TV →</Link></li>
                 </ul>
               </div>
 
@@ -340,7 +330,6 @@ const TVPage: React.FC = () => {
                 <p>Features magical elements, mythical creatures, and supernatural phenomena.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Game of Thrones, The Witcher, Supernatural</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Fantasy TV →</Link></li>
                 </ul>
               </div>
 
@@ -349,13 +338,12 @@ const TVPage: React.FC = () => {
                 <p>Designed to frighten viewers with supernatural or psychological threats.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Haunting of Hill House, American Horror Story</li>
-                  <li><Link to="/tv/directory#genres" className="default-links">Explore Horror TV →</Link></li>
                 </ul>
               </div>
             </div>
 
             <div className="view-more-container">
-              <Link to="/tv/directory#genres" className="view-more-button">View All Genres in Directory</Link>
+              <Link to="/tv/directory" className="non-existent-link">View All Genres in Directory</Link>
             </div>
           </div>
 
@@ -369,7 +357,6 @@ const TVPage: React.FC = () => {
                 <p>Shows where contestants compete for prizes, often involving elimination formats.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Survivor, The Amazing Race, Top Chef</li>
-                  <li><Link to="/tv/directory#unscripted" className="default-links">Explore Reality Competitions →</Link></li>
                 </ul>
               </div>
 
@@ -378,7 +365,6 @@ const TVPage: React.FC = () => {
                 <p>In-depth explorations of real events, people, or phenomena.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Planet Earth, Making a Murderer, The Last Dance</li>
-                  <li><Link to="/tv/directory#unscripted" className="default-links">Explore Documentary Series →</Link></li>
                 </ul>
               </div>
 
@@ -387,7 +373,6 @@ const TVPage: React.FC = () => {
                 <p>Programs featuring hosts interviewing guests or presenting entertainment.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Tonight Show, The View, The Daily Show</li>
-                  <li><Link to="/tv/directory#unscripted" className="default-links">Explore Talk Shows →</Link></li>
                 </ul>
               </div>
 
@@ -396,21 +381,12 @@ const TVPage: React.FC = () => {
                 <p>Shows following the lives of real people, either celebrities or ordinary individuals.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Keeping Up with the Kardashians, Queer Eye</li>
-                  <li><Link to="/tv/directory#unscripted" className="default-links">Explore Reality Lifestyle Shows →</Link></li>
                 </ul>
               </div>
             </div>
           </div>
 
-          <div className="genre-resources">
-            <h3>Finding Your Perfect TV Shows</h3>
-            <p>Not sure where to start? Here are some resources to help you discover television shows based on your interests:</p>
-            <ul className="resource-links">
-              <li><Link to="/tv/directory" className="default-links">Browse Our TV Shows Directory</Link></li>
-              <li><Link to="/tv/directory#popular-series" className="default-links">Popular Series for Beginners</Link></li>
-              <li><Link to="/tv/directory#genres" className="default-links">Browse by Genre</Link></li>
-            </ul>
-          </div>
+
         </div>
       </section>
       <hr />
@@ -504,10 +480,7 @@ const TVPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#tv-production" className="default-links">Explore Fan Discussions on TV Production →</Link>
-            <Link to="/community#favorite-networks" className="default-links">See Fan Rankings of TV Networks →</Link>
-          </div>
+
         </div>
       </section>
       <hr />
@@ -565,10 +538,7 @@ const TVPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#tv-impact" className="default-links">Join Discussions on Television's Cultural Impact →</Link>
-            <Link to="/community#tv-moments" className="default-links">Explore Fan Discussions of Iconic TV Moments →</Link>
-          </div>
+
         </div>
       </section>
       <hr />
@@ -589,13 +559,11 @@ const TVPage: React.FC = () => {
                 <div className="world-example">
                   <h4>The Star Trek Universe</h4>
                   <p>A future where humanity has joined a galactic community, spanning multiple series across different time periods and locations</p>
-                  <Link to="/tv/directory#universes" className="default-links">Explore the Star Trek Universe in Shows Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>The Arrowverse</h4>
                   <p>A shared universe of DC Comics-based shows including Arrow, The Flash, Supergirl, and Legends of Tomorrow</p>
-                  <Link to="/tv/directory#universes" className="default-links">Discover the Arrowverse in Shows Directory →</Link>
                 </div>
               </div>
             </div>
@@ -607,13 +575,11 @@ const TVPage: React.FC = () => {
                 <div className="world-example">
                   <h4>Westeros (Game of Thrones)</h4>
                   <p>A medieval fantasy continent with complex political systems, diverse cultures, and supernatural elements</p>
-                  <Link to="/tv/directory#universes" className="default-links">Explore Westeros in Shows Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>Twin Peaks</h4>
                   <p>A small town with surreal elements and dark secrets lurking beneath its seemingly idyllic surface</p>
-                  <Link to="/tv/directory#universes" className="default-links">Discover Twin Peaks in Shows Directory →</Link>
                 </div>
               </div>
             </div>
@@ -631,9 +597,8 @@ const TVPage: React.FC = () => {
           </div>
 
           <div className="community-connection">
-            <h4>Explore Television Worlds in Our Shows Directory</h4>
-            <p>Our shows directory features official information about your favorite TV universes, including character profiles, location guides, timelines, and more!</p>
-            <Link to="/tv/directory" className="default-links">Browse All TV Shows →</Link>
+            <h4>Explore Television Worlds</h4>
+            <p>Television's long-form storytelling allows for the creation of rich, detailed fictional worlds.</p>
           </div>
         </div>
       </section>
@@ -654,15 +619,12 @@ const TVPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Breaking Bad</strong> - Vince Gilligan's transformation story of a high school teacher turned drug kingpin
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>The Office</strong> - A mockumentary-style workplace comedy that balances cringe humor with heart
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Stranger Things</strong> - A nostalgic 1980s-set supernatural mystery with interdimensional threats
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -673,15 +635,12 @@ const TVPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>The Wire</strong> - David Simon's intricate examination of Baltimore's institutions and the people within them
-                  <Link to="/tv/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>The Sopranos</strong> - David Chase's groundbreaking mob drama that revolutionized television storytelling
-                  <Link to="/tv/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Twin Peaks</strong> - David Lynch's surreal mystery that pushed the boundaries of television
-                  <Link to="/tv/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -692,15 +651,12 @@ const TVPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Succession</strong> - A darkly comic drama about a dysfunctional media dynasty family
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Ted Lasso</strong> - A heartwarming comedy about an American football coach managing a British soccer team
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>The White Lotus</strong> - Mike White's satirical anthology series set at a luxury resort chain
-                  <Link to="/tv/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -708,210 +664,34 @@ const TVPage: React.FC = () => {
 
           <div className="community-connection">
             <h4>Find Your Next Favorite TV Show</h4>
-            <p>Looking for more TV shows to watch? Browse our comprehensive shows directory to discover series based on your interests and preferences.</p>
-            <Link to="/tv/directory" className="default-links">Browse All TV Shows →</Link>
+            <p>These are just a few examples of the diverse television shows available to viewers of all interests.</p>
           </div>
         </div>
       </section>
       <hr />
 
-      {/* Learning Resources Section */}
+      {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
         <div className="container">
           <h2>Learning Resources</h2>
           <p>
-            Whether you're new to television analysis or looking to deepen your knowledge, these resources will help you navigate and appreciate the world of TV.
+            Understanding television as a medium can enhance your appreciation of the art form.
           </p>
 
           <div className="resource-categories">
             <div className="resource-category">
-              <h3>Understanding Television</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Television Analysis Basics</h4>
-                  <p>An introduction to analyzing television shows, including visual storytelling, narrative structure, and thematic elements.</p>
-                  <Link to="/community#tv-analysis-basics" className="default-links">Read the Guide →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>The Evolution of Television</h4>
-                  <p>An overview of how television has changed over time, from broadcast networks to the streaming era.</p>
-                  <Link to="/community#tv-evolution" className="default-links">Read the Guide →</Link>
-                </div>
-              </div>
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>"Television: A Biography" by David Thomson - A comprehensive look at television's history and cultural impact</li>
+                <li>"Difficult Men" by Brett Martin - Behind-the-scenes look at the creators of the TV drama revolution</li>
+                <li>"The Revolution Was Televised" by Alan Sepinwall - How drama series transformed television</li>
+              </ul>
             </div>
-
-            <div className="resource-category">
-              <h3>Finding What to Watch</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>TV Show Recommendation Tool</h4>
-                  <p>An interactive tool to help you find television shows based on your preferences and interests.</p>
-                  <Link to="/community#tv-recommendation-tool" className="default-links">Use the Tool →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Essential TV Shows by Decade</h4>
-                  <p>Curated lists of influential and significant television shows from each decade.</p>
-                  <Link to="/community#tv-by-decade" className="default-links">View the Lists →</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="resource-category">
-              <h3>Deepening Your Knowledge</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Television Production Insights</h4>
-                  <p>Detailed information about how television shows are created, from writing to filming to post-production.</p>
-                  <Link to="/community#tv-production-insights" className="default-links">Explore Production Resources →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Television History Deep Dives</h4>
-                  <p>In-depth explorations of significant periods, movements, and innovations in television history.</p>
-                  <Link to="/community#tv-history-deep-dives" className="default-links">Learn More →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-resources">
-            <h3>Community-Created Resources</h3>
-            <p>Our community members have created valuable resources to help fellow television fans:</p>
-            <div className="community-resource-grid">
-              <div className="community-resource">
-                <h4>Fan-Made Episode Guides</h4>
-                <p>Detailed guides to television series, including episode summaries and analysis</p>
-                <Link to="/community#episode-guides" className="default-links">See Episode Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>TV Show Collections</h4>
-                <p>Curated lists of television shows based on themes, genres, or recommendations for specific interests</p>
-                <Link to="/community#tv-collections" className="default-links">Browse Collections →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>TV Discussion Guides</h4>
-                <p>Resources for hosting television viewing clubs or discussion groups</p>
-                <Link to="/community#tv-discussion-guides" className="default-links">Get Discussion Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>TV Glossary</h4>
-                <p>An extensive dictionary of television-related terms maintained by community members</p>
-                <Link to="/community#tv-glossary" className="default-links">View Glossary →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Contribute Your Knowledge</h4>
-            <p>Have expertise or insights about television you'd like to share? Join our community and contribute to our growing collection of television resources!</p>
-            <Link to="/community#contribute-resources" className="default-links">Contribute to Resources →</Link>
           </div>
         </div>
       </section>
       <hr />
       </main>
-
-      {/* Footer Section */}
-      <footer className="site-footer">
-        <div className="footer-container">
-          <div className="footer-section footer-about">
-            <img src="/images/logo-image.jpg" alt="FanArcs Logo" className="footer-logo" />
-            <p>FanArcs is your go-to platform for exploring and sharing content across anime, manga, comics, TV, and more. Join our community of passionate fans!</p>
-            <div className="social-links">
-              <a href="#" className="social-icon" aria-label="Facebook">📘</a>
-              <a href="#" className="social-icon" aria-label="Twitter">🐦</a>
-              <a href="#" className="social-icon" aria-label="Instagram">📷</a>
-              <a href="#" className="social-icon" aria-label="Discord">💬</a>
-            </div>
-          </div>
-
-          <div className="footer-section footer-contact">
-            <h3>Contact Us</h3>
-            <p><span>📧</span> contact@fanarc.com</p>
-            <p><span>📱</span> (555) 123-4567</p>
-            <p><span>🏢</span> 123 Fan Street, Anime City</p>
-
-            <h3>Newsletter</h3>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" aria-label="Email for newsletter" />
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>&copy; 2025 FanArcs. All rights reserved.</p>
-          <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-        </div>
-
-        {/* Bottom navigation bar */}
-        <div className="bottom-navigation">
-          <Link to="/" className="nav-home-button" aria-label="Go Home">🏠</Link>
-          <Link to="/community" className="nav-social-button" aria-label="Go to Community">👥</Link>
-          <Link to="/profile" className="nav-profile-button" aria-label="Profile Page">👤</Link>
-          <div className="nav-search-popup" onClick={() => console.log('Toggle search popup')}>
-            <span>🔍</span>
-          </div>
-
-          <div className="hamburger-menu-icon" aria-label="Open navigation menu">
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-          </div>
-        </div>
-
-        {/* The navigation menu that will show/hide */}
-        <nav className="main-navigation">
-          <ul>
-            {/* Categories dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="categories-dropdown"
-              >
-                Categories <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="categories-dropdown">
-                <li><Link to="/anime">Anime 🌸</Link></li>
-                <hr />
-                <li><Link to="/comics">Comics 💥</Link></li>
-                <hr />
-                <li><Link to="/manga">Manga 📖</Link></li>
-                <hr />
-                <li><Link to="/tv">Television 📺</Link></li>
-                <hr />
-                <li><Link to="/metaverse">Metaverse 🎮</Link></li>
-                <hr />
-                <li>
-                  <Link to="/worlds-universes">Worlds & Universes 🌌</Link>
-                </li>
-              </ul>
-            </li>
-
-            {/* FanArcs Info dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="info-dropdown"
-              >
-                FanArcs Info <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="info-dropdown">
-                <li><Link to="/about">About 🔎</Link></li>
-                <li><Link to="/contribute">Help FanArcs ⁉️</Link></li>
-                <li><Link to="/community">Community 👥</Link></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </footer>
     </div>
   );
 };

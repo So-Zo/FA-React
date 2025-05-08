@@ -6,77 +6,81 @@ import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
 import '../../../components/ui/MediaPages.css';
 import '../../../components/ui/MangaPage.css';
+import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const MangaPage: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history-of-manga" },
+        { label: "Terms", anchor: "#terminology-guide" }
+      ],
+      deepLinks: [
+        { label: "Full History", path: "/manga/history", exists: true }
+      ]
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genres", anchor: "#manga-genres" },
+        { label: "Worlds", anchor: "#manga-worlds" },
+        { label: "Audience", anchor: "#audience-categories" }
+      ],
+      deepLinks: [
+        { label: "Directory", path: "/manga/directory", exists: true }
+      ]
+    },
+    {
+      title: "BEHIND THE SCENES",
+      quickLinks: [
+        { label: "Process", anchor: "#production-process" },
+        { label: "Impact", anchor: "#cultural-impact" },
+        { label: "Resources", anchor: "#learning-resources" }
+      ],
+      deepLinks: []
+    }
+  ];
+
   return (
     <div className="manga-page">
-      <header role="banner">
-        <div className="header-image">
-          <img src="/images/manga/MangaHeader.jpg" alt="Manga Overview" />
+        <header>
+        <div className="image-header">
+          <img src="/images/Manga/MangaHeader.jpg" alt="Manga Overview" />
         </div>
 
         <input
           type="search"
           id="site-search-bar"
-          aria-label="Search From Manga Page"
+          aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
-          data-search-type="manga"
         />
-      </header>
 
-      <div className="accessibility-container">
-        <a href="#main-content" className="skip-link">Skip to content</a>
-        <button className="keyboard-shortcuts-link" onClick={() => console.log('Keyboard shortcuts')}>
-          <span>⌨️</span> Keyboard shortcuts
-        </button>
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
-      </div>
+      </header>
 
       <main id="main-content">
         <hr />
 
-        {/* Table of Contents */}
-        <section id="table-of-contents" className="section-content">
-        <div className="container">
-          <h2>Manga Encyclopedia</h2>
-          <p>Welcome to our comprehensive guide to manga. Use this table of contents to navigate to different sections.</p>
+        {/* New Table of Contents */}
+        <TableOfContents
+          sections={tocSections}
+          title="Manga Encyclopedia"
+          description="Use this table of contents to navigate through the manga guide."
+        />
 
-          <div className="toc-container">
-            <div className="toc-column">
-              <h3>Fundamentals</h3>
-              <ul className="toc-list">
-                <li><a href="#the-basics" className="default-links">The Basics</a></li>
-                <li><a href="#history-of-manga" className="default-links">History of Manga</a> (<Link to="/manga/history" className="default-links">Full History</Link>)</li>
-                <li><a href="#terminology-guide" className="default-links">Terminology Guide</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Categories & Styles</h3>
-              <ul className="toc-list">
-                <li><a href="#manga-genres" className="default-links">Manga Genres Guide</a></li>
-                <li><a href="#manga-worlds" className="default-links">Manga Worlds & Universes</a></li>
-                <li><a href="#audience-categories" className="default-links">Manga for Different Audiences</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Behind the Scenes</h3>
-              <ul className="toc-list">
-                <li><a href="#production-process" className="default-links">Production Process</a></li>
-                <li><a href="#cultural-impact" className="default-links">Cultural Impact</a></li>
-                <li><a href="#learning-resources" className="default-links">Learning Resources</a></li>
-              </ul>
+        {/* Community Connection */}
+        <section className="section-content">
+          <div className="container">
+            <div className="community-connection">
+              <h4>Looking for specific manga series or characters?</h4>
+              <p>Browse our <Link to="/manga/directory" className="default-links">Manga Shows Directory</Link> to find official pages for your favorite series and characters.</p>
+              <p>You can also visit our <Link to="/community#manga-section" className="default-links">Community Section</Link> to explore fan-created content about manga series, characters, and more!</p>
             </div>
           </div>
-
-          <div className="community-connection">
-            <h4>Looking for specific manga series or characters?</h4>
-            <p>Browse our <Link to="/manga/directory" className="default-links">Manga Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-            <p>You can also visit our <Link to="/community#manga-section" className="default-links">Community Section</Link> to explore fan-created content about manga series, characters, and more!</p>
-          </div>
-        </div>
-      </section>
+        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -287,14 +291,7 @@ const MangaPage: React.FC = () => {
             This guide will help you understand the different types of manga and find series that match your interests.
           </p>
 
-          <div className="genre-navigation">
-            <h3>Quick Navigation</h3>
-            <div className="genre-nav-buttons">
-              <a href="#popular-genres" className="default-links">Popular Genres</a>
-              <a href="#demographic-genres" className="default-links">Demographic Categories</a>
-              <Link to="/manga/directory#genres" className="default-links">Full Genre Directory →</Link>
-            </div>
-          </div>
+
 
           <div id="popular-genres" className="genre-section">
             <h3>Popular Manga Genres</h3>
@@ -306,7 +303,6 @@ const MangaPage: React.FC = () => {
                 <p>Action-focused manga featuring protagonists who grow stronger through training and combat.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Dragon Ball, One Piece, Naruto, My Hero Academia</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Shōnen Battle Manga →</Link></li>
                 </ul>
               </div>
 
@@ -315,7 +311,6 @@ const MangaPage: React.FC = () => {
                 <p>Focuses on the everyday experiences of characters, often with a warm or comedic tone.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Yotsuba&!, Barakamon, Silver Spoon</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Slice of Life Manga →</Link></li>
                 </ul>
               </div>
 
@@ -324,7 +319,6 @@ const MangaPage: React.FC = () => {
                 <p>Designed to evoke fear through disturbing imagery and unsettling narratives.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Junji Ito's works (Uzumaki, Tomie), Parasyte</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Horror Manga →</Link></li>
                 </ul>
               </div>
 
@@ -333,7 +327,6 @@ const MangaPage: React.FC = () => {
                 <p>Focuses on romantic relationships between characters and emotional connections.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Kimi ni Todoke, Horimiya, Kaguya-sama</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Romance Manga →</Link></li>
                 </ul>
               </div>
 
@@ -342,7 +335,6 @@ const MangaPage: React.FC = () => {
                 <p>Set in fantastical worlds with elements like magic and supernatural powers.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Berserk, Made in Abyss, The Ancient Magus' Bride</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Fantasy Manga →</Link></li>
                 </ul>
               </div>
 
@@ -351,13 +343,12 @@ const MangaPage: React.FC = () => {
                 <p>Centers around competitive sports and athletes, focusing on teamwork and growth.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Haikyuu!!, Slam Dunk, Blue Lock</li>
-                  <li><Link to="/manga/directory#genres" className="default-links">Explore Sports Manga →</Link></li>
                 </ul>
               </div>
             </div>
 
             <div className="view-more-container">
-              <Link to="/manga/directory#genres" className="view-more-button">View All Genres in Directory</Link>
+              <Link to="/manga/directory" className="non-existent-link">View All Genres in Directory</Link>
             </div>
           </div>
 
@@ -371,7 +362,6 @@ const MangaPage: React.FC = () => {
                 <p>Aimed at boys and young men ages 12-18, featuring action, adventure, and coming-of-age themes.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> One Piece, Naruto, My Hero Academia</li>
-                  <li><Link to="/manga/directory#demographics" className="default-links">Explore Shōnen Manga →</Link></li>
                 </ul>
               </div>
 
@@ -380,7 +370,6 @@ const MangaPage: React.FC = () => {
                 <p>Aimed at girls and young women ages 12-18, often focusing on romance and emotional growth.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Fruits Basket, Ouran High School Host Club, Nana</li>
-                  <li><Link to="/manga/directory#demographics" className="default-links">Explore Shōjo Manga →</Link></li>
                 </ul>
               </div>
 
@@ -389,7 +378,6 @@ const MangaPage: React.FC = () => {
                 <p>Targeted at adult men (18+), with more complex themes and mature content.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Berserk, Vagabond, Vinland Saga</li>
-                  <li><Link to="/manga/directory#demographics" className="default-links">Explore Seinen Manga →</Link></li>
                 </ul>
               </div>
 
@@ -398,20 +386,9 @@ const MangaPage: React.FC = () => {
                 <p>Targeted at adult women (18+), featuring realistic relationships and mature themes.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Chihayafuru, Honey and Clover, Wotakoi</li>
-                  <li><Link to="/manga/directory#demographics" className="default-links">Explore Josei Manga →</Link></li>
                 </ul>
               </div>
             </div>
-          </div>
-
-          <div className="genre-resources">
-            <h3>Finding Your Perfect Manga</h3>
-            <p>Not sure where to start? Here are some resources to help you discover manga based on your interests:</p>
-            <ul className="resource-links">
-              <li><Link to="/manga/directory" className="default-links">Browse Our Manga Shows Directory</Link></li>
-              <li><Link to="/manga/directory#popular-series" className="default-links">Popular Series for Beginners</Link></li>
-              <li><Link to="/manga/directory#genres" className="default-links">Browse by Genre</Link></li>
-            </ul>
           </div>
         </div>
       </section>
@@ -572,13 +549,11 @@ const MangaPage: React.FC = () => {
                 <div className="world-example">
                   <h4>The World of One Piece</h4>
                   <p>A vast ocean world divided by the Grand Line, filled with islands, pirates, and mysterious Devil Fruits</p>
-                  <Link to="/manga/directory#universes" className="default-links">Explore the Grand Line in Shows Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>Berserk's Dark Fantasy World</h4>
                   <p>A medieval European-inspired dark fantasy realm where humans struggle against demonic forces</p>
-                  <Link to="/manga/directory#universes" className="default-links">Discover the World of Berserk in Shows Directory →</Link>
                 </div>
               </div>
             </div>
@@ -590,13 +565,11 @@ const MangaPage: React.FC = () => {
                 <div className="world-example">
                   <h4>Akira's Neo-Tokyo</h4>
                   <p>A cyberpunk metropolis rebuilt after a catastrophic explosion, filled with biker gangs, government experiments, and psychic powers</p>
-                  <Link to="/manga/directory#universes" className="default-links">Explore Neo-Tokyo in Shows Directory →</Link>
                 </div>
 
                 <div className="world-example">
                   <h4>Attack on Titan's Walled Society</h4>
                   <p>A society enclosed by massive walls to protect humanity from giant humanoid creatures</p>
-                  <Link to="/manga/directory#universes" className="default-links">Discover the Walls in Shows Directory →</Link>
                 </div>
               </div>
             </div>
@@ -614,9 +587,9 @@ const MangaPage: React.FC = () => {
           </div>
 
           <div className="community-connection">
-            <h4>Explore Manga Worlds in Our Shows Directory</h4>
-            <p>Our shows directory features official information about your favorite manga universes, including character profiles, location guides, power system explanations, and more!</p>
-            <Link to="/manga/directory" className="default-links">Browse All Manga Shows →</Link>
+            <h4>Explore Manga Worlds</h4>
+            <p>Manga features countless fascinating worlds and universes with their own unique rules and settings.</p>
+            <Link to="/manga/directory" className="non-existent-link">Browse Manga Directory</Link>
           </div>
         </div>
       </section>
@@ -637,15 +610,12 @@ const MangaPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Death Note</strong> - A psychological thriller about a student who discovers a notebook that kills anyone whose name is written in it
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Fullmetal Alchemist</strong> - A perfect blend of action, drama, and fantasy with a complete, satisfying story
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Yotsuba&!</strong> - A heartwarming slice-of-life series about an energetic young girl discovering the world
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -656,15 +626,12 @@ const MangaPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Astro Boy</strong> - Osamu Tezuka's groundbreaking series about a robot boy with human emotions
-                  <Link to="/manga/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Dragon Ball</strong> - Akira Toriyama's martial arts adventure that popularized manga worldwide
-                  <Link to="/manga/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Akira</strong> - Katsuhiro Otomo's cyberpunk masterpiece that revolutionized manga storytelling
-                  <Link to="/manga/directory#eras" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -675,15 +642,12 @@ const MangaPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Demon Slayer</strong> - A visually stunning tale of a boy hunting demons in Taisho-era Japan
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Jujutsu Kaisen</strong> - A dark fantasy about students battling curses with supernatural powers
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Spy x Family</strong> - A charming blend of action and comedy about a spy who must create a fake family
-                  <Link to="/manga/directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
             </div>
@@ -691,210 +655,34 @@ const MangaPage: React.FC = () => {
 
           <div className="community-connection">
             <h4>Find Your Next Favorite Manga</h4>
-            <p>Looking for more manga to read? Browse our comprehensive shows directory to discover series based on your interests and preferences.</p>
-            <Link to="/manga/directory" className="default-links">Browse All Manga Shows →</Link>
+            <p>These are just a few examples of the diverse manga available to readers of all interests.</p>
           </div>
         </div>
       </section>
       <hr />
 
-      {/* Learning Resources Section */}
+      {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
         <div className="container">
           <h2>Learning Resources</h2>
           <p>
-            Whether you're new to manga or looking to deepen your knowledge, these resources will help you navigate and appreciate the world of manga.
+            Understanding manga as a medium can enhance your appreciation of the art form.
           </p>
 
           <div className="resource-categories">
             <div className="resource-category">
-              <h3>Beginner's Guides</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Getting Started with Manga</h4>
-                  <p>A comprehensive introduction to manga for complete beginners, covering basic terminology, common genres, and recommended first series.</p>
-                  <Link to="/community#manga-beginners-guide" className="default-links">Read the Guide →</Link>
-                </div>
-
-                <div className="info-box resource-item">
-                  <h4>How to Read Manga</h4>
-                  <p>Information on the right-to-left reading direction, understanding panel flow, and interpreting visual cues specific to manga.</p>
-                  <Link to="/community#manga-reading-guide" className="default-links">Read the Guide →</Link>
-                </div>
-              </div>
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>"Manga: A Brief History" by Paul Gravett - Accessible overview of manga's development</li>
+                <li>"Dreamland Japan: Writings on Modern Manga" by Frederik L. Schodt - Exploration of manga's evolution</li>
+                <li>"The Osamu Tezuka Story" by Toshio Ban - Biography of manga's most influential creator</li>
+              </ul>
             </div>
-
-            <div className="resource-category">
-              <h3>Finding What to Read</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Manga Recommendation Flowchart</h4>
-                  <p>An interactive tool to help you find manga based on your preferences and interests.</p>
-                  <Link to="/community#manga-flowchart" className="default-links">Use the Flowchart →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Manga Release Guide</h4>
-                  <p>Information about new and upcoming manga releases in both Japan and internationally.</p>
-                  <Link to="/community#manga-releases" className="default-links">View Current Releases →</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="resource-category">
-              <h3>Deepening Your Knowledge</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Manga Analysis Resources</h4>
-                  <p>Guides to understanding manga on a deeper level, including visual techniques, storytelling patterns, and cultural context.</p>
-                  <Link to="/community#manga-analysis" className="default-links">Explore Analysis Resources →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Japanese Language in Manga</h4>
-                  <p>Introduction to common Japanese phrases and concepts encountered in manga, and how manga can be used as a language learning tool.</p>
-                  <Link to="/community#manga-japanese" className="default-links">Learn More →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-resources">
-            <h3>Community-Created Resources</h3>
-            <p>Our community members have created valuable resources to help fellow manga fans:</p>
-            <div className="community-resource-grid">
-              <div className="community-resource">
-                <h4>Fan-Made Reading Orders</h4>
-                <p>Guides for navigating complex series with multiple spin-offs and related titles</p>
-                <Link to="/community#reading-orders" className="default-links">See Reading Orders →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Manga Collections</h4>
-                <p>Curated lists of manga based on themes, genres, or recommendations for specific interests</p>
-                <Link to="/community#manga-collections" className="default-links">Browse Collections →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Manga Discussion Guides</h4>
-                <p>Resources for hosting manga reading clubs or discussion groups</p>
-                <Link to="/community#discussion-guides" className="default-links">Get Discussion Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Manga Glossary</h4>
-                <p>An extensive dictionary of manga-related terms maintained by community members</p>
-                <Link to="/community#manga-glossary" className="default-links">View Glossary →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Contribute Your Knowledge</h4>
-            <p>Have expertise or insights about manga you'd like to share? Join our community and contribute to our growing collection of manga resources!</p>
-            <Link to="/community#contribute-resources" className="default-links">Contribute to Resources →</Link>
           </div>
         </div>
       </section>
       <hr />
       </main>
-
-      {/* Footer Section */}
-      <footer className="site-footer">
-        <div className="footer-container">
-          <div className="footer-section footer-about">
-            <img src="/images/logo-image.jpg" alt="FanArcs Logo" className="footer-logo" />
-            <p>FanArcs is your go-to platform for exploring and sharing content across anime, manga, comics, TV, and more. Join our community of passionate fans!</p>
-            <div className="social-links">
-              <a href="#" className="social-icon" aria-label="Facebook">📘</a>
-              <a href="#" className="social-icon" aria-label="Twitter">🐦</a>
-              <a href="#" className="social-icon" aria-label="Instagram">📷</a>
-              <a href="#" className="social-icon" aria-label="Discord">💬</a>
-            </div>
-          </div>
-
-          <div className="footer-section footer-contact">
-            <h3>Contact Us</h3>
-            <p><span>📧</span> contact@fanarcs.com</p>
-            <p><span>📱</span> (555) 123-4567</p>
-            <p><span>🏢</span> 123 Fan Street, Anime City</p>
-
-            <h3>Newsletter</h3>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" aria-label="Email for newsletter" />
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>&copy; 2025 FanArcs. All rights reserved.</p>
-          <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-        </div>
-
-        {/* Bottom navigation bar */}
-        <div className="bottom-navigation">
-          <Link to="/" className="nav-home-button" aria-label="Go Home">🏠</Link>
-          <Link to="/community" className="nav-social-button" aria-label="Go to Community">👥</Link>
-          <Link to="/profile" className="nav-profile-button" aria-label="Profile Page">👤</Link>
-          <div className="nav-search-popup" onClick={() => console.log('Toggle search popup')}>
-            <span>🔍</span>
-          </div>
-
-          <div className="hamburger-menu-icon" aria-label="Open navigation menu">
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-          </div>
-        </div>
-
-        {/* The navigation menu that will show/hide */}
-        <nav className="main-navigation">
-          <ul>
-            {/* Categories dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="categories-dropdown"
-              >
-                Categories <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="categories-dropdown">
-                <li><Link to="/anime">Anime 🌸</Link></li>
-                <hr />
-                <li><Link to="/comics">Comics 💥</Link></li>
-                <hr />
-                <li><Link to="/manga">Manga 📖</Link></li>
-                <hr />
-                <li><Link to="/tv">Television 📺</Link></li>
-                <hr />
-                <li><Link to="/video-games">Video Games 🎮</Link></li>
-                <hr />
-                <li>
-                  <Link to="/worlds-universes">Worlds & Universes 🌌</Link>
-                </li>
-              </ul>
-            </li>
-
-            {/* FanArcs Info dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="info-dropdown"
-              >
-                FanArcs Info <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="info-dropdown">
-                <li><Link to="/about">About 🔎</Link></li>
-                <li><Link to="/contribute">Help FanArcs ⁉️</Link></li>
-                <li><Link to="/community">Community 👥</Link></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </footer>
     </div>
   );
 };

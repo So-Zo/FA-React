@@ -5,8 +5,44 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const ComicsPage: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history-of-comics" },
+        { label: "Terms", anchor: "#terminology-guide" }
+      ],
+      deepLinks: [
+        { label: "Full History", path: "/comics/history", exists: true }
+      ]
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genres", anchor: "#comics-genres" },
+        { label: "Worlds", anchor: "#comics-worlds" },
+        { label: "Audience", anchor: "#audience-categories" }
+      ],
+      deepLinks: [
+        { label: "Directory", path: "/comics/directory", exists: true }
+      ]
+    },
+    {
+      title: "BEHIND THE SCENES",
+      quickLinks: [
+        { label: "Process", anchor: "#production-process" },
+        { label: "Impact", anchor: "#cultural-impact" },
+        { label: "Resources", anchor: "#learning-resources" }
+      ],
+      deepLinks: []
+    }
+  ];
+
   return (
     <div className="comics-page">
       <header>
@@ -17,64 +53,33 @@ const ComicsPage: React.FC = () => {
         <input
           type="search"
           id="site-search-bar"
-          aria-label="Search From Comics Page"
+          aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-      </header>
 
-      <div className="accessibility-container">
-        <a href="#main-content" className="skip-link">Skip to content</a>
-        <button className="keyboard-shortcuts-link" onClick={() => console.log('Keyboard shortcuts')}>
-          <span>⌨️</span> Keyboard shortcuts
-        </button>
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
-      </div>
+      </header>
 
       <main id="main-content">
         <hr />
 
-        {/* Table of Contents */}
-        <section id="table-of-contents" className="section-content">
-        <div className="container">
-          <h2>Comics Encyclopedia</h2>
-          <p>Welcome to our comprehensive guide to comics. Use this table of contents to navigate to different sections.</p>
+        {/* New Table of Contents */}
+        <TableOfContents
+          sections={tocSections}
+          title="Comics Encyclopedia"
+          description="Use this table of contents to navigate through the comics guide."
+        />
 
-          <div className="toc-container">
-            <div className="toc-column">
-              <h3>Fundamentals</h3>
-              <ul className="toc-list">
-                <li><a href="#the-basics" className="default-links">The Basics</a></li>
-                <li><a href="#history-of-comics" className="default-links">History of Comics</a> (<Link to="/comics/history" className="default-links">Full History</Link>)</li>
-                <li><a href="#terminology-guide" className="default-links">Terminology Guide</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Categories & Styles</h3>
-              <ul className="toc-list">
-                <li><a href="#comics-genres" className="default-links">Comics Genres Guide</a></li>
-                <li><a href="#comics-worlds" className="default-links">Comics Worlds & Universes</a></li>
-                <li><a href="#audience-categories" className="default-links">Comics for Different Audiences</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Behind the Scenes</h3>
-              <ul className="toc-list">
-                <li><a href="#production-process" className="default-links">Production Process</a></li>
-                <li><a href="#cultural-impact" className="default-links">Cultural Impact</a></li>
-                <li><a href="#learning-resources" className="default-links">Learning Resources</a></li>
-              </ul>
+        {/* Community Connection */}
+        <section className="section-content">
+          <div className="container">
+            <div className="community-connection">
+              <h4>Looking for specific comic series or characters?</h4>
+              <p>Browse our <Link to="/comics/directory" className="default-links">Comics Shows Directory</Link> to find official pages for your favorite series and characters.</p>
+              <p>You can also visit our <Link to="/community#comics-section" className="default-links">Community Section</Link> to explore fan-created content about comic series, characters, and more!</p>
             </div>
           </div>
-
-          <div className="community-connection">
-            <h4>Looking for specific comic series or characters?</h4>
-            <p>Browse our <Link to="/comics/directory" className="default-links">Comics Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-            <p>You can also visit our <Link to="/community#comics-section" className="default-links">Community Section</Link> to explore fan-created content about comic series, characters, and more!</p>
-          </div>
-        </div>
-      </section>
+        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -293,14 +298,6 @@ const ComicsPage: React.FC = () => {
             This guide will help you understand the different types of comics and find series that match your interests.
           </p>
 
-          <div className="genre-navigation">
-            <h3>Quick Navigation</h3>
-            <div className="genre-nav-buttons">
-              <a href="#popular-genres" className="default-links">Popular Genres</a>
-              <a href="#publishing-formats" className="default-links">Publishing Formats</a>
-              <Link to="/comics/directory#genres" className="default-links">Full Genre Directory →</Link>
-            </div>
-          </div>
 
           <div id="popular-genres" className="genre-section">
             <h3>Popular Comics Genres</h3>
@@ -312,7 +309,6 @@ const ComicsPage: React.FC = () => {
                 <p>Stories featuring characters with extraordinary abilities who typically fight crime and protect the innocent.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Batman, Spider-Man, X-Men, Wonder Woman</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Superhero Comics →</Link></li>
                 </ul>
               </div>
 
@@ -321,7 +317,6 @@ const ComicsPage: React.FC = () => {
                 <p>Comics that explore futuristic concepts, technology, space travel, and speculative ideas.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Saga, Transmetropolitan, Y: The Last Man</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Science Fiction Comics →</Link></li>
                 </ul>
               </div>
 
@@ -330,7 +325,6 @@ const ComicsPage: React.FC = () => {
                 <p>Comics designed to evoke fear, dread, or psychological disturbance through disturbing imagery.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Walking Dead, Hellblazer, Locke & Key</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Horror Comics →</Link></li>
                 </ul>
               </div>
 
@@ -339,7 +333,6 @@ const ComicsPage: React.FC = () => {
                 <p>Dark, gritty stories focusing on criminal activity, detectives, and moral ambiguity.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Criminal, Sin City, Gotham Central</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Crime Comics →</Link></li>
                 </ul>
               </div>
 
@@ -348,7 +341,6 @@ const ComicsPage: React.FC = () => {
                 <p>Set in magical worlds with elements like magic, mythical creatures, and supernatural powers.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Fables, Sandman, Monstress</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Fantasy Comics →</Link></li>
                 </ul>
               </div>
 
@@ -357,13 +349,12 @@ const ComicsPage: React.FC = () => {
                 <p>Stories about everyday experiences or autobiographical accounts of the creator's life.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Blankets, Fun Home, Persepolis</li>
-                  <li><Link to="/comics/directory#genres" className="default-links">Explore Slice of Life Comics →</Link></li>
                 </ul>
               </div>
             </div>
 
             <div className="view-more-container">
-              <Link to="/comics/directory#genres" className="view-more-button">View All Genres in Directory</Link>
+              <Link to="/comics/directory" className="non-existent-link">View All Genres in Directory</Link>
             </div>
           </div>
 
@@ -377,7 +368,6 @@ const ComicsPage: React.FC = () => {
                 <p>Serialized stories published in individual issues, typically 20-32 pages.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Most superhero titles from Marvel and DC</li>
-                  <li><Link to="/comics/directory#formats" className="default-links">Explore Monthly Comics →</Link></li>
                 </ul>
               </div>
 
@@ -386,7 +376,6 @@ const ComicsPage: React.FC = () => {
                 <p>Longer-form comics published as complete works in a single volume.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Maus, Persepolis, Blankets</li>
-                  <li><Link to="/comics/directory#formats" className="default-links">Explore Graphic Novels →</Link></li>
                 </ul>
               </div>
 
@@ -395,7 +384,6 @@ const ComicsPage: React.FC = () => {
                 <p>Comics published primarily online, often with unique digital formats.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> XKCD, Homestuck, The Oatmeal</li>
-                  <li><Link to="/comics/directory#formats" className="default-links">Explore Webcomics →</Link></li>
                 </ul>
               </div>
 
@@ -404,20 +392,9 @@ const ComicsPage: React.FC = () => {
                 <p>Short-form comics published in newspapers, typically in a few panels.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Calvin and Hobbes, Peanuts, Dilbert</li>
-                  <li><Link to="/comics/directory#formats" className="default-links">Explore Newspaper Comics →</Link></li>
                 </ul>
               </div>
             </div>
-          </div>
-
-          <div className="genre-resources">
-            <h3>Finding Your Perfect Comics</h3>
-            <p>Not sure where to start? Here are some resources to help you discover comics based on your interests:</p>
-            <ul className="resource-links">
-              <li><Link to="/comics/directory" className="default-links">Browse Our Comics Shows Directory</Link></li>
-              <li><Link to="/comics/directory#popular-series" className="default-links">Popular Series for Beginners</Link></li>
-              <li><Link to="/comics/directory#genres" className="default-links">Browse by Genre</Link></li>
-            </ul>
           </div>
         </div>
       </section>
@@ -702,203 +679,28 @@ const ComicsPage: React.FC = () => {
       </section>
       <hr />
 
-      {/* Learning Resources Section */}
+      {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
         <div className="container">
           <h2>Learning Resources</h2>
           <p>
-            Whether you're new to comics or looking to deepen your knowledge, these resources will help you navigate and appreciate the world of comics.
+            Understanding comics as a medium can enhance your appreciation of the art form.
           </p>
 
           <div className="resource-categories">
             <div className="resource-category">
-              <h3>Beginner's Guides</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Getting Started with Comics</h4>
-                  <p>A comprehensive introduction to comics for complete beginners, covering basic terminology, common genres, and recommended first reads.</p>
-                  <Link to="/community#comics-beginners-guide" className="default-links">Read the Guide →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Comics Reading Guide</h4>
-                  <p>Information on how to read and interpret the visual language of comics, including panel flow, artistic techniques, and storytelling conventions.</p>
-                  <Link to="/community#understanding-comics-guide" className="default-links">Read the Guide →</Link>
-                </div>
-              </div>
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>"Understanding Comics" by Scott McCloud - A groundbreaking analysis of comics as a medium</li>
+                <li>"Comics and Sequential Art" by Will Eisner - Foundational work on comics theory</li>
+                <li>"The Ten-Cent Plague" by David Hajdu - History of the comics industry and censorship</li>
+              </ul>
             </div>
-
-            <div className="resource-category">
-              <h3>Finding What to Read</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Comics Recommendation Flowchart</h4>
-                  <p>An interactive tool to help you find comics based on your preferences and interests.</p>
-                  <Link to="/community#comics-flowchart" className="default-links">Use the Flowchart →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>New Release Guide</h4>
-                  <p>Information about new and upcoming comics releases from major and independent publishers.</p>
-                  <Link to="/community#comics-releases" className="default-links">View Current Releases →</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="resource-category">
-              <h3>Deepening Your Knowledge</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>Comics Analysis Resources</h4>
-                  <p>Guides to understanding comics on a deeper level, including visual techniques, storytelling patterns, and cultural context.</p>
-                  <Link to="/community#comics-analysis" className="default-links">Explore Analysis Resources →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Comics History Deep Dives</h4>
-                  <p>Detailed explorations of significant periods, movements, and innovations in comics history.</p>
-                  <Link to="/community#comics-history-deep-dives" className="default-links">Learn More →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-resources">
-            <h3>Community-Created Resources</h3>
-            <p>Our community members have created valuable resources to help fellow comics fans:</p>
-            <div className="community-resource-grid">
-              <div className="community-resource">
-                <h4>Fan-Made Reading Orders</h4>
-                <p>Guides for navigating complex superhero continuity and long-running series</p>
-                <Link to="/community#reading-orders" className="default-links">See Reading Orders →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Comics Collections</h4>
-                <p>Curated lists of comics based on themes, genres, or recommendations for specific interests</p>
-                <Link to="/community#comics-collections" className="default-links">Browse Collections →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Comics Discussion Guides</h4>
-                <p>Resources for hosting comics reading clubs or discussion groups</p>
-                <Link to="/community#discussion-guides" className="default-links">Get Discussion Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>Comics Glossary</h4>
-                <p>An extensive dictionary of comics-related terms maintained by community members</p>
-                <Link to="/community#comics-glossary" className="default-links">View Glossary →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Contribute Your Knowledge</h4>
-            <p>Have expertise or insights about comics you'd like to share? Join our community and contribute to our growing collection of comics resources!</p>
-            <Link to="/community#contribute-resources" className="default-links">Contribute to Resources →</Link>
           </div>
         </div>
       </section>
       <hr />
       </main>
-
-      {/* Footer Section */}
-      <footer className="site-footer">
-        <div className="footer-container">
-          <div className="footer-section footer-about">
-            <img src="/images/logo-image.jpg" alt="FanArcs Logo" className="footer-logo" />
-            <p>FanArcs is your go-to platform for exploring and sharing content across anime, manga, comics, TV, and more. Join our community of passionate fans!</p>
-            <div className="social-links">
-              <a href="#" className="social-icon" aria-label="Facebook">📘</a>
-              <a href="#" className="social-icon" aria-label="Twitter">🐦</a>
-              <a href="#" className="social-icon" aria-label="Instagram">📷</a>
-              <a href="#" className="social-icon" aria-label="Discord">💬</a>
-            </div>
-          </div>
-
-          <div className="footer-section footer-contact">
-            <h3>Contact Us</h3>
-            <p><span>📧</span> contact@fanarc.com</p>
-            <p><span>📱</span> (555) 123-4567</p>
-            <p><span>🏢</span> 123 Fan Street, Anime City</p>
-
-            <h3>Newsletter</h3>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" aria-label="Email for newsletter" />
-              <button type="submit">Subscribe</button>
-            </form>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          <p>&copy; 2025 FanArcs. All rights reserved.</p>
-          <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
-        </div>
-
-        {/* Bottom navigation bar */}
-        <div className="bottom-navigation">
-          <Link to="/" className="nav-home-button" aria-label="Go Home">🏠</Link>
-          <Link to="/community" className="nav-social-button" aria-label="Go to Community">👥</Link>
-          <Link to="/profile" className="nav-profile-button" aria-label="Profile Page">👤</Link>
-          <div className="nav-search-popup" onClick={() => console.log('Toggle search popup')}>
-            <span>🔍</span>
-          </div>
-
-          <div className="hamburger-menu-icon" aria-label="Open navigation menu">
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-            <div className="hamburger-bar"></div>
-          </div>
-        </div>
-
-        {/* The navigation menu that will show/hide */}
-        <nav className="main-navigation">
-          <ul>
-            {/* Categories dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="categories-dropdown"
-              >
-                Categories <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="categories-dropdown">
-                <li><Link to="/anime">Anime 🌸</Link></li>
-                <hr />
-                <li><Link to="/comics">Comics 💥</Link></li>
-                <hr />
-                <li><Link to="/manga">Manga 📖</Link></li>
-                <hr />
-                <li><Link to="/tv">Television 📺</Link></li>
-                <hr />
-                <li><Link to="/video-games">Video Games 🎮</Link></li>
-                <hr />
-                <li>
-                  <Link to="/worlds-universes">Worlds & Universes 🌌</Link>
-                </li>
-              </ul>
-            </li>
-
-            {/* FanArcs Info dropdown */}
-            <li>
-              <button
-                className="nav-dropdown-toggle"
-                aria-expanded="false"
-                aria-controls="info-dropdown"
-              >
-                FanArcs Info <span>►</span>
-              </button>
-              <ul className="nav-dropdown-menu" id="info-dropdown">
-                <li><Link to="/about">About 🔎</Link></li>
-                <li><Link to="/contribute">Help FanArcs ⁉️</Link></li>
-                <li><Link to="/community">Community 👥</Link></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </footer>
     </div>
   );
 };

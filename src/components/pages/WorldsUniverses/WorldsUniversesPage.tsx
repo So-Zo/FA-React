@@ -5,49 +5,72 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const WorldsUniversesPage: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history" },
+        { label: "Terms", anchor: "#terminology-guide" }
+      ],
+      deepLinks: [
+        { label: "World's Directory", path: "/worlds-universes/directory", exists: true }
+      ]
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genre", anchor: "#genres-guide" },
+        { label: "Style", anchor: "#worlds-universes" },
+        { label: "Audience", anchor: "#audience-categories" }
+      ],
+      deepLinks: []
+    },
+    {
+      title: "BEHIND THE SCENES",
+      quickLinks: [
+        { label: "How", anchor: "#production-process" },
+        { label: "Impact", anchor: "#cultural-impact" },
+        { label: "Resources", anchor: "#learning-resources" }
+      ],
+      deepLinks: []
+    }
+  ];
+
   return (
     <div className="worlds-universes-page">
-      {/* Table of Contents */}
-      <section id="table-of-contents" className="section-content">
+        <header>
+        <div className="image-header">
+          <img src="/images/WorldsUniverses/VideoGamesHeader.jpg" alt="Worlds and Universes Overview" />
+        </div>
+
+        <input
+          type="search"
+          id="site-search-bar"
+          aria-label="Search From Video Games Page"
+          placeholder="Search for Characters, Universes, etc."
+        />
+
+        <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
+      </header>
+
+      {/* New Table of Contents */}
+      <TableOfContents
+        sections={tocSections}
+        title="Worlds & Universes Encyclopedia"
+        description="Use this table of contents to navigate through the worlds and universes guide."
+      />
+
+      {/* Community Connection */}
+      <section className="section-content">
         <div className="container">
-          <h2>Worlds & Universes Encyclopedia</h2>
-          <p>Welcome to our comprehensive guide to fictional worlds and universes. Use this table of contents to navigate to different sections.</p>
-
-          <div className="toc-container">
-            <div className="toc-column">
-              <h3>Fundamentals</h3>
-              <ul className="toc-list">
-                <li><a href="#the-basics" className="default-links">The Basics</a></li>
-                <li><a href="#history" className="default-links">History of Fictional Worlds</a></li>
-                <li><a href="#terminology-guide" className="default-links">Terminology Guide</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Categories & Styles</h3>
-              <ul className="toc-list">
-                <li><a href="#genres-guide" className="default-links">Genres Guide</a></li>
-                <li><a href="#worlds-universes" className="default-links">Popular Worlds & Universes</a></li>
-                <li><a href="#audience-categories" className="default-links">Worlds for Different Audiences</a></li>
-              </ul>
-            </div>
-
-            <div className="toc-column">
-              <h3>Behind the Scenes</h3>
-              <ul className="toc-list">
-                <li><a href="#production-process" className="default-links">World-Building Process</a></li>
-                <li><a href="#cultural-impact" className="default-links">Cultural Impact</a></li>
-                <li><a href="#learning-resources" className="default-links">Learning Resources</a></li>
-              </ul>
-            </div>
-          </div>
-
           <div className="community-connection">
             <h4>Looking for specific fictional worlds or universes?</h4>
             <p>Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to find official pages for your favorite fictional realms and settings.</p>
-            <p>You can also visit our <Link to="/community#worlds-section" className="default-links">Community Section</Link> to explore fan-created content about fictional worlds, crossovers, and more!</p>
           </div>
         </div>
       </section>
@@ -72,9 +95,7 @@ const WorldsUniversesPage: React.FC = () => {
 
 
 
-          <div className="community-connection">
-            <Link to="/community#worlds-basics-discussion" className="default-links">Join the Discussion on Fictional Worlds Basics →</Link>
-          </div>
+
         </div>
       </section>
 
@@ -156,10 +177,7 @@ const WorldsUniversesPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#worlds-history" className="default-links">Explore Fan Discussions on World-Building History →</Link>
-            <Link to="/community#legendary-world-builders" className="default-links">See Fan Tributes to Legendary World Creators →</Link>
-          </div>
+
         </div>
       </section>
 
@@ -233,10 +251,7 @@ const WorldsUniversesPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#worlds-terminology" className="default-links">See Fan Discussions on World-Building Terminology →</Link>
-            <Link to="/community#world-building-glossary" className="default-links">Explore Fan-Created World-Building Glossary →</Link>
-          </div>
+
         </div>
       </section>
 
@@ -261,7 +276,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Realms with magical elements, mythical creatures, and supernatural forces.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Middle-earth (Lord of the Rings), Westeros (Game of Thrones), Hogwarts (Harry Potter)</li>
-                  <li><Link to="/worlds-universes/directory#fantasy" className="default-links">Explore Fantasy Worlds →</Link></li>
                 </ul>
               </div>
 
@@ -270,7 +284,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Settings that explore advanced technology, space travel, and scientific concepts.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Star Trek, Foundation, Dune</li>
-                  <li><Link to="/worlds-universes/directory#sci-fi" className="default-links">Explore Sci-Fi Universes →</Link></li>
                 </ul>
               </div>
 
@@ -279,7 +292,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Worlds depicting societies in decline, collapse, or recovery after catastrophe.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Panem (The Hunger Games), The Wasteland (Fallout), The Road</li>
-                  <li><Link to="/worlds-universes/directory#dystopian" className="default-links">Explore Dystopian Worlds →</Link></li>
                 </ul>
               </div>
 
@@ -288,7 +300,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Worlds that diverge from our timeline at specific historical points.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Man in the High Castle, Watchmen, Fatherland</li>
-                  <li><Link to="/worlds-universes/directory#alternate-history" className="default-links">Explore Alternate Histories →</Link></li>
                 </ul>
               </div>
 
@@ -297,7 +308,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Modern settings with supernatural or magical elements hidden within everyday reality.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The World of Harry Dresden, Neverwhere, Buffy the Vampire Slayer</li>
-                  <li><Link to="/worlds-universes/directory#urban-fantasy" className="default-links">Explore Urban Fantasy Worlds →</Link></li>
                 </ul>
               </div>
 
@@ -306,7 +316,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Worlds populated by individuals with extraordinary abilities and their impact on society.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Marvel Universe, DC Universe, The Boys</li>
-                  <li><Link to="/worlds-universes/directory#superhero" className="default-links">Explore Superhero Universes →</Link></li>
                 </ul>
               </div>
             </div>
@@ -322,7 +331,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Universes that originated in novels, short stories, or other written works.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Discworld, The Culture, Earthsea</li>
-                  <li><Link to="/worlds-universes/directory#literary" className="default-links">Explore Literary Worlds →</Link></li>
                 </ul>
               </div>
 
@@ -331,7 +339,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Interconnected film franchises sharing characters and continuity.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> Marvel Cinematic Universe, Star Wars, MonsterVerse</li>
-                  <li><Link to="/worlds-universes/directory#cinematic" className="default-links">Explore Cinematic Universes →</Link></li>
                 </ul>
               </div>
 
@@ -340,7 +347,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Universes created for or primarily known through video games.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Elder Scrolls, Mass Effect, Hyrule (Legend of Zelda)</li>
-                  <li><Link to="/worlds-universes/directory#gaming" className="default-links">Explore Gaming Worlds →</Link></li>
                 </ul>
               </div>
 
@@ -349,7 +355,6 @@ const WorldsUniversesPage: React.FC = () => {
                 <p>Worlds designed from the beginning to span multiple media formats.</p>
                 <ul className="show-list">
                   <li><strong>Notable Examples:</strong> The Matrix, Defiance, Quantum Break</li>
-                  <li><Link to="/worlds-universes/directory#transmedia" className="default-links">Explore Transmedia Universes →</Link></li>
                 </ul>
               </div>
             </div>
@@ -357,12 +362,7 @@ const WorldsUniversesPage: React.FC = () => {
 
           <div className="genre-resources">
             <h3>Finding Your Perfect Fictional World</h3>
-            <p>Not sure where to start? Here are some resources to help you discover fictional universes based on your interests:</p>
-            <ul className="resource-links">
-              <li><Link to="/worlds-universes/directory" className="default-links">Browse Our Worlds & Universes Directory</Link></li>
-              <li><Link to="/worlds-universes/directory#popular" className="default-links">Most Popular Fictional Worlds</Link></li>
-              <li><Link to="/worlds-universes/directory#beginners" className="default-links">Accessible Worlds for Newcomers</Link></li>
-            </ul>
+            <p>Not sure where to start? Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to discover fictional universes based on your interests.</p>
           </div>
         </div>
       </section>
@@ -498,10 +498,7 @@ const WorldsUniversesPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#worlds-impact" className="default-links">Join Discussions on Fictional Worlds' Cultural Impact →</Link>
-            <Link to="/community#worlds-influence" className="default-links">Explore How Fictional Worlds Shape Our Reality →</Link>
-          </div>
+
         </div>
       </section>
 
@@ -609,15 +606,12 @@ const WorldsUniversesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Harry Potter's Wizarding World</strong> - A magical world hidden within our own, with clear rules and a gradual introduction to its complexities
-                  <Link to="/worlds-universes/directory#beginners" className="default-links">Explore the Wizarding World →</Link>
                 </li>
                 <li>
                   <strong>The World of Avatar: The Last Airbender</strong> - A fantasy world with distinct nations based on elemental powers and accessible themes
-                  <Link to="/worlds-universes/directory#beginners" className="default-links">Explore the Avatar World →</Link>
                 </li>
                 <li>
                   <strong>The MCU</strong> - A superhero universe that gradually introduces its concepts through interconnected but individually accessible stories
-                  <Link to="/worlds-universes/directory#beginners" className="default-links">Explore the Marvel Cinematic Universe →</Link>
                 </li>
               </ul>
             </div>
@@ -628,15 +622,12 @@ const WorldsUniversesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Middle-earth</strong> - Tolkien's meticulously crafted world with comprehensive languages, histories, and maps
-                  <Link to="/worlds-universes/directory#detailed" className="default-links">Explore Middle-earth →</Link>
                 </li>
                 <li>
                   <strong>Dune's Universe</strong> - Frank Herbert's complex ecological and political world spanning thousands of years
-                  <Link to="/worlds-universes/directory#detailed" className="default-links">Explore the Dune Universe →</Link>
                 </li>
                 <li>
                   <strong>The Cosmere</strong> - Brandon Sanderson's interconnected universe with multiple planetary systems and magic systems
-                  <Link to="/worlds-universes/directory#detailed" className="default-links">Explore the Cosmere →</Link>
                 </li>
               </ul>
             </div>
@@ -647,15 +638,12 @@ const WorldsUniversesPage: React.FC = () => {
               <ul className="recommendation-list">
                 <li>
                   <strong>Star Wars Universe</strong> - Accessible through films, TV series, books, comics, games, and more
-                  <Link to="/worlds-universes/directory#multimedia" className="default-links">Explore the Star Wars Universe →</Link>
                 </li>
                 <li>
                   <strong>The Witcher's World</strong> - Available through books, games, and TV series, each offering different entry points
-                  <Link to="/worlds-universes/directory#multimedia" className="default-links">Explore the World of The Witcher →</Link>
                 </li>
                 <li>
                   <strong>Pokémon World</strong> - Accessible through games, animated series, trading cards, and more
-                  <Link to="/worlds-universes/directory#multimedia" className="default-links">Explore the Pokémon World →</Link>
                 </li>
               </ul>
             </div>
@@ -663,110 +651,32 @@ const WorldsUniversesPage: React.FC = () => {
 
           <div className="community-connection">
             <h4>Find Your Perfect Fictional World</h4>
-            <p>Looking for more worlds to explore? Browse our comprehensive directory to discover fictional universes based on your interests and preferences.</p>
-            <Link to="/worlds-universes/directory" className="default-links">Browse All Fictional Worlds →</Link>
+            <p>Looking for more worlds to explore? Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to discover fictional universes based on your interests.</p>
           </div>
         </div>
       </section>
 
-      {/* Learning Resources Section */}
+      {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
         <div className="container">
           <h2>Learning Resources</h2>
           <p>
-            Whether you're interested in exploring existing fictional worlds or creating your own, these resources will help you navigate and appreciate the art of world-building.
+            Understanding fictional worlds and world-building can enhance your appreciation of these creative universes.
           </p>
 
           <div className="resource-categories">
             <div className="resource-category">
-              <h3>Exploring Fictional Worlds</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>World Exploration Guides</h4>
-                  <p>Comprehensive introductions to major fictional universes, covering their history, rules, and key elements.</p>
-                  <Link to="/community#world-guides" className="default-links">Browse World Guides →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>Fictional World Maps & Atlases</h4>
-                  <p>Visual resources to help you navigate and understand the geography of popular fictional worlds.</p>
-                  <Link to="/community#world-maps" className="default-links">Explore World Maps →</Link>
-                </div>
-              </div>
+              <h3>Recommended Books</h3>
+              <ul>
+                <li>"On Writing" by Stephen King - Insights on storytelling that apply to world-building</li>
+                <li>"The Guide to Writing Fantasy and Science Fiction" by Philip Athans - Comprehensive guide to creating fictional worlds</li>
+                <li>"Wonderbook" by Jeff VanderMeer - Illustrated guide to creating imaginative fiction</li>
+              </ul>
             </div>
-
-            <div className="resource-category">
-              <h3>World-Building Resources</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>World-Building Guides</h4>
-                  <p>Tutorials and advice on creating your own fictional worlds, from geography and cultures to magic systems and technologies.</p>
-                  <Link to="/community#world-building-guides" className="default-links">Read World-Building Guides →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>World-Building Templates</h4>
-                  <p>Structured frameworks to help you develop consistent and compelling fictional worlds.</p>
-                  <Link to="/community#world-templates" className="default-links">Download Templates →</Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="resource-category">
-              <h3>Academic & Critical Resources</h3>
-              <div className="resource-items">
-                <div className="resource-item">
-                  <h4>World-Building Theory</h4>
-                  <p>Academic and critical perspectives on fictional world creation and its significance in literature and media.</p>
-                  <Link to="/community#world-theory" className="default-links">Explore World-Building Theory →</Link>
-                </div>
-
-                <div className="resource-item">
-                  <h4>World Analysis Essays</h4>
-                  <p>In-depth examinations of successful fictional worlds and what makes them compelling.</p>
-                  <Link to="/community#world-analysis" className="default-links">Read World Analyses →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-resources">
-            <h3>Community-Created Resources</h3>
-            <p>Our community members have created valuable resources to help fellow world enthusiasts:</p>
-            <div className="community-resource-grid">
-              <div className="community-resource">
-                <h4>Fan-Made World Guides</h4>
-                <p>Detailed guides to complex fictional universes created by dedicated fans</p>
-                <Link to="/community#fan-world-guides" className="default-links">See Fan Guides →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>World Comparison Charts</h4>
-                <p>Visual comparisons of different fictional worlds' sizes, populations, technologies, and more</p>
-                <Link to="/community#world-comparisons" className="default-links">View Comparisons →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>World-Building Discussion Prompts</h4>
-                <p>Questions and topics to spark thoughtful conversations about fictional worlds</p>
-                <Link to="/community#world-discussions" className="default-links">Get Discussion Prompts →</Link>
-              </div>
-
-              <div className="community-resource">
-                <h4>World-Building Glossary</h4>
-                <p>An extensive dictionary of world-building terms maintained by community members</p>
-                <Link to="/community#world-glossary" className="default-links">View Glossary →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Contribute Your Knowledge</h4>
-            <p>Have expertise or insights about fictional worlds you'd like to share? Join our community and contribute to our growing collection of world-building resources!</p>
-            <Link to="/community#contribute-resources" className="default-links">Contribute to Resources →</Link>
           </div>
         </div>
       </section>
+      <hr />
     </div>
   );
 };
