@@ -70,16 +70,6 @@ const VideoGamesPage: React.FC = () => {
           description="Use this table of contents to navigate through the video games guide."
         />
 
-        {/* Community Connection */}
-        <section className="section-content">
-          <div className="container">
-            <div className="community-connection">
-              <h4>Looking for specific games or characters?</h4>
-              <p>Browse our <Link to="/video-games/directory" className="default-links">Video Games Directory</Link> to find official pages for your favorite games and characters.</p>
-              <p>You can also visit our <Link to="/community#video-games-section" className="default-links">Community Section</Link> to explore fan-created content about games, characters, and more!</p>
-            </div>
-          </div>
-        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -107,10 +97,6 @@ const VideoGamesPage: React.FC = () => {
               <li><strong>Goals:</strong> Most games have objectives that give players direction and purpose</li>
               <li><strong>Immersion:</strong> Games create engaging worlds that captivate players' attention and imagination</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#video-games-basics-discussion" className="default-links">Join the Discussion on Video Game Basics →</Link>
           </div>
         </div>
       </section>
@@ -193,12 +179,6 @@ const VideoGamesPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/community#video-games-history" className="default-links">Explore Fan Discussions on Video Game History →</Link>
-            <Link to="/community#legendary-game-creators" className="default-links">See Fan Tributes to Legendary Creators →</Link>
-            <Link to="/video-games/history" className="default-links">Read Full History of Video Games →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -271,11 +251,6 @@ const VideoGamesPage: React.FC = () => {
                 <dd>Small purchases within a game for virtual items or advantages</dd>
               </dl>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#video-games-terminology" className="default-links">See Fan Discussions on Gaming Terminology →</Link>
-            <Link to="/community#gaming-guide" className="default-links">Explore Fan-Created Gaming Guide →</Link>
           </div>
         </div>
       </section>
@@ -481,11 +456,6 @@ const VideoGamesPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/community#game-development" className="default-links">Explore Fan Discussions on Game Development →</Link>
-            <Link to="/community#game-dev-resources" className="default-links">See Community Game Development Resources →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -498,8 +468,7 @@ const VideoGamesPage: React.FC = () => {
             Video games have evolved from simple entertainment to a significant cultural force, influencing art, education, technology, and social interaction worldwide.
           </p>
 
-          <div className="impact-areas">
-            <div className="impact-area">
+          
               <h3>Artistic Expression</h3>
               <p>
                 Games have emerged as a unique art form combining visual design, music, narrative, and interactivity. From the emotional storytelling of "Journey" to the atmospheric world of "Shadow of the Colossus," games create experiences that couldn't exist in any other medium.
@@ -507,9 +476,7 @@ const VideoGamesPage: React.FC = () => {
               <p>
                 The artistic achievements of games are increasingly recognized by cultural institutions, with exhibitions at major museums like MoMA and the Smithsonian, and academic programs dedicated to game design and theory.
               </p>
-            </div>
-
-            <div className="impact-area">
+            
               <h3>Social Connection</h3>
               <p>
                 Video games have created new forms of social interaction and community:
@@ -520,9 +487,7 @@ const VideoGamesPage: React.FC = () => {
                 <li><strong>Esports:</strong> Competitive gaming has grown into a global phenomenon with professional players and massive audiences</li>
                 <li><strong>Streaming Culture:</strong> Platforms like Twitch have created new forms of entertainment and community around games</li>
               </ul>
-            </div>
-
-            <div className="impact-area">
+            
               <h3>Technological Innovation</h3>
               <p>
                 The gaming industry has driven technological advancement in numerous fields:
@@ -530,9 +495,7 @@ const VideoGamesPage: React.FC = () => {
               <p>
                 From graphics processing to virtual reality, games push the boundaries of what's technically possible. Technologies developed for games have applications in fields ranging from medicine and military training to architecture and film production. The computational demands of gaming have accelerated advances in consumer hardware.
               </p>
-            </div>
-
-            <div className="impact-area">
+            
               <h3>Educational Potential</h3>
               <p>
                 Games offer unique educational opportunities through their interactive nature:
@@ -540,13 +503,6 @@ const VideoGamesPage: React.FC = () => {
               <p>
                 Educational games make learning engaging and accessible. Simulation games like "Kerbal Space Program" teach physics and engineering principles. Complex strategy games develop critical thinking and resource management skills. Games are increasingly used in classrooms as teaching tools across various subjects.
               </p>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#games-impact" className="default-links">Join Discussions on Games' Cultural Impact →</Link>
-            <Link to="/community#games-art" className="default-links">Explore Fan Discussions of Games as Art →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -602,11 +558,6 @@ const VideoGamesPage: React.FC = () => {
               <li><strong>Atmosphere:</strong> Using visuals, sound, and music to create a distinctive mood</li>
               <li><strong>NPC Ecosystems:</strong> Populating the world with characters that have their own routines and relationships</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <h4>Explore Gaming Worlds</h4>
-            <p>Video games create some of the most immersive and detailed fictional worlds in any medium.</p>
           </div>
         </div>
       </section>
@@ -668,11 +619,6 @@ const VideoGamesPage: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Find Your Next Favorite Game</h4>
-            <p>These are just a few examples of the diverse games available to players of all interests.</p>
           </div>
         </div>
       </section>

@@ -53,7 +53,7 @@
   /* Media Section Gradients */
   --home-body-gradient: radial-gradient(
       circle at 50% 15%,
-      rgba(42, 26, 111, 0.9) 20%,
+       rgba(42, 26, 111, 0.9) 20%, 
       rgba(0, 0, 92, 0) 60%
     ),
     linear-gradient(

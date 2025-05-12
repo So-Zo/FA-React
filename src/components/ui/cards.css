@@ -229,7 +229,7 @@
 }
 
 .show-genres {
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
   font-size: var(--font-size-sm);
   margin-bottom: var(--spacing-sm);
 }

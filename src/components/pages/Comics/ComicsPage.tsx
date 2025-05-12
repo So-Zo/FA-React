@@ -70,16 +70,6 @@ const ComicsPage: React.FC = () => {
           description="Use this table of contents to navigate through the comics guide."
         />
 
-        {/* Community Connection */}
-        <section className="section-content">
-          <div className="container">
-            <div className="community-connection">
-              <h4>Looking for specific comic series or characters?</h4>
-              <p>Browse our <Link to="/comics/directory" className="default-links">Comics Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-              <p>You can also visit our <Link to="/community#comics-section" className="default-links">Community Section</Link> to explore fan-created content about comic series, characters, and more!</p>
-            </div>
-          </div>
-        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -109,9 +99,6 @@ const ComicsPage: React.FC = () => {
             </ul>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#comics-basics-discussion" className="default-links">Join the Discussion on Comics Basics →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -201,12 +188,6 @@ const ComicsPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/comics/history" className="default-links">Read Full History of Comics →</Link>
-            <Link to="/community#comics-history" className="default-links">Explore Fan Discussions on Comics History →</Link>
-            <Link to="/community#legendary-comics-creators" className="default-links">See Fan Tributes to Legendary Creators →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -281,10 +262,6 @@ const ComicsPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="community-connection">
-            <Link to="/community#comics-terminology" className="default-links">See Fan Discussions on Comics Terminology →</Link>
-            <Link to="/community#comics-reading-guide" className="default-links">Explore Fan-Created Comics Reading Guide →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -467,11 +444,6 @@ const ComicsPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/community#comics-creation" className="default-links">Explore Fan Discussions on Comics Creation →</Link>
-            <Link to="/community#favorite-publishers" className="default-links">See Fan Rankings of Comics Publishers →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -484,8 +456,6 @@ const ComicsPage: React.FC = () => {
             Comics have evolved from simple entertainment to a significant cultural force, influencing art, literature, film, television, and popular culture worldwide.
           </p>
 
-          <div className="impact-areas">
-            <div className="impact-area">
               <h3>Media Influence</h3>
               <p>
                 Comics have become a primary source material for film and television adaptations, with superhero movies dominating global box office receipts and comic-based TV shows proliferating across streaming platforms. The visual storytelling techniques pioneered in comics have influenced filmmaking, animation, and digital media.
@@ -495,20 +465,17 @@ const ComicsPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="impact-area">
               <h3>Literary Recognition</h3>
               <p>
                 Comics have gained increasing recognition as a legitimate literary form:
               </p>
-              <ul>
+              <u>
                 <li><strong>Critical Acclaim:</strong> Works like "Maus," "Persepolis," and "Fun Home" have received major literary awards</li>
                 <li><strong>Academic Study:</strong> Comics are now studied in universities and have spawned scholarly journals and conferences</li>
                 <li><strong>Library Collections:</strong> Libraries have expanded their graphic novel collections, recognizing their value in promoting literacy</li>
                 <li><strong>Literary Crossover:</strong> Established literary authors have embraced the comics medium</li>
-              </ul>
-            </div>
+              </u>
 
-            <div className="impact-area">
               <h3>Social Commentary</h3>
               <p>
                 Throughout their history, comics have addressed social issues and political concerns, sometimes overtly and sometimes through allegory:
@@ -516,9 +483,7 @@ const ComicsPage: React.FC = () => {
               <p>
                 From early Superman stories tackling corrupt politicians to X-Men exploring prejudice and civil rights, comics have provided a platform for examining complex social issues. Underground comix of the 1960s and 70s directly challenged social norms, while contemporary graphic novels often address topics like identity, trauma, and social justice.
               </p>
-            </div>
 
-            <div className="impact-area">
               <h3>Fan Culture</h3>
               <p>
                 Comics have fostered vibrant fan communities and conventions:
@@ -526,14 +491,6 @@ const ComicsPage: React.FC = () => {
               <p>
                 Comic-Con International in San Diego began as a small gathering of comics fans and has grown into one of the world's largest pop culture events. Comics fandom has pioneered practices now common across media fandoms, including collecting, cosplay, fan fiction, and detailed analysis of fictional universes.
               </p>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#comics-impact" className="default-links">Join Discussions on Comics' Cultural Impact →</Link>
-            <Link to="/community#comics-adaptations" className="default-links">Explore Fan Discussions of Comics Adaptations →</Link>
-          </div>
-        </div>
       </section>
       <hr />
 
@@ -592,12 +549,6 @@ const ComicsPage: React.FC = () => {
               <li><strong>Multiverses:</strong> Systems of parallel universes allowing for alternate versions of characters and worlds</li>
               <li><strong>Fictional Geography:</strong> Invented locations like Gotham City, Metropolis, or Wakanda</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <h4>Explore Comics Worlds in Our Shows Directory</h4>
-            <p>Our shows directory features official information about your favorite comics universes, including character profiles, location guides, timelines, and more!</p>
-            <Link to="/comics/shows-directory" className="default-links">Browse All Comics Shows →</Link>
           </div>
         </div>
       </section>
@@ -668,12 +619,6 @@ const ComicsPage: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Find Your Next Favorite Comics</h4>
-            <p>Looking for more comics to read? Browse our comprehensive shows directory to discover series based on your interests and preferences.</p>
-            <Link to="/comics/shows-directory" className="default-links">Browse All Comics Shows →</Link>
           </div>
         </div>
       </section>

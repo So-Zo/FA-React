@@ -71,16 +71,6 @@ const TVPage: React.FC = () => {
           description="Use this table of contents to navigate through the TV guide."
         />
 
-        {/* Community Connection */}
-        <section className="section-content">
-          <div className="container">
-            <div className="community-connection">
-              <h4>Looking for specific TV shows or characters?</h4>
-              <p>Browse our <Link to="/tv/directory" className="default-links">TV Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-              <p>You can also visit our <Link to="/community#tv-section" className="default-links">Community Section</Link> to explore fan-created content about TV series, characters, and more!</p>
-            </div>
-          </div>
-        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -108,10 +98,6 @@ const TVPage: React.FC = () => {
               <li><strong>Varied Formats:</strong> From 30-minute comedies to hour-long dramas to limited series</li>
               <li><strong>Evolving Distribution:</strong> From broadcast-only to cable to streaming platforms</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#tv-basics-discussion" className="default-links">Join the Discussion on Television Basics →</Link>
           </div>
         </div>
       </section>
@@ -193,10 +179,6 @@ const TVPage: React.FC = () => {
                 <p>Producer who revolutionized television with socially conscious sitcoms like "All in the Family," "The Jeffersons," and "Maude," addressing previously taboo topics on primetime TV.</p>
               </div>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/tv/history" className="default-links">Read Full History of Television →</Link>
           </div>
         </div>
       </section>
@@ -493,8 +475,7 @@ const TVPage: React.FC = () => {
             Television has been one of the most influential cultural forces of the past century, shaping public opinion, reflecting and challenging social norms, and creating shared cultural experiences across diverse audiences.
           </p>
 
-          <div className="impact-areas">
-            <div className="impact-area">
+        
               <h3>Social Influence</h3>
               <p>
                 Television has played a crucial role in shaping public discourse and social change. From coverage of the Civil Rights Movement to groundbreaking shows like "All in the Family" addressing racism and "Will & Grace" normalizing LGBTQ+ characters, TV has both reflected and influenced social attitudes.
@@ -502,9 +483,7 @@ const TVPage: React.FC = () => {
               <p>
                 News programming has been particularly influential, with events like the Kennedy assassination, the Moon landing, 9/11, and countless political moments experienced collectively through television, creating shared national and global experiences.
               </p>
-            </div>
-
-            <div className="impact-area">
+           
               <h3>Language & Popular Culture</h3>
               <p>
                 Television has introduced countless catchphrases, references, and cultural touchstones into everyday language:
@@ -517,7 +496,7 @@ const TVPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="impact-area">
+          
               <h3>Technological Evolution</h3>
               <p>
                 Television has both driven and adapted to technological change:
@@ -525,9 +504,7 @@ const TVPage: React.FC = () => {
               <p>
                 From the transition to color broadcasting to the shift from analog to digital signals, from VCRs allowing time-shifting to DVRs and streaming services enabling on-demand viewing, television has continuously evolved. Each technological shift has changed not just how we watch but what we watch and how stories are told.
               </p>
-            </div>
-
-            <div className="impact-area">
+            
               <h3>Global Reach</h3>
               <p>
                 Television has connected cultures across national boundaries:
@@ -535,11 +512,6 @@ const TVPage: React.FC = () => {
               <p>
                 American shows have influenced global culture, while international programming like British dramas, Scandinavian noir, Korean dramas, and Japanese anime have found worldwide audiences. Streaming platforms have accelerated this cross-cultural exchange, making television increasingly global rather than national in scope.
               </p>
-            </div>
-          </div>
-
-
-        </div>
       </section>
       <hr />
 
@@ -594,11 +566,6 @@ const TVPage: React.FC = () => {
               <li><strong>Physical Environments:</strong> Designing distinctive locations and settings</li>
               <li><strong>Recurring Elements:</strong> Using visual motifs, music, and other elements to create a cohesive world</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <h4>Explore Television Worlds</h4>
-            <p>Television's long-form storytelling allows for the creation of rich, detailed fictional worlds.</p>
           </div>
         </div>
       </section>
@@ -660,11 +627,6 @@ const TVPage: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Find Your Next Favorite TV Show</h4>
-            <p>These are just a few examples of the diverse television shows available to viewers of all interests.</p>
           </div>
         </div>
       </section>

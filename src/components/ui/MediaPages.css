@@ -87,7 +87,7 @@
 }
 
 .production-stage h3 {
-  color: var(--fanarc-secondary-color);
+  color: var(--fanarc-primary-color);
   margin-bottom: var(--spacing-sm);
 }
 

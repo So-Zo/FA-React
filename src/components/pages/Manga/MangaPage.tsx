@@ -71,16 +71,6 @@ const MangaPage: React.FC = () => {
           description="Use this table of contents to navigate through the manga guide."
         />
 
-        {/* Community Connection */}
-        <section className="section-content">
-          <div className="container">
-            <div className="community-connection">
-              <h4>Looking for specific manga series or characters?</h4>
-              <p>Browse our <Link to="/manga/directory" className="default-links">Manga Shows Directory</Link> to find official pages for your favorite series and characters.</p>
-              <p>You can also visit our <Link to="/community#manga-section" className="default-links">Community Section</Link> to explore fan-created content about manga series, characters, and more!</p>
-            </div>
-          </div>
-        </section>
       <hr />
 
       {/* The Basics Section */}
@@ -108,10 +98,6 @@ const MangaPage: React.FC = () => {
               <li><strong>Publication Format:</strong> Typically serialized in magazines before being collected into tankōbon (collected volumes)</li>
               <li><strong>Diverse Genres:</strong> Covers an extremely wide range of genres and topics for all ages and interests</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#manga-basics-discussion" className="default-links">Join the Discussion on Manga Basics →</Link>
           </div>
         </div>
       </section>
@@ -194,12 +180,6 @@ const MangaPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/manga/history" className="default-links">Read Full History of Manga →</Link>
-            <Link to="/community#manga-history" className="default-links">Explore Fan Discussions on Manga History →</Link>
-            <Link to="/community#legendary-manga-creators" className="default-links">See Fan Tributes to Legendary Creators →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -273,11 +253,6 @@ const MangaPage: React.FC = () => {
               </dl>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/community#manga-terminology" className="default-links">See Fan Discussions on Manga Terminology →</Link>
-            <Link to="/community#manga-reading-guide" className="default-links">Explore Fan-Created Manga Reading Guide →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -345,10 +320,6 @@ const MangaPage: React.FC = () => {
                   <li><strong>Notable Examples:</strong> Haikyuu!!, Slam Dunk, Blue Lock</li>
                 </ul>
               </div>
-            </div>
-
-            <div className="view-more-container">
-              <Link to="/manga/directory" className="non-existent-link">View All Genres in Directory</Link>
             </div>
           </div>
 
@@ -463,11 +434,6 @@ const MangaPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="community-connection">
-            <Link to="/community#manga-creation" className="default-links">Explore Fan Discussions on Manga Creation →</Link>
-            <Link to="/community#favorite-publishers" className="default-links">See Fan Rankings of Manga Publishers →</Link>
-          </div>
         </div>
       </section>
       <hr />
@@ -480,8 +446,6 @@ const MangaPage: React.FC = () => {
             Manga has grown from a Japanese medium to a global cultural phenomenon, influencing art, entertainment, fashion, and technology worldwide.
           </p>
 
-          <div className="impact-areas">
-            <div className="impact-area">
               <h3>Global Influence</h3>
               <p>
                 Manga has transcended cultural boundaries to become a worldwide phenomenon. Its unique storytelling approaches and visual styles have influenced comics, animation, and art globally. The international manga market continues to grow rapidly, with translations available in dozens of languages.
@@ -489,9 +453,7 @@ const MangaPage: React.FC = () => {
               <p>
                 Major publishers and digital platforms have made manga more accessible than ever to international audiences. This has led to unprecedented growth in manga fandom outside Japan.
               </p>
-            </div>
-
-            <div className="impact-area">
+           
               <h3>Fan Culture</h3>
               <p>
                 Manga has fostered vibrant fan communities worldwide, characterized by:
@@ -504,7 +466,6 @@ const MangaPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="impact-area">
               <h3>Cultural Exchange</h3>
               <p>
                 Manga has served as a cultural ambassador for Japan, introducing international audiences to Japanese language, customs, food, history, and values. Many fans have been inspired to learn Japanese or visit Japan after developing an interest in manga.
@@ -512,9 +473,7 @@ const MangaPage: React.FC = () => {
               <p>
                 Conversely, manga has also been influenced by global cultures, incorporating elements from Western storytelling, mythology, and aesthetics to create unique cross-cultural narratives.
               </p>
-            </div>
-
-            <div className="impact-area">
+           
               <h3>Artistic Influence</h3>
               <p>
                 Manga's distinctive visual style has influenced artists worldwide, creating hybrid forms like OEL (Original English Language) manga and the global rise of webtoons. The visual language of manga—including speed lines, expressive eyes, and symbolic emotional cues—has been adopted by artists across different media.
@@ -522,14 +481,6 @@ const MangaPage: React.FC = () => {
               <p>
                 The rise of digital creation tools and distribution platforms has further expanded manga's influence, allowing creators from around the world to adopt and adapt manga techniques.
               </p>
-            </div>
-          </div>
-
-          <div className="community-connection">
-            <Link to="/community#manga-impact" className="default-links">Join Discussions on Manga's Cultural Impact →</Link>
-            <Link to="/community#manga-conventions" className="default-links">Explore Fan Convention Experiences →</Link>
-          </div>
-        </div>
       </section>
       <hr />
 
@@ -584,12 +535,6 @@ const MangaPage: React.FC = () => {
               <li><strong>History & Lore:</strong> Backstories, legends, and historical events that shape the world</li>
               <li><strong>Visual Aesthetics:</strong> Distinctive architectural styles, fashion, and design elements</li>
             </ul>
-          </div>
-
-          <div className="community-connection">
-            <h4>Explore Manga Worlds</h4>
-            <p>Manga features countless fascinating worlds and universes with their own unique rules and settings.</p>
-            <Link to="/manga/directory" className="non-existent-link">Browse Manga Directory</Link>
           </div>
         </div>
       </section>
@@ -651,11 +596,6 @@ const MangaPage: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Find Your Next Favorite Manga</h4>
-            <p>These are just a few examples of the diverse manga available to readers of all interests.</p>
           </div>
         </div>
       </section>

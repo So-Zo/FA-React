@@ -1,4 +1,4 @@
-/*
+/**
  * Section Styles for FanArcs React
  * This file contains consolidated section styles from across the application
  */
@@ -6,9 +6,8 @@
 /* Section content styles */
 .section-content {
   padding: var(--spacing-lg) var(--spacing-md);
-  text-align: center;
   position: relative;
-  background-color: #f8f9fa; /* Light gray with slight blue tint */
+  background-color: #f8f9fa;
   border-radius: var(--border-radius-base);
   margin: var(--spacing-md);
   color: var(--text-color);
@@ -16,29 +15,20 @@
   border-top: 4px solid var(--fanarc-primary-color);
 }
 
-.section-content h1 {
-  margin-bottom: var(--spacing-md);
-  color: var(--fanarc-primary-color);
-}
-
-.section-content h2 {
-  color: var(--fanarc-primary-color);
-}
-
-.section-content h3 {
-  color: var(--fanarc-primary-color);
-}
-
+.section-content h1,
+.section-content h2,
+.section-content h3,
 .section-content h4 {
   color: var(--fanarc-primary-color);
+}
+
+.section-content h1 {
+  margin-bottom: var(--spacing-md);
 }
 
 .section-content p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-loose);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
   color: var(--text-color);
 }
 
@@ -46,7 +36,6 @@
 .section-content ol,
 .section-content dl {
   color: var(--text-color);
-  text-align: left;
 }
 
 /* Hero section styles */
@@ -80,14 +69,13 @@
   text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   margin: 0;
   padding: 0 var(--spacing-md);
-  text-align: center;
 }
 
 /* Content section styles */
 .content-section {
   padding: var(--spacing-xxl) var(--spacing-md);
   margin: var(--spacing-md);
-  background-color: #f8f9fa; /* Light gray with slight blue tint */
+  background-color: #f8f9fa;
   border-radius: var(--border-radius-base);
 }
 
@@ -98,15 +86,6 @@
   color: var(--fanarc-primary-color);
 }
 
-.content-section h2::after {
-  content: '';
-  position: absolute;
-  bottom: -0.3125rem;
-  left: 0;
-  width: 100%;
-  height: 0.125rem;
-  background: var(--fanarc-secondary-color);
-}
 
 /* Table of Contents styles */
 .toc-container {
@@ -125,9 +104,9 @@
 .community-connection {
   margin-top: var(--spacing-lg);
   padding: var(--spacing-md);
-  background-color: #e6e9f0; /* Slightly purple-tinted light gray */
+  background-color: #e6e9f0;
   border-radius: var(--border-radius-base);
-  border-left: 4px solid var(--fanarc-secondary-color);
+  border-left: 4px solid var(--fanarc-primary-color);
 }
 
 .community-connection h4 {
@@ -158,7 +137,7 @@
   color: var(--fanarc-secondary-color);
 }
 
-/* Timeline styles - Simplified to integrate with page background */
+/* Timeline styles */
 .timeline-container {
   margin: var(--spacing-lg) 0;
 }
@@ -194,7 +173,6 @@
 
 /* Section divider styles */
 .section-divider {
-  text-align: center;
   margin: var(--spacing-xl) 0;
   position: relative;
 }
@@ -222,7 +200,6 @@
 /* Section links styling */
 .section-links {
   margin: var(--spacing-md) 0;
-  text-align: center;
 }
 
 .section-links a {
@@ -263,7 +240,7 @@
 }
 
 /* Media queries for responsive design */
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .hero-section {
     height: 12.5rem;
   }
@@ -272,10 +249,7 @@
     font-size: var(--font-size-xxl);
   }
 
-  .section-content {
-    padding: var(--spacing-xl) 0;
-  }
-
+  .section-content,
   .content-section {
     padding: var(--spacing-xl) 0;
   }

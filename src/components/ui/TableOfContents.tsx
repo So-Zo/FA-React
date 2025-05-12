@@ -74,7 +74,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
       <div className="container">
         <h2>{title}</h2>
         <p>{description}</p>
-        <p><small>✓ = Same page links | → = Page links | + = Pages to create</small></p>
+        <p>✓ = Same page links | → = Page links | + = Pages to create</p>
 
         <div className="toc-container">
           {sections.map((section, index) => (

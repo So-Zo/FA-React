@@ -276,14 +276,6 @@ const AnimePage: React.FC = () => {
             This guide will help you understand the different types of anime and find shows that match your interests.
           </p>
 
-          <div className="genre-navigation">
-            <h3>Quick Navigation</h3>
-            <div className="genre-nav-buttons">
-              <a href="#popular-genres" className="default-links">Popular Genres</a>
-              <a href="#demographic-genres" className="default-links">Demographic Categories</a>
-            </div>
-          </div>
-
           <div id="popular-genres" className="genre-section">
             <h3>Popular Anime Genres</h3>
             <p>Discover anime series based on your preferred storytelling styles and themes:</p>
@@ -465,9 +457,6 @@ const AnimePage: React.FC = () => {
           <p>
             Anime has grown from a niche Japanese medium to a global cultural phenomenon, influencing art, entertainment, fashion, and technology worldwide.
           </p>
-
-          <div className="impact-areas">
-            <div className="impact-area">
               <h3>Global Influence</h3>
               <p>
                 Anime has transcended cultural boundaries to become a worldwide phenomenon. Its unique storytelling approaches and visual styles have influenced Western animation, filmmaking, and art. The global anime market was valued at over $24 billion in 2021 and continues to grow rapidly.
@@ -476,8 +465,6 @@ const AnimePage: React.FC = () => {
                 Major streaming platforms like Netflix, Crunchyroll, and Funimation have invested heavily in anime, making it more accessible than ever to international audiences. This has led to unprecedented growth in anime fandom outside Japan.
               </p>
             </div>
-
-            <div className="impact-area">
               <h3>Fan Culture</h3>
               <p>
                 Anime has fostered vibrant fan communities worldwide, characterized by:
@@ -488,9 +475,6 @@ const AnimePage: React.FC = () => {
                 <li><strong>Fan Art & Fan Fiction:</strong> Fans create their own artwork and stories based on anime properties</li>
                 <li><strong>Online Communities:</strong> Forums, social media groups, and websites dedicated to discussing and celebrating anime</li>
               </ul>
-            </div>
-
-            <div className="impact-area">
               <h3>Cultural Exchange</h3>
               <p>
                 Anime has served as a cultural ambassador for Japan, introducing international audiences to Japanese language, customs, food, history, and values. Many fans have been inspired to learn Japanese or visit Japan after developing an interest in anime.
@@ -498,9 +482,6 @@ const AnimePage: React.FC = () => {
               <p>
                 Conversely, anime has also been influenced by global cultures, incorporating elements from Western storytelling, mythology, and aesthetics to create unique cross-cultural narratives.
               </p>
-            </div>
-
-            <div className="impact-area">
               <h3>Technological Innovation</h3>
               <p>
                 The anime industry has driven innovation in animation techniques, from traditional cel animation to cutting-edge CGI and digital compositing. Studios continually push boundaries in visual storytelling, influencing animation worldwide.
@@ -508,11 +489,6 @@ const AnimePage: React.FC = () => {
               <p>
                 The rise of digital distribution platforms specifically for anime has also pioneered new models for global content distribution and monetization.
               </p>
-            </div>
-          </div>
-
-
-        </div>
       </section>
       <hr />
 

@@ -65,16 +65,6 @@ const WorldsUniversesPage: React.FC = () => {
         description="Use this table of contents to navigate through the worlds and universes guide."
       />
 
-      {/* Community Connection */}
-      <section className="section-content">
-        <div className="container">
-          <div className="community-connection">
-            <h4>Looking for specific fictional worlds or universes?</h4>
-            <p>Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to find official pages for your favorite fictional realms and settings.</p>
-          </div>
-        </div>
-      </section>
-
       {/* The Basics Section */}
       <section id="the-basics" className="section-content">
         <div className="container">
@@ -453,8 +443,6 @@ const WorldsUniversesPage: React.FC = () => {
             Fictional worlds have evolved from simple settings to significant cultural forces, influencing art, entertainment, technology, and social interaction worldwide.
           </p>
 
-          <div className="impact-areas">
-            <div className="impact-area">
               <h3>Artistic & Creative Influence</h3>
               <p>
                 Compelling fictional worlds inspire creators across all media. From Tolkien's influence on fantasy literature and games to Star Wars' impact on filmmaking and visual effects, these worlds establish templates that shape entire genres.
@@ -462,9 +450,7 @@ const WorldsUniversesPage: React.FC = () => {
               <p>
                 The most influential fictional universes create new visual languages, storytelling approaches, and world-building techniques that are adopted by subsequent creators, establishing lasting legacies in creative fields.
               </p>
-            </div>
-
-            <div className="impact-area">
+           
               <h3>Fan Communities & Participatory Culture</h3>
               <p>
                 Fictional worlds foster vibrant communities characterized by:
@@ -475,9 +461,9 @@ const WorldsUniversesPage: React.FC = () => {
                 <li><strong>Cosplay:</strong> Fans embodying characters from their favorite worlds</li>
                 <li><strong>Online Communities:</strong> Forums, social media groups, and websites dedicated to discussing fictional worlds</li>
               </ul>
-            </div>
+           
 
-            <div className="impact-area">
+          
               <h3>Economic Impact</h3>
               <p>
                 Successful fictional worlds generate massive economic activity through:
@@ -485,9 +471,7 @@ const WorldsUniversesPage: React.FC = () => {
               <p>
                 Merchandise ranging from toys and clothing to home decor and collectibles. Tourism to filming locations, theme parks, and exhibitions. Transmedia expansion across books, films, games, and other formats. Long-term franchise value that can span decades or even generations.
               </p>
-            </div>
-
-            <div className="impact-area">
+            
               <h3>Cultural Reference Points</h3>
               <p>
                 Fictional worlds provide shared cultural touchstones that transcend national and linguistic boundaries. Elements from these worlds enter everyday language and become shorthand for complex ideas.
@@ -495,11 +479,7 @@ const WorldsUniversesPage: React.FC = () => {
               <p>
                 Terms like "Jedi mind trick," "Catch-22," "Big Brother," or "Mordor" are understood by millions who may never have experienced the original works. Visual iconography from fictional worlds appears in advertising, political discourse, and other cultural contexts.
               </p>
-            </div>
           </div>
-
-
-        </div>
       </section>
 
       {/* Iconic Universes Section */}
@@ -647,11 +627,6 @@ const WorldsUniversesPage: React.FC = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className="community-connection">
-            <h4>Find Your Perfect Fictional World</h4>
-            <p>Looking for more worlds to explore? Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to discover fictional universes based on your interests.</p>
           </div>
         </div>
       </section>
