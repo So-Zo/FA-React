@@ -10,6 +10,7 @@ import './App.css';
 import HomePage from './components/pages/Home/HomePage';
 import AnimePage from './components/pages/Anime/AnimePage';
 import AnimeHistory from './components/pages/Anime/AnimeHistory';
+import AnimeDirectory from './components/pages/Anime/AnimeDirectory';
 import MangaPage from './components/pages/Manga/MangaPage';
 import MangaHistory from './components/pages/Manga/MangaHistory';
 import MangaDirectory from './components/pages/Manga/MangaDirectory';
@@ -44,6 +45,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/anime" element={<AnimePage />} />
               <Route path="/anime/history" element={<AnimeHistory />} />
+              <Route path="/anime/directory" element={<AnimeDirectory />} />
               <Route path="/manga" element={<MangaPage />} />
               <Route path="/manga/history" element={<MangaHistory />} />
               <Route path="/manga/directory" element={<MangaDirectory />} />

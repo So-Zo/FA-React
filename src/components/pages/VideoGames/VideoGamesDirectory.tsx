@@ -109,10 +109,6 @@ const VideoGamesDirectory: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="view-more-container">
-            <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Popular Video Games" data-related-to="Video Games">View All Popular Games</a>
-          </div>
         </section>
 
         {/* Genres Section */}

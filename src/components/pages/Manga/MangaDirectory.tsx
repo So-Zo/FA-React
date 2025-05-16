@@ -109,10 +109,6 @@ const MangaDirectory: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <div className="view-more-container">
-            <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Popular Manga" data-related-to="Manga">View All Popular Manga</a>
-          </div>
         </section>
 
         {/* Genres Section */}

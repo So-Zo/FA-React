@@ -323,10 +323,6 @@ const TVPage: React.FC = () => {
                 </ul>
               </div>
             </div>
-
-            <div className="view-more-container">
-              <Link to="/tv/directory" className="non-existent-link">View All Genres in Directory</Link>
-            </div>
           </div>
 
           <div id="unscripted-genres" className="genre-section">

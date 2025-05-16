@@ -320,10 +320,6 @@ const VideoGamesPage: React.FC = () => {
                 </ul>
               </div>
             </div>
-
-            <div className="view-more-container">
-              <Link to="/video-games/directory" className="default-links">View All Genres in Directory</Link>
-            </div>
           </div>
 
           <div id="emerging-genres" className="genre-section">

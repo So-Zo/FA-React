@@ -329,10 +329,6 @@ const ComicsPage: React.FC = () => {
                 </ul>
               </div>
             </div>
-
-            <div className="view-more-container">
-              <Link to="/comics/directory" className="non-existent-link">View All Genres in Directory</Link>
-            </div>
           </div>
 
           <div id="publishing-formats" className="genre-section">

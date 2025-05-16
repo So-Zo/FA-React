@@ -3,7 +3,6 @@
 
 /* Video games page background */
 .video-games-page {
-  color: var(--text-primary);
   background-image: var(--video-games-gradient);
 }
 

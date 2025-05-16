@@ -3,6 +3,5 @@
 
 /* Worlds & Universes page background */
 .worlds-universes-page {
-  color: var(--text-primary);
   background-image: var(--worlds-gradient);
 }

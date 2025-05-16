@@ -3,6 +3,5 @@
 
 /* TV page background */
 .tv-page {
-  color: var(--text-primary);
   background-image: var(--tv-gradient);
 }

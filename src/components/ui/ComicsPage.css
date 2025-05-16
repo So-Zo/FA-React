@@ -3,6 +3,5 @@
 
 /* Comics page background */
 .comics-page {
-  color: var(--text-primary);
   background-image: var(--comics-gradient);
 }

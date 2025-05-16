@@ -3,6 +3,5 @@
 
 /* Manga page background */
 .manga-page {
-  color: var(--text-primary);
   background-image: var(--manga-gradient);
 }

@@ -114,10 +114,6 @@ const ComicsDirectory: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Popular Comics" data-related-to="Comics">View All Popular Comics</a>
-      </div>
     </section>
 
     {/* Genres Section */}
@@ -147,10 +143,6 @@ const ComicsDirectory: React.FC = () => {
             <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Superhero Comics" data-related-to="Comics">View All Superhero Comics</a></li>
           </ul>
         </div>
-      </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Comics Genres" data-related-to="Comics">View All Genres</a>
       </div>
     </section>
 
@@ -211,10 +203,6 @@ const ComicsDirectory: React.FC = () => {
             <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="DC Comics" data-related-to="Comics">View All DC Comics</a></li>
           </ul>
         </div>
-      </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Comics Publishers" data-related-to="Comics">View All Publishers</a>
       </div>
     </section>
 

@@ -144,10 +144,6 @@ const AnimeDirectory: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Popular Anime Series" data-related-to="Anime">View All Popular Series</a>
-      </div>
     </section>
 
     {/* Genres Section */}
@@ -200,10 +196,6 @@ const AnimeDirectory: React.FC = () => {
             <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Drama Anime" data-related-to="Anime">View All Drama Anime</a></li>
           </ul>
         </div>
-      </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Anime Genres" data-related-to="Anime">View All Genres</a>
       </div>
     </section>
 
@@ -301,10 +293,6 @@ const AnimeDirectory: React.FC = () => {
           </ul>
         </div>
       </div>
-
-      <div className="view-more-container">
-        <a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Anime Studios" data-related-to="Anime">View All Studios</a>
-      </div>
     </section>
 
     {/* Alphabetical Section */}
@@ -379,5 +367,7 @@ const AnimeDirectory: React.FC = () => {
 };
 
 export default AnimeDirectory;
+console.log("💥 Directory page loaded");
+
 
 

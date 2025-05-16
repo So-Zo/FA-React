@@ -3,7 +3,6 @@
 
 /* Anime page background */
 .anime-page {
-  color: var(--text-primary);
   background-image: var(--anime-gradient);
 }
 

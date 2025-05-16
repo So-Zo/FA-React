@@ -222,4 +222,15 @@
 
   /* Flat design option */
   --flat-border: 0.0625rem solid rgba(0, 0, 0, 0.05);
+
+    /* Power Room Specific Colors */
+  --power-room-bg: #1a1a2e;
+  --power-room-panel: #232342;
+  --power-room-accent: #4a90e2;
+  --power-room-contrast: #e94560;
+  --power-room-neutral: #2d3436;
+
+  /* Power Room Specific Gradients */
+  --power-stat-left: linear-gradient(to right, #4a90e2, #357abd);
+  --power-stat-right: linear-gradient(to right, #e94560, #c23851);
 }
