@@ -65,11 +65,8 @@ const TVHistory: React.FC = () => {
     <section className="section-content" id="timeline-breakdown">
       <h2>Timeline Breakdown</h2>
 
-      <div className="timeline-container">
-        <div className="timeline-item">
-          <div className="timeline-date">1920s-1930s</div>
-          <div className="timeline-content">
-            <h3>Early Development</h3>
+
+            <h3>Early Development (1920-1930s)</h3>
             <p>
               The foundations of television technology were laid in the early 20th century, with mechanical television systems
               developed by pioneers like John Logie Baird in the UK and Charles Francis Jenkins in the US. Baird demonstrated
@@ -85,13 +82,10 @@ const TVHistory: React.FC = () => {
               These early broadcasts reached very limited audiences, as television sets were expensive luxury items owned by
               few households. Programming was limited, often consisting of news, simple variety shows, and special events.
             </p>
-          </div>
-        </div>
+         
 
-        <div className="timeline-item">
-          <div className="timeline-date">1940s-1950s</div>
-          <div className="timeline-content">
-            <h3>The Golden Age</h3>
+
+            <h3>The Golden Age (1940s-1950s)</h3>
             <p>
               World War II temporarily halted the development of television, with resources diverted to the war effort. However,
               the post-war economic boom, particularly in the United States, created ideal conditions for television's rapid growth.
@@ -109,13 +103,10 @@ const TVHistory: React.FC = () => {
               the medium to challenge political figures, most famously in his reports on Senator Joseph McCarthy. Television
               began to demonstrate its power to shape public opinion and influence social discourse.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1960s-1970s</div>
-          <div className="timeline-content">
-            <h3>Social Change & Creative Evolution</h3>
+
+            <h3>Social Change & Creative Evolution (1960s-1970s)</h3>
             <p>
               Television came of age as a cultural force during the 1960s and 1970s, a period of significant social upheaval.
               The medium played a crucial role in covering major historical events, from the Kennedy assassination to the Vietnam
@@ -133,13 +124,10 @@ const TVHistory: React.FC = () => {
               technology that enabled global broadcasting events like the Olympics. Cable television began its early development
               during this period, though it remained limited in reach.
             </p>
-          </div>
-        </div>
+         
 
-        <div className="timeline-item">
-          <div className="timeline-date">1980s</div>
-          <div className="timeline-content">
-            <h3>Cable Revolution & Channel Proliferation</h3>
+
+            <h3>Cable Revolution & Channel Proliferation (1980s)</h3>
             <p>
               The 1980s marked the beginning of the cable television revolution, fragmenting the once-dominant broadcast network
               audience. Cable channels like MTV (launched 1981), CNN (1980), and HBO (which began satellite distribution in 1975
@@ -156,13 +144,10 @@ const TVHistory: React.FC = () => {
               them to time-shift broadcasts and build personal libraries of content. This technology began to shift power from
               broadcasters to audiences, a trend that would accelerate in subsequent decades.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1990s</div>
-          <div className="timeline-content">
-            <h3>Network Renaissance & Global Expansion</h3>
+
+            <h3>Network Renaissance & Global Expansion (1990s)</h3>
             <p>
               The 1990s saw a creative renaissance in network television, with shows like "Seinfeld" (1989-1998), "Friends"
               (1994-2004), "The X-Files" (1993-2002), and "ER" (1994-2009) achieving both critical acclaim and massive popularity.
@@ -179,13 +164,10 @@ const TVHistory: React.FC = () => {
               content. Global formats began to emerge, with shows like "Who Wants to Be a Millionaire?" and "Big Brother"
               adapted for dozens of national markets, creating a more interconnected global television culture.
             </p>
-          </div>
-        </div>
+         
 
-        <div className="timeline-item">
-          <div className="timeline-date">2000s-2010s</div>
-          <div className="timeline-content">
-            <h3>The New Golden Age & Digital Transformation</h3>
+
+            <h3>The New Golden Age & Digital Transformation (2000s-2010s)</h3>
             <p>
               The early 21st century is often described as a new "Golden Age" of television, characterized by ambitious,
               cinematic dramas primarily on cable and premium channels. Shows like "The Wire" (2002-2008), "Breaking Bad"
@@ -203,13 +185,10 @@ const TVHistory: React.FC = () => {
               achieving massive popularity. These relatively inexpensive productions helped networks maintain profitability in
               an increasingly competitive environment.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">2010s-Present</div>
-          <div className="timeline-content">
-            <h3>Streaming Dominance & Content Explosion</h3>
+
+            <h3>Streaming Dominance & Content Explosion (2010s-Present)</h3>
             <p>
               The streaming revolution has transformed television in the 2010s and beyond. Services like Netflix, Amazon Prime
               Video, Hulu, and later Disney+, HBO Max, and others have become major producers of original content, challenging
@@ -230,9 +209,6 @@ const TVHistory: React.FC = () => {
               The COVID-19 pandemic accelerated existing trends toward streaming, while demonstrating television's continued
               importance as a source of shared cultural experiences during a time of physical isolation.
             </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     {/* 3. Key Figures & Contributors */}
@@ -340,8 +316,6 @@ const TVHistory: React.FC = () => {
       <h2>Influences & Cultural Impact</h2>
 
       <h3>What Influenced Television</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Radio</h4>
           <p>
             Television's earliest formats, business models, and creative approaches were heavily influenced by radio. Many early
@@ -349,9 +323,9 @@ const TVHistory: React.FC = () => {
             directly inherited from radio. Even the advertising model—programs sponsored by single companies—came from radio
             before evolving into the commercial spot model we know today.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+       
           <h4>Film</h4>
           <p>
             Cinema influenced television's visual language, storytelling techniques, and production methods. Early television
@@ -359,9 +333,9 @@ const TVHistory: React.FC = () => {
             editing. The relationship between film and television has been complex and reciprocal, with each medium influencing
             the other throughout their shared history.
           </p>
-        </div>
+       
 
-        <div className="influence-item">
+      
           <h4>Theater</h4>
           <p>
             Live theater was a significant influence on early television drama, which was often broadcast live from studios
@@ -369,9 +343,9 @@ const TVHistory: React.FC = () => {
             productions adapted for television, and many early television writers, directors, and actors came from theater
             backgrounds.
           </p>
-        </div>
+      
 
-        <div className="influence-item">
+        
           <h4>Technology</h4>
           <p>
             Technological developments have continuously shaped television's evolution, from the shift from black and white to
@@ -379,12 +353,9 @@ const TVHistory: React.FC = () => {
             to high-definition digital broadcasting, and most recently, the rise of internet streaming. Each technological change
             has influenced not only how television is delivered but also the types of content created.
           </p>
-        </div>
-      </div>
+       
 
       <h3>Television's Cultural Impact</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Shared Cultural Experience</h4>
           <p>
             For much of its history, television provided shared cultural experiences on an unprecedented scale. Major events like
@@ -392,9 +363,8 @@ const TVHistory: React.FC = () => {
             audiences, creating collective moments that transcended geographic and social boundaries. Even as audiences have
             fragmented in the streaming era, television continues to create cultural touchstones that shape public discourse.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
           <h4>Social and Political Influence</h4>
           <p>
             Television has played a crucial role in shaping public opinion and social attitudes. Coverage of the Civil Rights
@@ -403,9 +373,9 @@ const TVHistory: React.FC = () => {
             race and gender to sexuality and disability, with shows like "Will & Grace" and "Transparent" helping to normalize
             LGBTQ+ identities for mainstream audiences.
           </p>
-        </div>
+      
 
-        <div className="influence-item">
+        
           <h4>Global Cultural Exchange</h4>
           <p>
             Television has facilitated cultural exchange across national boundaries, with programs from one country influencing
@@ -414,9 +384,9 @@ const TVHistory: React.FC = () => {
             Western markets, with shows like the Korean "Squid Game" and Spanish "Money Heist" achieving global popularity on
             streaming platforms.
           </p>
-        </div>
+      
 
-        <div className="influence-item">
+        
           <h4>Language and Popular Culture</h4>
           <p>
             Television has introduced countless phrases, references, and ideas into popular culture and everyday language. From
@@ -424,16 +394,12 @@ const TVHistory: React.FC = () => {
             television has shaped how we communicate. Television references serve as cultural shorthand, allowing people to express
             complex ideas through shared understanding of shows and characters.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 5. Controversies & Turning Points */}
     <section className="section-content" id="controversies-turning-points">
       <h2>Controversies & Turning Points</h2>
 
-      <div className="controversy-section">
-        <div className="controversy-item">
           <h3>The Quiz Show Scandals</h3>
           <p>
             In the late 1950s, popular quiz shows like "Twenty-One" were revealed to be rigged, with contestants given answers
@@ -442,9 +408,9 @@ const TVHistory: React.FC = () => {
             perceived relationship with its audience. It also marked the end of the sponsor-controlled programming model, as
             networks took greater control over content to avoid similar scandals.
           </p>
-        </div>
+    
 
-        <div className="controversy-item">
+        
           <h3>The "Vast Wasteland" Speech</h3>
           <p>
             In 1961, FCC Chairman Newton Minow delivered a speech to the National Association of Broadcasters in which he
@@ -453,9 +419,8 @@ const TVHistory: React.FC = () => {
             It also contributed to the development of public television in the United States as an alternative to commercial
             broadcasting.
           </p>
-        </div>
+        
 
-        <div className="controversy-item">
           <h3>The "Family Viewing Hour"</h3>
           <p>
             In response to concerns about violence and sexual content on television, the FCC in 1975 pressured networks to
@@ -464,9 +429,9 @@ const TVHistory: React.FC = () => {
             debate about content regulation that continues today. The controversy contributed to the development of content
             ratings systems and parental controls.
           </p>
-        </div>
+  
 
-        <div className="controversy-item">
+        
           <h3>The Rise of Cable and the Decline of the Network Era</h3>
           <p>
             The expansion of cable television in the 1980s and 1990s fundamentally changed the television landscape, fragmenting
@@ -475,9 +440,9 @@ const TVHistory: React.FC = () => {
             greater diversity in programming but also contributing to increasing cultural polarization as viewers could select
             content that aligned with their existing interests and beliefs.
           </p>
-        </div>
+        
 
-        <div className="controversy-item">
+      
           <h3>Reality Television Ethics</h3>
           <p>
             The rise of reality television in the late 1990s and early 2000s raised significant ethical questions about
@@ -486,9 +451,9 @@ const TVHistory: React.FC = () => {
             reinforcing harmful stereotypes. Despite these controversies, reality programming has become a dominant television
             format due to its relatively low production costs and reliable audience appeal.
           </p>
-        </div>
+        
 
-        <div className="controversy-item">
+       
           <h3>The Streaming Revolution</h3>
           <p>
             The rise of streaming platforms has transformed how television content is produced, distributed, and consumed.
@@ -497,9 +462,9 @@ const TVHistory: React.FC = () => {
             The streaming era has also seen unprecedented content production, leading to concerns about oversaturation and the
             economic sustainability of what some call "Peak TV."
           </p>
-        </div>
+        
 
-        <div className="controversy-item">
+        
           <h3>Representation and Diversity</h3>
           <p>
             Television has faced ongoing criticism for its representation of various groups, including women, people of color,
@@ -508,16 +473,13 @@ const TVHistory: React.FC = () => {
             highlighting systemic inequalities in the industry. Streaming platforms have often been credited with providing
             opportunities for more diverse storytelling, though progress remains uneven.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 6. Further Reading / Sources */}
     <section className="section-content" id="further-reading">
       <h2>Further Reading & Sources</h2>
 
-      <div className="resources-section">
-        <div className="resource-category">
+     
           <h3>Books</h3>
           <ul>
             <li>"Tube of Plenty: The Evolution of American Television" by Erik Barnouw</li>
@@ -526,9 +488,9 @@ const TVHistory: React.FC = () => {
             <li>"The Platinum Age of Television: From I Love Lucy to The Walking Dead, How TV Became Terrific" by David Bianculli</li>
             <li>"From Daytime to Primetime: The History of American Television Programs" by James W. Roman</li>
           </ul>
-        </div>
+        
 
-        <div className="resource-category">
+      
           <h3>Documentaries</h3>
           <ul>
             <li>"America in Primetime" (2011) - PBS series on the evolution of television genres</li>
@@ -536,9 +498,9 @@ const TVHistory: React.FC = () => {
             <li>"Quiz Show" (1994) - Feature film about the quiz show scandals of the 1950s</li>
             <li>"Electronic Visions" (1984) - Documentary on the early history of television technology</li>
           </ul>
-        </div>
+    
 
-        <div className="resource-category">
+        
           <h3>Essential Viewing</h3>
           <p>To understand television's historical evolution, consider watching these landmark works:</p>
           <ul>
@@ -552,14 +514,6 @@ const TVHistory: React.FC = () => {
             <li>"Breaking Bad" (2008-2013) - AMC drama showcasing the cinematic potential of television storytelling</li>
             <li>"Game of Thrones" (2011-2019) - HBO fantasy series demonstrating television's capacity for epic storytelling</li>
           </ul>
-        </div>
-
-
-      </div>
-
-      <div className="read-full-history">
-        <Link to="/tv#history-of-tv" className="default-links">Return to Television Overview</Link>
-      </div>
     </section>
   </main>
       </div>

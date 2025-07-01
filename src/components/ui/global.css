@@ -3,8 +3,8 @@
 * Base styles that apply throughout the application
 */
 
-@import './variables.css';
-@import './reset.css'; /* Import consolidated reset styles */
+@import "./variables.css";
+@import "./reset.css"; /* Import consolidated reset styles */
 
 /*
 * RESET STYLES MOVED TO css/core/reset.css
@@ -34,7 +34,12 @@ button {
   font-family: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-md);
@@ -68,21 +73,8 @@ p {
   margin-bottom: var(--spacing-md);
 }
 
-/* Utility classes */
-.container {
-  width: 100%;
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-}
 
-.section {
-  padding: var(--spacing-xl) 0;
-}
 
-.text-center {
-  text-align: center;
-}
 
 .visually-hidden {
   position: absolute;
@@ -96,7 +88,7 @@ p {
   border: 0;
 }
 
-/* Skip to content link for accessibility */
+/* Skip to content link for accessibility  WILL USE LATER!
 .skip-link {
   position: absolute;
   top: -2.5rem;
@@ -110,7 +102,7 @@ p {
 
 .skip-link:focus {
   top: 0;
-}
+} WILL USE LATER*/
 
 /* Media queries */
 @media (max-width: 768px) {

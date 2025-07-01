@@ -63,11 +63,8 @@ const MangaHistory: React.FC = () => {
     <section className="section-content" id="timeline-breakdown">
       <h2>Timeline Breakdown</h2>
 
-      <div className="timeline-container">
-        <div className="timeline-item">
-          <div className="timeline-date">Pre-Modern Era</div>
-          <div className="timeline-content">
-            <h3>Early Origins</h3>
+
+            <h3>Early Origins (Pre-Modern Era)</h3>
             <p>
               The roots of manga can be traced to various traditional Japanese art forms. The 12th-century "Chōjū-giga" (Animal Scrolls)
               by Bishop Toba featured anthropomorphic animals in sequential illustrations that satirized Buddhist priests. Ukiyo-e woodblock
@@ -80,13 +77,10 @@ const MangaHistory: React.FC = () => {
               creatures, and landscapes. Political cartoons and satirical illustrations flourished in the late Edo and Meiji periods,
               influenced by Western publications brought to Japan after the country's opening to foreign trade.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1900s-1930s</div>
-          <div className="timeline-content">
-            <h3>Early Modern Manga</h3>
+
+            <h3>Early Modern Manga 1900s-1930s</h3>
             <p>
               The modern era of manga began with newspaper comics and children's magazines. "Jiji Manga" by Rakuten Kitazawa, published
               in 1902, is often considered the first modern manga series. Children's magazines like "Shōnen Club" (1914) and "Shōjo Club"
@@ -97,13 +91,10 @@ const MangaHistory: React.FC = () => {
               strip format (yonkoma) became popular for humor manga. As Japan's militarism increased in the 1930s, manga was increasingly
               used for propaganda purposes, promoting nationalism and military values to young readers.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1940s-1950s</div>
-          <div className="timeline-content">
-            <h3>Post-War Revolution: The Tezuka Era</h3>
+
+            <h3>Post-War Revolution: The Tezuka Era (1940s-1950s)</h3>
             <p>
               World War II devastated Japan's publishing industry, but manga quickly reemerged during the American occupation as affordable
               entertainment. The most significant development was the debut of Osamu Tezuka, often called the "God of Manga." Tezuka's
@@ -121,13 +112,8 @@ const MangaHistory: React.FC = () => {
               creators to explore more mature themes. Artists like Yoshihiro Tatsumi developed "gekiga" (dramatic pictures), a more
               realistic, adult-oriented style of manga addressing social issues and psychological themes.
             </p>
-          </div>
-        </div>
 
-        <div className="timeline-item">
-          <div className="timeline-date">1960s-1970s</div>
-          <div className="timeline-content">
-            <h3>Diversification and Maturation</h3>
+            <h3>Diversification and Maturation (1960s-1970s)</h3>
             <p>
               The 1960s and 1970s saw manga diversify into distinct demographic categories with specialized magazines. Weekly shōnen
               (boys') magazines like "Weekly Shōnen Magazine" (1959) and "Weekly Shōnen Jump" (1968) featured action, sports, and
@@ -146,13 +132,10 @@ const MangaHistory: React.FC = () => {
               sports manga, and horror manga. The relationship between manga and anime strengthened, with successful manga series
               increasingly adapted into television animation.
             </p>
-          </div>
-        </div>
+         
 
-        <div className="timeline-item">
-          <div className="timeline-date">1980s-1990s</div>
-          <div className="timeline-content">
-            <h3>The Golden Age and International Expansion</h3>
+
+            <h3>The Golden Age and International Expansion (1980s-1990s)</h3>
             <p>
               The 1980s and 1990s are often considered manga's golden age, with unprecedented commercial success and creative diversity.
               Landmark series like Akira Toriyama's "Dragon Ball," Rumiko Takahashi's "Ranma ½," and Naoko Takeuchi's "Sailor Moon"
@@ -171,13 +154,8 @@ const MangaHistory: React.FC = () => {
               Comics began publishing translated manga, though often "flipped" to read left-to-right and with cultural references
               modified for Western audiences.
             </p>
-          </div>
-        </div>
 
-        <div className="timeline-item">
-          <div className="timeline-date">2000s-Present</div>
-          <div className="timeline-content">
-            <h3>Digital Revolution and Global Phenomenon</h3>
+            <h3>Digital Revolution and Global Phenomenon (2000s-Present)</h3>
             <p>
               The 21st century has transformed manga through digital technology, globalization, and changing reader demographics. Digital
               tools have changed how manga is created, with many artists adopting tablets and specialized software, though traditional
@@ -195,9 +173,6 @@ const MangaHistory: React.FC = () => {
               with many successful creators starting in self-publishing or online platforms. Manga has diversified further, with greater
               representation of LGBTQ+ themes, international settings, and cross-cultural perspectives.
             </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     {/* 3. Key Figures & Contributors */}
@@ -272,8 +247,6 @@ const MangaHistory: React.FC = () => {
       <h2>Influences & Cultural Impact</h2>
 
       <h3>What Influenced Manga</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Traditional Japanese Art</h4>
           <p>
             Manga draws from various Japanese artistic traditions, including ukiyo-e woodblock prints, emakimono scrolls, and
@@ -281,9 +254,9 @@ const MangaHistory: React.FC = () => {
             symbolism. The stylized representation of emotions and use of visual shorthand derive partly from these traditional
             art forms.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+        
           <h4>Western Comics and Animation</h4>
           <p>
             American comics and Disney animation significantly influenced manga's development, particularly in the post-war period.
@@ -291,9 +264,9 @@ const MangaHistory: React.FC = () => {
             European comics, particularly French and Belgian bandes dessinées, also influenced certain manga creators, especially
             in science fiction and fantasy genres.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+      
           <h4>Japanese History and Society</h4>
           <p>
             Manga has been shaped by Japan's historical experiences, including the trauma of World War II, post-war reconstruction,
@@ -301,9 +274,9 @@ const MangaHistory: React.FC = () => {
             in many manga reflects Japanese cultural values. Contemporary social issues, from technological change to demographic
             challenges, are often explored through manga narratives.
           </p>
-        </div>
 
-        <div className="influence-item">
+
+      
           <h4>Publishing Industry Structures</h4>
           <p>
             The development of manga has been significantly shaped by Japan's unique publishing industry. The magazine serialization
@@ -311,12 +284,9 @@ const MangaHistory: React.FC = () => {
             format have all influenced how manga stories are structured and told. Competition between publishers has driven innovation
             in content and marketing approaches.
           </p>
-        </div>
-      </div>
+        
 
       <h3>Manga's Cultural Impact</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Japanese Popular Culture</h4>
           <p>
             Manga has become a cornerstone of Japanese popular culture, influencing fashion, slang, advertising, and even government
@@ -324,9 +294,9 @@ const MangaHistory: React.FC = () => {
             helped shape Japanese visual culture and storytelling conventions across media. The manga industry represents a significant
             economic sector, with annual sales in the billions of dollars.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+  
           <h4>Global Pop Culture</h4>
           <p>
             As part of Japan's "soft power," manga has influenced global visual culture and storytelling. Manga aesthetics and narrative
@@ -334,18 +304,18 @@ const MangaHistory: React.FC = () => {
             countries, including Korean manhwa and Chinese manhua. Manga has introduced international audiences to aspects of Japanese
             culture, language, and social norms.
           </p>
-        </div>
+    
 
-        <div className="influence-item">
+      
           <h4>Transmedia Storytelling</h4>
           <p>
             Manga has pioneered transmedia storytelling approaches, with properties extending across anime, video games, light novels,
             merchandise, and live-action adaptations. This "media mix" strategy has become a model for entertainment franchises globally.
             The relationship between manga and anime has been particularly significant, with each medium influencing the other's development.
           </p>
-        </div>
 
-        <div className="influence-item">
+
+        
           <h4>Artistic and Literary Recognition</h4>
           <p>
             Manga has increasingly gained recognition as a legitimate artistic and literary medium. Museums worldwide have hosted manga
@@ -353,16 +323,13 @@ const MangaHistory: React.FC = () => {
             and Katsuhiro Otomo's "Akira" have demonstrated manga's capacity for sophisticated storytelling. Manga has provided a platform
             for exploring complex social, philosophical, and psychological themes.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 5. Controversies & Turning Points */}
     <section className="section-content" id="controversies-turning-points">
       <h2>Controversies & Turning Points</h2>
 
-      <div className="controversy-section">
-        <div className="controversy-item">
+     
           <h3>Content Controversies and Censorship</h3>
           <p>
             Manga has faced various censorship challenges throughout its history. In the 1960s and 1970s, gekiga and alternative manga
@@ -371,9 +338,7 @@ const MangaHistory: React.FC = () => {
             Tokyo Metropolitan Ordinance Regarding the Healthy Development of Youths (revised in 2010) sparked protests from manga creators
             and publishers who viewed it as potential censorship.
           </p>
-        </div>
-
-        <div className="controversy-item">
+       
           <h3>The Digital Transition</h3>
           <p>
             The shift from print to digital has transformed manga creation, distribution, and consumption. Traditional publishers have
@@ -381,9 +346,9 @@ const MangaHistory: React.FC = () => {
             scanning) sites has been both a challenge to the industry and a factor in manga's international spread. The rise of webtoons
             and other digital-native formats has challenged the traditional page-based manga format.
           </p>
-        </div>
+      
 
-        <div className="controversy-item">
+        
           <h3>Representation and Diversity</h3>
           <p>
             While manga encompasses diverse genres and themes, it has faced criticism regarding representation of gender, sexuality, race,
@@ -391,9 +356,9 @@ const MangaHistory: React.FC = () => {
             space for exploring LGBTQ+ themes, particularly in shōjo and josei categories, though these representations have sometimes been
             problematic. Recent years have seen more diverse creator voices and more nuanced representations.
           </p>
-        </div>
+      
 
-        <div className="controversy-item">
+        
           <h3>Working Conditions</h3>
           <p>
             The manga industry has been criticized for demanding work schedules, with creators often working extremely long hours to meet
@@ -401,9 +366,9 @@ const MangaHistory: React.FC = () => {
             system, where lead artists employ junior artists to help with backgrounds and details, has been both a training ground and a
             source of labor concerns. Digital tools have changed workflows but haven't necessarily reduced workloads.
           </p>
-        </div>
 
-        <div className="controversy-item">
+
+      
           <h3>Globalization and Cultural Context</h3>
           <p>
             As manga has gone global, questions have arisen about translation, localization, and cultural context. Early localization often
@@ -412,16 +377,13 @@ const MangaHistory: React.FC = () => {
             audiences when creating manga. Some critics worry about the "flattening" of manga's Japanese cultural specificity as it becomes
             a global medium.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 6. Further Reading / Sources - Simplified */}
     <section className="section-content" id="further-reading">
       <h2>Further Reading & Sources</h2>
 
-      <div className="resources-section">
-        <div className="resource-category">
+      
           <h3>Books</h3>
           <ul>
             <li>"Manga! Manga! The World of Japanese Comics" by Frederik L. Schodt - Pioneering English-language study of manga</li>
@@ -430,12 +392,8 @@ const MangaHistory: React.FC = () => {
             <li>"God of Comics: Osamu Tezuka and the Creation of Post-World War II Manga" by Natsu Onoda Power</li>
             <li>"Manga: A Brief History" by Paul Gravett - Accessible overview of manga's development</li>
           </ul>
-        </div>
-      </div>
+        
 
-      <div className="read-full-history">
-        <Link to="/manga#history-of-manga" className="default-links">Return to Manga Overview</Link>
-      </div>
     </section>
   </main>
     </div>

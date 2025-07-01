@@ -4,7 +4,6 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
-import '../../../components/ui/MediaPages.css';
 import '../../../components/ui/TVPage.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
@@ -75,7 +74,7 @@ const TVPage: React.FC = () => {
 
       {/* The Basics Section */}
       <section id="the-basics" className="section-content">
-        <div className="container">
+        
           <h2>The Basics</h2>
           <p>
             Television is a medium that combines visual storytelling with audio to create episodic narratives that can span from a single season to decades of continuous storytelling. From broadcast networks to streaming platforms, television has evolved into one of the most influential and accessible forms of entertainment worldwide.
@@ -99,67 +98,45 @@ const TVPage: React.FC = () => {
               <li><strong>Evolving Distribution:</strong> From broadcast-only to cable to streaming platforms</li>
             </ul>
           </div>
-        </div>
       </section>
       <hr />
 
       {/* History of Television Section */}
       <section id="history-of-tv" className="section-content">
-        <div className="container">
+       
           <h2>History of Television</h2>
           <p>
             The evolution of television spans nearly a century, developing from experimental technology to the dominant entertainment medium of the 20th century and beyond. Understanding this history helps appreciate the medium's significance and influence.
           </p>
 
-          <div className="timeline-container">
-            <div className="timeline-item">
-              <div className="timeline-date">1920s-1930s</div>
-              <div className="timeline-content">
-                <h4>Early Development</h4>
+
+                <h4>Early Development 1920-1930s</h4>
                 <p>Mechanical television systems were developed in the 1920s, with electronic television emerging in the 1930s. The first regular television broadcasts began in the late 1930s in the UK and US.</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">1940s-1950s</div>
-              <div className="timeline-content">
-                <h4>The Golden Age</h4>
+                <h4>The Golden Age 1940s-1950s</h4>
                 <p>Television ownership exploded in the post-WWII era, particularly in the United States. This period saw the rise of variety shows, early sitcoms, and live drama anthologies like "Playhouse 90" and "The Twilight Zone."</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">1960s-1970s</div>
-              <div className="timeline-content">
-                <h4>Social Change & Innovation</h4>
+
+                <h4>Social Change & Innovation 1960s-1970s</h4>
                 <p>Television became a powerful force for social change, bringing the Vietnam War and Civil Rights Movement into living rooms. Color TV became standard, and groundbreaking shows like "All in the Family" and "M*A*S*H" addressed social issues.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">1980s</div>
-              <div className="timeline-content">
-                <h4>Cable Revolution</h4>
+
+                <h4>Cable Revolution 1980s</h4>
                 <p>The rise of cable television expanded viewing options dramatically. MTV changed music promotion forever, while channels like HBO began offering content that couldn't be shown on broadcast networks.</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">1990s-2000s</div>
-              <div className="timeline-content">
-                <h4>Quality TV Era</h4>
+
+                <h4>Quality TV Era 1990s-2000s</h4>
                 <p>Shows like "The Sopranos," "The Wire," and "Buffy the Vampire Slayer" pushed the boundaries of television storytelling. Reality TV emerged as a dominant format with shows like "Survivor" and "American Idol."</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">2010s-Present</div>
-              <div className="timeline-content">
-                <h4>Streaming Revolution</h4>
+
+                <h4>Streaming Revolution 2010s-Present</h4>
                 <p>Netflix, Hulu, Amazon Prime, and other streaming services transformed how television is produced, distributed, and consumed. Binge-watching became common, and the distinction between TV and film began to blur.</p>
-              </div>
-            </div>
-          </div>
+              
 
           <div className="key-figures">
             <h3>Key Figures in Television History</h3>
@@ -180,22 +157,20 @@ const TVPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
       </section>
       <hr />
 
       {/* Terminology Guide Section */}
       <section id="terminology-guide" className="section-content">
-        <div className="container">
+        
           <h2>Television Terminology Guide</h2>
           <p>
             The world of television has developed its own unique vocabulary. Understanding these terms will enhance your appreciation and help you navigate discussions about TV.
           </p>
 
-          <div className="terminology-container">
-            <div className="terminology-category">
+          
               <h3>Format & Production Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Pilot</dt>
                 <dd>The first episode of a series, often produced to convince networks to order a full season</dd>
 
@@ -211,11 +186,11 @@ const TVPage: React.FC = () => {
                 <dt>Syndication</dt>
                 <dd>The licensing of television programs to multiple broadcasting stations</dd>
               </dl>
-            </div>
+            
 
-            <div className="terminology-category">
+            
               <h3>Narrative & Structure Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Arc</dt>
                 <dd>A storyline that extends over multiple episodes or seasons</dd>
 
@@ -231,11 +206,11 @@ const TVPage: React.FC = () => {
                 <dt>Crossover</dt>
                 <dd>When characters from one show appear in another show</dd>
               </dl>
-            </div>
+            
 
-            <div className="terminology-category">
+           
               <h3>Industry & Broadcast Terms</h3>
-              <dl className="terminology-list">
+              <dl >
                 <dt>Nielsen Ratings</dt>
                 <dd>The system used to measure television viewership in the United States</dd>
 
@@ -251,17 +226,12 @@ const TVPage: React.FC = () => {
                 <dt>Binge-watching</dt>
                 <dd>Watching multiple episodes of a show in rapid succession</dd>
               </dl>
-            </div>
-          </div>
-
-
-        </div>
       </section>
       <hr />
 
       {/* TV Genres Guide Section */}
       <section id="tv-genres" className="section-content">
-        <div className="container">
+       
           <h2>Television Genres Guide</h2>
           <p>
             Television encompasses a diverse range of genres and formats, each with unique characteristics and storytelling approaches.
@@ -270,115 +240,103 @@ const TVPage: React.FC = () => {
 
 
 
-          <div id="scripted-genres" className="genre-section">
+          
             <h3>Scripted Genres</h3>
             <p>These genres feature fictional narratives with written scripts and professional actors:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Drama</h4>
                 <p>Character-driven narratives that explore complex emotions, relationships, and conflicts.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Breaking Bad, The Crown, This Is Us</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+             
                 <h4>Comedy</h4>
                 <p>Shows designed to make viewers laugh, typically with humorous situations and characters.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Office, Friends, Brooklyn Nine-Nine</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Science Fiction</h4>
                 <p>Shows that explore speculative concepts, futuristic technology, and alternate realities.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Star Trek, The Expanse, Doctor Who</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Crime/Procedural</h4>
                 <p>Focuses on solving crimes, often with a case-of-the-week format.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Law & Order, CSI, Criminal Minds</li>
                 </ul>
-              </div>
+      
 
-              <div className="genre-category">
+              
                 <h4>Fantasy</h4>
                 <p>Features magical elements, mythical creatures, and supernatural phenomena.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Game of Thrones, The Witcher, Supernatural</li>
                 </ul>
-              </div>
+          
 
-              <div className="genre-category">
+              
                 <h4>Horror</h4>
                 <p>Designed to frighten viewers with supernatural or psychological threats.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Haunting of Hill House, American Horror Story</li>
                 </ul>
-              </div>
-            </div>
-          </div>
 
-          <div id="unscripted-genres" className="genre-section">
+         
             <h3>Unscripted Genres</h3>
             <p>These genres feature real people rather than actors, though they may follow structured formats:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+           
                 <h4>Reality Competition</h4>
                 <p>Shows where contestants compete for prizes, often involving elimination formats.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Survivor, The Amazing Race, Top Chef</li>
                 </ul>
-              </div>
+           
 
-              <div className="genre-category">
+              
                 <h4>Documentary Series</h4>
                 <p>In-depth explorations of real events, people, or phenomena.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Planet Earth, Making a Murderer, The Last Dance</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Talk Shows</h4>
                 <p>Programs featuring hosts interviewing guests or presenting entertainment.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Tonight Show, The View, The Daily Show</li>
                 </ul>
-              </div>
+            
 
-              <div className="genre-category">
+          
                 <h4>Reality Lifestyle</h4>
                 <p>Shows following the lives of real people, either celebrities or ordinary individuals.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Keeping Up with the Kardashians, Queer Eye</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
       </section>
       <hr />
 
       {/* Production Process Section */}
       <section id="production-process" className="section-content">
-        <div className="container">
+        
           <h2>Television Production Process</h2>
           <p>
             Creating a television show is a complex, collaborative process involving multiple stages and specialized teams. Understanding how TV is made provides insight into the artistry and effort behind your favorite series.
           </p>
 
-          <div className="production-stages">
-            <div className="production-stage">
+          <div className="info-box">
               <h3>1. Development</h3>
               <ul>
                 <li><strong>Concept Creation:</strong> Developing the initial idea for a series</li>
@@ -386,9 +344,9 @@ const TVPage: React.FC = () => {
                 <li><strong>Pilot Order:</strong> Getting approval to produce a pilot episode</li>
                 <li><strong>Pilot Production:</strong> Creating the first episode to demonstrate the show's potential</li>
               </ul>
-            </div>
+          </div>
 
-            <div className="production-stage">
+          <div className="info-box">
               <h3>2. Pre-Production</h3>
               <ul>
                 <li><strong>Writers' Room:</strong> Team of writers developing scripts and story arcs</li>
@@ -396,9 +354,9 @@ const TVPage: React.FC = () => {
                 <li><strong>Location Scouting:</strong> Finding places to film</li>
                 <li><strong>Set Design:</strong> Creating the physical environments for the show</li>
               </ul>
-            </div>
+          </div>
 
-            <div className="production-stage">
+          <div className="info-box">
               <h3>3. Production</h3>
               <ul>
                 <li><strong>Principal Photography:</strong> Filming the actual episodes</li>
@@ -406,9 +364,9 @@ const TVPage: React.FC = () => {
                 <li><strong>Cinematography:</strong> Capturing the visual elements of the show</li>
                 <li><strong>Sound Recording:</strong> Capturing dialogue and ambient sound</li>
               </ul>
-            </div>
+          </div>
 
-            <div className="production-stage">
+          <div className="info-box">
               <h3>4. Post-Production</h3>
               <ul>
                 <li><strong>Editing:</strong> Assembling footage into coherent episodes</li>
@@ -416,9 +374,9 @@ const TVPage: React.FC = () => {
                 <li><strong>Sound Design:</strong> Creating and mixing audio elements</li>
                 <li><strong>Music:</strong> Adding original score or licensed music</li>
               </ul>
-            </div>
+          </div>
 
-            <div className="production-stage">
+          <div className="info-box">
               <h3>5. Distribution</h3>
               <ul>
                 <li><strong>Marketing:</strong> Promoting the show to potential viewers</li>
@@ -426,46 +384,39 @@ const TVPage: React.FC = () => {
                 <li><strong>International Sales:</strong> Licensing the show to foreign markets</li>
                 <li><strong>Merchandising:</strong> Creating products based on the show</li>
               </ul>
-            </div>
           </div>
 
           <div className="info-box">
+            
             <h4>Major Television Networks & Platforms</h4>
-            <div className="studio-grid">
-              <div className="studio-item">
                 <h5>Traditional Networks</h5>
                 <p>Broadcast television channels available over the air</p>
                 <p><strong>Examples:</strong> ABC, NBC, CBS, FOX, BBC</p>
-              </div>
+              
 
-              <div className="studio-item">
+              
                 <h5>Cable Networks</h5>
                 <p>Specialized channels available through cable or satellite subscriptions</p>
                 <p><strong>Examples:</strong> HBO, AMC, FX, Showtime</p>
-              </div>
+              
 
-              <div className="studio-item">
+              
                 <h5>Streaming Platforms</h5>
                 <p>Internet-based services offering on-demand content</p>
                 <p><strong>Examples:</strong> Netflix, Hulu, Amazon Prime Video, Disney+</p>
-              </div>
+             
 
-              <div className="studio-item">
+              
                 <h5>Production Studios</h5>
                 <p>Companies that create television content</p>
                 <p><strong>Examples:</strong> Warner Bros. Television, Universal Television, BBC Studios</p>
-              </div>
-            </div>
           </div>
-
-
-        </div>
       </section>
       <hr />
 
       {/* Cultural Impact Section */}
       <section id="cultural-impact" className="section-content">
-        <div className="container">
+      
           <h2>Cultural Impact of Television</h2>
           <p>
             Television has been one of the most influential cultural forces of the past century, shaping public opinion, reflecting and challenging social norms, and creating shared cultural experiences across diverse audiences.
@@ -490,7 +441,7 @@ const TVPage: React.FC = () => {
                 <li><strong>Fashion Trends:</strong> From Rachel Green's hairstyle to Miami Vice suits</li>
                 <li><strong>Cultural References:</strong> TV shows provide a common language of references across generations</li>
               </ul>
-            </div>
+            
 
           
               <h3>Technological Evolution</h3>
@@ -513,47 +464,38 @@ const TVPage: React.FC = () => {
 
       {/* TV Worlds & Universes Section */}
       <section id="tv-worlds" className="section-content">
-        <div className="container">
+        
           <h2>Television Worlds & Universes</h2>
           <p>
             Television's long-form storytelling allows for the creation of rich, detailed fictional worlds that can be explored over many episodes and seasons. These worlds become immersive environments that viewers can return to again and again.
           </p>
 
-          <div className="world-categories">
-            <div className="world-category">
+          
               <h3>Expansive Fictional Universes</h3>
               <p>Complex worlds with their own histories, geographies, and rules</p>
-              <div className="world-examples">
-                <div className="world-example">
+              
                   <h4>The Star Trek Universe</h4>
                   <p>A future where humanity has joined a galactic community, spanning multiple series across different time periods and locations</p>
-                </div>
-
-                <div className="world-example">
+               
+                
                   <h4>The Arrowverse</h4>
                   <p>A shared universe of DC Comics-based shows including Arrow, The Flash, Supergirl, and Legends of Tomorrow</p>
-                </div>
-              </div>
-            </div>
+               
 
-            <div className="world-category">
+            
               <h3>Richly Detailed Settings</h3>
               <p>Specific locations with distinctive characteristics and atmospheres</p>
-              <div className="world-examples">
-                <div className="world-example">
+              
                   <h4>Westeros (Game of Thrones)</h4>
                   <p>A medieval fantasy continent with complex political systems, diverse cultures, and supernatural elements</p>
-                </div>
+               
 
-                <div className="world-example">
+                
                   <h4>Twin Peaks</h4>
                   <p>A small town with surreal elements and dark secrets lurking beneath its seemingly idyllic surface</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div className="world-building-elements">
+
+         
             <h3>Elements of Television World-Building</h3>
             <ul>
               <li><strong>Consistent Rules:</strong> Establishing how the world works and maintaining those rules</li>
@@ -562,24 +504,21 @@ const TVPage: React.FC = () => {
               <li><strong>Physical Environments:</strong> Designing distinctive locations and settings</li>
               <li><strong>Recurring Elements:</strong> Using visual motifs, music, and other elements to create a cohesive world</li>
             </ul>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Audience Categories Section */}
       <section id="audience-categories" className="section-content">
-        <div className="container">
+
           <h2>Television for Different Audiences</h2>
           <p>
             Television offers content for viewers of all ages, interests, and preferences. Whether you're looking for family-friendly entertainment, sophisticated drama, or niche content, there's something for everyone.
           </p>
 
-          <div className="audience-categories">
-            <div className="audience-category">
+          
               <h3>For Beginners</h3>
               <p>These acclaimed series are excellent entry points to quality television:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Breaking Bad</strong> - Vince Gilligan's transformation story of a high school teacher turned drug kingpin
                 </li>
@@ -590,12 +529,12 @@ const TVPage: React.FC = () => {
                   <strong>Stranger Things</strong> - A nostalgic 1980s-set supernatural mystery with interdimensional threats
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="audience-category">
+            
               <h3>Classic Series</h3>
               <p>These influential works have stood the test of time and helped shape television as we know it today:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>The Wire</strong> - David Simon's intricate examination of Baltimore's institutions and the people within them
                 </li>
@@ -606,12 +545,12 @@ const TVPage: React.FC = () => {
                   <strong>Twin Peaks</strong> - David Lynch's surreal mystery that pushed the boundaries of television
                 </li>
               </ul>
-            </div>
+      
 
-            <div className="audience-category">
+          
               <h3>Recent Hits</h3>
               <p>These newer series represent the current generation of acclaimed television:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Succession</strong> - A darkly comic drama about a dysfunctional media dynasty family
                 </li>
@@ -622,31 +561,24 @@ const TVPage: React.FC = () => {
                   <strong>The White Lotus</strong> - Mike White's satirical anthology series set at a luxury resort chain
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
-        <div className="container">
+      
           <h2>Learning Resources</h2>
           <p>
             Understanding television as a medium can enhance your appreciation of the art form.
           </p>
 
-          <div className="resource-categories">
-            <div className="resource-category">
+          
               <h3>Recommended Books</h3>
               <ul>
                 <li>"Television: A Biography" by David Thomson - A comprehensive look at television's history and cultural impact</li>
                 <li>"Difficult Men" by Brett Martin - Behind-the-scenes look at the creators of the TV drama revolution</li>
                 <li>"The Revolution Was Televised" by Alan Sepinwall - How drama series transformed television</li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
       </main>

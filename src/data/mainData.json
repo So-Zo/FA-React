@@ -1,0 +1,25 @@
+{
+  "header": {
+    "image": "/images/video-games/VideoGamesHeader.jpg",
+    "searchPlaceholder": "Search for Characters, Universes, etc.",
+    "editButton": "Edit Page"
+  },
+  "toc": { ... },
+  "sections": [
+    {
+      "id": "the-basics",
+      "title": "The Basics",
+      "paragraphs": [
+        "Anime refers to animation originating from Japan...",
+        "While anime is primarily produced in Japan, it has inspired..."
+      ],
+      "infoCard": {
+        "title": "Key Characteristics of Anime",
+        "items": [
+          { "label": "Visual Style", "description": "Distinctive art style..." }
+        ]
+      }
+    },
+    // ...more sections
+  ]
+}

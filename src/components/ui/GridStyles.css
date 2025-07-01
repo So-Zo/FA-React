@@ -1,0 +1,57 @@
+/* === Wikipedia-style Grid Layouts === */
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-lg) 0;
+}
+
+.grid-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.grid-block dt {
+  font-weight: 600;
+  color: var(--fanarc-primary-color);
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--font-size-lg);
+}
+
+.grid-block dd {
+  margin: 0;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+.three-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--spacing-xl);
+  align-items: start;
+  margin: var(--spacing-lg) 0;
+}
+
+/* === Wikipedia-style Typography Enhancements === */
+
+.two-column-grid h2,
+.three-column-grid h2 {
+  font-size: var(--font-size-xxxl);
+  margin-bottom: var(--spacing-md);
+  font-weight: 700;
+  color: var(--fanarc-primary-color);
+  line-height: var(--line-height-tight);
+  text-align: center;
+}
+
+/* Responsive adjustments for grids */
+@media (max-width: 62rem) {
+  .two-column-grid,
+  .three-column-grid {
+    grid-template-columns: 1fr;
+  }
+}

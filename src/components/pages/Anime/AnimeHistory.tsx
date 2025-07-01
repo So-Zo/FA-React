@@ -4,7 +4,6 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
-import '../../../components/ui/MediaPages.css';
 import '../../../components/ui/AnimePage.css';
 
 const AnimeHistory: React.FC = () => {
@@ -61,11 +60,8 @@ const AnimeHistory: React.FC = () => {
     <section className="section-content" id="timeline-breakdown">
       <h2>Timeline Breakdown</h2>
 
-      <div className="timeline-container">
-        <div className="timeline-item">
-          <div className="timeline-date">1910s-1930s</div>
-          <div className="timeline-content">
-            <h3>Early Origins</h3>
+
+            <h3>Early Origins (1910s-1930s)</h3>
             <p>
               The earliest Japanese animations emerged in the 1910s, with works like Junichi Kouchi's "Namakura Gatana" (1917)
               and Seitaro Kitayama's "Urashima Taro" (1918). These pioneering animators were influenced by Western animation
@@ -79,13 +75,10 @@ const AnimeHistory: React.FC = () => {
               Key figures like Noburo Ofuji experimented with innovative techniques, including his distinctive chiyogami (colored paper)
               animations that showcased traditional Japanese aesthetics.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1940s-1950s</div>
-          <div className="timeline-content">
-            <h3>Formative Years</h3>
+
+            <h3>Formative Years (1940s-1950s)</h3>
             <p>
               During World War II, animation was largely co-opted for propaganda purposes, with works supporting Japan's war efforts.
               The first feature-length Japanese animated film, "Momotaro: Sacred Sailors" (1945), was a naval propaganda piece.
@@ -98,13 +91,10 @@ const AnimeHistory: React.FC = () => {
               The release of "Hakujaden" (The White Snake Enchantress) in 1958, Japan's first color feature-length animation,
               demonstrated the growing technical capabilities of Japanese animators and their interest in adapting Asian folklore.
             </p>
-          </div>
-        </div>
+        
 
-        <div className="timeline-item">
-          <div className="timeline-date">1960s-1970s</div>
-          <div className="timeline-content">
-            <h3>The Tezuka Revolution & Golden Age</h3>
+
+            <h3>The Tezuka Revolution & Golden Age (1960s-1970s)</h3>
             <p>
               The 1960s saw the revolutionary influence of Osamu Tezuka, the "God of Manga," who brought his distinctive visual style
               and storytelling approach to animation. His studio, Mushi Production, created "Astro Boy" (1963), Japan's first regularly
@@ -120,13 +110,10 @@ const AnimeHistory: React.FC = () => {
               more complex narratives and themes to what had previously been considered children's entertainment. These series addressed
               war, politics, and human psychology in ways that expanded anime's potential as a storytelling medium.
             </p>
-          </div>
-        </div>
+  
 
-        <div className="timeline-item">
-          <div className="timeline-date">1980s</div>
-          <div className="timeline-content">
-            <h3>Boom Era & Global Expansion</h3>
+
+            <h3>Boom Era & Global Expansion (1980s)</h3>
             <p>
               The 1980s represented a golden age for anime, with unprecedented creative diversity and technical innovation. The founding
               of Studio Ghibli in 1985 by Hayao Miyazaki and Isao Takahata marked a watershed moment, as their films would elevate anime's
@@ -142,13 +129,10 @@ const AnimeHistory: React.FC = () => {
               visually stunning storytelling aimed at adult audiences. Meanwhile, series like "Dragon Ball" (1986) began building global fandoms
               that would explode in the following decade.
             </p>
-          </div>
-        </div>
+          
 
-        <div className="timeline-item">
-          <div className="timeline-date">1990s</div>
-          <div className="timeline-content">
-            <h3>Mainstream Recognition & Creative Diversification</h3>
+
+            <h3>Mainstream Recognition & Creative Diversification (1990s)</h3>
             <p>
               The 1990s saw anime achieve unprecedented global recognition. Series like "Sailor Moon" (1992), "Dragon Ball Z" (1989-1996),
               and "Pokémon" (1997) became international phenomena, introducing anime to mainstream audiences worldwide and creating massive
@@ -163,13 +147,10 @@ const AnimeHistory: React.FC = () => {
               The rise of the internet facilitated the growth of international fan communities, with fan subtitling ("fansubs") making anime
               more accessible to non-Japanese audiences before official localization.
             </p>
-          </div>
-        </div>
+        
 
-        <div className="timeline-item">
-          <div className="timeline-date">2000s-2010s</div>
-          <div className="timeline-content">
-            <h3>Digital Revolution & Global Integration</h3>
+
+            <h3>Digital Revolution & Global Integration (2000s-2010s)</h3>
             <p>
               The transition to digital animation techniques transformed production processes, while the rise of internet streaming platforms
               revolutionized distribution. Services like Crunchyroll (founded 2006) made anime more accessible globally than ever before, with
@@ -185,13 +166,10 @@ const AnimeHistory: React.FC = () => {
               styles and storytelling approaches. Simultaneously, international co-productions and collaborations became more common, blurring
               the boundaries between anime and other animation traditions.
             </p>
-          </div>
-        </div>
+  
 
-        <div className="timeline-item">
-          <div className="timeline-date">2020s-Present</div>
-          <div className="timeline-content">
-            <h3>Streaming Era & New Frontiers</h3>
+
+            <h3>Streaming Era & New Frontiers (2020s-Present)</h3>
             <p>
               The streaming wars have transformed anime's global distribution, with platforms like Netflix, Amazon, and Disney+ investing heavily
               in exclusive anime content and original productions. This has brought unprecedented budgets to some productions while raising questions
@@ -207,9 +185,6 @@ const AnimeHistory: React.FC = () => {
               The global influence of anime aesthetics and storytelling conventions has never been more pronounced, appearing in everything from Hollywood
               films to fashion and music.
             </p>
-          </div>
-        </div>
-      </div>
     </section>
 
     {/* 3. Key Figures & Contributors */}
@@ -280,138 +255,122 @@ const AnimeHistory: React.FC = () => {
       <h2>Influences & Cultural Impact</h2>
 
       <h3>What Influenced Anime</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Traditional Japanese Art</h4>
           <p>
             Ukiyo-e woodblock prints, with their flat perspectives, bold outlines, and stylized representations, influenced anime's visual language.
             The emphasis on line over shading and expressive faces over realistic proportions can be traced to these traditional art forms.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+        
           <h4>Western Animation</h4>
           <p>
             Early Japanese animators were heavily influenced by Disney and other Western animation studios. Osamu Tezuka openly acknowledged
             Disney's influence on his character designs, while adapting these influences to create a distinctly Japanese style.
           </p>
-        </div>
+      
 
-        <div className="influence-item">
+        
           <h4>Post-War Japanese Society</h4>
           <p>
             The trauma of World War II and atomic bombings appears repeatedly in anime themes, from the apocalyptic imagery in "Akira" to the
             anti-war messages of many Ghibli films. Japan's rapid industrialization and economic transformation also provided thematic material
             for many works exploring tensions between tradition and modernity.
           </p>
-        </div>
+  
 
-        <div className="influence-item">
+        
           <h4>Technology</h4>
           <p>
             Advances in animation technology have continuously shaped anime's evolution, from the limited animation techniques developed to make
             television production economically viable to the integration of CGI in contemporary works. The rise of home video created the OVA market,
             while digital distribution transformed global access to anime.
           </p>
-        </div>
-      </div>
+        
 
       <h3>Anime's Cultural Impact</h3>
-      <div className="influence-section">
-        <div className="influence-item">
           <h4>Global Pop Culture</h4>
           <p>
             Anime has become a significant force in global entertainment, influencing aesthetics and storytelling across media. Hollywood films
             like "The Matrix," "Pacific Rim," and "Inception" show clear anime influences, while Western animation increasingly adopts anime-inspired
             visual elements and narrative approaches.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+      
           <h4>Fan Communities</h4>
           <p>
             Anime has fostered vibrant global fan communities engaged in cosplay, fan art, fan fiction, and convention culture. These communities
             were early adopters of internet technologies, using digital platforms to share, discuss, and translate anime before official localization
             was widely available.
           </p>
-        </div>
+        
 
-        <div className="influence-item">
+        
           <h4>Japanese Soft Power</h4>
           <p>
             Anime has become a key component of Japan's cultural exports and soft power, promoting tourism and interest in Japanese language and culture.
             The Japanese government has recognized this potential, supporting anime promotion through initiatives like the "Cool Japan" campaign.
           </p>
-        </div>
+      
 
-        <div className="influence-item">
+        
           <h4>Artistic Innovation</h4>
           <p>
             Anime has pushed the boundaries of animation as an artistic medium, demonstrating its potential for sophisticated storytelling across genres
             and target audiences. The medium's visual language has evolved distinctive approaches to representing emotion, action, and abstract concepts.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 5. Controversies & Turning Points */}
     <section className="section-content" id="controversies-turning-points">
       <h2>Controversies & Turning Points</h2>
 
-      <div className="controversy-section">
-        <div className="controversy-item">
+      
           <h3>Industry Working Conditions</h3>
           <p>
             The anime industry has faced ongoing criticism for poor working conditions, including low wages, extreme overtime, and heavy reliance on
             freelancers without benefits. These issues have raised concerns about the sustainability of traditional animation production models and
             the industry's ability to nurture new talent.
           </p>
-        </div>
 
-        <div className="controversy-item">
-          <h3>Content Controversies</h3>
+        <h3>Content Controversies</h3>
           <p>
             Certain anime content has sparked controversy both within Japan and internationally, particularly regarding the sexualization of young-appearing
             characters, extreme violence, and the representation of gender and sexuality. These controversies reflect broader cultural differences and
             ongoing debates about artistic freedom versus social responsibility.
           </p>
-        </div>
+    
 
-        <div className="controversy-item">
+        
           <h3>The Impact of "Evangelion"</h3>
           <p>
             The release of "Neon Genesis Evangelion" in 1995 represented a major turning point, challenging conventions of the mecha genre with its
             psychological complexity and controversial ending. The series sparked intense debate among fans and critics while demonstrating anime's
             potential for artistic experimentation and thematic depth.
           </p>
-        </div>
-
-        <div className="controversy-item">
+  
+    
           <h3>The Digital Transition</h3>
           <p>
             The shift from traditional cel animation to digital production techniques in the late 1990s and early 2000s transformed the industry,
             changing workflow, aesthetics, and the required skill sets for animators. This transition created both new opportunities and challenges
             for studios adapting to rapidly evolving technology.
           </p>
-        </div>
 
-        <div className="controversy-item">
           <h3>Globalization and Streaming</h3>
           <p>
             The rise of global streaming platforms has transformed anime distribution and production, bringing new investment but also raising questions
             about creative control and cultural authenticity. The increasing influence of international audiences on production decisions has sparked
             debate about whether anime is becoming less distinctively Japanese to appeal to global markets.
           </p>
-        </div>
-      </div>
     </section>
 
     {/* 6. Further Reading / Sources */}
     <section className="section-content" id="further-reading">
       <h2>Further Reading & Sources</h2>
 
-      <div className="resources-section">
-        <div className="resource-category">
+      
           <h3>Books</h3>
           <ul>
             <li>"Anime: A History" by Jonathan Clements</li>
@@ -420,18 +379,18 @@ const AnimeHistory: React.FC = () => {
             <li>"The Soul of Anime: Collaborative Creativity and Japan's Media Success Story" by Ian Condry</li>
             <li>"Starting Point: 1979-1996" by Hayao Miyazaki</li>
           </ul>
-        </div>
+      
 
-        <div className="resource-category">
+      
           <h3>Documentaries</h3>
           <ul>
             <li>"The Kingdom of Dreams and Madness" (2013) - About Studio Ghibli</li>
             <li>"Satoshi Kon: The Illusionist" (2021)</li>
             <li>"Anime: Drawing a Revolution" (2007)</li>
           </ul>
-        </div>
+  
 
-        <div className="resource-category">
+        
           <h3>Essential Viewing</h3>
           <p>To understand anime's historical evolution, consider watching these landmark works:</p>
           <ul>
@@ -445,14 +404,6 @@ const AnimeHistory: React.FC = () => {
             <li>"Spirited Away" (2001) - Oscar-winning Ghibli masterpiece</li>
             <li>"Your Name" (2016) - Contemporary blockbuster that broke box office records</li>
           </ul>
-        </div>
-
-
-      </div>
-
-      <div className="read-full-history">
-        <Link to="/anime#history-of-anime" className="default-links">Return to Anime Overview</Link>
-      </div>
     </section>
   </main>
     </div>

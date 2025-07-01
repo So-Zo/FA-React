@@ -148,7 +148,7 @@
   display: block;
 }
 
-.profile-content-section h2 {
+.profile- h2 {
   margin-bottom: 1rem;
   text-align: center;
   color: var(--text-primary);
@@ -270,8 +270,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Settings styles */
@@ -350,7 +356,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.2);
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 24px;
 }
 
@@ -362,7 +368,7 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -624,7 +630,7 @@ input:checked + .toggle-slider:before {
   .profile-stats {
     gap: 1rem;
   }
-  
+
   .profile-options-bar {
     flex-direction: column;
     align-items: stretch;
@@ -633,11 +639,11 @@ input:checked + .toggle-slider:before {
   .profile-option-item {
     text-align: center;
   }
-  
+
   .form-actions {
     flex-direction: column;
   }
-  
+
   .btn {
     width: 100%;
   }

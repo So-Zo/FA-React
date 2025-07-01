@@ -4,7 +4,6 @@ import '../../../components/ui/global.css';
 import '../../../components/ui/links.css';
 import '../../../components/ui/cards.css';
 import '../../../components/ui/sections.css';
-import '../../../components/ui/MediaPages.css';
 import '../../../components/ui/MangaPage.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
@@ -105,61 +104,38 @@ const MangaPage: React.FC = () => {
 
       {/* History of Manga Section */}
       <section id="history-of-manga" className="section-content">
-        <div className="container">
+        
           <h2>History of Manga</h2>
           <p>
             The evolution of manga spans centuries, developing from traditional Japanese art to the global cultural phenomenon it is today. Understanding this history helps appreciate the art form's significance and influence.
           </p>
 
-          <div className="timeline-container">
-            <div className="timeline-item">
-              <div className="timeline-date">12th Century</div>
-              <div className="timeline-content">
-                <h4>Early Beginnings</h4>
+
+                <h4>Early Beginnings (12th Century)</h4>
                 <p>The earliest precursors to manga can be traced back to the 12th century with the Chōjū-giga (Animal Scrolls), which depicted animals behaving as humans in a satirical manner.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">17th-19th Century</div>
-              <div className="timeline-content">
-                <h4>Ukiyo-e & Kibyōshi</h4>
+
+                <h4>Ukiyo-e & Kibyōshi (17th-19th Century)</h4>
                 <p>Ukiyo-e woodblock prints and kibyōshi (yellow-cover books) featured illustrations with text, establishing narrative art traditions that would influence modern manga.</p>
-              </div>
-            </div>
 
-            <div className="timeline-item">
-              <div className="timeline-date">Early 20th Century</div>
-              <div className="timeline-content">
-                <h4>Western Influence</h4>
+
+                <h4>Western Influence (20th Century)</h4>
                 <p>Japanese artists began incorporating elements from Western comics and cartoons, creating early comic strips for newspapers and magazines.</p>
-              </div>
-            </div>
 
-            <div className="timeline-item">
-              <div className="timeline-date">1950s-60s</div>
-              <div className="timeline-content">
-                <h4>The Tezuka Revolution</h4>
+                <h4>The Tezuka Revolution (1940s-50s)</h4>
                 <p>Osamu Tezuka, often called the "God of Manga," revolutionized the medium with works like "Astro Boy" and "Princess Knight," establishing many of the visual styles and storytelling approaches that would define manga.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">1970s-80s</div>
-              <div className="timeline-content">
-                <h4>Diversification</h4>
+
+                <h4>Diversification (1970s-80s)</h4>
                 <p>This period saw the rise of diverse genres and demographics, including shōjo manga (girls' comics) by artists like Moto Hagio and Keiko Takemiya, and seinen manga (men's comics) exploring more mature themes.</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">1990s-Present</div>
-              <div className="timeline-content">
-                <h4>Global Expansion & Digital Era</h4>
+
+                <h4>Global Expansion & Digital Era (1990s-Present)</h4>
                 <p>Manga gained significant international popularity with series like "Dragon Ball," "Sailor Moon," and "Naruto." The transition to digital creation techniques and online distribution has further expanded manga's global reach and accessibility.</p>
-              </div>
-            </div>
-          </div>
+         
 
           <div className="key-figures">
             <h3>Key Figures in Manga History</h3>
@@ -180,22 +156,20 @@ const MangaPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
       </section>
       <hr />
 
       {/* Terminology Guide Section */}
       <section id="terminology-guide" className="section-content">
-        <div className="container">
+        
           <h2>Manga Terminology Guide</h2>
           <p>
             The world of manga has developed its own unique vocabulary. Understanding these terms will enhance your appreciation and help you navigate discussions about manga.
           </p>
 
-          <div className="terminology-container">
-            <div className="terminology-category">
+          
               <h3>Format & Publication Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Tankōbon</dt>
                 <dd>Collected volumes of manga chapters that were previously serialized in magazines</dd>
 
@@ -211,11 +185,11 @@ const MangaPage: React.FC = () => {
                 <dt>Gekiga</dt>
                 <dd>Dramatic, mature manga aimed at adult audiences</dd>
               </dl>
-            </div>
+          
 
-            <div className="terminology-category">
+        
               <h3>Visual & Storytelling Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Furigana</dt>
                 <dd>Small hiragana characters printed above kanji to indicate pronunciation</dd>
 
@@ -231,11 +205,11 @@ const MangaPage: React.FC = () => {
                 <dt>Thought Bubbles</dt>
                 <dd>Cloud-like bubbles showing a character's thoughts</dd>
               </dl>
-            </div>
+            
 
-            <div className="terminology-category">
+        
               <h3>Demographic Categories</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Shōnen</dt>
                 <dd>Manga targeted primarily at boys and young men (ages 12-18)</dd>
 
@@ -251,15 +225,12 @@ const MangaPage: React.FC = () => {
                 <dt>Kodomomuke</dt>
                 <dd>Manga for young children</dd>
               </dl>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Manga Genres Guide Section */}
       <section id="manga-genres" className="section-content">
-        <div className="container">
+        
           <h2>Manga Genres Guide</h2>
           <p>
             Manga encompasses a diverse range of genres and storytelling styles, each with unique characteristics and appeal.
@@ -268,113 +239,103 @@ const MangaPage: React.FC = () => {
 
 
 
-          <div id="popular-genres" className="genre-section">
             <h3>Popular Manga Genres</h3>
             <p>Discover manga series based on your preferred storytelling styles and themes:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Shōnen Battle</h4>
                 <p>Action-focused manga featuring protagonists who grow stronger through training and combat.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Dragon Ball, One Piece, Naruto, My Hero Academia</li>
                 </ul>
-              </div>
+          
 
-              <div className="genre-category">
+          
                 <h4>Slice of Life</h4>
                 <p>Focuses on the everyday experiences of characters, often with a warm or comedic tone.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Yotsuba&!, Barakamon, Silver Spoon</li>
                 </ul>
-              </div>
+            
 
-              <div className="genre-category">
+            
                 <h4>Horror</h4>
                 <p>Designed to evoke fear through disturbing imagery and unsettling narratives.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Junji Ito's works (Uzumaki, Tomie), Parasyte</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+        
                 <h4>Romance</h4>
                 <p>Focuses on romantic relationships between characters and emotional connections.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Kimi ni Todoke, Horimiya, Kaguya-sama</li>
                 </ul>
-              </div>
+          
 
-              <div className="genre-category">
+            
                 <h4>Fantasy</h4>
                 <p>Set in fantastical worlds with elements like magic and supernatural powers.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Berserk, Made in Abyss, The Ancient Magus' Bride</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Sports</h4>
                 <p>Centers around competitive sports and athletes, focusing on teamwork and growth.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Haikyuu!!, Slam Dunk, Blue Lock</li>
                 </ul>
-              </div>
-            </div>
-          </div>
+              
 
-          <div id="demographic-genres" className="genre-section">
+          
             <h3>Demographic Categories</h3>
             <p>Manga is often categorized by its target audience in Japan, though fans of all types enjoy them worldwide:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Shōnen (Young Men)</h4>
                 <p>Aimed at boys and young men ages 12-18, featuring action, adventure, and coming-of-age themes.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> One Piece, Naruto, My Hero Academia</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Shōjo (Young Women)</h4>
                 <p>Aimed at girls and young women ages 12-18, often focusing on romance and emotional growth.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Fruits Basket, Ouran High School Host Club, Nana</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Seinen (Adult Men)</h4>
                 <p>Targeted at adult men (18+), with more complex themes and mature content.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Berserk, Vagabond, Vinland Saga</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+            
                 <h4>Josei (Adult Women)</h4>
                 <p>Targeted at adult women (18+), featuring realistic relationships and mature themes.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Chihayafuru, Honey and Clover, Wotakoi</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Production Process Section */}
       <section id="production-process" className="section-content">
-        <div className="container">
+      
           <h2>Manga Production Process</h2>
           <p>
             Creating manga is a labor-intensive process that combines artistic skill with storytelling ability. Understanding how manga is made provides insight into the craft and effort behind your favorite series.
           </p>
 
-          <div className="production-stages">
-            <div className="production-stage">
+          
               <h3>1. Planning & Story Development</h3>
               <ul>
                 <li><strong>Concept Creation:</strong> Developing the initial idea, characters, and world</li>
@@ -382,9 +343,9 @@ const MangaPage: React.FC = () => {
                 <li><strong>Character Design:</strong> Creating the visual appearance and personalities of characters</li>
                 <li><strong>Editor Consultation:</strong> Working with editors to refine the concept and approach</li>
               </ul>
-            </div>
+            
 
-            <div className="production-stage">
+        
               <h3>2. Drawing Process</h3>
               <ul>
                 <li><strong>Thumbnailing:</strong> Creating rough sketches of page layouts</li>
@@ -393,9 +354,9 @@ const MangaPage: React.FC = () => {
                 <li><strong>Screentoning:</strong> Adding patterns and shading for depth and texture</li>
                 <li><strong>Lettering:</strong> Adding dialogue, sound effects, and other text</li>
               </ul>
-            </div>
+        
 
-            <div className="production-stage">
+          
               <h3>3. Publication</h3>
               <ul>
                 <li><strong>Serialization:</strong> Publishing chapters in weekly or monthly magazines</li>
@@ -403,44 +364,38 @@ const MangaPage: React.FC = () => {
                 <li><strong>Digital Distribution:</strong> Releasing manga through online platforms</li>
                 <li><strong>Translation:</strong> Adapting manga for international audiences</li>
               </ul>
-            </div>
-          </div>
+           
 
           <div className="info-box">
             <h4>Major Manga Publishers</h4>
-            <div className="studio-grid">
-              <div className="studio-item">
                 <h5>Shueisha</h5>
                 <p>Publisher of Weekly Shōnen Jump, the most popular manga magazine</p>
                 <p><strong>Notable Series:</strong> One Piece, Naruto, Demon Slayer</p>
-              </div>
+              
 
-              <div className="studio-item">
+              
                 <h5>Kodansha</h5>
                 <p>One of Japan's largest publishing companies</p>
                 <p><strong>Notable Series:</strong> Attack on Titan, Fairy Tail, The Seven Deadly Sins</p>
-              </div>
+          
 
-              <div className="studio-item">
+              
                 <h5>Shogakukan</h5>
                 <p>Major publisher with diverse manga offerings</p>
                 <p><strong>Notable Series:</strong> Detective Conan, Inuyasha, Doraemon</p>
-              </div>
+              
 
-              <div className="studio-item">
+            
                 <h5>Hakusensha</h5>
                 <p>Known for shōjo and josei manga</p>
                 <p><strong>Notable Series:</strong> Berserk, Ouran High School Host Club, Fruits Basket</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
       <hr />
 
       {/* Cultural Impact Section */}
       <section id="cultural-impact" className="section-content">
-        <div className="container">
+        
           <h2>Cultural Impact of Manga</h2>
           <p>
             Manga has grown from a Japanese medium to a global cultural phenomenon, influencing art, entertainment, fashion, and technology worldwide.
@@ -464,7 +419,7 @@ const MangaPage: React.FC = () => {
                 <li><strong>Fan Art & Doujinshi:</strong> Fan-created artwork and comics based on existing manga</li>
                 <li><strong>Online Communities:</strong> Forums, social media groups, and websites dedicated to discussing and celebrating manga</li>
               </ul>
-            </div>
+        
 
               <h3>Cultural Exchange</h3>
               <p>
@@ -486,47 +441,38 @@ const MangaPage: React.FC = () => {
 
       {/* Manga Worlds & Universes Section */}
       <section id="manga-worlds" className="section-content">
-        <div className="container">
+      
           <h2>Manga Worlds & Universes</h2>
           <p>
             One of manga's greatest strengths is its ability to create immersive, richly detailed fictional worlds. From post-apocalyptic landscapes to magical realms, these universes captivate readers with their depth and creativity.
           </p>
 
-          <div className="world-categories">
-            <div className="world-category">
+         
               <h3>Fantasy Realms</h3>
               <p>Magical worlds with their own rules, creatures, and power systems</p>
-              <div className="world-examples">
-                <div className="world-example">
+            
                   <h4>The World of One Piece</h4>
                   <p>A vast ocean world divided by the Grand Line, filled with islands, pirates, and mysterious Devil Fruits</p>
-                </div>
+            
 
-                <div className="world-example">
                   <h4>Berserk's Dark Fantasy World</h4>
                   <p>A medieval European-inspired dark fantasy realm where humans struggle against demonic forces</p>
-                </div>
-              </div>
-            </div>
+            
 
-            <div className="world-category">
+            
               <h3>Futuristic Settings</h3>
               <p>Advanced technological societies, dystopian futures, and space frontiers</p>
-              <div className="world-examples">
-                <div className="world-example">
+             
                   <h4>Akira's Neo-Tokyo</h4>
                   <p>A cyberpunk metropolis rebuilt after a catastrophic explosion, filled with biker gangs, government experiments, and psychic powers</p>
-                </div>
+               
 
-                <div className="world-example">
+               
                   <h4>Attack on Titan's Walled Society</h4>
                   <p>A society enclosed by massive walls to protect humanity from giant humanoid creatures</p>
-                </div>
-              </div>
-            </div>
-          </div>
+               
 
-          <div className="world-building-elements">
+       
             <h3>Elements of Manga World-Building</h3>
             <ul>
               <li><strong>Power Systems:</strong> Unique rules governing special abilities (chakra, nen, quirks, etc.)</li>
@@ -535,24 +481,21 @@ const MangaPage: React.FC = () => {
               <li><strong>History & Lore:</strong> Backstories, legends, and historical events that shape the world</li>
               <li><strong>Visual Aesthetics:</strong> Distinctive architectural styles, fashion, and design elements</li>
             </ul>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Audience Categories Section */}
       <section id="audience-categories" className="section-content">
-        <div className="container">
+      
           <h2>Manga for Different Audiences</h2>
           <p>
             One of manga's strengths is its diversity, offering content for readers of all ages, interests, and experience levels. Whether you're new to manga or a seasoned fan, there's something for everyone.
           </p>
 
-          <div className="audience-categories">
-            <div className="audience-category">
+          
               <h3>For Beginners</h3>
               <p>These accessible series serve as excellent entry points to manga, featuring compelling stories and universal themes:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Death Note</strong> - A psychological thriller about a student who discovers a notebook that kills anyone whose name is written in it
                 </li>
@@ -563,12 +506,12 @@ const MangaPage: React.FC = () => {
                   <strong>Yotsuba&!</strong> - A heartwarming slice-of-life series about an energetic young girl discovering the world
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="audience-category">
+          
               <h3>Classic Series</h3>
               <p>These influential works have stood the test of time and helped shape manga as we know it today:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Astro Boy</strong> - Osamu Tezuka's groundbreaking series about a robot boy with human emotions
                 </li>
@@ -579,12 +522,12 @@ const MangaPage: React.FC = () => {
                   <strong>Akira</strong> - Katsuhiro Otomo's cyberpunk masterpiece that revolutionized manga storytelling
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="audience-category">
+          
               <h3>Recent Hits</h3>
               <p>These newer series represent the current generation of popular manga:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Demon Slayer</strong> - A visually stunning tale of a boy hunting demons in Taisho-era Japan
                 </li>
@@ -595,31 +538,23 @@ const MangaPage: React.FC = () => {
                   <strong>Spy x Family</strong> - A charming blend of action and comedy about a spy who must create a fake family
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
-        <div className="container">
+        
           <h2>Learning Resources</h2>
           <p>
             Understanding manga as a medium can enhance your appreciation of the art form.
           </p>
-
-          <div className="resource-categories">
-            <div className="resource-category">
+               
               <h3>Recommended Books</h3>
               <ul>
                 <li>"Manga: A Brief History" by Paul Gravett - Accessible overview of manga's development</li>
                 <li>"Dreamland Japan: Writings on Modern Manga" by Frederik L. Schodt - Exploration of manga's evolution</li>
                 <li>"The Osamu Tezuka Story" by Toshio Ban - Biography of manga's most influential creator</li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
       </main>

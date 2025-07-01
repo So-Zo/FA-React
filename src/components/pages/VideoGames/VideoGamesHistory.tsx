@@ -61,11 +61,8 @@ const VideoGamesHistory: React.FC = () => {
         <section className="section-content" id="timeline-breakdown">
           <h2>Timeline Breakdown</h2>
 
-          <div className="timeline-container">
-            <div className="timeline-item">
-              <div className="timeline-date">1950s-1960s</div>
-              <div className="timeline-content">
-                <h3>Early Beginnings</h3>
+
+                <h3>Early Beginnings 1950-1960s</h3>
                 <p>
                   The earliest video games emerged from academic and research settings, where scientists and engineers
                   experimented with interactive electronic entertainment on the primitive computers of the day.
@@ -87,13 +84,10 @@ const VideoGamesHistory: React.FC = () => {
                     which would later become the Magnavox Odyssey
                   </li>
                 </ul>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">1970s</div>
-              <div className="timeline-content">
-                <h3>Arcade & Home Console Birth</h3>
+
+                <h3>Arcade & Home Console Birth 1970-1980s</h3>
                 <p>
                   The 1970s saw video games emerge as a commercial medium with the rise of arcade games and the first
                   home consoles, establishing many of the business and design foundations that would shape the industry.
@@ -119,13 +113,10 @@ const VideoGamesHistory: React.FC = () => {
                     <strong>Space Invaders (1978)</strong> - Taito's alien-shooting game sparked the golden age of arcade games
                   </li>
                 </ul>
-              </div>
-            </div>
 
-            <div className="timeline-item">
-              <div className="timeline-date">1980s</div>
-              <div className="timeline-content">
-                <h3>Golden Age & Crash</h3>
+
+
+                <h3>Golden Age & Crash 1980-1990s</h3>
                 <p>
                   The early 1980s represented the golden age of arcade gaming, followed by a devastating industry crash
                   in North America and then a renaissance led by Nintendo.
@@ -153,14 +144,7 @@ const VideoGamesHistory: React.FC = () => {
                     <strong>Tetris (1984/1989)</strong> - Alexey Pajitnov's puzzle game became universally appealing, especially when bundled with the Game Boy
                   </li>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="read-full-history">
-            <Link to="/video-games#history-of-games" className="default-links">Return to Video Games Overview</Link>
-          </div>
-        </section>
+          </section>
 
         {/* 3. Resources Section */}
         <section className="section-content" id="resources">

@@ -105,69 +105,44 @@ const ComicsPage: React.FC = () => {
 
       {/* History of Comics Section */}
       <section id="history-of-comics" className="section-content">
-        <div className="container">
+
           <h2>History of Comics</h2>
           <p>
             The evolution of comics spans centuries, developing from early sequential art to the diverse global medium it is today. Understanding this history helps appreciate the art form's significance and influence.
           </p>
 
-          <div className="timeline-container">
-            <div className="timeline-item">
-              <div className="timeline-date">Early Precursors</div>
-              <div className="timeline-content">
+         
                 <h4>Sequential Art Beginnings</h4>
                 <p>Sequential art has ancient roots, from Egyptian hieroglyphics to medieval tapestries like the Bayeux Tapestry, which told stories through sequences of images.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">18th-19th Century</div>
-              <div className="timeline-content">
-                <h4>Early Political Cartoons & Illustrated Stories</h4>
+           
+                <h4>Early Political Cartoons & Illustrated Stories 17th-18th century</h4>
                 <p>Artists like William Hogarth created sequential narrative art, while Rodolphe Töpffer is often credited with creating the first modern comic strips in the 1830s with his "picture stories."</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">Late 19th-Early 20th Century</div>
-              <div className="timeline-content">
-                <h4>Newspaper Comics Era</h4>
+
+                <h4>Newspaper Comics Era Late 19th-Early 20th Century</h4>
                 <p>The Yellow Kid (1895) is often cited as the first recurring comic character in American newspapers. This period saw the rise of newspaper comic strips like "Little Nemo in Slumberland" and "Krazy Kat."</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">1930s-1950s</div>
-              <div className="timeline-content">
-                <h4>The Golden Age of Comics</h4>
+
+                <h4>The Golden Age of Comics 1930s-1950s</h4>
                 <p>The debut of Superman in Action Comics #1 (1938) launched the superhero genre and the comic book industry. This era saw the creation of iconic characters like Batman, Wonder Woman, and Captain America.</p>
-              </div>
-            </div>
 
-            <div className="timeline-item">
-              <div className="timeline-date">1950s-1970s</div>
-              <div className="timeline-content">
-                <h4>Comics Code Era & Underground Comix</h4>
+
+                <h4>Comics Code Era & Underground Comix 1950s-1970s</h4>
                 <p>Following concerns about comic content, the Comics Code Authority was established in 1954, restricting content. In response, underground comix emerged in the 1960s, exploring adult themes and countercultural ideas.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">1980s-1990s</div>
-              <div className="timeline-content">
-                <h4>Graphic Novel Revolution</h4>
+
+                <h4>Graphic Novel Revolution 1980s-1990s</h4>
                 <p>Works like "Watchmen," "The Dark Knight Returns," and "Maus" elevated comics to literary status. This period saw more mature, complex storytelling and the rise of independent publishers.</p>
-              </div>
-            </div>
+             
 
-            <div className="timeline-item">
-              <div className="timeline-date">2000s-Present</div>
-              <div className="timeline-content">
-                <h4>Digital Age & Mainstream Recognition</h4>
+
+                <h4>Digital Age & Mainstream Recognition 2000s-Present</h4>
                 <p>Webcomics, digital distribution, and the massive success of comic book adaptations in film and television have brought comics to wider audiences. Graphic novels are now recognized as legitimate literature and taught in schools and universities.</p>
-              </div>
-            </div>
-          </div>
 
           <div className="key-figures">
             <h3>Key Figures in Comics History</h3>
@@ -188,24 +163,21 @@ const ComicsPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
       </section>
       <hr />
 
       {/* Terminology Guide Section */}
       <section id="terminology-guide" className="section-content">
-        <div className="container">
+        
           <h2>Comics Terminology Guide</h2>
           <p>
             The world of comics has developed its own unique vocabulary. Understanding these terms will enhance your appreciation and help you navigate discussions about comics.
           </p>
 
-          <div className="terminology-container">
-            <div className="terminology-category">
-              <h3>Format & Publication Terms</h3>
-              <dl className="terminology-list">
-                <dt>Comic Book</dt>
-                <dd>A periodical publication containing sequential art storytelling, typically 20-32 pages</dd>
+          <h3>Format & Publication Terms</h3>
+          <dl>
+            <dt>Comic Book</dt>
+            <dd>A periodical publication containing sequential art storytelling, typically 20-32 pages</dd>
 
                 <dt>Graphic Novel</dt>
                 <dd>A longer-form comic work with a complete story, often published as a single volume</dd>
@@ -219,11 +191,11 @@ const ComicsPage: React.FC = () => {
                 <dt>Variant Cover</dt>
                 <dd>Alternative cover artwork for the same issue, often produced in limited quantities</dd>
               </dl>
-            </div>
+            
 
-            <div className="terminology-category">
+          
               <h3>Visual & Storytelling Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Panel</dt>
                 <dd>Individual framed image in a comic</dd>
 
@@ -239,11 +211,11 @@ const ComicsPage: React.FC = () => {
                 <dt>Thought Bubble</dt>
                 <dd>Cloud-like bubble showing a character's thoughts</dd>
               </dl>
-            </div>
+      
 
-            <div className="terminology-category">
+            
               <h3>Industry & Collection Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Golden Age</dt>
                 <dd>The period from the late 1930s to early 1950s in American comics</dd>
 
@@ -259,16 +231,12 @@ const ComicsPage: React.FC = () => {
                 <dt>Direct Market</dt>
                 <dd>The distribution system of selling comics primarily through specialty comic book stores</dd>
               </dl>
-            </div>
-          </div>
-
-        </div>
       </section>
       <hr />
 
       {/* Comics Genres Guide Section */}
       <section id="comics-genres" className="section-content">
-        <div className="container">
+
           <h2>Comics Genres Guide</h2>
           <p>
             Comics encompass a diverse range of genres and storytelling styles, each with unique characteristics and appeal.
@@ -276,122 +244,112 @@ const ComicsPage: React.FC = () => {
           </p>
 
 
-          <div id="popular-genres" className="genre-section">
+          
             <h3>Popular Comics Genres</h3>
             <p>Discover comics series based on your preferred storytelling styles and themes:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Superhero</h4>
                 <p>Stories featuring characters with extraordinary abilities who typically fight crime and protect the innocent.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Batman, Spider-Man, X-Men, Wonder Woman</li>
                 </ul>
-              </div>
+            
 
-              <div className="genre-category">
+              
                 <h4>Science Fiction</h4>
                 <p>Comics that explore futuristic concepts, technology, space travel, and speculative ideas.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Saga, Transmetropolitan, Y: The Last Man</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Horror</h4>
                 <p>Comics designed to evoke fear, dread, or psychological disturbance through disturbing imagery.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Walking Dead, Hellblazer, Locke & Key</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Crime/Noir</h4>
                 <p>Dark, gritty stories focusing on criminal activity, detectives, and moral ambiguity.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Criminal, Sin City, Gotham Central</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Fantasy</h4>
                 <p>Set in magical worlds with elements like magic, mythical creatures, and supernatural powers.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Fables, Sandman, Monstress</li>
                 </ul>
-              </div>
+            
 
-              <div className="genre-category">
+            
                 <h4>Slice of Life/Memoir</h4>
                 <p>Stories about everyday experiences or autobiographical accounts of the creator's life.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Blankets, Fun Home, Persepolis</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-          <div id="publishing-formats" className="genre-section">
+            
+          
             <h3>Publishing Formats</h3>
             <p>Comics are published in various formats, each with their own storytelling approaches and audience:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Monthly Comic Books</h4>
                 <p>Serialized stories published in individual issues, typically 20-32 pages.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Most superhero titles from Marvel and DC</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Graphic Novels</h4>
                 <p>Longer-form comics published as complete works in a single volume.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Maus, Persepolis, Blankets</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+              
                 <h4>Webcomics</h4>
                 <p>Comics published primarily online, often with unique digital formats.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> XKCD, Homestuck, The Oatmeal</li>
                 </ul>
-              </div>
+            
 
-              <div className="genre-category">
+              
                 <h4>Newspaper Strips</h4>
                 <p>Short-form comics published in newspapers, typically in a few panels.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Calvin and Hobbes, Peanuts, Dilbert</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Production Process Section */}
       <section id="production-process" className="section-content">
-        <div className="container">
+      
           <h2>Comics Production Process</h2>
           <p>
             Creating comics is a collaborative process that combines artistic skill with storytelling ability. Understanding how comics are made provides insight into the craft and effort behind your favorite series.
           </p>
 
-          <div className="production-stages">
-            <div className="production-stage">
+         
               <h3>1. Writing & Planning</h3>
               <ul>
                 <li><strong>Script:</strong> The writer creates a script detailing the story, dialogue, and panel descriptions</li>
                 <li><strong>Plot:</strong> In some workflows, especially the "Marvel Method," the writer provides a plot outline rather than a full script</li>
                 <li><strong>Editorial Direction:</strong> Editors work with writers to develop stories that fit within larger publishing plans</li>
               </ul>
-            </div>
+          
 
-            <div className="production-stage">
+           
               <h3>2. Artwork Creation</h3>
               <ul>
                 <li><strong>Penciling:</strong> The penciler draws the initial artwork based on the script or plot</li>
@@ -399,9 +357,9 @@ const ComicsPage: React.FC = () => {
                 <li><strong>Coloring:</strong> The colorist adds colors to the inked artwork, establishing mood and atmosphere</li>
                 <li><strong>Lettering:</strong> The letterer adds dialogue, captions, sound effects, and other text elements</li>
               </ul>
-            </div>
+           
 
-            <div className="production-stage">
+            
               <h3>3. Publication & Distribution</h3>
               <ul>
                 <li><strong>Editing:</strong> Final review and adjustments before publication</li>
@@ -409,44 +367,37 @@ const ComicsPage: React.FC = () => {
                 <li><strong>Digital Formatting:</strong> Preparation for digital distribution platforms</li>
                 <li><strong>Distribution:</strong> Delivery to comic shops, bookstores, and digital platforms</li>
               </ul>
-            </div>
-          </div>
+          
 
           <div className="info-box">
             <h4>Major Comics Publishers</h4>
-            <div className="studio-grid">
-              <div className="studio-item">
                 <h5>Marvel Comics</h5>
                 <p>Known for superhero universes and characters like Spider-Man, X-Men, and Avengers</p>
                 <p><strong>Founded:</strong> 1939 (as Timely Comics)</p>
-              </div>
+            
 
-              <div className="studio-item">
+              
                 <h5>DC Comics</h5>
                 <p>Home to iconic characters like Superman, Batman, and Wonder Woman</p>
                 <p><strong>Founded:</strong> 1934 (as National Allied Publications)</p>
-              </div>
+              
 
-              <div className="studio-item">
                 <h5>Image Comics</h5>
                 <p>Creator-owned publisher known for innovative series and creator rights</p>
                 <p><strong>Founded:</strong> 1992</p>
-              </div>
+              
 
-              <div className="studio-item">
+              
                 <h5>Dark Horse Comics</h5>
                 <p>Known for creator-owned titles, licensed properties, and diverse genres</p>
                 <p><strong>Founded:</strong> 1986</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
       <hr />
 
       {/* Cultural Impact Section */}
       <section id="cultural-impact" className="section-content">
-        <div className="container">
+      
           <h2>Cultural Impact of Comics</h2>
           <p>
             Comics have evolved from simple entertainment to a significant cultural force, influencing art, literature, film, television, and popular culture worldwide.
@@ -459,18 +410,18 @@ const ComicsPage: React.FC = () => {
               <p>
                 The Marvel Cinematic Universe, based on Marvel Comics characters, has become the highest-grossing film franchise in history, demonstrating the mainstream appeal of comic book narratives and characters.
               </p>
-            </div>
+          
 
               <h3>Literary Recognition</h3>
               <p>
                 Comics have gained increasing recognition as a legitimate literary form:
               </p>
-              <u>
+              <ul>
                 <li><strong>Critical Acclaim:</strong> Works like "Maus," "Persepolis," and "Fun Home" have received major literary awards</li>
                 <li><strong>Academic Study:</strong> Comics are now studied in universities and have spawned scholarly journals and conferences</li>
                 <li><strong>Library Collections:</strong> Libraries have expanded their graphic novel collections, recognizing their value in promoting literacy</li>
                 <li><strong>Literary Crossover:</strong> Established literary authors have embraced the comics medium</li>
-              </u>
+              </ul>
 
               <h3>Social Commentary</h3>
               <p>
@@ -492,51 +443,39 @@ const ComicsPage: React.FC = () => {
 
       {/* Comics Worlds & Universes Section */}
       <section id="comics-worlds" className="section-content">
-        <div className="container">
+        
           <h2>Comics Worlds & Universes</h2>
           <p>
             One of the most distinctive aspects of comics is the creation of vast, interconnected fictional universes where multiple characters and stories coexist and interact. These shared universes have become complex narrative ecosystems with their own histories, geographies, and rules.
           </p>
 
-          <div className="world-categories">
-            <div className="world-category">
+          
               <h3>Superhero Universes</h3>
               <p>Expansive shared worlds where multiple superhero characters and teams coexist</p>
-              <div className="world-examples">
-                <div className="world-example">
+              
                   <h4>Marvel Universe</h4>
                   <p>Home to the Avengers, X-Men, Spider-Man, and thousands of other characters, with a history spanning from ancient times to the far future</p>
-                  <Link to="/comics/directory#universes" className="default-links">Explore the Marvel Universe in Shows Directory →</Link>
-                </div>
+                
 
-                <div className="world-example">
+                
                   <h4>DC Universe</h4>
                   <p>Setting for Superman, Batman, Wonder Woman, and the Justice League, featuring a multiverse of parallel realities</p>
-                  <Link to="/comics/directory#universes" className="default-links">Discover the DC Universe in Shows Directory →</Link>
-                </div>
-              </div>
-            </div>
+                
 
-            <div className="world-category">
+           
               <h3>Independent Comics Worlds</h3>
               <p>Unique fictional settings created outside the major superhero publishers</p>
-              <div className="world-examples">
-                <div className="world-example">
+              
                   <h4>Hellboy Universe</h4>
                   <p>Mike Mignola's dark fantasy world blending folklore, Lovecraftian horror, and pulp adventure</p>
-                  <Link to="/comics/shows-directory#universes" className="default-links">Explore the Hellboy Universe in Shows Directory →</Link>
-                </div>
+                
 
-                <div className="world-example">
+            
                   <h4>The World of Saga</h4>
                   <p>Brian K. Vaughan and Fiona Staples' space fantasy featuring an interstellar war between magic and technology</p>
-                  <Link to="/comics/shows-directory#universes" className="default-links">Discover the World of Saga in Shows Directory →</Link>
-                </div>
-              </div>
-            </div>
-          </div>
+               
 
-          <div className="world-building-elements">
+          
             <h3>Elements of Comics World-Building</h3>
             <ul>
               <li><strong>Continuity:</strong> The internal consistency and chronology of events within a fictional universe</li>
@@ -545,100 +484,79 @@ const ComicsPage: React.FC = () => {
               <li><strong>Multiverses:</strong> Systems of parallel universes allowing for alternate versions of characters and worlds</li>
               <li><strong>Fictional Geography:</strong> Invented locations like Gotham City, Metropolis, or Wakanda</li>
             </ul>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Audience Categories Section */}
       <section id="audience-categories" className="section-content">
-        <div className="container">
+        
           <h2>Comics for Different Audiences</h2>
           <p>
             Comics offer content for readers of all ages, interests, and experience levels. Whether you're new to comics or a seasoned fan, there's something for everyone.
           </p>
 
-          <div className="audience-categories">
-            <div className="audience-category">
+          
               <h3>For Beginners</h3>
               <p>These accessible series serve as excellent entry points to comics, featuring compelling stories and universal themes:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Watchmen</strong> - Alan Moore and Dave Gibbons' groundbreaking deconstruction of the superhero genre
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Saga</strong> - Brian K. Vaughan and Fiona Staples' epic space fantasy about a family caught between warring factions
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Maus</strong> - Art Spiegelman's Pulitzer Prize-winning memoir about his father's experiences during the Holocaust
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="audience-category">
+            
               <h3>Classic Series</h3>
               <p>These influential works have stood the test of time and helped shape comics as we know it today:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Batman: Year One</strong> - Frank Miller and David Mazzucchelli's definitive Batman origin story
-                  <Link to="/comics/shows-directory#eras" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
-                  <strong>The Dark Phoenix Saga</strong> - Chris Claremont and John Byrne's classic X-Men storyline
-                  <Link to="/comics/shows-directory#eras" className="default-links">View Series Details →</Link>
-                </li>
+                  <strong>The Dark Phoenix Saga</strong> - Chris Claremont and John Byrne's classic X-Men storyline                </li>
                 <li>
                   <strong>Sandman</strong> - Neil Gaiman's epic fantasy series that redefined the possibilities of the comics medium
-                  <Link to="/comics/shows-directory#eras" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="audience-category">
               <h3>Recent Hits</h3>
               <p>These newer series represent the current generation of popular comics:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Monstress</strong> - Marjorie Liu and Sana Takeda's dark fantasy epic with stunning artwork
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Something is Killing the Children</strong> - James Tynion IV's horror series about monsters only children can see
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
                 <li>
                   <strong>Die</strong> - Kieron Gillen and Stephanie Hans' dark take on fantasy role-playing games
-                  <Link to="/comics/shows-directory#popular-series" className="default-links">View Series Details →</Link>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
 
       {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
-        <div className="container">
+        
           <h2>Learning Resources</h2>
           <p>
             Understanding comics as a medium can enhance your appreciation of the art form.
           </p>
 
-          <div className="resource-categories">
-            <div className="resource-category">
+          
               <h3>Recommended Books</h3>
               <ul>
                 <li>"Understanding Comics" by Scott McCloud - A groundbreaking analysis of comics as a medium</li>
                 <li>"Comics and Sequential Art" by Will Eisner - Foundational work on comics theory</li>
                 <li>"The Ten-Cent Plague" by David Hajdu - History of the comics industry and censorship</li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
       </main>

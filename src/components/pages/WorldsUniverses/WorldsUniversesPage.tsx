@@ -67,7 +67,7 @@ const WorldsUniversesPage: React.FC = () => {
 
       {/* The Basics Section */}
       <section id="the-basics" className="section-content">
-        <div className="container">
+        
           <h2>The Basics</h2>
           <p>
             Fictional worlds and universes are the imagined settings where stories take place. They range from small, focused environments like a single town or school to vast, complex universes spanning multiple planets, dimensions, or timelines. These worlds provide the foundation for characters to interact, conflicts to arise, and stories to unfold.
@@ -80,72 +80,37 @@ const WorldsUniversesPage: React.FC = () => {
           <p>
             While some fictional worlds exist within a single work, many expand across multiple stories, media formats, and even franchises. These interconnected universes allow for crossovers, shared continuity, and the exploration of different perspectives within the same setting.
           </p>
-
-
-
-
-
-
-        </div>
       </section>
 
       {/* History Section */}
       <section id="history" className="section-content">
-        <div className="container">
+        
           <h2>History of Fictional Worlds</h2>
           <p>
             The creation and development of fictional worlds has evolved significantly throughout literary and media history. Understanding this evolution helps appreciate the depth and complexity of modern fictional universes.
           </p>
 
-          <div className="timeline-container">
-            <div className="timeline-item">
-              <div className="timeline-date">Ancient Times</div>
-              <div className="timeline-content">
+        
                 <h4>Mythological Worlds</h4>
                 <p>The earliest fictional worlds appeared in mythology and religious texts, with elaborate cosmologies like Mount Olympus, Asgard, and various underworlds. These mythic realms established many patterns still used in world-building today.</p>
-              </div>
-            </div>
+              
 
-            <div className="timeline-item">
-              <div className="timeline-date">Medieval Period</div>
-              <div className="timeline-content">
-                <h4>Epic Sagas & Legends</h4>
+           
+                <h4>Epic Sagas & Legends Medieval Period</h4>
                 <p>Works like Beowulf, The Divine Comedy, and Arthurian legends created detailed settings with their own rules and geography, though they were often connected to the real world rather than being fully separate realms.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-date">19th Century</div>
-              <div className="timeline-content">
-                <h4>Literary Worlds</h4>
+            
+                <h4>Literary Worlds 19th Century</h4>
                 <p>Authors began creating more detailed fictional settings, from the realistic but fictional counties in Jane Austen's works to the fantastical lands in Lewis Carroll's "Alice in Wonderland" and L. Frank Baum's Oz.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-date">Early-Mid 20th Century</div>
-              <div className="timeline-content">
+              
                 <h4>The Foundation of Modern World-Building</h4>
                 <p>J.R.R. Tolkien revolutionized fictional world creation with Middle-earth, developing comprehensive languages, histories, and maps. H.P. Lovecraft's Cthulhu Mythos and Robert E. Howard's Hyborian Age established shared universe concepts.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-date">Late 20th Century</div>
-              <div className="timeline-content">
-                <h4>Multimedia Expansion</h4>
+              
+                <h4>Multimedia Expansion Early-Mid 20th Century</h4>
                 <p>Fictional worlds expanded beyond books into film, television, and games. Star Wars, Star Trek, and various comic book universes developed vast continuities spanning multiple media formats and decades of storytelling.</p>
-              </div>
-            </div>
-
-            <div className="timeline-item">
-              <div className="timeline-date">21st Century</div>
-              <div className="timeline-content">
-                <h4>Transmedia Universes</h4>
+              
+                <h4>Transmedia Universes 21st Century</h4>
                 <p>The rise of planned transmedia franchises like the Marvel Cinematic Universe, complex TV worlds like Game of Thrones/A Song of Ice and Fire, and interactive worlds in video games have pushed world-building to new heights of complexity and audience engagement.</p>
-              </div>
-            </div>
-          </div>
+             
 
           <div className="key-figures">
             <h3>Key Figures in World-Building History</h3>
@@ -166,23 +131,17 @@ const WorldsUniversesPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-
-        </div>
       </section>
 
       {/* Terminology Guide Section */}
       <section id="terminology-guide" className="section-content">
-        <div className="container">
+      
           <h2>World-Building Terminology Guide</h2>
           <p>
             The field of fictional world creation has developed its own specialized vocabulary. Understanding these terms will enhance your appreciation of fictional worlds and help you navigate discussions about them.
           </p>
 
-          <div className="terminology-container">
-            <div className="terminology-category">
-              <h3>World Structure Terms</h3>
-              <dl className="terminology-list">
+          <dl>
                 <dt>Universe/Multiverse</dt>
                 <dd>The entire fictional reality; a multiverse contains multiple universes with different rules or timelines</dd>
 
@@ -198,11 +157,11 @@ const WorldsUniversesPage: React.FC = () => {
                 <dt>Retcon</dt>
                 <dd>Retroactive continuity - changing previously established facts in a fictional world</dd>
               </dl>
-            </div>
+           
 
-            <div className="terminology-category">
+           
               <h3>World Types & Approaches</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Secondary World</dt>
                 <dd>A completely fictional reality not connected to our world (e.g., Middle-earth, Westeros)</dd>
 
@@ -218,11 +177,11 @@ const WorldsUniversesPage: React.FC = () => {
                 <dt>Hard World-Building</dt>
                 <dd>Approach that emphasizes logical consistency, detailed rules, and comprehensive background</dd>
               </dl>
-            </div>
+           
 
-            <div className="terminology-category">
+           
               <h3>Narrative & Meta Terms</h3>
-              <dl className="terminology-list">
+              <dl>
                 <dt>Lore</dt>
                 <dd>The collective history, legends, and knowledge within a fictional world</dd>
 
@@ -238,16 +197,11 @@ const WorldsUniversesPage: React.FC = () => {
                 <dt>Handwavium</dt>
                 <dd>Elements of a world deliberately left unexplained or glossed over</dd>
               </dl>
-            </div>
-          </div>
-
-
-        </div>
       </section>
 
       {/* Genres Guide Section */}
       <section id="genres-guide" className="section-content">
-        <div className="container">
+        
           <h2>Fictional Worlds Genres Guide</h2>
           <p>
             Fictional worlds span a diverse range of genres and styles, each with unique characteristics and appeal.
@@ -255,111 +209,89 @@ const WorldsUniversesPage: React.FC = () => {
           </p>
 
 
-
-          <div id="world-types" className="genre-section">
-            <h3>Types of Fictional Worlds</h3>
+           <h3>Types of Fictional Worlds</h3>
             <p>Discover fictional universes based on their fundamental nature and relationship to reality:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Fantasy Worlds</h4>
                 <p>Realms with magical elements, mythical creatures, and supernatural forces.</p>
-                <ul className="show-list">
+                <ul> 
                   <li><strong>Notable Examples:</strong> Middle-earth (Lord of the Rings), Westeros (Game of Thrones), Hogwarts (Harry Potter)</li>
                 </ul>
-              </div>
 
-              <div className="genre-category">
+              
                 <h4>Science Fiction Universes</h4>
                 <p>Settings that explore advanced technology, space travel, and scientific concepts.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Star Trek, Foundation, Dune</li>
                 </ul>
-              </div>
+             
 
-              <div className="genre-category">
+              
                 <h4>Dystopian/Post-Apocalyptic</h4>
                 <p>Worlds depicting societies in decline, collapse, or recovery after catastrophe.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Panem (The Hunger Games), The Wasteland (Fallout), The Road</li>
                 </ul>
-              </div>
+             
 
-              <div className="genre-category">
+              
                 <h4>Alternate History</h4>
                 <p>Worlds that diverge from our timeline at specific historical points.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Man in the High Castle, Watchmen, Fatherland</li>
                 </ul>
-              </div>
 
-              <div className="genre-category">
                 <h4>Urban Fantasy</h4>
                 <p>Modern settings with supernatural or magical elements hidden within everyday reality.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The World of Harry Dresden, Neverwhere, Buffy the Vampire Slayer</li>
                 </ul>
-              </div>
 
-              <div className="genre-category">
+              
                 <h4>Superhero Universes</h4>
                 <p>Worlds populated by individuals with extraordinary abilities and their impact on society.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Marvel Universe, DC Universe, The Boys</li>
                 </ul>
-              </div>
-            </div>
-          </div>
+           
 
-          <div id="media-formats" className="genre-section">
             <h3>Worlds Across Media Formats</h3>
             <p>Fictional universes often originate in specific media but may expand across multiple formats:</p>
 
-            <div className="genre-directory">
-              <div className="genre-category">
+            
                 <h4>Literary Worlds</h4>
                 <p>Universes that originated in novels, short stories, or other written works.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Discworld, The Culture, Earthsea</li>
                 </ul>
-              </div>
+              
 
-              <div className="genre-category">
+             
                 <h4>Cinematic Universes</h4>
                 <p>Interconnected film franchises sharing characters and continuity.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> Marvel Cinematic Universe, Star Wars, MonsterVerse</li>
                 </ul>
-              </div>
 
-              <div className="genre-category">
                 <h4>Gaming Worlds</h4>
                 <p>Universes created for or primarily known through video games.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Elder Scrolls, Mass Effect, Hyrule (Legend of Zelda)</li>
                 </ul>
-              </div>
 
-              <div className="genre-category">
                 <h4>Transmedia Universes</h4>
                 <p>Worlds designed from the beginning to span multiple media formats.</p>
-                <ul className="show-list">
+                <ul>
                   <li><strong>Notable Examples:</strong> The Matrix, Defiance, Quantum Break</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="genre-resources">
             <h3>Finding Your Perfect Fictional World</h3>
             <p>Not sure where to start? Browse our <Link to="/worlds-universes/directory" className="default-links">Worlds & Universes Directory</Link> to discover fictional universes based on your interests.</p>
-          </div>
-        </div>
       </section>
 
       {/* World-Building Section */}
       <section id="production-process" className="section-content">
-        <div className="container">
+
           <h2>The Art of World-Building</h2>
           <p>
             World-building is the process of constructing an imaginary world with coherent qualities such as geography,
@@ -367,77 +299,68 @@ const WorldsUniversesPage: React.FC = () => {
             internal logic and consistency that allows audiences to immerse themselves fully.
           </p>
 
-          <div className="worldbuilding-elements">
-            <div className="element-card">
+         
               <h3>Geography & Environment</h3>
               <p>
                 The physical spaces where stories unfold, including landscapes, cities, planets, and dimensions.
                 Well-crafted environments reflect their inhabitants and histories, shaping the stories that can be told.
               </p>
-              <div className="examples">
+              
                 <h4>Notable Examples:</h4>
                 <ul>
                   <li>Middle-earth's diverse regions in Lord of the Rings</li>
                   <li>The detailed school grounds of Hogwarts in Harry Potter</li>
                   <li>The distinctive planets of Star Wars</li>
                 </ul>
-              </div>
-            </div>
+              
 
-            <div className="element-card">
+           
               <h3>History & Lore</h3>
               <p>
                 The backstory and mythology that gives depth to a fictional world. Rich histories create context
                 for current events and provide opportunities for prequels, spinoffs, and expanded storytelling.
               </p>
-              <div className="examples">
+              
                 <h4>Notable Examples:</h4>
                 <ul>
                   <li>The extensive timeline of Middle-earth spanning thousands of years</li>
                   <li>Marvel's evolving continuity across decades of comics</li>
                   <li>The ancient histories and myths in Game of Thrones</li>
                 </ul>
-              </div>
-            </div>
-
-            <div className="element-card">
+              
+            
               <h3>Social Structures & Culture</h3>
               <p>
                 The societies, governments, religions, and cultural practices that shape how characters interact.
                 These elements add authenticity and create natural sources of conflict and drama.
               </p>
-              <div className="examples">
+              
                 <h4>Notable Examples:</h4>
                 <ul>
                   <li>The Houses and political systems of Dune</li>
                   <li>The distinct cultures of different nations in Avatar: The Last Airbender</li>
                   <li>The complex social hierarchy in Bridgerton</li>
                 </ul>
-              </div>
-            </div>
+              
 
-            <div className="element-card">
+           
               <h3>Rules & Systems</h3>
               <p>
                 The consistent laws that govern how the world works, particularly regarding magic, technology,
                 or supernatural elements. Well-defined systems create boundaries that make stories more compelling.
               </p>
-              <div className="examples">
+              
                 <h4>Notable Examples:</h4>
                 <ul>
                   <li>The detailed magic system in Brandon Sanderson's Cosmere</li>
                   <li>The rules of bending in Avatar: The Last Airbender</li>
                   <li>The consistent technology in Star Trek</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Cultural Impact Section */}
       <section id="cultural-impact" className="section-content">
-        <div className="container">
+
           <h2>Cultural Impact of Fictional Worlds</h2>
           <p>
             Fictional worlds have evolved from simple settings to significant cultural forces, influencing art, entertainment, technology, and social interaction worldwide.
@@ -457,8 +380,11 @@ const WorldsUniversesPage: React.FC = () => {
               </p>
               <ul>
                 <li><strong>Fan Fiction & Art:</strong> Creative works that expand or reimagine established worlds</li>
+                <br />
                 <li><strong>Conventions & Events:</strong> Gatherings where fans celebrate shared interests in fictional universes</li>
+                <br />
                 <li><strong>Cosplay:</strong> Fans embodying characters from their favorite worlds</li>
+                <br />
                 <li><strong>Online Communities:</strong> Forums, social media groups, and websites dedicated to discussing fictional worlds</li>
               </ul>
            
@@ -479,12 +405,11 @@ const WorldsUniversesPage: React.FC = () => {
               <p>
                 Terms like "Jedi mind trick," "Catch-22," "Big Brother," or "Mordor" are understood by millions who may never have experienced the original works. Visual iconography from fictional worlds appears in advertising, political discourse, and other cultural contexts.
               </p>
-          </div>
       </section>
 
       {/* Iconic Universes Section */}
       <section id="worlds-universes" className="section-content">
-        <div className="container">
+
           <h2>Iconic Fictional Universes</h2>
           <p>
             Some fictional universes have transcended their original medium to become cultural touchstones,
@@ -492,98 +417,54 @@ const WorldsUniversesPage: React.FC = () => {
             grow and evolve, captivating new generations of fans.
           </p>
 
-          <div className="universes-showcase">
-            <div className="universe-card">
+  
               <h3>Marvel Cinematic Universe</h3>
               <p>
                 A shared universe centered on superhero films and TV series based on Marvel Comics characters.
                 The MCU has revolutionized franchise storytelling with its interconnected narratives across
                 multiple films and series.
               </p>
-              <div className="universe-stats">
-                <div className="stat">
-                  <span className="stat-label">Origin:</span>
-                  <span className="stat-value">Comics (1939), MCU (2008)</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Media:</span>
-                  <span className="stat-value">Films, TV, Comics, Games</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Key Locations:</span>
-                  <span className="stat-value">Earth-616, Asgard, Wakanda</span>
-                </div>
-              </div>
-              <Link to="/worlds-universes/marvel" className="universe-link">Explore Marvel Universe →</Link>
-            </div>
+              
+              <ul>
+                <li><strong>Origin:</strong> Comics (1939), MCU (2008)</li>
+                <li><strong>Media:</strong> Films, TV, Comics, Games</li>
+                <li><strong>Key Locations:</strong> Earth-616, Asgard, Wakanda</li>
+              </ul>
 
-            <div className="universe-card">
               <h3>Star Wars Universe</h3>
               <p>
                 A space opera epic set "a long time ago in a galaxy far, far away," featuring the struggle
                 between the light and dark sides of the Force. The Star Wars universe spans millennia of
                 galactic history across multiple eras.
               </p>
-              <div className="universe-stats">
-                <div className="stat">
-                  <span className="stat-label">Origin:</span>
-                  <span className="stat-value">Film (1977)</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Media:</span>
-                  <span className="stat-value">Films, TV, Books, Comics, Games</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Key Locations:</span>
-                  <span className="stat-value">Tatooine, Coruscant, Death Star</span>
-                </div>
-              </div>
-              <Link to="/worlds-universes/star-wars" className="universe-link">Explore Star Wars Universe →</Link>
-            </div>
 
-            <div className="universe-card">
+              Origin: Film (1977)
+              Media: Films, TV, Books, Comics, Games
+              Key Locations: Tatooine, Coruscant, Death Star
+
+            
               <h3>Middle-earth</h3>
               <p>
                 J.R.R. Tolkien's meticulously crafted fantasy world, home to hobbits, elves, dwarves, and men.
                 Middle-earth features a comprehensive mythology, multiple languages, and thousands of years of history.
               </p>
-              <div className="universe-stats">
-                <div className="stat">
-                  <span className="stat-label">Origin:</span>
-                  <span className="stat-value">Books (1937)</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Media:</span>
-                  <span className="stat-value">Books, Films, TV, Games</span>
-                </div>
-                <div className="stat">
-                  <span className="stat-label">Key Locations:</span>
-                  <span className="stat-value">The Shire, Mordor, Gondor</span>
-                </div>
-              </div>
-              <Link to="/worlds-universes/middle-earth" className="universe-link">Explore Middle-earth →</Link>
-            </div>
-          </div>
-
-          <div className="cta-link">
-            <Link to="/worlds-universes/directory">Explore All Fictional Universes →</Link>
-          </div>
-        </div>
+              Origin: Books (1937)
+              Media: Books, Films, TV, Games
+              Key Locations: The Shire, Mordor, Gondor
       </section>
 
       {/* Audience Categories Section */}
       <section id="audience-categories" className="section-content">
-        <div className="container">
+       
           <h2>Worlds for Different Audiences</h2>
           <p>
             Fictional worlds cater to diverse audiences with varying interests, preferences, and experience levels. Whether you're new to exploring fictional universes or a seasoned world-hopper, there are worlds designed to appeal to you.
           </p>
 
-          <div className="audience-categories">
-            <div className="audience-category">
+          
               <h3>For Newcomers to Fictional Worlds</h3>
               <p>These accessible worlds serve as excellent entry points, featuring clear rules and engaging narratives:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Harry Potter's Wizarding World</strong> - A magical world hidden within our own, with clear rules and a gradual introduction to its complexities
                 </li>
@@ -594,12 +475,10 @@ const WorldsUniversesPage: React.FC = () => {
                   <strong>The MCU</strong> - A superhero universe that gradually introduces its concepts through interconnected but individually accessible stories
                 </li>
               </ul>
-            </div>
-
-            <div className="audience-category">
+           
               <h3>For World-Building Enthusiasts</h3>
               <p>These richly detailed worlds reward deep exploration and analysis:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Middle-earth</strong> - Tolkien's meticulously crafted world with comprehensive languages, histories, and maps
                 </li>
@@ -610,12 +489,12 @@ const WorldsUniversesPage: React.FC = () => {
                   <strong>The Cosmere</strong> - Brandon Sanderson's interconnected universe with multiple planetary systems and magic systems
                 </li>
               </ul>
-            </div>
+           
 
-            <div className="audience-category">
+           
               <h3>For Multimedia Explorers</h3>
               <p>These worlds span multiple media formats, allowing fans to engage through their preferred medium:</p>
-              <ul className="recommendation-list">
+              <ul>
                 <li>
                   <strong>Star Wars Universe</strong> - Accessible through films, TV series, books, comics, games, and more
                 </li>
@@ -626,30 +505,23 @@ const WorldsUniversesPage: React.FC = () => {
                   <strong>Pokémon World</strong> - Accessible through games, animated series, trading cards, and more
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Learning Resources Section - Simplified */}
       <section id="learning-resources" className="section-content">
-        <div className="container">
+        
           <h2>Learning Resources</h2>
           <p>
             Understanding fictional worlds and world-building can enhance your appreciation of these creative universes.
           </p>
 
-          <div className="resource-categories">
-            <div className="resource-category">
+          
               <h3>Recommended Books</h3>
               <ul>
                 <li>"On Writing" by Stephen King - Insights on storytelling that apply to world-building</li>
                 <li>"The Guide to Writing Fantasy and Science Fiction" by Philip Athans - Comprehensive guide to creating fictional worlds</li>
                 <li>"Wonderbook" by Jeff VanderMeer - Illustrated guide to creating imaginative fiction</li>
               </ul>
-            </div>
-          </div>
-        </div>
       </section>
       <hr />
     </div>
