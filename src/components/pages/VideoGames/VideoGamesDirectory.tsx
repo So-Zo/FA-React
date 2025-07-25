@@ -4,7 +4,6 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
 
-
 const VideoGamesDirectory: React.FC = () => {
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
@@ -60,6 +59,8 @@ const VideoGamesDirectory: React.FC = () => {
         </button>
       </header>
 
+      <hr />
+
       {/* Table of Contents */}
       <TableOfContents
         sections={tocSections}
@@ -71,37 +72,72 @@ const VideoGamesDirectory: React.FC = () => {
         {/* Popular Games Section */}
         <section id="popular-games" className="section-content">
           <h2>Popular Video Games</h2>
-          <p>These widely acclaimed games are excellent starting points for exploring the medium.</p>
+          <p>
+            These widely acclaimed games are excellent starting points for
+            exploring the medium.
+          </p>
 
           <div className="profile-card-grid">
-          <div className="profile-card">
-          <div className="show-image">
-          <img src="/images/video-games/shows/the-legend-of-zelda.jpg" alt="The Legend of Zelda: Breath of the Wild" />
-          </div>
-          <div className="profile-card-content">
-          <h3>The Legend of Zelda: Breath of the Wild</h3>
-          <p className="card-subtext">Action-Adventure, Open World</p>
-          <p>Explore the vast kingdom of Hyrule in this critically acclaimed open-world adventure game.</p>
-          <div className="show-links">
-          <a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Legend of Zelda: Breath of the Wild" data-related-to="Video Games">Official Page</a>
-          <Link to="/community#zelda-botw" className="default-links">Community Content →</Link>
-          </div>
-          </div>
-          </div>
-          <div className="profile-card">
-          <div className="show-image">
-          <img src="/images/video-games/shows/minecraft.jpg" alt="Minecraft" />
-          </div>
-          <div className="profile-card-content">
-          <h3>Minecraft</h3>
-          <p className="card-subtext">Sandbox, Survival</p>
-          <p>Build, explore, and survive in a blocky, procedurally-generated 3D world.</p>
-          <div className="show-links">
-          <a href="#" className="non-existent-link" data-page-type="show" data-page-title="Minecraft" data-related-to="Video Games">Official Page</a>
-          <Link to="/community#minecraft" className="default-links">Community Content →</Link>
-          </div>
-          </div>
-          </div>
+            <div className="profile-card">
+              <div className="show-image">
+                <img
+                  src="/images/video-games/shows/the-legend-of-zelda.jpg"
+                  alt="The Legend of Zelda: Breath of the Wild"
+                />
+              </div>
+              <div className="profile-card-content">
+                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                <p className="card-subtext">Action-Adventure, Open World</p>
+                <p>
+                  Explore the vast kingdom of Hyrule in this critically
+                  acclaimed open-world adventure game.
+                </p>
+                <div className="show-links">
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="The Legend of Zelda: Breath of the Wild"
+                    data-related-to="Video Games"
+                  >
+                    Official Page
+                  </a>
+                  <Link to="/community#zelda-botw" className="default-links">
+                    Community Content →
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="profile-card">
+              <div className="show-image">
+                <img
+                  src="/images/video-games/shows/minecraft.jpg"
+                  alt="Minecraft"
+                />
+              </div>
+              <div className="profile-card-content">
+                <h3>Minecraft</h3>
+                <p className="card-subtext">Sandbox, Survival</p>
+                <p>
+                  Build, explore, and survive in a blocky,
+                  procedurally-generated 3D world.
+                </p>
+                <div className="show-links">
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Minecraft"
+                    data-related-to="Video Games"
+                  >
+                    Official Page
+                  </a>
+                  <Link to="/community#minecraft" className="default-links">
+                    Community Content →
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -113,18 +149,98 @@ const VideoGamesDirectory: React.FC = () => {
           {/* Genre categories flattened, no extra wrappers */}
           <h3>Action & Adventure</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Legend of Zelda: Breath of the Wild" data-related-to="Video Games">The Legend of Zelda: Breath of the Wild</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="God of War" data-related-to="Video Games">God of War</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Uncharted 4" data-related-to="Video Games">Uncharted 4</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Action Adventure Games" data-related-to="Video Games">View All Action & Adventure Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="The Legend of Zelda: Breath of the Wild"
+                data-related-to="Video Games"
+              >
+                The Legend of Zelda: Breath of the Wild
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="God of War"
+                data-related-to="Video Games"
+              >
+                God of War
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Uncharted 4"
+                data-related-to="Video Games"
+              >
+                Uncharted 4
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="Action Adventure Games"
+                data-related-to="Video Games"
+              >
+                View All Action & Adventure Games
+              </a>
+            </li>
           </ul>
 
           <h3>Role-Playing Games</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Witcher 3" data-related-to="Video Games">The Witcher 3</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Final Fantasy VII Remake" data-related-to="Video Games">Final Fantasy VII Remake</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Skyrim" data-related-to="Video Games">The Elder Scrolls V: Skyrim</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="RPG Games" data-related-to="Video Games">View All RPG Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="The Witcher 3"
+                data-related-to="Video Games"
+              >
+                The Witcher 3
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Final Fantasy VII Remake"
+                data-related-to="Video Games"
+              >
+                Final Fantasy VII Remake
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Skyrim"
+                data-related-to="Video Games"
+              >
+                The Elder Scrolls V: Skyrim
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="RPG Games"
+                data-related-to="Video Games"
+              >
+                View All RPG Games
+              </a>
+            </li>
           </ul>
         </section>
 
@@ -135,40 +251,203 @@ const VideoGamesDirectory: React.FC = () => {
 
           <h3>PlayStation</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="God of War" data-related-to="Video Games">God of War</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Last of Us" data-related-to="Video Games">The Last of Us</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Ghost of Tsushima" data-related-to="Video Games">Ghost of Tsushima</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="PlayStation Games" data-related-to="Video Games">View All PlayStation Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="God of War"
+                data-related-to="Video Games"
+              >
+                God of War
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="The Last of Us"
+                data-related-to="Video Games"
+              >
+                The Last of Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Ghost of Tsushima"
+                data-related-to="Video Games"
+              >
+                Ghost of Tsushima
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="PlayStation Games"
+                data-related-to="Video Games"
+              >
+                View All PlayStation Games
+              </a>
+            </li>
           </ul>
 
           <h3>Xbox</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Halo Infinite" data-related-to="Video Games">Halo Infinite</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Forza Horizon 5" data-related-to="Video Games">Forza Horizon 5</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Gears 5" data-related-to="Video Games">Gears 5</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Xbox Games" data-related-to="Video Games">View All Xbox Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Halo Infinite"
+                data-related-to="Video Games"
+              >
+                Halo Infinite
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Forza Horizon 5"
+                data-related-to="Video Games"
+              >
+                Forza Horizon 5
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Gears 5"
+                data-related-to="Video Games"
+              >
+                Gears 5
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="Xbox Games"
+                data-related-to="Video Games"
+              >
+                View All Xbox Games
+              </a>
+            </li>
           </ul>
         </section>
 
         {/* Studios Section */}
         <section id="studios" className="section-content">
           <h2>Browse by Developer</h2>
-          <p>Explore games from renowned development studios known for their distinctive styles and quality.</p>
+          <p>
+            Explore games from renowned development studios known for their
+            distinctive styles and quality.
+          </p>
 
           <h3>Nintendo</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Legend of Zelda: Breath of the Wild" data-related-to="Video Games">The Legend of Zelda: Breath of the Wild</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Super Mario Odyssey" data-related-to="Video Games">Super Mario Odyssey</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Animal Crossing: New Horizons" data-related-to="Video Games">Animal Crossing: New Horizons</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Nintendo Games" data-related-to="Video Games">View All Nintendo Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="The Legend of Zelda: Breath of the Wild"
+                data-related-to="Video Games"
+              >
+                The Legend of Zelda: Breath of the Wild
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Super Mario Odyssey"
+                data-related-to="Video Games"
+              >
+                Super Mario Odyssey
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Animal Crossing: New Horizons"
+                data-related-to="Video Games"
+              >
+                Animal Crossing: New Horizons
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="Nintendo Games"
+                data-related-to="Video Games"
+              >
+                View All Nintendo Games
+              </a>
+            </li>
           </ul>
 
           <h3>Rockstar Games</h3>
           <ul className="show-list">
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Red Dead Redemption 2" data-related-to="Video Games">Red Dead Redemption 2</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Grand Theft Auto V" data-related-to="Video Games">Grand Theft Auto V</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="L.A. Noire" data-related-to="Video Games">L.A. Noire</a></li>
-            <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Rockstar Games" data-related-to="Video Games">View All Rockstar Games</a></li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Red Dead Redemption 2"
+                data-related-to="Video Games"
+              >
+                Red Dead Redemption 2
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="Grand Theft Auto V"
+                data-related-to="Video Games"
+              >
+                Grand Theft Auto V
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="show"
+                data-page-title="L.A. Noire"
+                data-related-to="Video Games"
+              >
+                L.A. Noire
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="directory"
+                data-page-title="Rockstar Games"
+                data-related-to="Video Games"
+              >
+                View All Rockstar Games
+              </a>
+            </li>
           </ul>
         </section>
 
@@ -178,23 +457,68 @@ const VideoGamesDirectory: React.FC = () => {
           <div className="help-options">
             <div className="help-option">
               <h3>Use Search</h3>
-              <p>Try searching for specific games or characters using the search bar at the top of the page.</p>
+              <p>
+                Try searching for specific games or characters using the search
+                bar at the top of the page.
+              </p>
             </div>
 
             <div className="help-option">
               <h3>Request a Game</h3>
-              <p>Don't see a game that should be included? Let us know and we'll add it to our database.</p>
-              <a href="#" className="non-existent-link" data-page-type="action" data-page-title="Request Game Addition" data-related-to="Video Games">Request Addition</a>
+              <p>
+                Don't see a game that should be included? Let us know and we'll
+                add it to our database.
+              </p>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="action"
+                data-page-title="Request Game Addition"
+                data-related-to="Video Games"
+              >
+                Request Addition
+              </a>
             </div>
 
             <div className="help-option">
               <h3>Create a Game Page</h3>
-              <p>Contribute to FanArcs by creating a page for your favorite video game.</p>
-              <a href="#" className="non-existent-link" data-page-type="action" data-page-title="Learn How to Contribute" data-related-to="Video Games">Learn How to Contribute</a>
+              <p>
+                Contribute to FanArcs by creating a page for your favorite video
+                game.
+              </p>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="action"
+                data-page-title="Learn How to Contribute"
+                data-related-to="Video Games"
+              >
+                Learn How to Contribute
+              </a>
               <p>Try creating one of these popular games:</p>
               <ul className="show-list">
-                <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Hollow Knight" data-related-to="Video Games">Hollow Knight</a></li>
-                <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Celeste" data-related-to="Video Games">Celeste</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Hollow Knight"
+                    data-related-to="Video Games"
+                  >
+                    Hollow Knight
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Celeste"
+                    data-related-to="Video Games"
+                  >
+                    Celeste
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

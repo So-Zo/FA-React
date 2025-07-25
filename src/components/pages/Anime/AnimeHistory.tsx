@@ -46,6 +46,8 @@ const AnimeHistory: React.FC = () => {
         </button>
       </header>
 
+      <hr />
+
       {/* Table of Contents */}
       <TableOfContents
         sections={tocSections}

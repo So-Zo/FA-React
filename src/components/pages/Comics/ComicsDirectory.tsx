@@ -46,6 +46,8 @@ const ComicsDirectory: React.FC = () => {
         </button>
       </header>
 
+      <hr />
+
       {/* Table of Contents */}
       <TableOfContents
         sections={tocSections}
@@ -54,68 +56,75 @@ const ComicsDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
-      
-
         {/* Popular Series Section */}
         <section
           id="popular-series"
           className="section-content"
           data-section-type="popular"
         >
-      <h2>Popular Comic Series</h2>
-      <p>These widely acclaimed series are excellent introductions to comics and have many places to start.</p>
-        <div className="profile-card-grid">
-          <div className="profile-card">
-            <div className="show-image">
-              <img src="/images/comics/shows/batman.jpg" alt="Batman" />
-            </div>
-            <div className="profile-card-content">
-              <h3>Batman</h3>
-              <p className="card-subtext">Superhero, Action, Crime, Drama</p>
-              <p>Follow the adventures of Bruce Wayne, a billionaire who fights
-                crime in Gotham City as the masked vigilante Batman.</p>
-              <div className="show-links">
-                <a
-                  href="#"
-                  className="non-existent-link"
-                  data-page-type="show"
-                  data-page-title="Batman"
-                  data-related-to="Comics"
-                >
-                  Official Page
-                </a>
-                <Link to="/community#batman" className="default-links">
-                  Community Content →
-                </Link>
+          <h2>Popular Comic Series</h2>
+          <p>
+            These widely acclaimed series are excellent introductions to comics
+            and have many places to start.
+          </p>
+          <div className="profile-card-grid">
+            <div className="profile-card">
+              <div className="show-image">
+                <img src="/images/comics/shows/batman.jpg" alt="Batman" />
+              </div>
+              <div className="profile-card-content">
+                <h3>Batman</h3>
+                <p className="card-subtext">Superhero, Action, Crime, Drama</p>
+                <p>
+                  Follow the adventures of Bruce Wayne, a billionaire who fights
+                  crime in Gotham City as the masked vigilante Batman.
+                </p>
+                <div className="show-links">
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Batman"
+                    data-related-to="Comics"
+                  >
+                    Official Page
+                  </a>
+                  <Link to="/community#batman" className="default-links">
+                    Community Content →
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
 
-           <div className="profile-card">
-            <div className="show-image">
-              <img src="/images/comics/shows/superman.jpg" alt="superman" />
-            </div>
-            <div className="profile-card-content">
-              <h3>Superman</h3>
-              <p className="card-subtext">Superhero, Action, Crime, Drama</p>
-              <p>Follow the adventures of Clark Kent, a journalist from the planet Krypton who uses his extraordinary powers to protect Metropolis as the heroic vigilante Superman.</p>
-              <div className="show-links">
-                <a
-                  href="#"
-                  className="non-existent-link"
-                  data-page-type="show"
-                  data-page-title="superman"
-                  data-related-to="Comics"
-                >
-                  Official Page
-                </a>
-                <Link to="/community#batman" className="default-links">
-                  Community Content 
-                </Link>
+            <div className="profile-card">
+              <div className="show-image">
+                <img src="/images/comics/shows/superman.jpg" alt="superman" />
+              </div>
+              <div className="profile-card-content">
+                <h3>Superman</h3>
+                <p className="card-subtext">Superhero, Action, Crime, Drama</p>
+                <p>
+                  Follow the adventures of Clark Kent, a journalist from the
+                  planet Krypton who uses his extraordinary powers to protect
+                  Metropolis as the heroic vigilante Superman.
+                </p>
+                <div className="show-links">
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="superman"
+                    data-related-to="Comics"
+                  >
+                    Official Page
+                  </a>
+                  <Link to="/community#batman" className="default-links">
+                    Community Content
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </section>
 
         {/* Genres Section */}
@@ -417,8 +426,28 @@ const ComicsDirectory: React.FC = () => {
               </a>
               <p>Try creating one of these popular comics:</p>
               <ul className="show-list">
-                <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Watchmen" data-related-to="Comics">Watchmen</a></li>
-                <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Saga" data-related-to="Comics">Saga</a></li>
+                <li>
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Watchmen"
+                    data-related-to="Comics"
+                  >
+                    Watchmen
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="non-existent-link"
+                    data-page-type="show"
+                    data-page-title="Saga"
+                    data-related-to="Comics"
+                  >
+                    Saga
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

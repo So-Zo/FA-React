@@ -52,6 +52,8 @@ const TelevisionDirectory: React.FC = () => {
         </button>
       </div>
 
+      <hr />
+
       {/* Table of Contents */}
       <TableOfContents
         sections={tocSections}

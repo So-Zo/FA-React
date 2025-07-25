@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CommunityPage: React.FC = () => {
   // State for active filter dropdowns
@@ -16,7 +16,7 @@ const CommunityPage: React.FC = () => {
   // Close dropdown when clicking outside
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    if (!target.closest('.filter-group')) {
+    if (!target.closest(".filter-group")) {
       setActiveDropdown(null);
     }
   };
@@ -35,17 +35,27 @@ const CommunityPage: React.FC = () => {
             <div className="filter-buttons">
               {/* Post Type Filter */}
               <div className="filter-group">
-                <button 
-                  className={`filter-btn ${activeDropdown === 'post-type' ? 'active' : ''}`}
-                  onClick={() => toggleDropdown('post-type')}
+                <button
+                  className={`filter-btn ${
+                    activeDropdown === "post-type" ? "active" : ""
+                  }`}
+                  onClick={() => toggleDropdown("post-type")}
                 >
                   Post type
                 </button>
-                <div className={`filter-dropdown ${activeDropdown === 'post-type' ? 'active' : ''}`}>
+                <div
+                  className={`filter-dropdown ${
+                    activeDropdown === "post-type" ? "active" : ""
+                  }`}
+                >
                   <ul>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="category" value="creators" />
+                        <input
+                          type="checkbox"
+                          name="category"
+                          value="creators"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Creators</button>
                       </label>
@@ -53,7 +63,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="category" value="fan-art" />
+                        <input
+                          type="checkbox"
+                          name="category"
+                          value="fan-art"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Fan Art</button>
                       </label>
@@ -61,7 +75,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="category" value="fan-fiction" />
+                        <input
+                          type="checkbox"
+                          name="category"
+                          value="fan-fiction"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Fan Fiction</button>
                       </label>
@@ -69,7 +87,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="category" value="world-building" />
+                        <input
+                          type="checkbox"
+                          name="category"
+                          value="world-building"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>World Building</button>
                       </label>
@@ -77,7 +99,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="category" value="character-spinoffs" />
+                        <input
+                          type="checkbox"
+                          name="category"
+                          value="character-spinoffs"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Character Spin-offs</button>
                       </label>
@@ -89,13 +115,19 @@ const CommunityPage: React.FC = () => {
 
               {/* Genre Filter */}
               <div className="filter-group">
-                <button 
-                  className={`filter-btn ${activeDropdown === 'genre' ? 'active' : ''}`}
-                  onClick={() => toggleDropdown('genre')}
+                <button
+                  className={`filter-btn ${
+                    activeDropdown === "genre" ? "active" : ""
+                  }`}
+                  onClick={() => toggleDropdown("genre")}
                 >
                   Filter genre
                 </button>
-                <div className={`filter-dropdown ${activeDropdown === 'genre' ? 'active' : ''}`}>
+                <div
+                  className={`filter-dropdown ${
+                    activeDropdown === "genre" ? "active" : ""
+                  }`}
+                >
                   <ul>
                     <li>
                       <label className="checkbox-wrapper">
@@ -159,13 +191,19 @@ const CommunityPage: React.FC = () => {
 
               {/* Sort By Filter */}
               <div className="filter-group">
-                <button 
-                  className={`filter-btn ${activeDropdown === 'sort-by' ? 'active' : ''}`}
-                  onClick={() => toggleDropdown('sort-by')}
+                <button
+                  className={`filter-btn ${
+                    activeDropdown === "sort-by" ? "active" : ""
+                  }`}
+                  onClick={() => toggleDropdown("sort-by")}
                 >
                   Sort By
                 </button>
-                <div className={`filter-dropdown ${activeDropdown === 'sort-by' ? 'active' : ''}`}>
+                <div
+                  className={`filter-dropdown ${
+                    activeDropdown === "sort-by" ? "active" : ""
+                  }`}
+                >
                   <ul>
                     <li>
                       <label className="checkbox-wrapper">
@@ -193,7 +231,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="shortest-to-longest" />
+                        <input
+                          type="checkbox"
+                          name="sort"
+                          value="shortest-to-longest"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Shortest to Longest</button>
                       </label>
@@ -201,7 +243,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="longest-to-shortest" />
+                        <input
+                          type="checkbox"
+                          name="sort"
+                          value="longest-to-shortest"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Longest to Shortest</button>
                       </label>
@@ -209,7 +255,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="completed-works" />
+                        <input
+                          type="checkbox"
+                          name="sort"
+                          value="completed-works"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Completed Works</button>
                       </label>
@@ -217,7 +267,11 @@ const CommunityPage: React.FC = () => {
                     </li>
                     <li>
                       <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="unfinished-work" />
+                        <input
+                          type="checkbox"
+                          name="sort"
+                          value="unfinished-work"
+                        />
                         <span className="custom-checkbox"></span>
                         <button>Unfinished Work</button>
                       </label>
@@ -242,12 +296,12 @@ const CommunityPage: React.FC = () => {
                     <span className="post-timestamp">2h ago</span>
                   </div>
                 </div>
-                <div className="post-category-tag">
-                  Anime
-                </div>
+                <div className="post-category-tag">Anime</div>
               </div>
               <div className="post-content">
-                <h2 className="post-title">Incredible Character Design Concept</h2>
+                <h2 className="post-title">
+                  Incredible Character Design Concept
+                </h2>
                 <div className="post-media">
                   <img src="/Post-test.jpg" alt="Character Design" />
                 </div>
@@ -280,15 +334,16 @@ const CommunityPage: React.FC = () => {
                     <span className="post-timestamp">5h ago</span>
                   </div>
                 </div>
-                <div className="post-category-tag">
-                  Manga
-                </div>
+                <div className="post-category-tag">Manga</div>
               </div>
               <div className="post-content">
-                <h2 className="post-title">My Fan Theory About the Latest Chapter</h2>
+                <h2 className="post-title">
+                  My Fan Theory About the Latest Chapter
+                </h2>
                 <p className="post-description">
-                  After reading the latest chapter of One Piece, I have a theory about what might happen next.
-                  I think Luffy's new power-up is actually connected to an ancient prophecy that was hinted at
+                  After reading the latest chapter of One Piece, I have a theory
+                  about what might happen next. I think Luffy's new power-up is
+                  actually connected to an ancient prophecy that was hinted at
                   in chapter 287. Here's why...
                 </p>
               </div>
@@ -315,9 +370,7 @@ const CommunityPage: React.FC = () => {
                     <span className="post-timestamp">1d ago</span>
                   </div>
                 </div>
-                <div className="post-category-tag">
-                  Comics
-                </div>
+                <div className="post-category-tag">Comics</div>
               </div>
               <div className="post-content">
                 <h2 className="post-title">Fan Art: Spider-Man in My Style</h2>
@@ -325,8 +378,8 @@ const CommunityPage: React.FC = () => {
                   <img src="/placeholder-avatar.jpg" alt="Spider-Man Fan Art" />
                 </div>
                 <p className="post-description">
-                  I've been working on developing my own art style, and decided to draw
-                  Spider-Man as practice. Let me know what you think!
+                  I've been working on developing my own art style, and decided
+                  to draw Spider-Man as practice. Let me know what you think!
                 </p>
               </div>
 

@@ -1,14 +1,8 @@
 .profile-page {
-  color: var(--text-primary);
-  background: var(--home-body-gradient);
   min-height: 100vh;
 }
 
-.profile-page-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
-}
+
 
 .profile-header {
   background-color: rgba(0, 0, 0, 0.3);

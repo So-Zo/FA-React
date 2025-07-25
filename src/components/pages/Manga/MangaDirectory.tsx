@@ -48,6 +48,8 @@ const MangaDirectory: React.FC = () => {
         </button>
       </header>
 
+      <hr />
+
       {/* Table of Contents */}
       <TableOfContents
         sections={tocSections}
@@ -56,7 +58,6 @@ const MangaDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
-  
         {/* Popular Series Section */}
         <section
           id="popular-series"
@@ -77,7 +78,10 @@ const MangaDirectory: React.FC = () => {
               <div className="profile-card-content">
                 <h3>One Piece</h3>
                 <p className="card-subtext">Adventure, Fantasy, Shōnen</p>
-                <p>Follow Monkey D. Luffy and his pirate crew as they search for the world's ultimate treasure known as the "One Piece".</p>
+                <p>
+                  Follow Monkey D. Luffy and his pirate crew as they search for
+                  the world's ultimate treasure known as the "One Piece".
+                </p>
                 <div className="show-links">
                   <a
                     href="#"
@@ -97,12 +101,21 @@ const MangaDirectory: React.FC = () => {
 
             <div className="profile-card">
               <div className="profile-card-image">
-                <img src="/images/manga/shows/attack-on-titan.jpg" alt="Attack on Titan" />
+                <img
+                  src="/images/manga/shows/attack-on-titan.jpg"
+                  alt="Attack on Titan"
+                />
               </div>
               <div className="profile-card-content">
                 <h3>Attack on Titan</h3>
-                <p className="card-subtext">Action, Dark Fantasy, Post-Apocalyptic</p>
-                <p>In a world where humanity lives within cities surrounded by enormous walls due to the Titans, gigantic humanoid creatures who devour humans seemingly without reason.</p>
+                <p className="card-subtext">
+                  Action, Dark Fantasy, Post-Apocalyptic
+                </p>
+                <p>
+                  In a world where humanity lives within cities surrounded by
+                  enormous walls due to the Titans, gigantic humanoid creatures
+                  who devour humans seemingly without reason.
+                </p>
                 <div className="show-links">
                   <a
                     href="#"
@@ -113,7 +126,10 @@ const MangaDirectory: React.FC = () => {
                   >
                     Official Page
                   </a>
-                  <Link to="/community#attack-on-titan" className="default-links">
+                  <Link
+                    to="/community#attack-on-titan"
+                    className="default-links"
+                  >
                     Community Content →
                   </Link>
                 </div>
