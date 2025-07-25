@@ -1,12 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/TVPage.css';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../ui/TableOfContents';
 
 const TVHistory: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "OVERVIEW",
+      quickLinks: [
+        { label: "Timeline Breakdown", anchor: "#timeline-breakdown" },
+        { label: "Key Figures & Contributors", anchor: "#key-figures" },
+        { label: "Influences & Cultural Impact", anchor: "#influences-impact" },
+        { label: "Controversies & Turning Points", anchor: "#controversies-turning-points" },
+        { label: "Further Reading & Sources", anchor: "#further-reading" }
+      ],
+      deepLinks: [
+        { label: "TV Directory", path: "/tv/directory", exists: true },
+        { label: "TV Encyclopedia", path: "/tv", exists: true }
+      ]
+    }
+  ];
+
   return (
     <div className="tv-page tv-history-page">
         <header>
@@ -24,42 +38,18 @@ const TVHistory: React.FC = () => {
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
       </header>
 
+      {/* Table of Contents */}
+      <TableOfContents
+        sections={tocSections}
+        title="TV History Overview"
+        description="Use this table of contents to navigate the history of television."
+      />
+
       <main id="main-content">
         <section className="content-header">
           <h1 className="content-title">History of Television</h1>
           <p className="content-meta">A comprehensive exploration of television's evolution through the decades</p>
         </section>
-
-    {/* 1. Intro Overview */}
-    <section className="section-content" id="intro-overview">
-      <h2>Introduction to Television History</h2>
-
-      <h3>What is this page?</h3>
-      <p>
-        This page offers a comprehensive overview of television's historical development, from its earliest technological
-        beginnings to the current streaming era. We explore the key movements, creators, technological advances, and cultural
-        shifts that have shaped this influential medium into a global force that has transformed entertainment, news,
-        and social discourse.
-      </p>
-
-      <h3>Why the history of television matters</h3>
-      <p>
-        Understanding television's history provides crucial context for appreciating the medium's artistic evolution, cultural
-        significance, and global impact. Television has been the dominant mass medium for much of the 20th and early 21st centuries,
-        shaping public opinion, reflecting and influencing social values, and creating shared cultural experiences across diverse
-        populations. By exploring this history, viewers can develop a deeper appreciation for the shows they enjoy and recognize
-        the artistic and technological innovations that have made modern television possible.
-      </p>
-
-      <h3>What this page doesn't try to do</h3>
-      <p>
-        This page doesn't attempt to catalog every television show ever created or provide exhaustive details about each historical
-        period. It doesn't focus exclusively on any single genre, though certain influential genres are highlighted. Instead, it aims
-        to provide a balanced overview of television's development, highlighting key technological innovations, creative milestones,
-        and cultural impacts. For more detailed information about specific eras, creators, or shows, please explore the linked
-        resources and dedicated pages throughout the site.
-      </p>
-    </section>
 
     {/* 2. Timeline Breakdown */}
     <section className="section-content" id="timeline-breakdown">

@@ -3,14 +3,8 @@ body {
   background: var(--home-body-gradient);
 }
 
-.home-page {
-  color: var(--text-primary);
-  background: var(--home-body-gradient);
-}
-
 /* Header styles */
 .page-header {
-  background: var(--home-body-gradient);
   color: white;
   padding-bottom: var(--spacing-md);
   position: relative;
@@ -74,6 +68,8 @@ body {
   border-radius: var(--border-radius-base);
   color: white; /* Set all text in sections to white */
   text-align: center; /* Center all text in sections */
+  margin: var(--spacing-lg) auto;
+  max-width: 65rem;
 }
 
 /* Section paragraph styling */

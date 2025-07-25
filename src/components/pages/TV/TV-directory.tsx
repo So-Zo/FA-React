@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import TableOfContents, { TocSectionProps } from '../../ui/TableOfContents';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
-import '../../../components/ui/TVPage.css';
-import '../../../components/ui/DirectoryPages.css';
+
 
 const TelevisionDirectory: React.FC = () => {
  const tocSections: TocSectionProps[] = [
@@ -68,35 +63,21 @@ const TelevisionDirectory: React.FC = () => {
       
 <main id="main-content" role="main">
         {/* Directory Intro Section */}
-        <section className="directory-intro">
-          <h1>TV Shows Directory</h1>
-          <p>Browse our collection of TV series organized by genre, popularity, and release era. Each show page contains official information, character listings, and links to related community content.</p>
-
-```
-      <div className="directory-navigation">
-        <a href="#popular-series" className="non-existent-link" data-page-type="anchor" data-page-title="Popular Series" data-related-to="TV">Popular Series</a>
-        <a href="#genres" className="non-existent-link" data-page-type="anchor" data-page-title="Browse by Genre" data-related-to="TV">Browse by Genre</a>
-        <a href="#eras" className="non-existent-link" data-page-type="anchor" data-page-title="Browse by Era" data-related-to="TV">Browse by Era</a>
-        <a href="#studios" className="non-existent-link" data-page-type="anchor" data-page-title="Browse by Network" data-related-to="TV">Browse by Network</a>
-        <a href="#alphabetical" className="non-existent-link" data-page-type="anchor" data-page-title="Alphabetical List" data-related-to="TV">Alphabetical List</a>
-        <Link to="/tv/history" className="default-links">History of Television</Link>
-      </div>
-    </section>
 
 {/* Popular Series Section */}
-<section id="popular-series" className="directory-section">
+<section id="popular-series" className="section-content">
   <h2>Popular TV Series</h2>
   <p>These widely acclaimed series are excellent starting points for exploring television.</p>
 
-  <div className="show-grid">
-    <div className="show-card">
-      <div className="show-image">
+  <div className="profile-card-grid">
+    <div className="profile-card">
+      <div className="profile-card-image">
         <img src="/images/tv/shows/breaking-bad.jpg" alt="Breaking Bad" />
       </div>
-      <div className="show-info">
+      <div className="profile-card-content">
         <h3>Breaking Bad</h3>
-        <p className="show-genres">Drama, Crime, Thriller</p>
-        <p className="show-description">Follow Walter White, a chemistry teacher turned methamphetamine manufacturer, as he transforms from a mild-mannered family man into a ruthless player in the drug trade.</p>
+        <p className="card-subtext">Drama, Crime, Thriller</p>
+        <p>Follow Walter White, a chemistry teacher turned methamphetamine manufacturer, as he transforms from a mild-mannered family man into a ruthless player in the drug trade.</p>
         <div className="show-links">
           <a href="#" className="non-existent-link" data-page-type="show" data-page-title="Breaking Bad" data-related-to="TV">Official Page</a>
           <Link to="/community#breaking-bad" className="default-links">Community Content</Link>
@@ -105,14 +86,14 @@ const TelevisionDirectory: React.FC = () => {
       </div>
     </div>
 
-    <div className="show-card">
-      <div className="show-image">
+    <div className="profile-card">
+      <div className="profile-card-image">
         <img src="/images/tv/shows/game-of-thrones.jpg" alt="Game of Thrones" />
       </div>
-      <div className="show-info">
+      <div className="profile-card-content">
         <h3>Game of Thrones</h3>
-        <p className="show-genres">Fantasy, Drama, Adventure</p>
-        <p className="show-description">In the mythical continent of Westeros, several powerful families fight for control of the Seven Kingdoms and the Iron Throne, while ancient threats emerge from beyond the Wall.</p>
+        <p className="card-subtext">Fantasy, Drama, Adventure</p>
+        <p>In the mythical continent of Westeros, several powerful families fight for control of the Seven Kingdoms and the Iron Throne, while ancient threats emerge from beyond the Wall.</p>
         <div className="show-links">
           <a href="#" className="non-existent-link" data-page-type="show" data-page-title="Game of Thrones" data-related-to="TV">Official Page</a>
           <Link to="/community#game-of-thrones" className="default-links">Community Content</Link>
@@ -121,14 +102,14 @@ const TelevisionDirectory: React.FC = () => {
       </div>
     </div>
 
-    <div className="show-card">
-      <div className="show-image">
+    <div className="profile-card">
+      <div className="profile-card-image">
         <img src="/images/tv/shows/stranger-things.jpg" alt="Stranger Things" />
       </div>
-      <div className="show-info">
+      <div className="profile-card-content">
         <h3>Stranger Things</h3>
-        <p className="show-genres">Science Fiction, Horror, Mystery</p>
-        <p className="show-description">When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back.</p>
+        <p className="card-subtext">Science Fiction, Horror, Mystery</p>
+        <p>When a young boy disappears, his mother, a police chief, and his friends must confront terrifying supernatural forces in order to get him back.</p>
         <div className="show-links">
           <a href="#" className="non-existent-link" data-page-type="show" data-page-title="Stranger Things" data-related-to="TV">Official Page</a>
           <Link to="/community#stranger-things" className="default-links">Community Content</Link>
@@ -137,14 +118,14 @@ const TelevisionDirectory: React.FC = () => {
       </div>
     </div>
 
-    <div className="show-card">
-      <div className="show-image">
+    <div className="profile-card">
+      <div className="profile-card-image">
         <img src="/images/tv/shows/the-office.jpg" alt="The Office" />
       </div>
-      <div className="show-info">
+      <div className="profile-card-content">
         <h3>The Office</h3>
-        <p className="show-genres">Comedy, Mockumentary, Sitcom</p>
-        <p className="show-description">A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.</p>
+        <p className="card-subtext">Comedy, Mockumentary, Sitcom</p>
+        <p>A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.</p>
         <div className="show-links">
           <a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Office" data-related-to="TV">Official Page</a>
           <Link to="/community#the-office" className="default-links">Community Content</Link>
@@ -156,60 +137,51 @@ const TelevisionDirectory: React.FC = () => {
 </section>
 
 {/* Genres Section */}
-<section id="genres" className="directory-section">
+<section id="genres" className="section-content">
   <h2>Browse by Genre</h2>
   <p>Find TV series based on your preferred storytelling styles and themes.</p>
 
-  <div className="genre-directory">
-    <div className="genre-category">
-      <h3>Drama & Thriller</h3>
-      <ul className="show-list">
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Breaking Bad" data-related-to="TV">Breaking Bad</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Sopranos" data-related-to="TV">The Sopranos</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Wire" data-related-to="TV">The Wire</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Better Call Saul" data-related-to="TV">Better Call Saul</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Succession" data-related-to="TV">Succession</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Drama TV" data-related-to="TV">View All Drama TV</a></li>
-      </ul>
-    </div>
+  {/* Genre categories flattened, no extra wrappers */}
+  <h3>Drama & Thriller</h3>
+  <ul className="show-list">
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Breaking Bad" data-related-to="TV">Breaking Bad</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Sopranos" data-related-to="TV">The Sopranos</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Wire" data-related-to="TV">The Wire</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Better Call Saul" data-related-to="TV">Better Call Saul</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Succession" data-related-to="TV">Succession</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Drama TV" data-related-to="TV">View All Drama TV</a></li>
+  </ul>
 
-    <div className="genre-category">
-      <h3>Sci-Fi & Fantasy</h3>
-      <ul className="show-list">
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Game of Thrones" data-related-to="TV">Game of Thrones</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Stranger Things" data-related-to="TV">Stranger Things</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Mandalorian" data-related-to="TV">The Mandalorian</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Westworld" data-related-to="TV">Westworld</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Sci-Fi TV" data-related-to="TV">View All Sci-Fi TV</a></li>
-      </ul>
-    </div>
+  <h3>Sci-Fi & Fantasy</h3>
+  <ul className="show-list">
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Game of Thrones" data-related-to="TV">Game of Thrones</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Stranger Things" data-related-to="TV">Stranger Things</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Mandalorian" data-related-to="TV">The Mandalorian</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Westworld" data-related-to="TV">Westworld</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Sci-Fi TV" data-related-to="TV">View All Sci-Fi TV</a></li>
+  </ul>
 
-    <div className="genre-category">
-      <h3>Comedy & Sitcom</h3>
-      <ul className="show-list">
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Office" data-related-to="TV">The Office</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Friends" data-related-to="TV">Friends</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Brooklyn Nine-Nine" data-related-to="TV">Brooklyn Nine-Nine</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Parks and Recreation" data-related-to="TV">Parks and Recreation</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Comedy TV" data-related-to="TV">View All Comedy TV</a></li>
-      </ul>
-    </div>
+  <h3>Comedy & Sitcom</h3>
+  <ul className="show-list">
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="The Office" data-related-to="TV">The Office</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Friends" data-related-to="TV">Friends</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Brooklyn Nine-Nine" data-related-to="TV">Brooklyn Nine-Nine</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Parks and Recreation" data-related-to="TV">Parks and Recreation</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Comedy TV" data-related-to="TV">View All Comedy TV</a></li>
+  </ul>
 
-    <div className="genre-category">
-      <h3>Mystery & Crime</h3>
-      <ul className="show-list">
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="True Detective" data-related-to="TV">True Detective</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Sherlock" data-related-to="TV">Sherlock</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Mindhunter" data-related-to="TV">Mindhunter</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Fargo" data-related-to="TV">Fargo</a></li>
-        <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Crime TV" data-related-to="TV">View All Crime TV</a></li>
-      </ul>
-    </div>
-  </div>
+  <h3>Mystery & Crime</h3>
+  <ul className="show-list">
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="True Detective" data-related-to="TV">True Detective</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Sherlock" data-related-to="TV">Sherlock</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Mindhunter" data-related-to="TV">Mindhunter</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="show" data-page-title="Fargo" data-related-to="TV">Fargo</a></li>
+    <li><a href="#" className="non-existent-link" data-page-type="directory" data-page-title="Crime TV" data-related-to="TV">View All Crime TV</a></li>
+  </ul>
 </section>
 
 {/* Eras Section */}
-<section id="eras" className="directory-section">
+<section id="eras" className="section-content">
   <h2>Browse by Era</h2>
   <p>Explore TV from different time periods, from classics to the latest releases. For a comprehensive overview of how television has evolved over time, check out our <Link to="/tv/history" className="default-links">History of Television</Link> page.</p>
 
@@ -257,7 +229,7 @@ const TelevisionDirectory: React.FC = () => {
 </section>
 
 {/* Studios Section */}
-<section id="studios" className="directory-section">
+<section id="studios" className="section-content">
   <h2>Browse by Network</h2>
   <p>Discover TV shows produced by renowned networks known for their distinctive styles and quality.</p>
 
@@ -305,7 +277,7 @@ const TelevisionDirectory: React.FC = () => {
 </section>
 
 {/* Alphabetical Section */}
-<section id="alphabetical" className="directory-section">
+<section id="alphabetical" className="section-content">
   <h2>Alphabetical List</h2>
   <p>Browse all TV series in our database alphabetically.</p>
 
@@ -344,7 +316,7 @@ const TelevisionDirectory: React.FC = () => {
 </section>
 
 {/* Help Section */}
-<section className="directory-help">
+<section className="section-content">
   <h2>Can't Find What You're Looking For?</h2>
   <div className="help-options">
     <div className="help-option">

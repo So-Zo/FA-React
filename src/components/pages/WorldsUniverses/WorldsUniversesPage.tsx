@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/WorldsUniversesPage.css';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const WorldsUniversesPage: React.FC = () => {

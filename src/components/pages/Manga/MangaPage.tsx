@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
-import '../../../components/ui/MangaPage.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const MangaPage: React.FC = () => {
@@ -74,31 +69,24 @@ const MangaPage: React.FC = () => {
 
       {/* The Basics Section */}
       <section id="the-basics" className="section-content">
-        <div className="container">
-          <h2>The Basics</h2>
-          <p>
-            "Manga" refers to comics or graphic novels originating from Japan. In Japan, the term "manga" (漫画) is used for all comics regardless of origin, but internationally it has come to specifically mean Japanese-style comics. This distinctive art form is characterized by its unique visual style, storytelling techniques, and diverse genres.
-          </p>
-
-          <p>
-            While manga is primarily produced in Japan, it has inspired comic artists worldwide. Korean comics are often referred to as "manhwa," while Chinese comics may be called "manhua." These neighboring traditions share some visual elements with manga but have their own distinct characteristics.
-          </p>
-
-          <p>
-            Manga is closely related to anime (Japanese animation), with many anime series being adaptations of popular manga. However, the manga medium has its own unique strengths, including distinctive art styles, pacing, and storytelling approaches. For more on the relationship between manga and anime, see our <Link to="/anime" className="default-links">Anime page</Link>.
-          </p>
-
-          <div className="info-box">
-            <h4>Key Characteristics of Manga</h4>
-            <ul>
-              <li><strong>Reading Direction:</strong> Traditional manga is read right-to-left, opposite to Western comics</li>
-              <li><strong>Visual Style:</strong> Distinctive art style with expressive eyes, simplified facial features, and dynamic action lines</li>
-              <li><strong>Storytelling:</strong> Often features long-form narratives that can span dozens or even hundreds of volumes</li>
-              <li><strong>Publication Format:</strong> Typically serialized in magazines before being collected into tankōbon (collected volumes)</li>
-              <li><strong>Diverse Genres:</strong> Covers an extremely wide range of genres and topics for all ages and interests</li>
-            </ul>
-          </div>
-        </div>
+        <h2>The Basics</h2>
+        <p>
+          "Manga" refers to comics or graphic novels originating from Japan. In Japan, the term "manga" (漫画) is used for all comics regardless of origin, but internationally it has come to specifically mean Japanese-style comics. This distinctive art form is characterized by its unique visual style, storytelling techniques, and diverse genres.
+        </p>
+        <p>
+          While manga is primarily produced in Japan, it has inspired comic artists worldwide. Korean comics are often referred to as "manhwa," while Chinese comics may be called "manhua." These neighboring traditions share some visual elements with manga but have their own distinct characteristics.
+        </p>
+        <p>
+          Manga is closely related to anime (Japanese animation), with many anime series being adaptations of popular manga. However, the manga medium has its own unique strengths, including distinctive art styles, pacing, and storytelling approaches. For more on the relationship between manga and anime, see our <Link to="/anime" className="default-links">Anime page</Link>.
+        </p>
+        <h4>Key Characteristics of Manga</h4>
+        <ul>
+          <li><strong>Reading Direction:</strong> Traditional manga is read right-to-left, opposite to Western comics</li>
+          <li><strong>Visual Style:</strong> Distinctive art style with expressive eyes, simplified facial features, and dynamic action lines</li>
+          <li><strong>Storytelling:</strong> Often features long-form narratives that can span dozens or even hundreds of volumes</li>
+          <li><strong>Publication Format:</strong> Typically serialized in magazines before being collected into tankōbon (collected volumes)</li>
+          <li><strong>Diverse Genres:</strong> Covers an extremely wide range of genres and topics for all ages and interests</li>
+        </ul>
       </section>
       <hr />
 
@@ -137,22 +125,24 @@ const MangaPage: React.FC = () => {
                 <p>Manga gained significant international popularity with series like "Dragon Ball," "Sailor Moon," and "Naruto." The transition to digital creation techniques and online distribution has further expanded manga's global reach and accessibility.</p>
          
 
-          <div className="key-figures">
-            <h3>Key Figures in Manga History</h3>
-            <div className="figure-cards">
-              <div className="figure-card">
-                <h4>Osamu Tezuka (1928-1989)</h4>
-                <p>Known as the "God of Manga," Tezuka created over 700 manga series including "Astro Boy," "Black Jack," and "Buddha." His cinematic storytelling techniques and innovative visual style revolutionized the medium.</p>
+          <h3>Key Figures in Manga History</h3>
+          <div className="profile-card-grid">
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Osamu Tezuka (1928-1989)</h4>
+                <p className="profile-card-text">Known as the "God of Manga," Tezuka created over 700 manga series including "Astro Boy," "Black Jack," and "Buddha." His cinematic storytelling techniques and innovative visual style revolutionized the medium.</p>
               </div>
-
-              <div className="figure-card">
-                <h4>Rumiko Takahashi (1957-)</h4>
-                <p>One of the most successful manga artists in history, Takahashi created popular series like "Inuyasha," "Ranma ½," and "Urusei Yatsura," known for their blend of comedy, action, and romance.</p>
+            </div>
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Rumiko Takahashi (1957-)</h4>
+                <p className="profile-card-text">One of the most successful manga artists in history, Takahashi created popular series like "Inuyasha," "Ranma ½," and "Urusei Yatsura," known for their blend of comedy, action, and romance.</p>
               </div>
-
-              <div className="figure-card">
-                <h4>Naoki Urasawa (1960-)</h4>
-                <p>Creator of critically acclaimed series like "Monster," "20th Century Boys," and "Pluto," known for complex psychological narratives and realistic art style.</p>
+            </div>
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Naoki Urasawa (1960-)</h4>
+                <p className="profile-card-text">Creator of critically acclaimed series like "Monster," "20th Century Boys," and "Pluto," known for complex psychological narratives and realistic art style.</p>
               </div>
             </div>
           </div>
@@ -167,8 +157,10 @@ const MangaPage: React.FC = () => {
             The world of manga has developed its own unique vocabulary. Understanding these terms will enhance your appreciation and help you navigate discussions about manga.
           </p>
 
-          
+         
               <h3>Format & Publication Terms</h3>
+          <div className='three-column-grid'>
+            <div className='grid-block'>
               <dl>
                 <dt>Tankōbon</dt>
                 <dd>Collected volumes of manga chapters that were previously serialized in magazines</dd>
@@ -185,9 +177,10 @@ const MangaPage: React.FC = () => {
                 <dt>Gekiga</dt>
                 <dd>Dramatic, mature manga aimed at adult audiences</dd>
               </dl>
+              </div>
           
 
-        
+            <div className='grid-block'>
               <h3>Visual & Storytelling Terms</h3>
               <dl>
                 <dt>Furigana</dt>
@@ -205,9 +198,9 @@ const MangaPage: React.FC = () => {
                 <dt>Thought Bubbles</dt>
                 <dd>Cloud-like bubbles showing a character's thoughts</dd>
               </dl>
-            
+             </div>
 
-        
+            <div className='grid-block'>
               <h3>Demographic Categories</h3>
               <dl>
                 <dt>Shōnen</dt>
@@ -225,6 +218,8 @@ const MangaPage: React.FC = () => {
                 <dt>Kodomomuke</dt>
                 <dd>Manga for young children</dd>
               </dl>
+            </div>
+          </div>
       </section>
       <hr />
 
@@ -242,88 +237,98 @@ const MangaPage: React.FC = () => {
             <h3>Popular Manga Genres</h3>
             <p>Discover manga series based on your preferred storytelling styles and themes:</p>
 
-            
+            <div className='three-column-grid'>
+              <div className='grid-card'>
                 <h4>Shōnen Battle</h4>
                 <p>Action-focused manga featuring protagonists who grow stronger through training and combat.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Dragon Ball, One Piece, Naruto, My Hero Academia</li>
                 </ul>
+              </div>
           
 
-          
+              <div className='grid-card'>
                 <h4>Slice of Life</h4>
                 <p>Focuses on the everyday experiences of characters, often with a warm or comedic tone.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Yotsuba&!, Barakamon, Silver Spoon</li>
                 </ul>
+              </div>
             
 
-            
+              <div className='grid-card'>
                 <h4>Horror</h4>
                 <p>Designed to evoke fear through disturbing imagery and unsettling narratives.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Junji Ito's works (Uzumaki, Tomie), Parasyte</li>
                 </ul>
+              </div>
               
 
-        
+              
+              <div className='grid-card'>
                 <h4>Romance</h4>
                 <p>Focuses on romantic relationships between characters and emotional connections.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Kimi ni Todoke, Horimiya, Kaguya-sama</li>
                 </ul>
+              </div>
           
 
-            
+              <div className='grid-card'>
                 <h4>Fantasy</h4>
                 <p>Set in fantastical worlds with elements like magic and supernatural powers.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Berserk, Made in Abyss, The Ancient Magus' Bride</li>
                 </ul>
-              
+              </div>
 
-            
+              <div className='grid-card'>
                 <h4>Sports</h4>
                 <p>Centers around competitive sports and athletes, focusing on teamwork and growth.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Haikyuu!!, Slam Dunk, Blue Lock</li>
                 </ul>
-              
+             </div>
+            </div>
 
           
             <h3>Demographic Categories</h3>
             <p>Manga is often categorized by its target audience in Japan, though fans of all types enjoy them worldwide:</p>
 
-            
+            <div className='three-column-grid'>
+              <div className='grid-card'>
                 <h4>Shōnen (Young Men)</h4>
                 <p>Aimed at boys and young men ages 12-18, featuring action, adventure, and coming-of-age themes.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> One Piece, Naruto, My Hero Academia</li>
                 </ul>
-              
+              </div>
 
-            
+              <div className='grid-card'>
                 <h4>Shōjo (Young Women)</h4>
                 <p>Aimed at girls and young women ages 12-18, often focusing on romance and emotional growth.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Fruits Basket, Ouran High School Host Club, Nana</li>
                 </ul>
-              
+              </div>
 
-            
+              <div className='grid-card'>
                 <h4>Seinen (Adult Men)</h4>
                 <p>Targeted at adult men (18+), with more complex themes and mature content.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Berserk, Vagabond, Vinland Saga</li>
                 </ul>
-              
+              </div>
 
-            
+              <div className='grid-card'>
                 <h4>Josei (Adult Women)</h4>
                 <p>Targeted at adult women (18+), featuring realistic relationships and mature themes.</p>
                 <ul>
                   <li><strong>Notable Examples:</strong> Chihayafuru, Honey and Clover, Wotakoi</li>
                 </ul>
+              </div>
+            </div>
       </section>
       <hr />
 
@@ -366,30 +371,29 @@ const MangaPage: React.FC = () => {
               </ul>
            
 
-          <div className="info-box">
-            <h4>Major Manga Publishers</h4>
-                <h5>Shueisha</h5>
-                <p>Publisher of Weekly Shōnen Jump, the most popular manga magazine</p>
-                <p><strong>Notable Series:</strong> One Piece, Naruto, Demon Slayer</p>
-              
-
-              
-                <h5>Kodansha</h5>
-                <p>One of Japan's largest publishing companies</p>
-                <p><strong>Notable Series:</strong> Attack on Titan, Fairy Tail, The Seven Deadly Sins</p>
-          
-
-              
-                <h5>Shogakukan</h5>
-                <p>Major publisher with diverse manga offerings</p>
-                <p><strong>Notable Series:</strong> Detective Conan, Inuyasha, Doraemon</p>
-              
-
-            
-                <h5>Hakusensha</h5>
-                <p>Known for shōjo and josei manga</p>
-                <p><strong>Notable Series:</strong> Berserk, Ouran High School Host Club, Fruits Basket</p>
-        </div>
+          <h4>Major Manga Publishers</h4>
+          <div className="info-card-grid">
+            <div className="info-card">
+              <h5>Shueisha</h5>
+              <p>Publisher of Weekly Shōnen Jump, the most popular manga magazine</p>
+              <p><strong>Notable Series:</strong> One Piece, Naruto, Demon Slayer</p>
+            </div>
+            <div className="info-card">
+              <h5>Kodansha</h5>
+              <p>One of Japan's largest publishing companies</p>
+              <p><strong>Notable Series:</strong> Attack on Titan, Fairy Tail, The Seven Deadly Sins</p>
+            </div>
+            <div className="info-card">
+              <h5>Shogakukan</h5>
+              <p>Major publisher with diverse manga offerings</p>
+              <p><strong>Notable Series:</strong> Detective Conan, Inuyasha, Doraemon</p>
+            </div>
+            <div className="info-card">
+              <h5>Hakusensha</h5>
+              <p>Known for shōjo and josei manga</p>
+              <p><strong>Notable Series:</strong> Berserk, Ouran High School Host Club, Fruits Basket</p>
+            </div>
+          </div>
       </section>
       <hr />
 

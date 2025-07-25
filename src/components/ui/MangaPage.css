@@ -1,7 +1,0 @@
-/* MangaPage styles */
-/* Note: Most styles moved to shared CSS files */
-
-/* Manga page background */
-.manga-page {
-  background-image: var(--manga-gradient);
-}

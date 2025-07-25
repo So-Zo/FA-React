@@ -1,0 +1,27 @@
+/*will use later and refactor to add in properly potentially*/
+/* .char-quick-info {
+    position: fixed;       
+    top: 1rem;              
+   right: 1rem;            
+    bottom: auto;
+    max-width: 18rem;       
+    height: auto;          
+    background: #fff;        
+    border: 1px solid #ccc;  
+    border-radius: 0.5rem;   
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+    padding: 1rem;
+    z-index: 1000;        
+    flex-direction: column;
+ */
+
+/*needs work of course but i dont have any images rn lol 
+will check back in on later.
+*/
+
+.char-image {
+  display: block;
+  overflow: hidden;
+  height: 20rem;
+  width: 10rem;
+}

@@ -2,7 +2,7 @@
  * Card Styles for FanArcs React
  * Simplified card system with two main card styles:
  * 1. info-card: for links and quick information
- * 2. profile-card: for characters, key figures, and publishers
+ * 2. profile-card: for characters, key figures, publishers and shows.
  */
 
 /*
@@ -10,7 +10,7 @@
  * Default card style for links and quick information
  */
 .info-card {
-  background-color: rgb(116, 127, 244);
+  background-color: rgb(212, 216, 255);
   border-left: 4px solid var(--fanarc-primary-color);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-base);
@@ -50,6 +50,7 @@
  */
 .profile-card {
   display: flex;
+  flex-direction: column;
   background-color: white;
   border-left: 4px solid var(--fanarc-primary-color);
   border-radius: var(--border-radius-base);
@@ -89,10 +90,16 @@
   font-weight: bold;
 }
 
-.profile-card-subtitle {
+.card-subtext {
   color: var(--fanarc-secondary-color);
   font-size: 0.9em;
   margin-bottom: var(--spacing-sm);
+}
+
+.show-links{
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
 }
 
 .profile-card-text {
@@ -113,12 +120,7 @@
 /* Media queries for responsive design */
 @media (max-width: 768px) {
   .info-card,
-  .profile-card,
-  .card,
-  .figure-card,
-  .info-box,
-  .publisher-card,
-  .show-card {
+  .profile-card{
     padding: var(--spacing-md);
   }
 

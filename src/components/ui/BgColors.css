@@ -1,0 +1,37 @@
+/* Dynamic background colors based on data-page attribute */
+body[data-page] {
+  background: #f5f6fa; /* fallback neutral background */
+}
+body[data-page="anime"] {
+  background: linear-gradient(to right, #2c3e50 0%, #2980b9 50%, #f1c40f 100%);
+}
+body[data-page="manga"] {
+  background: #f0f7fa;
+}
+body[data-page="comics"] {
+  background: linear-gradient(to top, #0056b3 0%, #d35400 100%);
+}
+body[data-page="tv"] {
+  background: linear-gradient(135deg, #000000 0%, #f9a826 50%, #1a1a1a 100%);
+}
+body[data-page="video-games"] {
+  background: #e3e0f7;
+}
+body[data-page="worlds-universes"] {
+  background: #f9fbe7;
+}
+body[data-page="power-room"] {
+  background: #fce4ec;
+}
+body[data-page="community"] {
+  background: #e3f2fd;
+}
+body[data-page="profile"] {
+  background: #f3e5f5;
+}
+body[data-page="characters"] {
+  background: linear-gradient(to right, #2c3e50 0%, #2980b9 50%, #f1c40f 100%);
+}
+body[data-page="home"] {
+  background: #f5f6fa;
+}

@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
-import '../../../components/ui/TVPage.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
 const TVPage: React.FC = () => {
@@ -138,25 +133,30 @@ const TVPage: React.FC = () => {
                 <p>Netflix, Hulu, Amazon Prime, and other streaming services transformed how television is produced, distributed, and consumed. Binge-watching became common, and the distinction between TV and film began to blur.</p>
               
 
-          <div className="key-figures">
-            <h3>Key Figures in Television History</h3>
-            <div className="figure-cards">
-              <div className="figure-card">
-                <h4>Philo Farnsworth (1906-1971)</h4>
-                <p>Inventor who created the first fully electronic television system in 1927, laying the groundwork for modern television technology.</p>
+          <h3>Key Figures in Television History</h3>
+          <div className="profile-card-grid">
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Philo Farnsworth (1906-1971)</h4>
+                <p className="profile-card-text">Inventor who created the first fully electronic television system in 1927, laying the groundwork for modern television technology.</p>
               </div>
-
-              <div className="figure-card">
-                <h4>Lucille Ball (1911-1989)</h4>
-                <p>Star of "I Love Lucy" and co-founder of Desilu Productions, one of the first successful independent television production companies. Her innovations in multi-camera filming and syndication shaped the industry.</p>
+            </div>
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Lucille Ball (1911-1989)</h4>
+                <p className="profile-card-text">Star of "I Love Lucy" and co-founder of Desilu Productions, one of the first successful independent television production companies. Her innovations in multi-camera filming and syndication shaped the industry.</p>
               </div>
-
-              <div className="figure-card">
-                <h4>Norman Lear (1922-)</h4>
-                <p>Producer who revolutionized television with socially conscious sitcoms like "All in the Family," "The Jeffersons," and "Maude," addressing previously taboo topics on primetime TV.</p>
+            </div>
+            <div className="profile-card">
+              <div className="profile-card-content">
+                <h4 className="profile-card-title">Norman Lear (1922-)</h4>
+                <p className="profile-card-text">Producer who revolutionized television with socially conscious sitcoms like "All in the Family," "The Jeffersons," and "Maude," addressing previously taboo topics on primetime TV.</p>
               </div>
             </div>
           </div>
+          <p className="section-links">
+            <Link to="/tv/history" className="default-links">Read Full History of Television</Link>
+          </p>
       </section>
       <hr />
 
@@ -170,161 +170,148 @@ const TVPage: React.FC = () => {
 
           
               <h3>Format & Production Terms</h3>
-              <dl>
-                <dt>Pilot</dt>
-                <dd>The first episode of a series, often produced to convince networks to order a full season</dd>
+          <div className="two-column-grid">
+            <div className="grid-block">
+              <dt>Pilot</dt>
+              <dd>The first episode of a series, often produced to convince networks to order a full season</dd>
+              <dt>Series</dt>
+              <dd>A set of related episodes with the same characters and continuing storylines</dd>
+              <dt>Season</dt>
+              <dd>A group of episodes produced and broadcast during a specific time period</dd>
+            </div>
+            <div className="grid-block">
+              <dt>Showrunner</dt>
+              <dd>The person with overall creative authority and management responsibility for a TV series</dd>
+              <dt>Syndication</dt>
+              <dd>The licensing of television programs to multiple broadcasting stations</dd>
+            </div>
+          </div>
 
-                <dt>Series</dt>
-                <dd>A set of related episodes with the same characters and continuing storylines</dd>
+          <h3>Narrative & Structure Terms</h3>
+          <div className="two-column-grid">
+            <div className="grid-block">
+              <dt>Arc</dt>
+              <dd>A storyline that extends over multiple episodes or seasons</dd>
+              <dt>Bottle Episode</dt>
+              <dd>An episode confined to one location, often produced to save budget</dd>
+              <dt>Cliffhanger</dt>
+              <dd>An unresolved ending designed to create suspense and encourage viewers to return</dd>
+            </div>
+            <div className="grid-block">
+              <dt>Cold Open</dt>
+              <dd>A scene before the opening credits or title sequence</dd>
+              <dt>Crossover</dt>
+              <dd>When characters from one show appear in another show</dd>
+            </div>
+          </div>
 
-                <dt>Season</dt>
-                <dd>A group of episodes produced and broadcast during a specific time period</dd>
-
-                <dt>Showrunner</dt>
-                <dd>The person with overall creative authority and management responsibility for a TV series</dd>
-
-                <dt>Syndication</dt>
-                <dd>The licensing of television programs to multiple broadcasting stations</dd>
-              </dl>
-            
-
-            
-              <h3>Narrative & Structure Terms</h3>
-              <dl>
-                <dt>Arc</dt>
-                <dd>A storyline that extends over multiple episodes or seasons</dd>
-
-                <dt>Bottle Episode</dt>
-                <dd>An episode confined to one location, often produced to save budget</dd>
-
-                <dt>Cliffhanger</dt>
-                <dd>An unresolved ending designed to create suspense and encourage viewers to return</dd>
-
-                <dt>Cold Open</dt>
-                <dd>A scene before the opening credits or title sequence</dd>
-
-                <dt>Crossover</dt>
-                <dd>When characters from one show appear in another show</dd>
-              </dl>
-            
-
-           
-              <h3>Industry & Broadcast Terms</h3>
-              <dl >
-                <dt>Nielsen Ratings</dt>
-                <dd>The system used to measure television viewership in the United States</dd>
-
-                <dt>Sweeps</dt>
-                <dd>Periods when ratings are measured to set advertising rates</dd>
-
-                <dt>Upfronts</dt>
-                <dd>Annual presentations where networks showcase their upcoming programming to advertisers</dd>
-
-                <dt>Jump the Shark</dt>
-                <dd>The point when a show begins to decline in quality, named after a Happy Days episode</dd>
-
-                <dt>Binge-watching</dt>
-                <dd>Watching multiple episodes of a show in rapid succession</dd>
-              </dl>
+          <h3>Industry & Broadcast Terms</h3>
+          <div className="two-column-grid">
+            <div className="grid-block">
+              <dt>Nielsen Ratings</dt>
+              <dd>The system used to measure television viewership in the United States</dd>
+              <dt>Sweeps</dt>
+              <dd>Periods when ratings are measured to set advertising rates</dd>
+              <dt>Upfronts</dt>
+              <dd>Annual presentations where networks showcase their upcoming programming to advertisers</dd>
+            </div>
+            <div className="grid-block">
+              <dt>Jump the Shark</dt>
+              <dd>The point when a show begins to decline in quality, named after a Happy Days episode</dd>
+              <dt>Binge-watching</dt>
+              <dd>Watching multiple episodes of a show in rapid succession</dd>
+            </div>
+          </div>
       </section>
       <hr />
 
       {/* TV Genres Guide Section */}
       <section id="tv-genres" className="section-content">
-       
-          <h2>Television Genres Guide</h2>
-          <p>
-            Television encompasses a diverse range of genres and formats, each with unique characteristics and storytelling approaches.
-            This guide will help you understand the different types of TV shows and find series that match your interests.
-          </p>
+        <h2>Television Genres Guide</h2>
+        <p>
+          Television encompasses a diverse range of genres and formats, each with unique characteristics and storytelling approaches.
+          This guide will help you understand the different types of TV shows and find series that match your interests.
+        </p>
 
+        <h3>Scripted Genres</h3>
+        <p>These genres feature fictional narratives with written scripts and professional actors:</p>
+        <div className="three-column-grid">
+          <div className="grid-card">
+            <h4>Drama</h4>
+            <p>Character-driven narratives that explore complex emotions, relationships, and conflicts.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Breaking Bad, The Crown, This Is Us</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Comedy</h4>
+            <p>Shows designed to make viewers laugh, typically with humorous situations and characters.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> The Office, Friends, Brooklyn Nine-Nine</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Science Fiction</h4>
+            <p>Shows that explore speculative concepts, futuristic technology, and alternate realities.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Star Trek, The Expanse, Doctor Who</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Crime/Procedural</h4>
+            <p>Focuses on solving crimes, often with a case-of-the-week format.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Law & Order, CSI, Criminal Minds</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Fantasy</h4>
+            <p>Features magical elements, mythical creatures, and supernatural phenomena.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Game of Thrones, The Witcher, Supernatural</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Horror</h4>
+            <p>Designed to frighten viewers with supernatural or psychological threats.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> The Haunting of Hill House, American Horror Story</li>
+            </ul>
+          </div>
+        </div>
 
-
-          
-            <h3>Scripted Genres</h3>
-            <p>These genres feature fictional narratives with written scripts and professional actors:</p>
-
-            
-                <h4>Drama</h4>
-                <p>Character-driven narratives that explore complex emotions, relationships, and conflicts.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Breaking Bad, The Crown, This Is Us</li>
-                </ul>
-              
-
-             
-                <h4>Comedy</h4>
-                <p>Shows designed to make viewers laugh, typically with humorous situations and characters.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> The Office, Friends, Brooklyn Nine-Nine</li>
-                </ul>
-              
-
-            
-                <h4>Science Fiction</h4>
-                <p>Shows that explore speculative concepts, futuristic technology, and alternate realities.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Star Trek, The Expanse, Doctor Who</li>
-                </ul>
-              
-
-            
-                <h4>Crime/Procedural</h4>
-                <p>Focuses on solving crimes, often with a case-of-the-week format.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Law & Order, CSI, Criminal Minds</li>
-                </ul>
-      
-
-              
-                <h4>Fantasy</h4>
-                <p>Features magical elements, mythical creatures, and supernatural phenomena.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Game of Thrones, The Witcher, Supernatural</li>
-                </ul>
-          
-
-              
-                <h4>Horror</h4>
-                <p>Designed to frighten viewers with supernatural or psychological threats.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> The Haunting of Hill House, American Horror Story</li>
-                </ul>
-
-         
-            <h3>Unscripted Genres</h3>
-            <p>These genres feature real people rather than actors, though they may follow structured formats:</p>
-
-           
-                <h4>Reality Competition</h4>
-                <p>Shows where contestants compete for prizes, often involving elimination formats.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Survivor, The Amazing Race, Top Chef</li>
-                </ul>
-           
-
-              
-                <h4>Documentary Series</h4>
-                <p>In-depth explorations of real events, people, or phenomena.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Planet Earth, Making a Murderer, The Last Dance</li>
-                </ul>
-              
-
-              
-                <h4>Talk Shows</h4>
-                <p>Programs featuring hosts interviewing guests or presenting entertainment.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> The Tonight Show, The View, The Daily Show</li>
-                </ul>
-            
-
-          
-                <h4>Reality Lifestyle</h4>
-                <p>Shows following the lives of real people, either celebrities or ordinary individuals.</p>
-                <ul>
-                  <li><strong>Notable Examples:</strong> Keeping Up with the Kardashians, Queer Eye</li>
-                </ul>
+        <h3>Unscripted Genres</h3>
+        <p>These genres feature real people rather than actors, though they may follow structured formats:</p>
+        <div className="three-column-grid">
+          <div className="grid-card">
+            <h4>Reality Competition</h4>
+            <p>Shows where contestants compete for prizes, often involving elimination formats.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Survivor, The Amazing Race, Top Chef</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Documentary Series</h4>
+            <p>In-depth explorations of real events, people, or phenomena.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Planet Earth, Making a Murderer, The Last Dance</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Talk Shows</h4>
+            <p>Programs featuring hosts interviewing guests or presenting entertainment.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> The Tonight Show, The View, The Daily Show</li>
+            </ul>
+          </div>
+          <div className="grid-card">
+            <h4>Reality Lifestyle</h4>
+            <p>Shows following the lives of real people, either celebrities or ordinary individuals.</p>
+            <ul>
+              <li><strong>Notable Examples:</strong> Keeping Up with the Kardashians, Queer Eye</li>
+            </ul>
+          </div>
+        </div>
       </section>
       <hr />
 
@@ -386,30 +373,28 @@ const TVPage: React.FC = () => {
               </ul>
           </div>
 
-          <div className="info-box">
-            
-            <h4>Major Television Networks & Platforms</h4>
-                <h5>Traditional Networks</h5>
-                <p>Broadcast television channels available over the air</p>
-                <p><strong>Examples:</strong> ABC, NBC, CBS, FOX, BBC</p>
-              
-
-              
-                <h5>Cable Networks</h5>
-                <p>Specialized channels available through cable or satellite subscriptions</p>
-                <p><strong>Examples:</strong> HBO, AMC, FX, Showtime</p>
-              
-
-              
-                <h5>Streaming Platforms</h5>
-                <p>Internet-based services offering on-demand content</p>
-                <p><strong>Examples:</strong> Netflix, Hulu, Amazon Prime Video, Disney+</p>
-             
-
-              
-                <h5>Production Studios</h5>
-                <p>Companies that create television content</p>
-                <p><strong>Examples:</strong> Warner Bros. Television, Universal Television, BBC Studios</p>
+          <h4>Major Television Networks & Platforms</h4>
+          <div className="info-card-grid">
+            <div className="info-card">
+              <h5>Traditional Networks</h5>
+              <p>Broadcast television channels available over the air</p>
+              <p><strong>Examples:</strong> ABC, NBC, CBS, FOX, BBC</p>
+            </div>
+            <div className="info-card">
+              <h5>Cable Networks</h5>
+              <p>Specialized channels available through cable or satellite subscriptions</p>
+              <p><strong>Examples:</strong> HBO, AMC, FX, Showtime</p>
+            </div>
+            <div className="info-card">
+              <h5>Streaming Platforms</h5>
+              <p>Internet-based services offering on-demand content</p>
+              <p><strong>Examples:</strong> Netflix, Hulu, Amazon Prime Video, Disney+</p>
+            </div>
+            <div className="info-card">
+              <h5>Production Studios</h5>
+              <p>Companies that create television content</p>
+              <p><strong>Examples:</strong> Warner Bros. Television, Universal Television, BBC Studios</p>
+            </div>
           </div>
       </section>
       <hr />

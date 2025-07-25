@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navigation from './components/layout/Navigation/Navigation';
 import Footer from './components/layout/Footer/Footer';
 import BottomNavigation from './components/layout/BottomNavigation/BottomNavigation';
 import './components/ui/global.css';
 import './App.css';
+import './Import.css';
 
 // Import page components
 import HomePage from './components/pages/Home/HomePage';
@@ -28,11 +31,27 @@ import WorldsUniversesDirectory from './components/pages/WorldsUniverses/WorldsU
 import PowerRoomPage from './components/pages/PowerRoom/PowerRoomPage';
 import CommunityPage from './components/pages/Community/CommunityPage';
 import ProfilePage from './components/pages/Profile/ProfilePage';
+import CharacterPage from './components/pages/Characters/CharacterPage';
+
+// This component sets the data-page attribute on the body based on the current route
+function PageDataAttributeSetter() {
+  const location = useLocation();
+  useEffect(() => {
+    const match = location.pathname.match(/^\/?([^\/]+)/);
+    const page = match && match[1] ? match[1] : 'home';
+    document.body.setAttribute('data-page', page);
+    return () => {
+      document.body.removeAttribute('data-page');
+    };
+  }, [location]);
+  return null;
+}
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
+        <PageDataAttributeSetter />
         <div className="layout">
           {/* Skip to content link for accessibility */}
           <a href="#main-content" className="skip-link">
@@ -63,6 +82,7 @@ function App() {
               <Route path="/power-room" element={<PowerRoomPage />} />
               <Route path="/community" element={<CommunityPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path ="/characters" element={<CharacterPage />} />
               {/* Add more routes as we create the page components */}
               {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>

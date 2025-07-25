@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-import "../../../components/ui/PowerRoomPage.css";
-import "../../../components/ui/global.css";
-import "../../../components/ui/links.css";
-import "../../../components/ui/cards.css";
-import "../../../components/ui/sections.css";
 
 const PowerRoomPage: React.FC = () => {
   // State for active tab

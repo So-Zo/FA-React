@@ -1,7 +1,0 @@
-/* TVPage styles */
-/* Note: Most styles moved to shared CSS files */
-
-/* TV page background */
-.tv-page {
-  background-image: var(--tv-gradient);
-}

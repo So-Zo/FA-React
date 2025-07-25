@@ -1,12 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/VideoGamesPage.css';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../ui/TableOfContents';
 
 const VideoGamesHistory: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "OVERVIEW",
+      quickLinks: [
+        { label: "Timeline Breakdown", anchor: "#timeline-breakdown" },
+        { label: "Resources for Further Exploration", anchor: "#resources" }
+      ],
+      deepLinks: [
+        { label: "Video Games Directory", path: "/video-games/directory", exists: true },
+        { label: "Video Games Encyclopedia", path: "/video-games", exists: true }
+      ]
+    }
+  ];
+
   return (
     <div className="video-games-page video-games-history-page">
       <header>
@@ -23,40 +34,16 @@ const VideoGamesHistory: React.FC = () => {
 
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
       </header>
+    <hr />
+      {/* Table of Contents */}
+      <TableOfContents
+        sections={tocSections}
+        title="Video Games History Overview"
+        description="Use this table of contents to navigate the history of video games."
+      />
 
       <main id="main-content">
-        <section className="content-header">
-          <h1 className="content-title">History of Video Games</h1>
-          <p className="content-meta">A comprehensive exploration of video games' evolution through the decades</p>
-        </section>
-
-        {/* 1. Intro Overview */}
-        <section className="section-content" id="intro-overview">
-          <h2>Introduction to Video Games History</h2>
-
-          <h3>What is this page?</h3>
-          <p>
-            This page offers a comprehensive overview of video games' historical development, from their earliest
-            technological beginnings to the current era. We explore the key innovations, creators, technological advances,
-            and cultural shifts that have shaped this interactive medium into a global entertainment phenomenon.
-          </p>
-
-          <p>
-            Video games have evolved from simple electronic experiments in research labs to one of the world's largest
-            entertainment industries, influencing not just how we play but also how we tell stories, socialize, and even
-            how we learn. This history traces that remarkable journey.
-          </p>
-
-          <h3>What this page doesn't try to do</h3>
-          <p>
-            This page doesn't attempt to catalog every video game ever created or provide exhaustive details about each
-            historical period. It doesn't focus exclusively on any single platform or genre. Instead, it aims to provide
-            a balanced overview of video games' development, highlighting key developments, influential works, and major
-            shifts in the medium's evolution. For more detailed information about specific eras, creators, or works,
-            please explore the linked resources and dedicated pages throughout the site.
-          </p>
-        </section>
-
+      <hr />
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">
           <h2>Timeline Breakdown</h2>
@@ -145,6 +132,8 @@ const VideoGamesHistory: React.FC = () => {
                   </li>
                 </ul>
           </section>
+          
+        <hr />
 
         {/* 3. Resources Section */}
         <section className="section-content" id="resources">

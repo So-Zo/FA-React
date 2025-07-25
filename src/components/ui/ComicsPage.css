@@ -1,7 +1,0 @@
-/* ComicsPage styles */
-/* Note: Most styles moved to shared CSS files */
-
-/* Comics page background */
-.comics-page {
-  background-image: var(--comics-gradient);
-}

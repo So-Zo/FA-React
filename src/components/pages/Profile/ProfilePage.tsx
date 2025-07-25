@@ -1,5 +1,5 @@
 import React, { useState, useRef, ChangeEvent } from 'react';
-import '../../../components/ui/ProfilePage.css';
+
 
 const ProfilePage: React.FC = () => {
   // State for active content section

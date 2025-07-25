@@ -1,12 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/MangaPage.css';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
+import TableOfContents, { TocSectionProps } from '../../ui/TableOfContents';
 
 const MangaHistory: React.FC = () => {
+  // Define TOC sections
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "OVERVIEW",
+      quickLinks: [
+        { label: "Timeline Breakdown", anchor: "#timeline-breakdown" },
+        { label: "Key Figures & Contributors", anchor: "#key-figures" },
+        { label: "Influences & Cultural Impact", anchor: "#influences-impact" },
+        { label: "Controversies & Turning Points", anchor: "#controversies-turning-points" },
+        { label: "Further Reading & Sources", anchor: "#further-reading" }
+      ],
+      deepLinks: [
+        { label: "Manga Directory", path: "/manga/directory", exists: true },
+        { label: "Manga Encyclopedia", path: "/manga", exists: true }
+      ]
+    }
+  ];
+
   return (
     <div className="manga-page manga-history-page">
         <header>
@@ -24,39 +38,17 @@ const MangaHistory: React.FC = () => {
         <button className="wiki-edit-button" id="page-edit-button">Edit Page</button>
       </header>
 
+      {/* Table of Contents */}
+      <TableOfContents
+        sections={tocSections}
+        title="Manga History Overview"
+        description="Use this table of contents to navigate the history of manga."
+      />
+
   <main id="main-content">
     <section className="content-header">
       <h1 className="content-title">History of Manga</h1>
       <p className="content-meta">A comprehensive exploration of manga's evolution through the centuries</p>
-    </section>
-
-    {/* 1. Intro Overview */}
-    <section className="section-content" id="intro-overview">
-      <h2>Introduction to Manga History</h2>
-
-      <h3>What is this page?</h3>
-      <p>
-        This page offers a comprehensive overview of manga's historical development, from its ancient roots in Japanese art to
-        its current status as a global cultural phenomenon. We explore the key movements, creators, technological advances, and
-        cultural shifts that have shaped this uniquely Japanese storytelling medium and its worldwide influence.
-      </p>
-
-      <h3>Why the history of manga matters</h3>
-      <p>
-        Understanding manga's history provides crucial context for appreciating the medium's artistic evolution, cultural significance,
-        and global impact. The story of manga is intertwined with Japan's history, from traditional art forms to post-war reconstruction
-        and eventual international cultural export. By exploring this history, readers can develop a deeper appreciation for the works
-        they enjoy and recognize the artistic lineage that connects contemporary manga to its predecessors.
-      </p>
-
-      <h3>What this page doesn't try to do</h3>
-      <p>
-        This page doesn't attempt to catalog every manga ever created or provide exhaustive details about each historical period.
-        It doesn't focus exclusively on any single genre, though certain influential genres are highlighted. Instead, it aims to
-        provide a balanced overview of manga's development, highlighting key developments, influential works, and major shifts in
-        the medium's evolution. For more detailed information about specific eras, creators, or works, please explore the linked
-        resources and dedicated pages throughout the site.
-      </p>
     </section>
 
     {/* 2. Timeline Breakdown */}

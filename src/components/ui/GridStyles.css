@@ -2,9 +2,9 @@
 
 .two-column-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-xl);
-  margin: var(--spacing-lg) 0;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  margin: var(--spacing-md) 0;
 }
 
 .grid-block {
@@ -13,27 +13,28 @@
   gap: var(--spacing-xs);
 }
 
-.grid-block dt {
-  font-weight: 600;
-  color: var(--fanarc-primary-color);
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--font-size-lg);
-}
-
-.grid-block dd {
-  margin: 0;
-  color: var(--text-color);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-}
-
 .three-column-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto;
   gap: var(--spacing-xl);
   align-items: start;
   margin: var(--spacing-lg) 0;
+}
+
+/* Grid card utility for grid children */
+.grid-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: calc(var(--border-radius-base) * 1.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: var(--spacing-md);
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  margin-bottom: var(--spacing-md);
+}
+.grid-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px) scale(1.01);
 }
 
 /* === Wikipedia-style Typography Enhancements === */
@@ -49,7 +50,7 @@
 }
 
 /* Responsive adjustments for grids */
-@media (max-width: 62rem) {
+@media (max-width: 40rem) {
   .two-column-grid,
   .three-column-grid {
     grid-template-columns: 1fr;

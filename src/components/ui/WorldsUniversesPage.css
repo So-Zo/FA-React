@@ -1,7 +1,0 @@
-/* WorldsUniversesPage styles */
-/* Note: Most styles moved to shared CSS files */
-
-/* Worlds & Universes page background */
-.worlds-universes-page {
-  background-image: var(--worlds-gradient);
-}

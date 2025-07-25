@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/HomePage.css';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
 
 // This is the main homepage component that corresponds to the original index.html
 const HomePage: React.FC = () => {
@@ -22,6 +19,7 @@ const HomePage: React.FC = () => {
       </header>
 
       <main id="main-content" role="main">
+
       {/* Main Body sections */}
       <section className="section-content">
         <h1>Welcome to FanArcs</h1>
@@ -125,7 +123,7 @@ const HomePage: React.FC = () => {
         </p>
       </section>
     </main>
-    </div>
+  </div>
   );
 };
 

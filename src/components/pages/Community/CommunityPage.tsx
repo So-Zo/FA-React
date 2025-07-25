@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../../components/ui/CommunityPage.css';
 
 const CommunityPage: React.FC = () => {
   // State for active filter dropdowns

@@ -1,18 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../../components/ui/global.css';
-import '../../../components/ui/links.css';
-import '../../../components/ui/cards.css';
-import '../../../components/ui/sections.css';
-import '../../../components/ui/WorldsUniversesPage.css';
 import TableOfContents, { TocSectionProps } from '../../../components/ui/TableOfContents';
 
-/**
- * WorldsUniversesDirectory Component
- *
- * This component displays a directory of fictional worlds and universes
- * organized by type, medium, and creator.
- */
+
 const WorldsUniversesDirectory: React.FC = () => {
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
@@ -63,13 +53,6 @@ const WorldsUniversesDirectory: React.FC = () => {
       </header>
 
       <main id="main-content" role="main">
-        <section className="directory-intro">
-          <h1>Worlds & Universes Directory</h1>
-          <p>Browse our collection of fictional worlds and universes organized by type, medium, and creator. Each world page contains official information, location listings, and links to related community content.</p>
-
-          <div className="info-card">
-            <p>Return to the <Link to="/worlds-universes" className="default-links">Worlds & Universes Main Page</Link> for more information about fictional worlds and universes.</p>
-          </div>
 
           {/* New Table of Contents */}
           <TableOfContents
@@ -79,9 +62,8 @@ const WorldsUniversesDirectory: React.FC = () => {
           />
 
 
-        </section>
-
-        <section id="popular-worlds" className="directory-section" data-section-type="popular">
+      
+        <section id="popular-worlds" className="section-content" data-section-type="popular">
           <h2>Popular Fictional Worlds</h2>
           <p>These widely acclaimed fictional worlds are excellent starting points for exploring worldbuilding.</p>
 
@@ -91,11 +73,10 @@ const WorldsUniversesDirectory: React.FC = () => {
                 <img src="/images/worlds/middle-earth.jpg" alt="Middle-earth" />
               </div>
               <div className="profile-card-content">
-                <h3 className="profile-card-title">Middle-earth</h3>
-                <p className="profile-card-subtitle">High Fantasy, Epic</p>
-                <p className="profile-card-text">J.R.R. Tolkien's meticulously crafted fantasy realm from The Lord of the Rings and related works, featuring multiple races, languages, and thousands of years of history.</p>
+                <h3>Middle-earth</h3>
+                <p className='card-subtext'>High Fantasy, Epic</p>
+                <p >J.R.R. Tolkien's meticulously crafted fantasy realm from The Lord of the Rings and related works, featuring multiple races, languages, and thousands of years of history.</p>
                 <div className="show-links">
-                  <a href="#" className="non-existent-link" data-page-type="world" data-page-title="Middle-earth" data-related-to="Worlds">Official Page</a>
                   <Link to="/community#middle-earth" className="default-links">Community Content →</Link>
                 </div>
               </div>
@@ -110,7 +91,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                 <p className="profile-card-subtitle">Space Opera, Science Fantasy</p>
                 <p className="profile-card-text">George Lucas's space fantasy setting that combines science fiction with mythic storytelling, spanning multiple planets, species, and eras.</p>
                 <div className="show-links">
-                  <a href="#" className="non-existent-link" data-page-type="world" data-page-title="Star Wars Galaxy" data-related-to="Worlds">Official Page</a>
                   <Link to="/community#star-wars-galaxy" className="default-links">Community Content →</Link>
                 </div>
               </div>
@@ -125,7 +105,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                 <p className="profile-card-subtitle">Low Fantasy, Magical</p>
                 <p className="profile-card-text">J.K. Rowling's magical world existing alongside our own reality in the Harry Potter series, featuring magical institutions, creatures, and societies.</p>
                 <div className="show-links">
-                  <a href="#" className="non-existent-link" data-page-type="world" data-page-title="Wizarding World" data-related-to="Worlds">Official Page</a>
                   <Link to="/community#wizarding-world" className="default-links">Community Content →</Link>
                 </div>
               </div>
@@ -140,7 +119,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                 <p className="profile-card-subtitle">Dark Fantasy, Political</p>
                 <p className="profile-card-text">George R.R. Martin's gritty, politically complex fantasy world from A Song of Ice and Fire/Game of Thrones, known for its moral ambiguity and realistic consequences.</p>
                 <div className="show-links">
-                  <a href="#" className="non-existent-link" data-page-type="world" data-page-title="Westeros" data-related-to="Worlds">Official Page</a>
                   <Link to="/community#westeros" className="default-links">Community Content →</Link>
                 </div>
               </div>
@@ -150,7 +128,7 @@ const WorldsUniversesDirectory: React.FC = () => {
 
         </section>
 
-        <section id="world-types" className="directory-section" data-section-type="types">
+        <section id="world-types" className="section-content" data-section-type="types">
           <h2>Browse by World Type</h2>
           <p>Find fictional worlds based on their genre and characteristics.</p>
 
@@ -203,7 +181,7 @@ const WorldsUniversesDirectory: React.FC = () => {
 
         </section>
 
-        <section id="media-source" className="directory-section" data-section-type="media">
+        <section id="media-source" className="section-content" data-section-type="media">
           <h2>Browse by Media Source</h2>
           <p>Explore fictional worlds based on their original medium.</p>
 
@@ -256,7 +234,7 @@ const WorldsUniversesDirectory: React.FC = () => {
 
         </section>
 
-        <section id="creators" className="directory-section" data-section-type="creators">
+        <section id="creators" className="section-content" data-section-type="creators">
           <h2>Browse by Creator</h2>
           <p>Explore fictional worlds based on their creators and worldbuilders.</p>
 
@@ -303,7 +281,7 @@ const WorldsUniversesDirectory: React.FC = () => {
 
         </section>
 
-        <section id="alphabetical" className="directory-section" data-section-type="alphabetical">
+        <section id="alphabetical" className="section-content" data-section-type="alphabetical">
           <h2>Alphabetical List</h2>
           <p>Browse all fictional worlds and universes in our database alphabetically.</p>
 
@@ -341,7 +319,7 @@ const WorldsUniversesDirectory: React.FC = () => {
           </div>
         </section>
 
-        <section className="directory-help">
+        <section className="section-content">
           <h2>Can't Find What You're Looking For?</h2>
           <div className="info-card-grid">
             <div className="info-card">

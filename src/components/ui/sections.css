@@ -5,14 +5,23 @@
 
 /* Section content styles */
 .section-content {
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-lg);
   position: relative;
-  background-color: #f8f9fa;
-  border-radius: var(--border-radius-base);
-  margin: var(--spacing-md);
+  background-color: linear-gradient(
+    to top,
+    #c9c8c5 0%,
+    #c9c8c5 1%,
+    #dbdad7 31%,
+    #dcdad7 75%,
+    #d6d5d2 100%
+  ); /* subtle transparency */
+  border-radius: calc(var(--border-radius-base) * 2);
+  margin: var(--spacing-lg) auto;
   color: var(--text-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-top: 4px solid var(--fanarc-primary-color);
+  max-width: 65rem;
+  transition: box-shadow 0.2s;
 }
 
 .section-content h1,
@@ -30,6 +39,8 @@
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-loose);
   color: var(--text-color);
+  letter-spacing: .065rem;
+  font-size: var(--font-size-md);
 }
 
 .section-content ul,
@@ -117,57 +128,7 @@
   margin: var(--spacing-md) 0;
 }
 
-/* === Wikipedia-style Typography Enhancements === */
 
-.two-column-grid,
-.three-column-grid {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-loose);
-  color: var(--text-color);
-  background: var(--base-light-gradient);
-  letter-spacing: var(--letter-spacing);
-  word-spacing: var(--word-spacing);
-}
-
-
-.two-column-grid h1,
-.three-column-grid h1 {
-  font-size: var(--font-size-xxxl);
-  margin-bottom: var(--spacing-md);
-  font-weight: 700;
-  color: var(--fanarc-primary-color);
-  line-height: var(--line-height-tight);
-}
-
-
-.two-column-grid h2,
-.three-column-grid h2 {
-  font-size: var(--font-size-xxl);
-  margin-top: var(--spacing-xl);
-  margin-bottom: var(--spacing-md);
-  font-weight: 600;
-  color: var(--text-color);
-}
-
-
-.two-column-grid h3,
-.three-column-grid h3 {
-  font-size: var(--font-size-xl);
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-sm);
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.section-content p,
-.two-column-grid p,
-.three-column-grid p {
-  margin-bottom: var(--spacing-md);
-  line-height: var(--line-height-loose);
-  color: var(--text-color);
-  text-align: left;
-}
 
 
 
@@ -186,6 +147,7 @@
     margin: var(--spacing-sm);
   }
 
+  
   .content-grid {
     grid-template-columns: 1fr;
   }
@@ -193,5 +155,9 @@
   .grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+  }
+
+  .grid-card {
+    padding: var(--spacing-md);
   }
 }
