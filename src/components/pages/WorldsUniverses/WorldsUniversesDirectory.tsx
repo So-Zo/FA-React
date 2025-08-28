@@ -188,8 +188,7 @@ const WorldsUniversesDirectory: React.FC = () => {
           <h2>Browse by World Type</h2>
           <p>Find fictional worlds based on their genre and characteristics.</p>
 
-          <div className="info-card-grid" data-content="world-types">
-            <div className="info-card">
+        
               <h3>Fantasy Worlds</h3>
               <ul className="show-list">
                 <li>
@@ -237,9 +236,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+      
 
-            <div className="info-card">
+            
               <h3>Science Fiction Worlds</h3>
               <ul className="show-list">
                 <li>
@@ -287,9 +286,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="info-card">
+          
               <h3>Superhero Universes</h3>
               <ul className="show-list">
                 <li>
@@ -337,9 +336,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+          
 
-            <div className="info-card">
+        
               <h3>Post-Apocalyptic Worlds</h3>
               <ul className="show-list">
                 <li>
@@ -387,8 +386,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
         </section>
 
         <section
@@ -399,8 +396,7 @@ const WorldsUniversesDirectory: React.FC = () => {
           <h2>Browse by Media Source</h2>
           <p>Explore fictional worlds based on their original medium.</p>
 
-          <div className="info-card-grid" data-content="world-media">
-            <div className="info-card">
+         
               <h3>Literature</h3>
               <ul className="show-list">
                 <li>
@@ -448,9 +444,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="info-card">
+            
               <h3>Film & Television</h3>
               <ul className="show-list">
                 <li>
@@ -498,9 +494,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+    
 
-            <div className="info-card">
+      
               <h3>Comics & Graphic Novels</h3>
               <ul className="show-list">
                 <li>
@@ -548,9 +544,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+          
 
-            <div className="info-card">
+          
               <h3>Video Games</h3>
               <ul className="show-list">
                 <li>
@@ -598,8 +594,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
         </section>
 
         <section
@@ -612,8 +606,7 @@ const WorldsUniversesDirectory: React.FC = () => {
             Explore fictional worlds based on their creators and worldbuilders.
           </p>
 
-          <div className="info-card-grid" data-content="world-creators">
-            <div className="info-card">
+          
               <h3>J.R.R. Tolkien</h3>
               <ul className="show-list">
                 <li>
@@ -650,9 +643,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="info-card">
+            
               <h3>George R.R. Martin</h3>
               <ul className="show-list">
                 <li>
@@ -678,9 +671,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+            
 
-            <div className="info-card">
+      
               <h3>Brandon Sanderson</h3>
               <ul className="show-list">
                 <li>
@@ -717,9 +710,9 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
+          
 
-            <div className="info-card">
+            
               <h3>Ursula K. Le Guin</h3>
               <ul className="show-list">
                 <li>
@@ -745,8 +738,6 @@ const WorldsUniversesDirectory: React.FC = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
         </section>
 
         <section
@@ -809,8 +800,7 @@ const WorldsUniversesDirectory: React.FC = () => {
             </a>
           </div>
 
-          <div className="info-card-grid" data-content="alphabetical-listing">
-            <div id="a" className="info-card">
+          
               <h3>A</h3>
               <ul className="show-list">
                 <li>
@@ -848,9 +838,8 @@ const WorldsUniversesDirectory: React.FC = () => {
                 </li>
                 {/* More worlds starting with A */}
               </ul>
-            </div>
+            
 
-            <div id="b" className="info-card">
               <h3>B</h3>
               <ul className="show-list">
                 <li>
@@ -888,23 +877,18 @@ const WorldsUniversesDirectory: React.FC = () => {
                 </li>
                 {/* More worlds starting with B */}
               </ul>
-            </div>
+      
 
             {/* Continue with all letters */}
-          </div>
         </section>
 
         <section className="section-content">
           <h2>Can't Find What You're Looking For?</h2>
-          <div className="info-card-grid">
-            <div className="info-card">
               <h3>Use Search</h3>
               <p>
                 Try searching for specific worlds or universes using the search
                 bar at the top of the page.
               </p>
-            </div>
-          </div>
         </section>
       </main>
     </div>

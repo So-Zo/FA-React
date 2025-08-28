@@ -174,7 +174,7 @@ body {
 /* Link styles moved to links.css */
 
 /* Section content styles */
-.section-content {
+.home-section {
   padding: var(--spacing-lg) var(--spacing-md);
   text-align: center;
   background-image: var(--base-light-gradient);
@@ -182,7 +182,7 @@ body {
   margin: var(--spacing-md);
 }
 
-.section-content h1 {
+.home-section h1 {
   margin-bottom: var(--spacing-md);
   color: var(--fanarc-primary-color);
 }

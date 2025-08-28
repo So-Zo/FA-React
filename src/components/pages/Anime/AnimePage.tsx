@@ -4,6 +4,8 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
 
+
+
 const AnimePage: React.FC = () => {
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
@@ -578,8 +580,8 @@ const AnimePage: React.FC = () => {
           </p>
 
           <h4>Key Studios in Anime Production</h4>
-          <div className="info-card-grid">
-            <div className="info-card">
+          <div className="three-column-grid">
+            <div className="grid-card">
               <h5>Studio Ghibli</h5>
               <p>
                 Known for high-quality feature films with rich storytelling and
@@ -591,7 +593,7 @@ const AnimePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Kyoto Animation</h5>
               <p>
                 Renowned for exceptional animation quality and attention to
@@ -603,7 +605,7 @@ const AnimePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="info-card">
+            <div className="grid-card">
               <h5>MAPPA</h5>
               <p>
                 Modern studio known for taking on challenging and diverse
@@ -615,7 +617,7 @@ const AnimePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Bones</h5>
               <p>Known for action-packed series with fluid animation</p>
               <p>
@@ -876,3 +878,5 @@ const AnimePage: React.FC = () => {
 };
 
 export default AnimePage;
+
+

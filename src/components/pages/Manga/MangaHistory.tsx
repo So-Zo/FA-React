@@ -56,13 +56,6 @@ const MangaHistory: React.FC = () => {
       />
 
       <main id="main-content">
-        <section className="content-header">
-          <h1 className="content-title">History of Manga</h1>
-          <p className="content-meta">
-            A comprehensive exploration of manga's evolution through the
-            centuries
-          </p>
-        </section>
 
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">

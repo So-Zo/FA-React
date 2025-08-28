@@ -18,7 +18,24 @@
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
 
+@media (min-width: 1024px) {
+  .bottom-navigation {
+    position: sticky;
+    top: 0;
+    grid-column: 1 / 2; /* Occupy the first grid column */
+    width: 4.5rem;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    z-index: calc(var(--z-index-fixed) + 10);
+  }
+}
+
 .bottom-navigation a,
+.bottom-navigation button,
 .bottom-navigation div {
   color: white;
   text-decoration: none;
@@ -30,15 +47,20 @@
   padding: 0.5rem;
   width: 3rem;
   height: 3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .bottom-navigation a:hover,
+.bottom-navigation button:hover,
 .bottom-navigation div:hover {
   opacity: 0.8;
   transform: scale(1.1);
 }
 
 .bottom-navigation a:active,
+.bottom-navigation button:active,
 .bottom-navigation div:active {
   opacity: 0.6;
   transform: scale(0.95);
@@ -64,16 +86,17 @@
   opacity: 0.8;
 }
 
-
 /* Main Navigation Menu */
 .main-navigation {
-  position: fixed;
+  position: sticky;
   bottom: 4rem;
   left: 0;
   width: 100%;
   height: 70vh;
   max-height: 95vh;
-  background-color: var(--fanarc-primary-color); /* Using a plain color instead of gradient */
+  background-color: var(
+    --fanarc-primary-color
+  ); /* Using a plain color instead of gradient */
   border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
   transform: translateY(100%);
   transition: transform 0.3s ease;
@@ -212,7 +235,7 @@
 /* Media query for sidebar*/
 @media (min-width: 1024px) {
   .bottom-navigation {
-    position: fixed;
+    position: sticky;
     top: 0;
     bottom: auto;
     left: 0;
@@ -221,7 +244,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    box-shadow: 1px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
     padding: 1rem 0;
     z-index: calc(var(--z-index-fixed) + 10);
   }
@@ -237,7 +260,6 @@
 }
 
 @media (min-width: 1024px) {
-
   .main-navigation {
     position: fixed;
     top: 0;

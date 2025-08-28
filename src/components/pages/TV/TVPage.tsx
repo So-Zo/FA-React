@@ -594,15 +594,15 @@ const TVPage: React.FC = () => {
           </div>
 
           <h4>Major Television Networks & Platforms</h4>
-          <div className="info-card-grid">
-            <div className="info-card">
+          <div className="three-column-grid">
+            <div className="grid-card">
               <h5>Traditional Networks</h5>
               <p>Broadcast television channels available over the air</p>
               <p>
                 <strong>Examples:</strong> ABC, NBC, CBS, FOX, BBC
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Cable Networks</h5>
               <p>
                 Specialized channels available through cable or satellite
@@ -612,7 +612,7 @@ const TVPage: React.FC = () => {
                 <strong>Examples:</strong> HBO, AMC, FX, Showtime
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Streaming Platforms</h5>
               <p>Internet-based services offering on-demand content</p>
               <p>
@@ -620,7 +620,7 @@ const TVPage: React.FC = () => {
                 Disney+
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Production Studios</h5>
               <p>Companies that create television content</p>
               <p>

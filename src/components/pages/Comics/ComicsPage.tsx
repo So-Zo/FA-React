@@ -42,20 +42,6 @@ const ComicsPage: React.FC = () => {
 
   return (
     <div className="comics-page">
-      <header>
-        <div className="image-header">
-          <img src="/images/comics/ComicsHeader.jpg" alt="Comics Overview" />
-        </div>
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
-      </header>
       <main id="main-content">
         <hr />
         <TableOfContents
@@ -92,7 +78,7 @@ const ComicsPage: React.FC = () => {
             </Link>
             .
           </p>
-          <h4>Key Characteristics of Comics</h4>
+          <h3>Key Characteristics of Comics</h3>
           <ul>
             <li>
               <strong>Sequential Art:</strong> Stories told through a sequence
@@ -520,8 +506,8 @@ const ComicsPage: React.FC = () => {
             </li>
           </ul>
           <h4>Major Comics Publishers</h4>
-          <div className="info-card-grid">
-            <div className="info-card">
+          <div className="three-column-grid">
+            <div className="grid-card">
               <h5>Marvel Comics</h5>
               <p>
                 Known for superhero universes and characters like Spider-Man,
@@ -531,7 +517,7 @@ const ComicsPage: React.FC = () => {
                 <strong>Founded:</strong> 1939 (as Timely Comics)
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>DC Comics</h5>
               <p>
                 Home to iconic characters like Superman, Batman, and Wonder
@@ -541,7 +527,7 @@ const ComicsPage: React.FC = () => {
                 <strong>Founded:</strong> 1934 (as National Allied Publications)
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Image Comics</h5>
               <p>
                 Creator-owned publisher known for innovative series and creator
@@ -551,7 +537,7 @@ const ComicsPage: React.FC = () => {
                 <strong>Founded:</strong> 1992
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Dark Horse Comics</h5>
               <p>
                 Known for creator-owned titles, licensed properties, and diverse

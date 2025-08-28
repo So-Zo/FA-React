@@ -6,13 +6,6 @@
 @import "./variables.css";
 @import "./reset.css"; /* Import consolidated reset styles */
 
-/*
-* RESET STYLES MOVED TO css/core/reset.css
-* The following reset styles have been moved to the central reset.css file
-* and are now imported above. This ensures consistent resets across the project.
-* Please do not add reset styles here - add them to reset.css instead.
-*/
-
 /* Base styles - these remain as they are styling choices, not resets */
 body {
   font-family: var(--font-family-base);
@@ -20,8 +13,6 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
 }
-
-
 
 .visually-hidden {
   position: absolute;
@@ -34,7 +25,6 @@ body {
   white-space: nowrap;
   border: 0;
 }
-
 
 .skip-link {
   position: absolute;
@@ -53,17 +43,14 @@ body {
 
 /* Content wrapper for main content to avoid sidebar overlap */
 .content-wrapper {
-  padding: 0 1rem; /* default mobile padding */
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile-first: single column */
   max-width: 100%;
   margin: 0 auto;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .content-wrapper {
-  margin: var(--spacing-lg) auto;
-  padding-left: 6rem;
+    grid-template-columns: 4.5rem 1fr; /* Sidebar width + main content */
   }
 }
-
-
-

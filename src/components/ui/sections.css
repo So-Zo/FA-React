@@ -7,7 +7,7 @@
 .section-content {
   padding: var(--spacing-xl) var(--spacing-lg);
   position: relative;
-  background-color: linear-gradient(
+  background: linear-gradient(
     to top,
     #c9c8c5 0%,
     #c9c8c5 1%,
@@ -20,16 +20,11 @@
   color: var(--text-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   border-top: 4px solid var(--fanarc-primary-color);
-  max-width: 65rem;
+  max-width: 70rem;
   transition: box-shadow 0.2s;
 }
 
-.section-content h1,
-.section-content h2,
-.section-content h3,
-.section-content h4 {
-  color: var(--text-color);
-}
+
 
 .section-content h1 {
   margin-bottom: var(--spacing-md);
@@ -38,19 +33,17 @@
 .section-content p {
   margin-bottom: var(--spacing-md);
   line-height: var(--line-height-loose);
-  color: var(--text-color);
-  letter-spacing: .065rem;
+  letter-spacing: 0.065rem;
   font-size: var(--font-size-md);
+  text-align: left;
 }
 
 .section-content ul,
 .section-content ol,
 .section-content dl {
   color: var(--text-color);
+  font-size: var(--font-size-md);
 }
-
-
-
 
 /* Table of Contents styles */
 .toc-container {
@@ -128,10 +121,6 @@
   margin: var(--spacing-md) 0;
 }
 
-
-
-
-
 /* Media queries for responsive design */
 @media (max-width: 48rem) {
   .hero-section {
@@ -147,7 +136,6 @@
     margin: var(--spacing-sm);
   }
 
-  
   .content-grid {
     grid-template-columns: 1fr;
   }

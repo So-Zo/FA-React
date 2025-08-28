@@ -5,6 +5,8 @@
 
 @import url(/src/components/ui/global.css);
 
+@import url(/src/components/ui/sections.css);
+
 @import url(/src/components/ui/HomePage.css);
 
 @import url(/src/components/ui/CommunityPage.css);
@@ -14,8 +16,6 @@
 @import url(/src/components/ui/PowerRoomPage.css);
 
 @import url(/src/components/ui/BgColors.css);
-
-@import url(/src/components/ui/sections.css);
 
 @import url(/src/components/ui/links.css);
 

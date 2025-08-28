@@ -10,7 +10,7 @@
  * Default card style for links and quick information
  */
 .info-card {
-  background-color: rgb(212, 216, 255);
+  background-color: var(--fanarc-primary-color);
   border-left: 4px solid var(--fanarc-primary-color);
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-base);

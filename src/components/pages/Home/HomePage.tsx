@@ -17,10 +17,10 @@ const HomePage: React.FC = () => {
           placeholder="Search for media, characters, universes, etc."
         />
       </header>
-
+      <hr />
       <main id="main-content" role="main">
         {/* Main Body sections */}
-        <section className="section-content">
+        <section className="home-section">
           <h1>Welcome to FanArcs</h1>
           <p>
             FanArcs is your hub for exploring and contributing to fan

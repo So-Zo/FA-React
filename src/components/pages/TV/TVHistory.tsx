@@ -41,9 +41,7 @@ const TVHistory: React.FC = () => {
           placeholder="Search for Characters, Universes, etc."
         />
 
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
+       
       </header>
 
       <hr />
@@ -56,13 +54,6 @@ const TVHistory: React.FC = () => {
       />
 
       <main id="main-content">
-        <section className="content-header">
-          <h1 className="content-title">History of Television</h1>
-          <p className="content-meta">
-            A comprehensive exploration of television's evolution through the
-            decades
-          </p>
-        </section>
 
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">

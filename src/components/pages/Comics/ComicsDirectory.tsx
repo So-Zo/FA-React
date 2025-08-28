@@ -89,9 +89,6 @@ const ComicsDirectory: React.FC = () => {
                   >
                     Official Page
                   </a>
-                  <Link to="/community#batman" className="default-links">
-                    Community Content →
-                  </Link>
                 </div>
               </div>
             </div>
@@ -118,9 +115,6 @@ const ComicsDirectory: React.FC = () => {
                   >
                     Official Page
                   </a>
-                  <Link to="/community#batman" className="default-links">
-                    Community Content
-                  </Link>
                 </div>
               </div>
             </div>

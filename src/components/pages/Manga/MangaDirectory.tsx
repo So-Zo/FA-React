@@ -92,9 +92,6 @@ const MangaDirectory: React.FC = () => {
                   >
                     Official Page
                   </a>
-                  <Link to="/community#one-piece" className="default-links">
-                    Community Content →
-                  </Link>
                 </div>
               </div>
             </div>
@@ -126,12 +123,6 @@ const MangaDirectory: React.FC = () => {
                   >
                     Official Page
                   </a>
-                  <Link
-                    to="/community#attack-on-titan"
-                    className="default-links"
-                  >
-                    Community Content →
-                  </Link>
                 </div>
               </div>
             </div>

@@ -35,7 +35,7 @@ const CharacterPage: React.FC = () => {
           />
         </div>
 
-        {/* Alternate Forms Navigation */}
+        {/* Alternate Forms Navigation SHOULD BE LINKS */}
         <nav
           className="alternate-forms-nav"
           aria-label="Alternate Forms"
@@ -53,56 +53,56 @@ const CharacterPage: React.FC = () => {
           <button className="alt-form-btn">Adult Naruto</button>
           <button className="alt-form-btn">Kurama Mode</button>
         </nav>
+        <section className="section-content">
+          <div className="two-column-grid">
+            <div className="grid-card">
+              <h2>Naruto Uzumaki</h2>
+              <p>
+                <strong>Age:</strong> 12–13 (Part I), 15–17 (Shippuden), Adult
+                (Boruto)
+              </p>
+              <p>
+                <strong>Show(s):</strong> Naruto, Naruto Shippuden, Boruto:
+                Naruto Next Generations
+              </p>
+              <p>
+                <strong>Height:</strong> 145.3–147.5 cm (Part I), 166 cm
+                (Shippuden), 180 cm (Adult)
+              </p>
+              <p>
+                <strong>Weight:</strong> 40.1–40.6 kg (Part I), 50.9 kg
+                (Shippuden), 66 kg (Adult)
+              </p>
 
-        <div className="two-column-grid">
-          <div className="grid-card">
-            <h2>Naruto Uzumaki</h2>
-            <p>
-              <strong>Age:</strong> 12–13 (Part I), 15–17 (Shippuden), Adult
-              (Boruto)
-            </p>
-            <p>
-              <strong>Show(s):</strong> Naruto, Naruto Shippuden, Boruto: Naruto
-              Next Generations
-            </p>
-            <p>
-              <strong>Height:</strong> 145.3–147.5 cm (Part I), 166 cm
-              (Shippuden), 180 cm (Adult)
-            </p>
-            <p>
-              <strong>Weight:</strong> 40.1–40.6 kg (Part I), 50.9 kg
-              (Shippuden), 66 kg (Adult)
-            </p>
+              <h2>Powers & Abilities</h2>
+              <p>
+                <strong>Shadow Clone Jutsu</strong>
+              </p>
+              <p>
+                <strong>Rasengan</strong>
+              </p>
+              <p>
+                <strong>Sage Mode</strong>
+              </p>
+              <p>
+                <strong>Kurama Chakra Mode</strong>
+              </p>
+            </div>
 
-            <h2>Powers & Abilities</h2>
-            <p>
-              <strong>Shadow Clone Jutsu</strong>
-            </p>
-            <p>
-              <strong>Rasengan</strong>
-            </p>
-            <p>
-              <strong>Sage Mode</strong>
-            </p>
-            <p>
-              <strong>Kurama Chakra Mode</strong>
-            </p>
+            <div className="grid-card">
+              <h3>Personality</h3>
+              <p>
+                Naruto is energetic, optimistic, and fiercely determined. He
+                never gives up on his goals or friends, no matter the odds.
+              </p>
+              <p>Key personality traits include:</p>
+              <p>Unyielding determination</p>
+              <p>Loyalty</p>
+              <p>Compassion</p>
+              <p>Mischievousness</p>
+            </div>
           </div>
-
-          <div className="grid-card">
-            <h3>Personality</h3>
-            <p>
-              Naruto is energetic, optimistic, and fiercely determined. He never
-              gives up on his goals or friends, no matter the odds.
-            </p>
-            <p>Key personality traits include:</p>
-            <p>Unyielding determination</p>
-            <p>Loyalty</p>
-            <p>Compassion</p>
-            <p>Mischievousness</p>
-          </div>
-        </div>
-
+        </section>
         <hr />
 
         <section className="section-content">

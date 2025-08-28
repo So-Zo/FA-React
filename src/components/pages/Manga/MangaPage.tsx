@@ -42,23 +42,6 @@ const MangaPage: React.FC = () => {
 
   return (
     <div className="manga-page">
-      <header>
-        <div className="image-header">
-          <img src="/images/Manga/MangaHeader.jpg" alt="Manga Overview" />
-        </div>
-
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
-      </header>
-
       <main id="main-content">
         <hr />
 
@@ -553,8 +536,8 @@ const MangaPage: React.FC = () => {
           </ul>
 
           <h4>Major Manga Publishers</h4>
-          <div className="info-card-grid">
-            <div className="info-card">
+          <div className="three-column-grid">
+            <div className="grid-card">
               <h5>Shueisha</h5>
               <p>
                 Publisher of Weekly Shōnen Jump, the most popular manga magazine
@@ -563,7 +546,7 @@ const MangaPage: React.FC = () => {
                 <strong>Notable Series:</strong> One Piece, Naruto, Demon Slayer
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Kodansha</h5>
               <p>One of Japan's largest publishing companies</p>
               <p>
@@ -571,7 +554,7 @@ const MangaPage: React.FC = () => {
                 The Seven Deadly Sins
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Shogakukan</h5>
               <p>Major publisher with diverse manga offerings</p>
               <p>
@@ -579,7 +562,7 @@ const MangaPage: React.FC = () => {
                 Doraemon
               </p>
             </div>
-            <div className="info-card">
+            <div className="grid-card">
               <h5>Hakusensha</h5>
               <p>Known for shōjo and josei manga</p>
               <p>
