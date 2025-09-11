@@ -1,6 +1,6 @@
 # FA-React
 
-FanArcs (react) is a modern, clean, and accessible platform for fan communities, built with React, TypeScript, and Vite. Inspired by FanArcs, this project provides a clutter-free or atleast miminal clutter, experience for exploring and sharing fan content across various media types including anime, manga, comics, television, and more. FA-React leverages the power of React components for a scalable, maintainable, and interactive user experience.
+FanArcs (react) is a modern, clean, and accessible platform for fan communities, built with React, TypeScript, and Vite. This project attempts to provide a miminal clutter, experience for exploring and sharing fan content across various media types including anime, manga, comics, television, and more. FA-React leverages the power of React components for a scalable, maintainable, and interactive user experience.
 
 ## Features
 
