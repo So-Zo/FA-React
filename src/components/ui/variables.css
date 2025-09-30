@@ -3,7 +3,8 @@
 * Central location for all CSS variables used throughout the site
 */
 
-:root {
+:root,
+[data-theme='light'] {
   /* Core Colors */
   --text-color: black;
   --bg-color: white;
@@ -191,4 +192,28 @@
   /* Power Room Specific Gradients */
   --power-stat-left: linear-gradient(to right, #4a90e2, #357abd);
   --power-stat-right: linear-gradient(to right, #e94560, #c23851);
+}
+
+[data-theme='dark'] {
+  /* Core Colors */
+  --text-color: white;
+  --bg-color: #121212;
+  --text-primary: #000000;
+
+  /* Brand Colors */
+  --fanarc-primary-color: #A997DF; /* Lighter purple for dark mode */
+  --fanarc-secondary-color: #0F084B; /* Darker purple for dark mode */
+
+  /* Link Colors */
+  --non-existent-link-color: #FF8E8E;
+  --non-existent-link-hover-color: #FF6B6B;
+  --non-existent-link-border: #FF8E8E;
+  --non-existent-link-icon-color: #FF8E8E;
+
+  /* UI Colors */
+  --shadow-color: rgba(255, 255, 255, 0.2);
+  --accent-color: #A997DF; /* Lighter purple for dark mode */
+  --border-color: #A997DF; /* Lighter purple for dark mode */
+  --bg-primary: #1d004d;
+  --bg-secondary: #2a1a6f;
 }
