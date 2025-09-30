@@ -5,6 +5,10 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-lg);
   margin: var(--spacing-md) 0;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .grid-block {
@@ -12,6 +16,9 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   font-size: var(--font-size-md);
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .three-column-grid {
@@ -28,22 +35,96 @@
   background: white;
   border-radius: calc(var(--border-radius-base) * 1.5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: var(--spacing-md);
-  transition: box-shadow 0.2s, transform 0.2s;
-  border: 4px solid rgba(11, 11, 11, 0.04);
-  margin-bottom: var(--spacing-md);
+  border: 1px solid rgba(11, 11, 11, 0.04);
+  height: fit-content;
+  min-width: 0; /* Prevent grid item overflow */
+  word-wrap: break-word; /* Ensure text wraps */
+  overflow-wrap: break-word;
 }
+
 .grid-card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px) scale(1.01);
 }
 
-.grid-card h4 {
-  font-size: var(--font-size-lg);
+/* Card header with user info */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
 }
 
-.grid-card ul li {
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.user-info img.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: var(--font-size-md);
+}
+
+.timestamp {
   font-size: var(--font-size-sm);
+  color: var(--fanarc-text-secondary);
+}
+
+.category-tag {
+  padding: 0.25rem 0.75rem;
+  background: var(--fanarc-accent-color, #e0e0e0);
+  border-radius: 16px;
+  font-size: var(--font-size-sm);
+}
+
+/* Content area */
+.content {
+  padding: var(--spacing-sm);
+  width: 100%;
+  overflow: hidden;
+}
+
+.content h4 {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--font-size-lg);
+  color: var(--fanarc-text-primary);
+}
+
+.content p {
+  margin: 0 0 var(--spacing-md);
+  line-height: 1.5;
+  color: var(--fanarc-text-secondary);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+.media-container {
+  margin-top: var(--spacing-md);
+  border-radius: var(--border-radius-base);
+  overflow: hidden;
+}
+
+.media-container img.post-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 /* === Wikipedia-style Typography Enhancements === */
 

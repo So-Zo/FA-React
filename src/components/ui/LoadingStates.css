@@ -1,0 +1,36 @@
+.loading-state,
+.error-state,
+.empty-state {
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface-background);
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+}
+
+.loading-state {
+  color: var(--text-primary);
+  animation: pulse 1.5s infinite;
+}
+
+.error-state {
+  color: var(--error-color, #ff4444);
+  border: 1px solid var(--error-border-color, #ff6666);
+}
+
+.empty-state {
+  color: var(--text-secondary);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
