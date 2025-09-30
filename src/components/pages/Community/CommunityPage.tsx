@@ -1,6 +1,19 @@
 import React, { useState } from "react";
+import { PostType, SortOption, usePosts } from "../../../hooks/usePosts";
+import "../../ui/LoadingStates.css";
+import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
 
 const CommunityPage: React.FC = () => {
+  const [selectedPostType, setSelectedPostType] = useState<PostType | null>(
+    null
+  );
+  const [selectedSort, setSelectedSort] = useState<SortOption>("latest");
+
+  const { posts, loading, error, toggleLike } = usePosts({
+    postType: selectedPostType || undefined,
+    sort: selectedSort,
+  });
+
   // State for active filter dropdowns
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -49,66 +62,35 @@ const CommunityPage: React.FC = () => {
                   }`}
                 >
                   <ul>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value="creators"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Creators</button>
-                      </label>
-                      <span className="category-count">245</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value="fan-art"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Fan Art</button>
-                      </label>
-                      <span className="category-count">189</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value="fan-fiction"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Fan Fiction</button>
-                      </label>
-                      <span className="category-count">76</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value="world-building"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>World Building</button>
-                      </label>
-                      <span className="category-count">112</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="category"
-                          value="character-spinoffs"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Character Spin-offs</button>
-                      </label>
-                      <span className="category-count">93</span>
-                    </li>
+                    {(["discussion", "feedback", "misc"] as PostType[]).map(
+                      (type) => (
+                        <li key={type}>
+                          <label className="checkbox-wrapper">
+                            <input
+                              type="radio"
+                              name="post-type"
+                              value={type}
+                              checked={selectedPostType === type}
+                              onChange={() => setSelectedPostType(type)}
+                            />
+                            <span className="custom-checkbox"></span>
+                            <button onClick={() => setSelectedPostType(type)}>
+                              {type.charAt(0).toUpperCase() + type.slice(1)}
+                            </button>
+                          </label>
+                        </li>
+                      )
+                    )}
+                    {selectedPostType && (
+                      <li>
+                        <button
+                          className="clear-filter"
+                          onClick={() => setSelectedPostType(null)}
+                        >
+                          Show All
+                        </button>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -197,7 +179,8 @@ const CommunityPage: React.FC = () => {
                   }`}
                   onClick={() => toggleDropdown("sort-by")}
                 >
-                  Sort By
+                  Sort By:{" "}
+                  {selectedSort.charAt(0).toUpperCase() + selectedSort.slice(1)}
                 </button>
                 <div
                   className={`filter-dropdown ${
@@ -205,78 +188,37 @@ const CommunityPage: React.FC = () => {
                   }`}
                 >
                   <ul>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="new-to-old" />
-                        <span className="custom-checkbox"></span>
-                        <button>New to Old</button>
-                      </label>
-                      <span className="category-count">245</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="old-to-new" />
-                        <span className="custom-checkbox"></span>
-                        <button>Old to New</button>
-                      </label>
-                      <span className="category-count">189</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input type="checkbox" name="sort" value="most-liked" />
-                        <span className="custom-checkbox"></span>
-                        <button>Most Liked</button>
-                      </label>
-                      <span className="category-count">76</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="sort"
-                          value="shortest-to-longest"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Shortest to Longest</button>
-                      </label>
-                      <span className="category-count">112</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="sort"
-                          value="longest-to-shortest"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Longest to Shortest</button>
-                      </label>
-                      <span className="category-count">93</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="sort"
-                          value="completed-works"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Completed Works</button>
-                      </label>
-                      <span className="category-count">93</span>
-                    </li>
-                    <li>
-                      <label className="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          name="sort"
-                          value="unfinished-work"
-                        />
-                        <span className="custom-checkbox"></span>
-                        <button>Unfinished Work</button>
-                      </label>
-                      <span className="category-count">93</span>
-                    </li>
+                    {(
+                      [
+                        "latest",
+                        "trending",
+                        "top",
+                        "most_commented",
+                        "most_liked",
+                      ] as SortOption[]
+                    ).map((sort) => (
+                      <li key={sort}>
+                        <label className="checkbox-wrapper">
+                          <input
+                            type="radio"
+                            name="sort"
+                            value={sort}
+                            checked={selectedSort === sort}
+                            onChange={() => setSelectedSort(sort)}
+                          />
+                          <span className="custom-checkbox"></span>
+                          <button onClick={() => setSelectedSort(sort)}>
+                            {sort
+                              .split("_")
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1)
+                              )
+                              .join(" ")}
+                          </button>
+                        </label>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -286,114 +228,71 @@ const CommunityPage: React.FC = () => {
 
         <main className="community-feed">
           <div className="posts-container">
-            {/* Post Card 1 */}
-            <article className="post-card">
-              <div className="post-card-header">
-                <div className="post-author-mini">
-                  <img src="/placeholder-avatar.jpg" alt="Author Profile" />
-                  <div className="author-info">
-                    <span className="author-name">CreativeUsername</span>
-                    <span className="post-timestamp">2h ago</span>
+            {loading ? (
+              <div className="loading-state">Loading posts...</div>
+            ) : error ? (
+              <div className="error-state">Error: {error}</div>
+            ) : posts.length === 0 ? (
+              <div className="empty-state">No posts found</div>
+            ) : (
+              posts.map((post) => (
+                <article key={post.id} className="post-card">
+                  <div className="post-card-header">
+                    <div className="post-author-mini">
+                      <img
+                        src={
+                          post.author?.avatar_url || "/placeholder-avatar.jpg"
+                        }
+                        alt={`${post.author?.display_name}'s Profile`}
+                      />
+                      <div className="author-info">
+                        <span className="author-name">
+                          {post.author?.display_name || "Anonymous"}
+                        </span>
+                        <span className="post-timestamp">
+                          {new Date(post.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="post-category-tag">Anime</div>
-              </div>
-              <div className="post-content">
-                <h2 className="post-title">
-                  Incredible Character Design Concept
-                </h2>
-                <div className="post-media">
-                  <img src="/Post-test.jpg" alt="Character Design" />
-                </div>
-                <p className="post-description">
-                  Just finished this character design for my upcoming manga
-                  project. Inspired by classic 90s anime aesthetics with a
-                  modern twist!
-                </p>
-              </div>
 
-              <div className="post-interactions">
-                <div className="interaction-group">
-                  <button className="like-btn">👍 256</button>
-                  <button className="comment-btn">💬 42</button>
-                  <button className="share-btn">🔗 Share</button>
-                </div>
-                <div className="save-btn">
-                  <button>💾 Save</button>
-                </div>
-              </div>
-            </article>
-
-            {/* Post Card 2 */}
-            <article className="post-card">
-              <div className="post-card-header">
-                <div className="post-author-mini">
-                  <img src="/placeholder-avatar.jpg" alt="Author Profile" />
-                  <div className="author-info">
-                    <span className="author-name">MangaEnthusiast</span>
-                    <span className="post-timestamp">5h ago</span>
+                  <div className="post-content">
+                    <h2 className="post-title">{post.title}</h2>
+                    {post.media_ids?.[0] && (
+                      <div className="post-media">
+                        <img
+                          src={post.media_ids[0]}
+                          alt={`Media for ${post.title}`}
+                        />
+                      </div>
+                    )}
+                    <p className="post-description">{post.content}</p>
                   </div>
-                </div>
-                <div className="post-category-tag">Manga</div>
-              </div>
-              <div className="post-content">
-                <h2 className="post-title">
-                  My Fan Theory About the Latest Chapter
-                </h2>
-                <p className="post-description">
-                  After reading the latest chapter of One Piece, I have a theory
-                  about what might happen next. I think Luffy's new power-up is
-                  actually connected to an ancient prophecy that was hinted at
-                  in chapter 287. Here's why...
-                </p>
-              </div>
 
-              <div className="post-interactions">
-                <div className="interaction-group">
-                  <button className="like-btn">👍 128</button>
-                  <button className="comment-btn">💬 37</button>
-                  <button className="share-btn">🔗 Share</button>
-                </div>
-                <div className="save-btn">
-                  <button>💾 Save</button>
-                </div>
-              </div>
-            </article>
-
-            {/* Post Card 3 */}
-            <article className="post-card">
-              <div className="post-card-header">
-                <div className="post-author-mini">
-                  <img src="/placeholder-avatar.jpg" alt="Author Profile" />
-                  <div className="author-info">
-                    <span className="author-name">ComicBookFan</span>
-                    <span className="post-timestamp">1d ago</span>
+                  <div className="post-interactions">
+                    <div className="interaction-group">
+                      <button
+                        className={`action-btn ${
+                          post.isLikedByUser ? "liked" : ""
+                        }`}
+                        onClick={() => toggleLike(post.id)}
+                      >
+                        {post.isLikedByUser ? (
+                          <AiFillHeart className="action-icon" />
+                        ) : (
+                          <AiOutlineHeart className="action-icon" />
+                        )}{" "}
+                        {post.likes_count || 0}
+                      </button>
+                      <button className="action-btn">
+                        <AiOutlineComment className="action-icon" />{" "}
+                        {post.comments_count || 0}
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="post-category-tag">Comics</div>
-              </div>
-              <div className="post-content">
-                <h2 className="post-title">Fan Art: Spider-Man in My Style</h2>
-                <div className="post-media">
-                  <img src="/placeholder-avatar.jpg" alt="Spider-Man Fan Art" />
-                </div>
-                <p className="post-description">
-                  I've been working on developing my own art style, and decided
-                  to draw Spider-Man as practice. Let me know what you think!
-                </p>
-              </div>
-
-              <div className="post-interactions">
-                <div className="interaction-group">
-                  <button className="like-btn">👍 342</button>
-                  <button className="comment-btn">💬 58</button>
-                  <button className="share-btn">🔗 Share</button>
-                </div>
-                <div className="save-btn">
-                  <button>💾 Save</button>
-                </div>
-              </div>
-            </article>
+                </article>
+              ))
+            )}
           </div>
         </main>
       </div>
