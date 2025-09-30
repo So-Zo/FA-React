@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { AuthProvider } from "./auth/AuthProvider";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -40,30 +35,29 @@ import PowerRoomPage from "./components/pages/PowerRoom/PowerRoomPage";
 import CommunityPage from "./components/pages/Community/CommunityPage";
 import ProfilePage from "./components/pages/Profile/ProfilePage";
 import CharacterPage from "./components/pages/Characters/CharacterPage";
+import LoginPage from "./components/pages/Auth/LoginPage";
 
-// This component sets the data-page attribute on the body based on the current route
-
-function PageDataAttributeSetter() {
+const PageDataAttributeSetter = () => {
   const location = useLocation();
-  useEffect(() => {
-    const match = location.pathname.match(/^\/?([^/]+)/);
-    const page = match && match[1] ? match[1] : "home";
-    document.body.setAttribute("data-page", page);
-    return () => {
-      document.body.removeAttribute("data-page");
-    };
-  }, [location]);
-  return null;
-}
 
+  useEffect(() => {
+    const path = location.pathname.split("/")[1] || "home";
+    document.body.setAttribute("data-page", path);
+  }, [location]);
+
+  return null;
+};
+
+function App() {
+  const location = useLocation();
+
+  // Logic for showing/hiding the header based on the current page.
+  // This must be inside the App component to use the `useLocation` hook.
   const noHeaderPages = ["/profile", "/power-room", "/community"];
   const showHeader = !(
     location.pathname === "/" ||
     noHeaderPages.some((page) => location.pathname.startsWith(page))
   );
-
-
-function App() {;
 
   return (
     <ThemeProvider>
@@ -74,8 +68,7 @@ function App() {;
           <div className="content-wrapper">
             <BottomNavigation />
             <div>
-              
-            {/* Skip to content link for accessibility */}
+              {/* Skip to content link for accessibility */}
               {showHeader && <Header />}
               <a href="#main-content" className="skip-link">
                 Skip to content
@@ -93,7 +86,10 @@ function App() {;
                   <Route path="/manga/directory" element={<MangaDirectory />} />
                   <Route path="/comics" element={<ComicsPage />} />
                   <Route path="/comics/history" element={<ComicsHistory />} />
-                  <Route path="/comics/directory" element={<ComicsDirectory />} />
+                  <Route
+                    path="/comics/directory"
+                    element={<ComicsDirectory />}
+                  />
                   <Route path="/tv" element={<TVPage />} />
                   <Route path="/tv/history" element={<TVHistory />} />
                   <Route path="/tv/directory" element={<TVDirectory />} />
@@ -117,6 +113,7 @@ function App() {;
                   <Route path="/power-room" element={<PowerRoomPage />} />
                   <Route path="/community" element={<CommunityPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/login" element={<LoginPage />} />
                   <Route path="/characters" element={<CharacterPage />} />
                   {/* Add more routes as we create the page components */}
                   {/* <Route path="*" element={<NotFoundPage />} /> */}
