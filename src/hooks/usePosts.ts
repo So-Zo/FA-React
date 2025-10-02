@@ -2,9 +2,20 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useAuth } from "./useAuth";
 
-export type PostType = "discussion" | "feedback" | "misc";
+export type PostType =
+  | "discussion"
+  | "question"
+  | "fan-art"
+  | "fan-fiction"
+  | "world-building"
+  | "feedback"
+  | "review"
+  | "theory"
+  | "news"
+  | "meme"
+  | "cosplay";
 
-export type MediaType =
+export type Medium =
   | "anime"
   | "manga"
   | "comics"
@@ -14,7 +25,7 @@ export type MediaType =
   | "books"
   | "other";
 
-export type ContentGenre =
+export type Genre =
   | "comedy"
   | "horror"
   | "drama"
@@ -22,7 +33,8 @@ export type ContentGenre =
   | "action"
   | "adventure"
   | "fantasy"
-  | "sci-fi";
+  | "sci-fi"
+  | "other";
 
 interface MediaItem {
   id: string;
@@ -50,8 +62,9 @@ interface PostFeedRow {
   title: string;
   content: string;
   post_type: PostType;
-  media_type?: MediaType;
-  content_genre?: ContentGenre;
+  medium: Medium;
+  genre: Genre;
+  tags: string[];
   author_id: string;
   media_ids: string[];
   hashtags: string[];
@@ -77,19 +90,12 @@ export type SortOption =
   | "most_commented"
   | "most_liked";
 export type TimeFilter = "today" | "this_week" | "this_month" | "all_time";
-export type PostCategory =
-  | "creators"
-  | "fan-art"
-  | "fan-fiction"
-  | "world-building"
-  | "all";
-
 export interface PostQueryOptions {
   sort?: SortOption;
   timeFilter?: TimeFilter;
-  category?: PostCategory;
   postType?: PostType;
-  genre?: ContentGenre;
+  medium?: Medium;
+  genre?: Genre;
   searchQuery?: string;
 }
 
@@ -99,8 +105,9 @@ export interface Post {
   title: string;
   content: string;
   post_type: PostType;
-  media_type?: MediaType;
-  content_genre?: ContentGenre;
+  medium: Medium;
+  genre: Genre;
+  tags: string[];
   author_id: string; // References user_profiles.id
   media_ids: string[];
   hashtags: string[];
@@ -143,7 +150,14 @@ export function usePosts(options: PostQueryOptions = {}) {
 
   useEffect(() => {
     fetchPosts(options);
-  }, [options.sort, options.timeFilter, options.category, options.searchQuery]);
+  }, [
+    options.sort,
+    options.timeFilter,
+    options.postType,
+    options.medium,
+    options.genre,
+    options.searchQuery,
+  ]);
 
   const fetchPosts = async (options: PostQueryOptions = {}) => {
     try {
@@ -151,7 +165,30 @@ export function usePosts(options: PostQueryOptions = {}) {
       setError(null);
 
       // Start with base query from post_feed view
-      let query = supabase.from("post_feed").select("*");
+      let query = supabase.from("post_feed").select(`
+        id,
+        created_at,
+        title,
+        content,
+        post_type,
+        medium,
+        genre,
+        tags,
+        author_id,
+        media_ids,
+        hashtags,
+        mentions,
+        visibility,
+        location,
+        updated_at,
+        display_name,
+        username,
+        avatar_url,
+        is_verified,
+        actual_likes_count,
+        actual_comments_count,
+        engagement_score
+      `);
 
       // Apply time filter
       if (options.timeFilter) {
@@ -177,9 +214,15 @@ export function usePosts(options: PostQueryOptions = {}) {
         }
       }
 
-      // Apply category filter
-      if (options.category && options.category !== "all") {
-        query = query.eq("category", options.category);
+      // Apply filters
+      if (options.postType) {
+        query = query.eq("post_type", options.postType);
+      }
+      if (options.medium) {
+        query = query.eq("medium", options.medium);
+      }
+      if (options.genre) {
+        query = query.eq("genre", options.genre);
       }
 
       // Apply search filter if provided
@@ -223,6 +266,10 @@ export function usePosts(options: PostQueryOptions = {}) {
             created_at: post.created_at,
             title: post.title,
             content: post.content,
+            post_type: post.post_type,
+            medium: post.medium,
+            genre: post.genre,
+            tags: post.tags,
             author_id: post.author_id,
             media_ids: post.media_ids,
             hashtags: post.hashtags,
@@ -348,22 +395,13 @@ export function usePosts(options: PostQueryOptions = {}) {
     }
 
     try {
-      // First get the user's profile ID
-      const { data: profileData, error: profileError } = await supabase
-        .from("user_profiles")
-        .select("id")
-        .eq("username", user.email)
-        .single();
-
-      if (profileError) throw profileError;
-      if (!profileData) throw new Error("User profile not found");
-
+      // Use the auth UUID directly as the author_id
       const { data, error } = await supabase
         .from("posts")
         .insert([
           {
             ...postData,
-            author_id: profileData.id,
+            author_id: user.id, // Using auth UUID directly
           },
         ])
         .select()
@@ -402,29 +440,19 @@ export function usePosts(options: PostQueryOptions = {}) {
         )
       );
 
-      // Get the user's profile ID first
-      const { data: profileData, error: profileError } = await supabase
-        .from("user_profiles")
-        .select("id")
-        .eq("username", user.email)
-        .single();
-
-      if (profileError) throw profileError;
-      if (!profileData) throw new Error("User profile not found");
-
       if (post.isLikedByUser) {
         // Unlike: Delete the like
         const { error } = await supabase
           .from("likes")
           .delete()
-          .match({ post_id: postId, author_id: profileData.id });
+          .match({ post_id: postId, author_id: user.id }); // Using auth UUID directly
 
         if (error) throw error;
       } else {
         // Like: Insert new like
         const { error } = await supabase
           .from("likes")
-          .insert([{ post_id: postId, author_id: profileData.id }]);
+          .insert([{ post_id: postId, author_id: user.id }]); // Using auth UUID directly
 
         if (error) throw error;
       }
