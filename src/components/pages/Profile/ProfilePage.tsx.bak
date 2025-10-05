@@ -1,0 +1,1296 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../hooks/useAuth';
+import { useTheme } from '../../../context/ThemeContext';
+import { ProfileProvider, useProfileContext } from './ProfileContext';
+import { useProfileNavigation, useModal, useProfileForms } from './hooks';
+import {
+  ProfileHeader,
+  ProfileNavigation,
+  PostList,
+  ProfileSettings,
+  CreatePostModal,
+} from './components';
+import { profileService } from './services';
+import { ProfileSection } from './types';
+
+interface Post {
+  id: string;
+  author_id: string;
+  title: string;
+  content: string;
+  post_type: PostType;
+  medium: Medium;
+  genre: Genre;
+  tags: string[];
+  visibility: "public" | "followers" | "private";
+  media_url?: string;
+  created_at: string;
+  updated_at: string;
+  author?: {
+    display_name: string;
+    avatar_url?: string;
+  };
+}
+
+// PERFORMANCE REVIEW:
+// State Management Issues:
+// 1. Too many individual state variables that could be grouped:
+//    - All profile data could be one object
+//    - All post form data could be one object
+//    - All counts could be one object
+// 2. Generic 'loading' state is problematic - need separate loading states for different operations
+// 3. No error state management
+// 4. No optimistic updates for better UX
+// 5. No state persistence between renders
+// Types for our new structured state management
+interface ProfileStats {
+  followers: number;
+  following: number;
+  posts: number;
+}
+
+interface ProfileData {
+  id: string; // This is the auth user's UUID
+  display_name: string;
+  username: string; // This stores their login identifier (email, etc)
+  bio: string;
+  avatar_url?: string;
+  website_url?: string;
+  location?: string;
+  is_verified?: boolean;
+  is_private?: boolean;
+}
+
+interface ProfileState {
+  loading: {
+    profile: boolean;
+    posts: boolean;
+    stats: boolean;
+  };
+  error: {
+    profile: Error | null;
+    posts: Error | null;
+    stats: Error | null;
+  };
+  data: ProfileData | null;
+  stats: ProfileStats;
+  posts: Post[];
+  totalPosts: number;
+}
+
+const ProfilePage: React.FC = () => {
+  const { user, loading: authLoading } = useAuth();
+  const navigate = useNavigate();
+
+  // Consolidated profile state
+  const [profileState, setProfileState] = useState<ProfileState>({
+    isLoading: false,
+    error: null,
+    data: null,
+    stats: {
+      followers: 0,
+      following: 0,
+      posts: 0,
+    },
+    posts: [],
+  });
+
+  // UI state
+  const [activeSection, setActiveSection] = useState<
+    | "comments"
+    | "posts"
+    | "work-requests"
+    | "settings"
+    | "drafts"
+    | "notifications"
+  >("posts");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState("/placeholder-avatar.jpg");
+  const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
+  const { theme, setTheme } = useTheme();
+
+  // Form state - separate from profile state since these are temporary user inputs
+  const [formState, setFormState] = useState({
+    settings: {
+      displayName: "",
+      bio: "",
+    },
+    post: {
+      title: "",
+      content: "",
+      post_type: "discussion" as PostType,
+      medium: "other" as Medium,
+      genre: "other" as Genre,
+      tags: [] as string[],
+      visibility: "public" as Post["visibility"],
+    },
+  });
+
+  // Effect to initialize form state from profile data
+  useEffect(() => {
+    if (profileState.data) {
+      setFormState((prev) => ({
+        ...prev,
+        settings: {
+          displayName: profileState.data?.display_name || "",
+          bio: profileState.data?.bio || "",
+        },
+      }));
+    }
+  }, [profileState.data]);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const postMediaInputRef = useRef<HTMLInputElement>(null);
+
+  // Combined fetch function that gets all profile-related data in parallel
+  const fetchProfileData = useCallback(async () => {
+    if (!user) return;
+
+    setProfileState((prev) => ({
+      ...prev,
+      loading: { ...prev.loading, profile: true, posts: true, stats: true },
+      error: { profile: null, posts: null, stats: null }
+    }));
+    console.log("Starting combined profile data fetch for:", {
+      userId: user.id,
+    });
+
+    try {
+      const [profileResult, postsData, statsResult] = await Promise.all([
+          // 1. Profile data - only select profile-specific fields
+          supabase
+            .from("user_profiles")
+            .select(
+              "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private"
+            )
+            .eq("id", user.id)
+            .single(),
+
+          // 2. Posts with pagination and total count
+          Promise.all([
+            supabase
+              .from("posts")
+              .select(
+                "id, title, content, post_type, medium, genre, tags, visibility, created_at, updated_at"
+              )
+              .eq("author_id", user.id)
+              .range((currentPage - 1) * postsPerPage, currentPage * postsPerPage - 1)
+              .order("created_at", { ascending: false }),
+
+            supabase
+              .from("posts")
+              .select("id", { count: "exact", head: true })
+              .eq("author_id", user.id)
+          ]),
+
+          // 3. Combined stats query using a stored procedure
+          supabase.rpc("get_profile_stats", { user_id: user.id })
+          // This assumes we've created a Postgres function like:
+          // CREATE OR REPLACE FUNCTION get_profile_stats(user_id UUID)
+          // RETURNS JSON AS $$
+          // SELECT json_build_object(
+          //   'followers', (SELECT COUNT(*) FROM follows WHERE following_id = user_id),
+          //   'following', (SELECT COUNT(*) FROM follows WHERE follower_id = user_id)
+          // )
+          // $$ LANGUAGE sql;
+
+      if (profileResult.error) throw new Error("Failed to fetch profile data");
+      
+      const [posts, postsCount] = postsData;
+      if (posts.error) throw new Error("Failed to fetch posts");
+      if (postsCount.error) throw new Error("Failed to fetch posts count");
+      if (statsResult.error) throw new Error("Failed to fetch profile stats");
+
+      const profileData = profileResult.data;
+      const stats = statsResult.data;
+
+      // Update all state at once
+      setProfileState((prev) => ({
+        ...prev,
+        loading: { profile: false, posts: false, stats: false },
+        error: { profile: null, posts: null, stats: null },
+        data: profileData,
+        posts: posts.data || [],
+        stats: {
+          ...stats,
+          posts: postsCount.count || 0
+        },
+        totalPosts: postsCount.count || 0
+      }));
+    } catch (err) {
+      console.error("Error in combined fetch:", err);
+      setProfileState((prev) => ({
+        ...prev,
+        loading: { profile: false, posts: false, stats: false },
+        error: {
+          profile: err as Error,
+          posts: err as Error,
+          stats: err as Error
+        }
+      }));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      console.log("Auth state loaded:", { isAuthenticated: true });
+      fetchProfileData(); // Use our new combined fetch
+    } else if (!authLoading && !user) {
+      console.log("Auth state loaded:", {
+        isAuthenticated: false,
+        redirecting: true,
+      });
+      navigate("/login");
+    }
+  }, [authLoading, user, navigate, fetchProfileData]);
+
+  // Effect to fetch posts when page changes
+  useEffect(() => {
+    if (!authLoading && user) {
+      fetchProfileData();
+    }
+  }, [currentPage, authLoading, user, fetchProfileData]);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = "";
+    setMediaPreview(null);
+
+    const form = document.getElementById(
+      "post-creation-form"
+    ) as HTMLFormElement | null;
+    if (form) form.reset();
+  };
+
+  const handleProfileImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setProfileImage(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePostMediaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setMediaPreview(event.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // PERFORMANCE REVIEW:
+  // Form Submission Issues:
+  // 1. No loading state during submission
+  // 2. No optimistic updates (we wait for fetchPosts to complete)
+  // 3. Unnecessary re-fetch of ALL posts after creating one
+  // 4. No form validation before submission
+  // 5. No rate limiting on submissions
+
+  const handleProfileImageClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
+
+  const handleSaveSettings = async () => {
+    if (!user) return;
+
+    const { displayName, bio } = formState.settings;
+    if (!user) {
+      alert("You must be logged in to update your profile");
+      return;
+    }
+
+    console.log("Saving user settings:", { userId: user.id, displayName });
+    setProfileState((prev) => ({
+      ...prev,
+      loading: { ...prev.loading, profile: true, stats: true },
+      error: { ...prev.error, profile: null, stats: null }
+    }));
+
+    try {
+      // Only update the user_profiles table with profile-specific data
+      // Update profile directly using the auth user's UUID
+      const { error: profileError } = await supabase
+        .from("user_profiles")
+        .update({
+          display_name: displayName,
+          bio,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("id", user.id); // Use auth user's UUID directly
+
+      if (profileError) {
+        throw profileError;
+      }
+
+      // Refresh profile data
+      await fetchProfileData();
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error saving settings:", error);
+      setProfileState((prev) => ({
+        ...prev,
+        loading: { ...prev.loading, profile: false, stats: false },
+        error: {
+          ...prev.error,
+          profile: error as Error,
+          stats: error as Error
+        }
+      }));
+      alert("Failed to save settings.");
+    }
+  };
+
+  return (
+    <div className="profile-page">
+      {authLoading && <div>Loading your profile…</div>}
+
+      {/* Modal for post creation */}
+      <div
+        className={`modal${isModalOpen ? " active" : ""}`}
+        onClick={handleModalClick}
+      >
+        <div className="modal-content">
+          <div className="modal-header">
+            <h2>Create New Post</h2>
+            <button
+              className="modal-close"
+              aria-label="Close modal"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+          </div>
+          <div className="modal-body">
+            <form
+              id="post-creation-form"
+              className="form-container"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!user) {
+                  alert("You must be logged in to create a post.");
+                  return;
+                }
+
+                try {
+                  const {
+                    title,
+                    content,
+                    post_type,
+                    medium,
+                    genre,
+                    tags,
+                    visibility,
+                  } = formState.post;
+                  const { error } = await supabase.from("posts").insert([
+                    {
+                      author_id: user.id,
+                      title,
+                      content,
+                      post_type,
+                      medium,
+                      genre,
+                      tags,
+                      visibility,
+                      media_url: mediaPreview,
+                    },
+                  ]);
+
+                  if (error) throw error;
+
+                  // Reset form state
+                  setFormState((prev) => ({
+                    ...prev,
+                    post: {
+                      title: "",
+                      content: "",
+                      post_type: "discussion" as PostType,
+                      medium: "other" as Medium,
+                      genre: "other" as Genre,
+                      tags: [],
+                      visibility: "public" as Post["visibility"],
+                    },
+                  }));
+
+                  // Refresh profile data (which includes posts)
+                  await fetchProfileData();
+                  alert("Post created successfully!");
+                  closeModal();
+                } catch (err) {
+                  console.error("Error creating post:", err);
+                  alert("Failed to create post.");
+                }
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="post-title" className="form-label">
+                  Post Title
+                </label>
+                <input
+                  type="text"
+                  id="post-title"
+                  name="post-title"
+                  className="form-input"
+                  placeholder="Give your post a title"
+                  value={formState.post.title}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      post: {
+                        ...prev.post,
+                        title: e.target.value,
+                      },
+                    }))
+                  }
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-type" className="form-label">
+                  Post Type
+                </label>
+                <select
+                  id="post-type"
+                  name="post-type"
+                  className="form-select"
+                  value={formState.post.post_type}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      post: {
+                        ...prev.post,
+                        post_type: e.target.value as PostType,
+                      },
+                    }))
+                  }
+                  required
+                >
+                  <option value="" disabled>
+                    Select a post type
+                  </option>
+                  <option value="discussion">Discussion</option>
+                  <option value="question">Question</option>
+                  <option value="fan-art">Fan Art</option>
+                  <option value="fan-fiction">Fan Fiction</option>
+                  <option value="world-building">World Building</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="review">Review</option>
+                  <option value="theory">Theory</option>
+                  <option value="news">News</option>
+                  <option value="meme">Meme</option>
+                  <option value="cosplay">Cosplay</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="medium" className="form-label">
+                  Medium
+                </label>
+                <select
+                  id="medium"
+                  name="medium"
+                  className="form-select"
+                  value={formState.post.medium}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      post: {
+                        ...prev.post,
+                        medium: e.target.value as Medium,
+                      },
+                    }))
+                  }
+                  required
+                >
+                  <option value="" disabled>
+                    Select a medium
+                  </option>
+                  <option value="anime">Anime</option>
+                  <option value="manga">Manga</option>
+                  <option value="comics">Comics</option>
+                  <option value="tv">TV</option>
+                  <option value="movies">Movies</option>
+                  <option value="games">Games</option>
+                  <option value="books">Books</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="genre" className="form-label">
+                  Genre
+                </label>
+                <select
+                  id="genre"
+                  name="genre"
+                  className="form-select"
+                  value={formState.post.genre}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      post: {
+                        ...prev.post,
+                        genre: e.target.value as Genre,
+                      },
+                    }))
+                  }
+                  required
+                >
+                  <option value="" disabled>
+                    Select a genre
+                  </option>
+                  <option value="comedy">Comedy</option>
+                  <option value="horror">Horror</option>
+                  <option value="drama">Drama</option>
+                  <option value="romance">Romance</option>
+                  <option value="action">Action</option>
+                  <option value="adventure">Adventure</option>
+                  <option value="fantasy">Fantasy</option>
+                  <option value="sci-fi">Sci-Fi</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-content" className="form-label">
+                  Post Content
+                </label>
+                <textarea
+                  id="post-content"
+                  name="post-content"
+                  className="form-textarea"
+                  rows={5}
+                  placeholder="Share your thoughts..."
+                  value={formState.post.content}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      post: {
+                        ...prev.post,
+                        content: e.target.value,
+                      },
+                    }))
+                  }
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-media" className="form-label">
+                  Add Media (Optional)
+                </label>
+                <div className="media-upload-container">
+                  <input
+                    type="file"
+                    id="post-media"
+                    className="media-upload-input"
+                    accept="image/*"
+                    ref={postMediaInputRef}
+                    onChange={handlePostMediaChange}
+                  />
+                  <label htmlFor="post-media" className="media-upload-label">
+                    <span className="media-upload-icon">📷</span>
+                    <span className="media-upload-text">
+                      Click to upload image
+                    </span>
+                  </label>
+                  <div
+                    className={`media-preview${
+                      mediaPreview ? " has-image" : ""
+                    }`}
+                  >
+                    {mediaPreview && (
+                      <img src={mediaPreview} alt="Post media preview" />
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Post Visibility</label>
+                <div className="form-radio">
+                  <input
+                    type="radio"
+                    id="visibility-public"
+                    name="post-visibility"
+                    value="public"
+                    checked={formState.post.visibility === "public"}
+                    onChange={(e) =>
+                      setFormState((prev) => ({
+                        ...prev,
+                        post: {
+                          ...prev.post,
+                          visibility: e.target.value as Post["visibility"],
+                        },
+                      }))
+                    }
+                  />
+                  <label htmlFor="visibility-public">
+                    Public - Anyone can see this post
+                  </label>
+                </div>
+                <div className="form-radio">
+                  <input
+                    type="radio"
+                    id="visibility-followers"
+                    name="post-visibility"
+                    value="followers"
+                    checked={formState.post.visibility === "followers"}
+                    onChange={(e) =>
+                      setFormState((prev) => ({
+                        ...prev,
+                        post: {
+                          ...prev.post,
+                          visibility: e.target.value as Post["visibility"],
+                        },
+                      }))
+                    }
+                  />
+                  <label htmlFor="visibility-followers">
+                    Followers Only - Only your followers can see this post
+                  </label>
+                </div>
+                <div className="form-radio">
+                  <input
+                    type="radio"
+                    id="visibility-private"
+                    name="post-visibility"
+                    value="private"
+                    checked={formState.post.visibility === "private"}
+                    onChange={(e) =>
+                      setFormState((prev) => ({
+                        ...prev,
+                        post: {
+                          ...prev.post,
+                          visibility: e.target.value as Post["visibility"],
+                        },
+                      }))
+                    }
+                  />
+                  <label htmlFor="visibility-private">
+                    Private - Only you can see this post
+                  </label>
+                </div>
+              </div>
+              <div className="form-actions">
+                <button
+                  type="button"
+                  className="btn btn-outline cancel-post-btn"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Create Post
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Profile Header */}
+      <header className="profile-header">
+        <div className="profile-header-row">
+          <div className="profile-avatar-block">
+            <img
+              id="user-profile-image"
+              alt="User Profile Picture"
+              src={profileImage}
+              className="profile-avatar"
+              onClick={handleProfileImageClick}
+            />
+            <input
+              type="file"
+              id="profile-image-upload"
+              accept="image/*"
+              aria-label="Upload profile picture"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleProfileImageChange}
+            />
+            <button
+              className="profile-image-label"
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Change Profile Picture
+            </button>
+          </div>
+          <div className="user-overview-block">
+            <h1 className="profile-user-name">
+              {profileState.data?.display_name || "user"}
+            </h1>
+            <div className="profile-stats-row">
+              <div className="profile-stat">
+                <span className="stat-number">{profileState.stats.posts}</span>
+                <span className="stat-label">Posts</span>
+              </div>
+              <div className="profile-stat">
+                <span className="stat-number">
+                  {profileState.stats.followers}
+                </span>
+                <span className="stat-label">Followers</span>
+              </div>
+              <div className="profile-stat">
+                <span className="stat-number">
+                  {profileState.stats.following}
+                </span>
+                <span className="stat-label">Following</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="profile-main">
+        <nav className="profile-options-bar">
+          {[
+            "comments",
+            "posts",
+            "work-requests",
+            "settings",
+            "drafts",
+            "notifications",
+          ].map((sec) => (
+            <button
+              key={sec}
+              className={`profile-option-item${
+                activeSection === sec ? " active" : ""
+              }`}
+              onClick={() => setActiveSection(sec as typeof activeSection)}
+            >
+              {sec.charAt(0).toUpperCase() + sec.slice(1).replace("-", " ")}
+            </button>
+          ))}
+        </nav>
+        <section className="profile-content-container">
+          <div
+            className={`profile-content-section${
+              activeSection === "comments" ? " active" : ""
+            }`}
+          >
+            <h2>Recent Comments</h2>
+            <div className="comment-placeholder">No comments yet.</div>
+          </div>
+          <div
+            className={`profile-content-section${
+              activeSection === "posts" ? " active" : ""
+            }`}
+          >
+            <h2>Your Posts</h2>
+            {(profileState.loading.profile || profileState.loading.stats || profileState.loading.posts) ? (
+              <p>Loading posts...</p>
+            ) : profileState.stats.posts > 0 ? (
+              <>
+                <div className="two-column-grid">
+                  {profileState.posts?.map((post) => (
+                    <div key={post.id} className="grid-card">
+                      <div className="grid-block">
+                        <div className="card-header">
+                          <div className="user-info">
+                            <img
+                              src={
+                                post.author?.avatar_url ||
+                                "/placeholder-avatar.jpg"
+                              }
+                              alt={`${post.author?.display_name}'s avatar`}
+                              className="user-avatar"
+                            />
+                            <div>
+                              <h3>{post.author?.display_name}</h3>
+                              <span className="timestamp">
+                                {new Date(post.created_at).toLocaleDateString()}
+                              </span>
+                            </div>
+                          </div>
+                          <span className="category-tag">{post.medium}</span>
+                        </div>
+                        <div className="content">
+                          <h4>{post.title}</h4>
+                          <p>{post.content}</p>
+                          {post.media_url && (
+                            <div className="media-container">
+                              <img
+                                src={post.media_url}
+                                alt="Post media"
+                                className="post-image"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="pagination-controls">
+                  <button
+                    className="btn"
+                    onClick={() =>
+                      setCurrentPage((prev) => Math.max(1, prev - 1))
+                    }
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  <span>Page {currentPage}</span>
+                  <button
+                    className="btn"
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    disabled={
+                      !profileState.posts ||
+                      profileState.posts.length < postsPerPage
+                    }
+                  >
+                    Next
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="posts-placeholder">
+                No posts yet. Create your first post!
+              </div>
+            )}
+          </div>
+          <div
+            className={`profile-content-section${
+              activeSection === "work-requests" ? " active" : ""
+            }`}
+          >
+            <h2>Work Requests</h2>
+            <div className="work-requests-placeholder">No work requests.</div>
+          </div>
+          <div
+            className={`profile-content-section${
+              activeSection === "settings" ? " active" : ""
+            }`}
+          >
+            <h2>Account Settings</h2>
+
+            {/* Account Information */}
+
+            <div className="settings-group">
+              <h3>Account Information</h3>
+
+              <div className="form-group">
+                <label htmlFor="display-name">Display Name</label>
+                <input
+                  type="text"
+                  id="display-name"
+                  name="display-name"
+                  value={formState.settings.displayName}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      settings: {
+                        ...prev.settings,
+                        displayName: e.target.value,
+                      },
+                    }))
+                  }
+                />
+              </div>
+
+              {/* Email is managed through Supabase Auth */}
+
+              <div className="form-group">
+                <label htmlFor="user-bio">Bio</label>
+
+                <textarea
+                  id="user-bio"
+                  name="user-bio"
+                  rows={3}
+                  className="settings-textarea"
+                  placeholder="Tell us about yourself..."
+                  value={formState.settings.bio}
+                  onChange={(e) =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      settings: {
+                        ...prev.settings,
+                        bio: e.target.value,
+                      },
+                    }))
+                  }
+                />
+
+                <p className="setting-description">
+                  Your bio appears on your public profile.
+                </p>
+              </div>
+
+              <div className="form-group">
+                <button type="button" className="secondary-btn">
+                  Change Password
+                </button>
+              </div>
+              <div className="form-group">
+                <button
+                  onClick={async () => {
+                    const { error } = await supabase.auth.signOut();
+                    if (error) {
+                      console.error("Error logging out:", error);
+                    } else {
+                      navigate("/"); // Navigate to home page after logout
+                    }
+                  }}
+                  className="btn btn-outline"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+
+            {/* Display Preferences */}
+
+            <div className="settings-group">
+              <h3>Display Preferences</h3>
+
+              <div className="settings-subgroup">
+                <h4>Site Theme</h4>
+
+                <ul className="theme-options-list">
+                  <li>
+                    <label htmlFor="light-theme">Light Theme</label>
+
+                    <input
+                      type="radio"
+                      id="light-theme"
+                      name="theme"
+                      value="light"
+                      checked={theme === "light"}
+                      onChange={() => setTheme("light")}
+                    />
+                  </li>
+
+                  <li>
+                    <label htmlFor="dark-theme">Dark Theme</label>
+
+                    <input
+                      type="radio"
+                      id="dark-theme"
+                      name="theme"
+                      value="dark"
+                      checked={theme === "dark"}
+                      onChange={() => setTheme("dark")}
+                    />
+                  </li>
+
+                  <li>
+                    <label htmlFor="system-theme">Use System Preference</label>
+
+                    <input
+                      type="radio"
+                      id="system-theme"
+                      name="theme"
+                      value="system"
+                      checked={theme === "system"}
+                      onChange={() => setTheme("system")}
+                    />
+                  </li>
+                </ul>
+              </div>
+
+              <div className="settings-subgroup">
+                <h4>Section Content Theme</h4>
+
+                <div className="dropdown-container">
+                  <label htmlFor="section-content-theme">
+                    Choose how section content appears:
+                  </label>
+
+                  <select
+                    id="section-content-theme"
+                    name="section-content-theme"
+                    className="settings-dropdown"
+                  >
+                    <option value="light">Light Background</option>
+
+                    <option value="dark">Dark Background</option>
+
+                    <option value="auto">Match Site Theme</option>
+                  </select>
+                </div>
+
+                <p className="setting-description">
+                  This affects the background color of content sections across
+                  the site.
+                </p>
+              </div>
+            </div>
+
+            {/* Privacy Settings */}
+
+            <div className="settings-group">
+              <h3>Privacy Settings</h3>
+
+              <div className="settings-subgroup">
+                <h4>Post Visibility</h4>
+
+                <div className="dropdown-container">
+                  <label htmlFor="post-visibility-setting">
+                    Default visibility for new posts:
+                  </label>
+                  <ul className="settings-toggle-list">
+                    <li>
+                      <input
+                        type="radio"
+                        id="post-visibility-public"
+                        name="post-visibility"
+                        value="public"
+                        checked={formState.post.visibility === "public"}
+                        onChange={() =>
+                          setFormState((prev) => ({
+                            ...prev,
+                            post: {
+                              ...prev.post,
+                              visibility: "public" as const,
+                            },
+                          }))
+                        }
+                      />
+                      <label htmlFor="post-visibility-public">Public</label>
+                    </li>
+
+                    <li>
+                      <input
+                        type="radio"
+                        id="post-visibility-friends"
+                        name="post-visibility"
+                        value="friends"
+                        checked={formState.post.visibility === "followers"}
+                        onChange={() =>
+                          setFormState((prev) => ({
+                            ...prev,
+                            post: {
+                              ...prev.post,
+                              visibility: "followers" as const,
+                            },
+                          }))
+                        }
+                      />
+                      <label htmlFor="post-visibility-friends">Friends</label>
+                    </li>
+
+                    <li>
+                      <input
+                        type="radio"
+                        id="post-visibility-private"
+                        name="post-visibility"
+                        value="private"
+                        checked={formState.post.visibility === "private"}
+                        onChange={() =>
+                          setFormState((prev) => ({
+                            ...prev,
+                            post: {
+                              ...prev.post,
+                              visibility: "private" as const,
+                            },
+                          }))
+                        }
+                      />
+                      <label htmlFor="post-visibility-private">Private</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <ul className="settings-toggle-list">
+                <li>
+                  <span className="setting-label">
+                    Show my profile to everyone
+                  </span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="public-profile"
+                      name="public-profile"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+
+                <li>
+                  <span className="setting-label">Show my online status</span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="show-online-status"
+                      name="show-online-status"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+
+                <li>
+                  <span className="setting-label">
+                    Allow others to tag me in posts
+                  </span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="allow-tagging"
+                      name="allow-tagging"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            {/* Notification Preferences */}
+
+            <div className="settings-group">
+              <h3>Notification Preferences</h3>
+
+              <ul className="settings-toggle-list">
+                <li>
+                  <span className="setting-label">Email notifications</span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="email-notifications"
+                      name="email-notifications"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+
+                <li>
+                  <span className="setting-label">Comment replies</span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="comment-notifications"
+                      name="comment-notifications"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+
+                <li>
+                  <span className="setting-label">New followers</span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="follower-notifications"
+                      name="follower-notifications"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+
+                <li>
+                  <span className="setting-label">Content updates</span>
+
+                  <label className="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="content-notifications"
+                      name="content-notifications"
+                      defaultChecked
+                    />
+
+                    <span className="toggle-slider"></span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connected Accounts */}
+
+            <div className="settings-group">
+              <h3>Blocked Users</h3>
+
+              <div className="blocked-users-list">
+                <div className="blocked-user">
+                  <span>Blocked User 1</span>
+                  <button className="btn btn-outline">Unblock</button>
+                </div>
+                <div className="blocked-user">
+                  <span>Blocked User 2</span>
+                  <button className="btn btn-outline">Unblock</button>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="save-settings-btn"
+              onClick={handleSaveSettings}
+            >
+              Save Changes
+            </button>
+          </div>
+          <div
+            className={`profile-content-section${
+              activeSection === "drafts" ? " active" : ""
+            }`}
+          >
+            <h2>Your Drafts</h2>
+            <div className="drafts-placeholder">No drafts yet.</div>
+          </div>
+          <div
+            className={`profile-content-section${
+              activeSection === "notifications" ? " active" : ""
+            }`}
+          >
+            <h2>Notifications</h2>
+            <div className="notifications-placeholder">
+              No new notifications.
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <button
+        className="create-post-button"
+        aria-label="Create New Post"
+        onClick={openModal}
+      >
+        +
+      </button>
+    </div>
+  );
+};
+
+export default ProfilePage;
