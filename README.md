@@ -1,51 +1,60 @@
-# FA-React
+# Welcome to FanArcs! 🌟
 
-FA-React is a modern, clean, and accessible platform for fan communities, built with React, TypeScript, and Vite. Inspired by FanArcs, this project provides a clutter-free or atleast miminal clutter, experience for exploring and sharing fan content across various media types including anime, manga, comics, television, and more. FA-React leverages the power of React components for a scalable, maintainable, and interactive user experience.
+Ever wondered who would win in a fight between your favorite anime character and that epic superhero? Or spotted mind-blowing connections between different series that you're dying to share? FanArcs is your new home for all things fandom!
 
-## Features
+## What Makes FanArcs Special? 🤔
 
-- **Modern React Architecture**: Built with React and TypeScript for modular, maintainable code
-- **Clean Interface**: Minimalist design focused on content and usability
-- **Cross-Media Support**: Dedicated sections for:
-  - Anime
-  - Manga
-  - Comics
-  - Television
-  - Video Games
-  - Worlds & Universes
-- **Power Room**: Compare characters from different universes
-- **Community Features**:
-  - User posts and interactions
-  - Content sharing
-  - Community discussions
-- **User-Generated Content**: Create and share your own theories, analyses, and fan fiction
-- **Search Functionality**: Site-wide search for characters, universes, and content
-- **Responsive Design**: Works across all device sizes
-- **Accessibility**: Built with accessibility in mind, including keyboard navigation and ARIA attributes
+Tired of jumping between different fan sites and wikis? We get it! FanArcs brings everything you love into one awesome space:
+
+- **Connect the Dots**: Discover mind-blowing links between your favorite universes
+- **Epic Showdowns**: Debate dream matchups in our Power Room
+- **Share Your Theories**: Got a wild theory about that season finale? We want to hear it!
+- **Find Your People**: Connect with fans who geek out about the same things you do
+
+## Core Features
+
+### Media Sections
+
+- **Anime & Manga**: Japanese animation and comics exploration
+- **Comics**: Western comics and graphic novel analysis
+- **Television**: TV series discussion and analysis
+- **Video Games**: Gaming universe exploration
+- **Worlds & Universes**: Cross-media universe connections
+
+### Special Features
+
+- **Power Room**: Compare and analyze character abilities across universes
+- **Community Hub**: Share posts, theories, and creative content
+- **Profile System**: Personalized space for your contributions
+- **Interactive Directories**: Organized collections for each media type
+
+### Technical Features
+
+- Modern React architecture with TypeScript
+- Supabase integration for auth and data management
+- Global edit mode for content management
+- Responsive design for all devices
+- Accessibility-focused development
 
 ## Project Structure
 
 ```
-FA-React/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── pages/
-│   │   └── ui/
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── ...
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
+src/
+├── features/          # Core feature modules
+│   ├── Community/     # Community features
+│   ├── PowerRoom/     # Power comparison system
+│   └── profile/       # User profile system
+├── shared/            # Shared components and styles
+│   ├── Components/    # Common UI components
+│   └── Css/          # Global styles
+├── context/          # React context providers
+├── lib/              # Utility functions and services
+└── components/       # Page-specific components
+    ├── pages/        # Main page components
+    └── ui/           # UI-specific components
 ```
-- Main React components are in `src/components/`
-- UI elements and styles are in `src/components/ui/`
-- Page components are in `src/components/pages/`
-- Static assets are in `public/`
 
-## Getting Started
+## Setup & Development
 
 1. Clone the repository:
    ```bash
@@ -71,17 +80,20 @@ FA-React/
 FA-React welcomes contributions! There are several ways to help:
 
 1. **Content Creation**
+
    - Write fan theories, character analyses, or fan fiction
    - Submit artwork for characters or series
    - Create detailed guides for shows, comics, or games
 
 2. **Code Contributions**
+
    - Fork the repository
    - Create a feature branch
    - Make your changes following our code style
    - Submit a pull request with a clear description
 
 3. **Feedback and Ideas**
+
    - Submit issues for bugs on GitHub
    - Suggest new features or improvements
    - Provide feedback on existing features
@@ -119,6 +131,7 @@ FA-React uses a component-based architecture with organized styles:
 ## Why FA-React?
 
 FA-React was created to address the common issues with existing fan community platforms:
+
 - Overcrowded interfaces with too many distractions
 - Excessive advertisements that interrupt the experience
 - Poor mobile experience and inconsistent responsive design
