@@ -6,8 +6,46 @@ Built with React, TypeScript, and Vite, FanArcs delivers a minimal-clutter exper
 
 ## ✨ What Makes FanArcs Special?
 
+Ever wondered who would win in a fight between your favorite anime character and that epic superhero? Or spotted mind-blowing connections between different series that you're dying to share? FanArcs is your new home for all things fandom!
+
+## What Makes FanArcs Special? 🤔
+
+Tired of jumping between different fan sites and wikis? We get it! FanArcs brings everything you love into one awesome space:
+
+- **Connect the Dots**: Discover mind-blowing links between your favorite universes
+- **Epic Showdowns**: Debate dream matchups in our Power Room
+- **Share Your Theories**: Got a wild theory about that season finale? We want to hear it!
+- **Find Your People**: Connect with fans who geek out about the same things you do
+
+## Core Features
+
+### Media Sections
+
+- **Anime & Manga**: Japanese animation and comics exploration
+- **Comics**: Western comics and graphic novel analysis
+- **Television**: TV series discussion and analysis
+- **Video Games**: Gaming universe exploration
+- **Worlds & Universes**: Cross-media universe connections
+
+### Special Features
+
+- **Power Room**: Compare and analyze character abilities across universes
+- **Community Hub**: Share posts, theories, and creative content
+- **Profile System**: Personalized space for your contributions
+- **Interactive Directories**: Organized collections for each media type
+
+### Technical Features
+
+- Modern React architecture with TypeScript
+- Supabase integration for auth and data management
+- Global edit mode for content management
+- Responsive design for all devices
+- Accessibility-focused development
+>>>>>>> feature/file-restructure
+
 Imagine a place where you can:
 
+<<<<<<< HEAD
 - 📚 Deep-dive into theories about your favorite manga
 - 🦸‍♂️ Compare superheroes from different universes in the Power Room
 - 🎮 Share gaming strategies and stories
@@ -45,6 +83,25 @@ Compare characters across different universes! Who would win in a battle between
 ## 🚀 Quick Start Guide
 
 1. **Clone and Install**
+=======
+```
+src/
+├── features/          # Core feature modules
+│   ├── Community/     # Community features
+│   ├── PowerRoom/     # Power comparison system
+│   └── profile/       # User profile system
+├── shared/            # Shared components and styles
+│   ├── Components/    # Common UI components
+│   └── Css/          # Global styles
+├── context/          # React context providers
+├── lib/              # Utility functions and services
+└── components/       # Page-specific components
+    ├── pages/        # Main page components
+    └── ui/           # UI-specific components
+```
+
+## Setup & Development
+>>>>>>> feature/file-restructure
 
    ```bash
    git clone <repository-url>
@@ -63,6 +120,7 @@ Compare characters across different universes! Who would win in a battle between
 
 ## 📁 Project Overview
 
+<<<<<<< HEAD
 ```
 FA-React/
 ├── 📂 src/
@@ -78,6 +136,27 @@ FA-React/
 ## 🤝 Join Our Community
 
 We love contributions! Here's how you can help make FanArcs even better:
+=======
+1. **Content Creation**
+
+   - Write fan theories, character analyses, or fan fiction
+   - Submit artwork for characters or series
+   - Create detailed guides for shows, comics, or games
+
+2. **Code Contributions**
+
+   - Fork the repository
+   - Create a feature branch
+   - Make your changes following our code style
+   - Submit a pull request with a clear description
+
+3. **Feedback and Ideas**
+
+   - Submit issues for bugs on GitHub
+   - Suggest new features or improvements
+   - Provide feedback on existing features
+   - Help test the site on different devices
+>>>>>>> feature/file-restructure
 
 ### 📝 Content Creation
 
@@ -143,6 +222,11 @@ FA-React uses a component-based architecture with organized styles:
 
 FanArcs was created to address the common issues with existing fan community platforms:
 
+<<<<<<< HEAD
+=======
+FA-React was created to address the common issues with existing fan community platforms:
+
+>>>>>>> feature/file-restructure
 - Overcrowded interfaces with too many distractions
 - Excessive advertisements that interrupt the experience
 - Poor mobile experience and inconsistent responsive design

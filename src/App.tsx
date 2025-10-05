@@ -1,12 +1,12 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { AuthProvider } from "./auth/AuthProvider";
+import { AuthProvider } from "./context/AuthProvider";
 import { ThemeProvider } from "./context/ThemeContext";
-import Header from "./components/layout/Header/Header";
-import Navigation from "./components/layout/Navigation/Navigation";
-import Footer from "./components/layout/Footer/Footer";
-import BottomNavigation from "./components/layout/BottomNavigation/BottomNavigation";
-import "./components/ui/global.css";
+import Header from "./shared/Components/Header";
+import Navigation from "./shared/Components/Navigation";
+import Footer from "./shared/Components/Footer";
+import BottomNavigation from "./shared/Components/BottomNavigation";
+import "./shared/Css/global.css";
 import "./App.css";
 import "./Import.css";
 import { EditModeProvider } from "./edit/EditModeContext";
@@ -31,9 +31,9 @@ import VideoGamesDirectory from "./components/pages/VideoGames/VideoGamesDirecto
 import VideoGamesHistory from "./components/pages/VideoGames/VideoGamesHistory";
 import WorldsUniversesPage from "./components/pages/WorldsUniverses/WorldsUniversesPage";
 import WorldsUniversesDirectory from "./components/pages/WorldsUniverses/WorldsUniversesDirectory";
-import PowerRoomPage from "./components/pages/PowerRoom/PowerRoomPage";
-import CommunityPage from "./components/pages/Community/CommunityPage";
-import ProfilePage from "./components/pages/Profile/ProfilePage";
+import PowerRoomPage from "./features/Power room/PowerRoomPage";
+import CommunityPage from "./features/Community/CommunityPage";
+import ProfilePage from "./features/profile/ProfilePage";
 import CharacterPage from "./components/pages/Characters/CharacterPage";
 import LoginPage from "./components/pages/Auth/LoginPage";
 

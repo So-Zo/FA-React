@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PostType, SortOption, usePosts } from "../../../hooks/usePosts";
+import { PostType, SortOption, usePosts } from "./hooks/usePosts";
 import "../../ui/LoadingStates.css";
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment } from "react-icons/ai";
 
