@@ -6,10 +6,6 @@ Built with React, TypeScript, and Vite, FanArcs delivers a minimal-clutter exper
 
 ## ✨ What Makes FanArcs Special?
 
-Ever wondered who would win in a fight between your favorite anime character and that epic superhero? Or spotted mind-blowing connections between different series that you're dying to share? FanArcs is your new home for all things fandom!
-
-## What Makes FanArcs Special? 🤔
-
 Tired of jumping between different fan sites and wikis? We get it! FanArcs brings everything you love into one awesome space:
 
 - **Connect the Dots**: Discover mind-blowing links between your favorite universes
@@ -41,73 +37,24 @@ Tired of jumping between different fan sites and wikis? We get it! FanArcs bring
 - Global edit mode for content management
 - Responsive design for all devices
 - Accessibility-focused development
->>>>>>> feature/file-restructure
 
 Imagine a place where you can:
 
-<<<<<<< HEAD
 - 📚 Deep-dive into theories about your favorite manga
 - 🦸‍♂️ Compare superheroes from different universes in the Power Room
 - 🎮 Share gaming strategies and stories
 - 🎯 Connect with fans who share your specific interests
 - 📱 Enjoy a clean, clutter-free experience on any device
 
-## 🎯 Features That Set Us Apart
-
-### 🌍 Explore Multiple Universes
-
-- **Anime & Manga Zone**: Discuss the latest chapters, share theories, and discover new series
-- **Comics Corner**: From Marvel to indie comics, dive into illustrated storytelling
-- **TV & Film Hub**: Break down episodes, predict plot twists, and share fan theories
-- **Gaming Galaxy**: Share gameplay moments, strategies, and video game lore
-- **Worlds & Universes**: Connect storylines and discover shared universes
-
-### ⚡ Power Room - Character Showdown
-
-Compare characters across different universes! Who would win in a battle between your favorite heroes? Back up your theories with facts and engage in friendly debates.
-
-### 🤝 Community Features
-
-- Create and share your own theories
-- Build your profile and connect with like-minded fans
-- Engage in thoughtful discussions
-- Share and discover fan art, fan fiction, and analyses
-
-### 🎨 Clean, Modern Design
-
-- Distraction-free reading experience
-- Easy navigation between different media types
-- Responsive design that works beautifully on all devices
-- Accessibility features for everyone to enjoy
-
 ## 🚀 Quick Start Guide
 
 1. **Clone and Install**
-=======
-```
-src/
-├── features/          # Core feature modules
-│   ├── Community/     # Community features
-│   ├── PowerRoom/     # Power comparison system
-│   └── profile/       # User profile system
-├── shared/            # Shared components and styles
-│   ├── Components/    # Common UI components
-│   └── Css/          # Global styles
-├── context/          # React context providers
-├── lib/              # Utility functions and services
-└── components/       # Page-specific components
-    ├── pages/        # Main page components
-    └── ui/           # UI-specific components
-```
 
-## Setup & Development
->>>>>>> feature/file-restructure
-
-   ```bash
-   git clone <repository-url>
-   cd FA-React
-   npm install   # or yarn install
-   ```
+```bash
+git clone <repository-url>
+cd FA-React
+npm install   # or yarn install
+```
 
 2. **Fire It Up**
 
@@ -120,7 +67,6 @@ src/
 
 ## 📁 Project Overview
 
-<<<<<<< HEAD
 ```
 FA-React/
 ├── 📂 src/
@@ -136,7 +82,7 @@ FA-React/
 ## 🤝 Join Our Community
 
 We love contributions! Here's how you can help make FanArcs even better:
-=======
+
 1. **Content Creation**
 
    - Write fan theories, character analyses, or fan fiction
@@ -151,12 +97,10 @@ We love contributions! Here's how you can help make FanArcs even better:
    - Submit a pull request with a clear description
 
 3. **Feedback and Ideas**
-
    - Submit issues for bugs on GitHub
    - Suggest new features or improvements
    - Provide feedback on existing features
    - Help test the site on different devices
->>>>>>> feature/file-restructure
 
 ### 📝 Content Creation
 
@@ -222,11 +166,6 @@ FA-React uses a component-based architecture with organized styles:
 
 FanArcs was created to address the common issues with existing fan community platforms:
 
-<<<<<<< HEAD
-=======
-FA-React was created to address the common issues with existing fan community platforms:
-
->>>>>>> feature/file-restructure
 - Overcrowded interfaces with too many distractions
 - Excessive advertisements that interrupt the experience
 - Poor mobile experience and inconsistent responsive design
