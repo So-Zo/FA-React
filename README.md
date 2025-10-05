@@ -2,6 +2,8 @@
 
 Welcome to FanArcs, where fan communities come together to celebrate their favorite stories, characters, and universes! Whether you're a die-hard anime enthusiast, comic book collector, or TV show theorist, FanArcs provides a clean, modern space for sharing your passion.
 
+Built with React, TypeScript, and Vite, FanArcs delivers a minimal-clutter experience for exploring and sharing fan content across various media types including anime, manga, comics, television, and more.
+
 ## ✨ What Makes FanArcs Special?
 
 Imagine a place where you can:
