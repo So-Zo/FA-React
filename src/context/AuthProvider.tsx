@@ -1,7 +1,7 @@
-import { useState, useEffect, ReactNode } from 'react';
-import { supabase } from '../lib/supabaseClient';
-import { Session, User } from '@supabase/supabase-js';
-import { AuthContext, AuthContextType } from '../context/AuthContext';
+import { useState, useEffect, ReactNode } from "react";
+import { supabase } from "../lib/supabaseClient";
+import { Session, User } from "@supabase/supabase-js";
+import { AuthContext, AuthContextType } from "./AuthContext";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -14,7 +14,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
