@@ -10,7 +10,7 @@ import {
   UserActivityMetrics,
   UserPost,
 } from "./types";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../shared/hooks/useAuth";
 import { supabase } from "../../../lib/supabaseClient";
 
 // Initial state

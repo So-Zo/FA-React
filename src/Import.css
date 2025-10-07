@@ -1,24 +1,30 @@
+/* Base */
+@import url(./shared/Css/reset.css);
+@import url(./shared/Css/variables.css);
+@import url(./shared/Css/global.css);
 
-@import url(/src/components/ui/variables.css);
+/* Layout */
+@import url(./shared/Css/sections.css);
+@import url(./shared/Css/GridStyles.css);
 
-@import url(/src/components/ui/reset.css);
+/* Components */
+@import url(./shared/Css/Header.css);
+@import url(./shared/Css/Navigation.css);
+@import url(./shared/Css/BottomNavigation.css);
+@import url(./shared/Css/Footer.css);
+@import url(./shared/Css/cards.css);
+@import url(./shared/Css/TableOfContents.css);
 
-@import url(/src/components/ui/global.css);
+/* Pages */
+@import url(./components/ui/HomePage.css);
+@import url(./components/ui/CommunityPage.css);
+@import url(./components/ui/ProfilePage.css);
+@import url(./components/ui/PowerRoomPage.css);
+@import url(./components/ui/AuthPage.css);
+@import url(./components/ui/CharStyles.css);
 
-@import url(/src/components/ui/sections.css);
-
-@import url(/src/components/ui/HomePage.css);
-
-@import url(/src/components/ui/CommunityPage.css);
-
-@import url(/src/components/ui/ProfilePage.css);
-
-@import url(/src/components/ui/PowerRoomPage.css);
-
-@import url(/src/components/ui/BgColors.css);
-
-@import url(/src/components/ui/links.css);
-
-@import url(/src/components/ui/cards.css);
-
-@import url(/src/components/ui/GridStyles.css);
+/* States & Utilities */
+@import url(./shared/Css/BgColors.css);
+@import url(./shared/Css/links.css);
+@import url(./shared/Css/LoadingStates.css);
+@import url(./components/ui/LoadingAndError.css);

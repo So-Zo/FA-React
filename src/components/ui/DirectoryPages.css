@@ -8,8 +8,10 @@
 
 /* Directory section */
 
-/* probably use later just not being used right now :-)
-.view-more-container a {
+/* probably use later just not being used right now :-) */
+
+
+/*.view-more-container a {
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--border-radius-base);
   background-color: var(--fanarc-primary-color);
@@ -21,3 +23,5 @@
 .view-more-container a:hover {
   background-color: var(--fanarc-secondary-color);
 }
+
+*/

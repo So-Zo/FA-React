@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../hooks/useAuth";
-import { useTheme } from "../../../context/ThemeContext";
+import { useAuth } from "../../../shared/hooks/useAuth";
 import { ProfileProvider, useProfileContext } from "./ProfileContext";
 import { useProfileNavigation, useModal } from "./hooks";
 import {
@@ -11,7 +10,6 @@ import {
   ProfileSettings,
   CreatePostModal,
   ErrorBoundary,
-  ErrorMessage,
   LoadingSpinner,
 } from "./components";
 import { profileService } from "./services";
@@ -19,7 +17,6 @@ import { profileService } from "./services";
 const ProfileContent: React.FC = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const { theme } = useTheme();
   const { refreshProfileData } = useProfileContext();
 
   // Custom hooks

@@ -1,5 +1,4 @@
-import { PostType, Medium, Genre } from "../../../hooks/usePosts";
-
+import { PostType, Medium, Genre } from "../Community/hooks/usePosts";
 // User's post data structure
 export interface UserPost {
   id: string;

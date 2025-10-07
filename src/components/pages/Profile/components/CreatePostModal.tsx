@@ -2,8 +2,10 @@ import React from "react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { useModal, useFileUpload, useProfileForms } from "../hooks";
 import { useProfileContext } from "../ProfileContext";
-import { Post } from "../types";
-import { useAuth } from "../../../../hooks/useAuth";
+import { useAuth } from "../../../../shared/hooks/useAuth";
+import { PostType, Medium, Genre } from "../../Community/hooks/usePosts";
+
+type PostVisibility = "public" | "private" | "followers";
 
 interface CreatePostModalProps {
   onClose: () => void;
@@ -28,19 +30,26 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
     }
 
     try {
-      const { title, content, post_type, medium, genre, tags, visibility } =
-        formState.post;
+      const {
+        postTitle,
+        postContent,
+        postType,
+        postMedium,
+        postGenre,
+        postTags,
+        postVisibility,
+      } = formState.newPostForm;
 
       const { error } = await supabase.from("posts").insert([
         {
           author_id: user.id,
-          title,
-          content,
-          post_type,
-          medium,
-          genre,
-          tags,
-          visibility,
+          title: postTitle,
+          content: postContent,
+          post_type: postType,
+          medium: postMedium,
+          genre: postGenre,
+          tags: postTags,
+          visibility: postVisibility,
           media_url: mediaPreview,
         },
       ]);
@@ -91,8 +100,8 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 name="post-title"
                 className="form-input"
                 placeholder="Give your post a title"
-                value={formState.post.title}
-                onChange={(e) => updatePostForm({ title: e.target.value })}
+                value={formState.newPostForm.postTitle}
+                onChange={(e) => updatePostForm({ postTitle: e.target.value })}
                 required
               />
             </div>
@@ -105,10 +114,10 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 id="post-type"
                 name="post-type"
                 className="form-select"
-                value={formState.post.post_type}
+                value={formState.newPostForm.postType}
                 onChange={(e) =>
                   updatePostForm({
-                    post_type: e.target.value as Post["post_type"],
+                    postType: e.target.value as PostType,
                   })
                 }
                 required
@@ -138,9 +147,9 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 id="medium"
                 name="medium"
                 className="form-select"
-                value={formState.post.medium}
+                value={formState.newPostForm.postMedium}
                 onChange={(e) =>
-                  updatePostForm({ medium: e.target.value as Post["medium"] })
+                  updatePostForm({ postMedium: e.target.value as Medium })
                 }
                 required
               >
@@ -166,9 +175,9 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 id="genre"
                 name="genre"
                 className="form-select"
-                value={formState.post.genre}
+                value={formState.newPostForm.postGenre}
                 onChange={(e) =>
-                  updatePostForm({ genre: e.target.value as Post["genre"] })
+                  updatePostForm({ postGenre: e.target.value as Genre })
                 }
                 required
               >
@@ -197,8 +206,10 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 className="form-textarea"
                 rows={5}
                 placeholder="Share your thoughts..."
-                value={formState.post.content}
-                onChange={(e) => updatePostForm({ content: e.target.value })}
+                value={formState.newPostForm.postContent}
+                onChange={(e) =>
+                  updatePostForm({ postContent: e.target.value })
+                }
                 required
               />
             </div>
@@ -239,10 +250,10 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                   id="visibility-public"
                   name="post-visibility"
                   value="public"
-                  checked={formState.post.visibility === "public"}
+                  checked={formState.newPostForm.postVisibility === "public"}
                   onChange={(e) =>
                     updatePostForm({
-                      visibility: e.target.value as Post["visibility"],
+                      postVisibility: e.target.value as PostVisibility,
                     })
                   }
                 />
@@ -256,10 +267,13 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                   id="visibility-followers"
                   name="post-visibility"
                   value="followers"
-                  checked={formState.post.visibility === "followers"}
+                  checked={formState.newPostForm.postVisibility === "followers"}
                   onChange={(e) =>
                     updatePostForm({
-                      visibility: e.target.value as Post["visibility"],
+                      postVisibility: e.target.value as
+                        | "public"
+                        | "private"
+                        | "followers",
                     })
                   }
                 />
@@ -273,10 +287,13 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                   id="visibility-private"
                   name="post-visibility"
                   value="private"
-                  checked={formState.post.visibility === "private"}
+                  checked={formState.newPostForm.postVisibility === "private"}
                   onChange={(e) =>
                     updatePostForm({
-                      visibility: e.target.value as Post["visibility"],
+                      postVisibility: e.target.value as
+                        | "public"
+                        | "private"
+                        | "followers",
                     })
                   }
                 />

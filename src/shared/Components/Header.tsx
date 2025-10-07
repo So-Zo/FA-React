@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../../context/ThemeContext";
-import { useEditMode } from "../../../edit/editMode";
-import "../../../components/ui/Header.css";
+import { useTheme } from "../hooks/ThemeContext";
+import { useEditMode } from "../../edit/editMode";
 
 const Header: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { effectiveTheme, toggleTheme } = useTheme();
   const { isEditing, toggle, saveAll } = useEditMode();
 
   const handleEditSaveClick = async () => {
@@ -34,10 +33,10 @@ const Header: React.FC = () => {
             className="theme-toggle"
             onClick={toggleTheme}
             aria-label={`Switch to ${
-              theme === "light" ? "dark" : "light"
+              effectiveTheme === "light" ? "dark" : "light"
             } mode`}
           >
-            {theme === "light" ? "🌙" : "☀️"}
+            {effectiveTheme === "light" ? "🌙" : "☀️"}
           </button>
 
           <button

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../../components/ui/BottomNavigation.css";
 import {
   FaHome,
   FaUsers,
@@ -80,7 +79,12 @@ const BottomNavigation: React.FC = () => {
     <>
       {/* Bottom navigation bar */}
       <div className="bottom-navigation">
-        <Link to="/" className="nav-home-button" aria-label="Go Home" title="Home">
+        <Link
+          to="/"
+          className="nav-home-button"
+          aria-label="Go Home"
+          title="Home"
+        >
           <FaHome />
         </Link>
         <Link

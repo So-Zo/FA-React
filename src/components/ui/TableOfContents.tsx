@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './TableOfContents.css';
+
 
 // Define types for TOC links
 interface TocQuickLink {

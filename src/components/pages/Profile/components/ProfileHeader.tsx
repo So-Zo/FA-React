@@ -9,7 +9,7 @@ interface ProfileHeaderProps {
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   onProfileImageChange,
 }) => {
-  const { data: profileData, stats } = useProfileContext();
+  const { profileData, activityMetrics } = useProfileContext();
   const { mediaPreview: profileImage, handleFileChange } = useFileUpload({
     onUpload: onProfileImageChange,
   });
@@ -52,15 +52,19 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           </h1>
           <div className="profile-stats-row">
             <div className="profile-stat">
-              <span className="stat-number">{stats.posts}</span>
+              <span className="stat-number">{activityMetrics.totalPosts}</span>
               <span className="stat-label">Posts</span>
             </div>
             <div className="profile-stat">
-              <span className="stat-number">{stats.followers}</span>
+              <span className="stat-number">
+                {activityMetrics.totalFollowers}
+              </span>
               <span className="stat-label">Followers</span>
             </div>
             <div className="profile-stat">
-              <span className="stat-number">{stats.following}</span>
+              <span className="stat-number">
+                {activityMetrics.totalFollowing}
+              </span>
               <span className="stat-label">Following</span>
             </div>
           </div>

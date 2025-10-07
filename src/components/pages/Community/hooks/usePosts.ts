@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../../lib/supabaseClient";
-import { useAuth } from "./useAuth";
+import { supabase } from "../../../../lib/supabaseClient";
+import { useAuth } from "../../../../shared/hooks/useAuth";
 
 export type PostType =
   | "discussion"
@@ -108,7 +108,7 @@ export interface Post {
   medium: Medium;
   genre: Genre;
   tags: string[];
-  author_id: string; // References user_profiles.id
+  author_id: string;
   media_ids: string[];
   hashtags: string[];
   mentions: string[];
@@ -121,18 +121,15 @@ export interface Post {
   visibility: "public" | "private" | "followers";
   location?: string;
   updated_at: string;
-  // Author details from user_profiles
   author?: {
-    id: string; // This is user_profiles.id
+    id: string;
     display_name: string;
     username: string;
     avatar_url: string;
     is_verified: boolean;
   };
-  // Likes data
   likes?: Like[];
   isLikedByUser?: boolean;
-  // Client-side state
   media?: Array<{
     id: string;
     file_name: string;
@@ -164,7 +161,6 @@ export function usePosts(options: PostQueryOptions = {}) {
       setLoading(true);
       setError(null);
 
-      // Start with base query from post_feed view
       let query = supabase.from("post_feed").select(`
         id,
         created_at,
@@ -190,7 +186,6 @@ export function usePosts(options: PostQueryOptions = {}) {
         engagement_score
       `);
 
-      // Apply time filter
       if (options.timeFilter) {
         switch (options.timeFilter) {
           case "today":
@@ -214,7 +209,6 @@ export function usePosts(options: PostQueryOptions = {}) {
         }
       }
 
-      // Apply filters
       if (options.postType) {
         query = query.eq("post_type", options.postType);
       }
@@ -225,12 +219,10 @@ export function usePosts(options: PostQueryOptions = {}) {
         query = query.eq("genre", options.genre);
       }
 
-      // Apply search filter if provided
       if (options.searchQuery) {
         query = query.textSearch("content", options.searchQuery);
       }
 
-      // Apply sorting
       switch (options.sort) {
         case "trending":
           query = query.order("engagement_score", { ascending: false });
@@ -244,11 +236,10 @@ export function usePosts(options: PostQueryOptions = {}) {
         case "most_liked":
           query = query.order("actual_likes_count", { ascending: false });
           break;
-        default: // 'latest' is default
+        default:
           query = query.order("created_at", { ascending: false });
       }
 
-      // Always filter for public posts
       query = query.eq("visibility", "public");
 
       const { data: postsData, error: postsError } = (await query) as {
@@ -258,7 +249,6 @@ export function usePosts(options: PostQueryOptions = {}) {
 
       if (postsError) throw postsError;
 
-      // Process posts and likes data
       const processedPosts = (postsData || []).map(
         (post: PostFeedRow) =>
           ({
@@ -279,8 +269,8 @@ export function usePosts(options: PostQueryOptions = {}) {
             updated_at: post.updated_at,
             likes_count: post.actual_likes_count,
             comments_count: post.actual_comments_count,
-            reposts_count: 0, // not implemented yet
-            views_count: 0, // not implemented yet
+            reposts_count: 0,
+            views_count: 0,
             is_pinned: false,
             is_archived: false,
             author: {
@@ -299,10 +289,8 @@ export function usePosts(options: PostQueryOptions = {}) {
 
       setPosts(processedPosts);
 
-      // Then get the likes for the current user if logged in
       let userLikes: Record<string, boolean> = {};
       if (user) {
-        // First get the user's profile
         const { data: profileData } = await supabase
           .from("user_profiles")
           .select("id")
@@ -329,7 +317,6 @@ export function usePosts(options: PostQueryOptions = {}) {
         }
       }
 
-      // Get media info for posts with media_ids
       const mediaIds = (postsData as PostFeedRow[])
         .flatMap((post) => post.media_ids)
         .filter((id): id is string => !!id);
@@ -342,7 +329,6 @@ export function usePosts(options: PostQueryOptions = {}) {
           .in("id", mediaIds);
 
         if (mediaData) {
-          // Group media by post using media_ids arrays
           (postsData as PostFeedRow[]).forEach((post) => {
             if (post.media_ids?.length > 0) {
               mediaByPostId[post.id] = post.media_ids
@@ -357,7 +343,6 @@ export function usePosts(options: PostQueryOptions = {}) {
         throw postsError;
       }
 
-      // Transform the data to include all related info
       const transformedPosts = (postsData as PostFeedRow[]).map(
         (post): Post => ({
           ...post,
@@ -372,7 +357,7 @@ export function usePosts(options: PostQueryOptions = {}) {
           media: mediaByPostId[post.id] || [],
           likes_count: post.actual_likes_count || 0,
           comments_count: post.actual_comments_count || 0,
-          reposts_count: 0, // These aren't in the feed view yet
+          reposts_count: 0,
           views_count: 0,
           is_pinned: false,
           is_archived: false,
@@ -395,13 +380,12 @@ export function usePosts(options: PostQueryOptions = {}) {
     }
 
     try {
-      // Use the auth UUID directly as the author_id
       const { data, error } = await supabase
         .from("posts")
         .insert([
           {
             ...postData,
-            author_id: user.id, // Using auth UUID directly
+            author_id: user.id,
           },
         ])
         .select()
@@ -409,7 +393,6 @@ export function usePosts(options: PostQueryOptions = {}) {
 
       if (error) throw error;
 
-      // Refresh posts after creating a new one
       await fetchPosts();
 
       return data;
@@ -427,7 +410,6 @@ export function usePosts(options: PostQueryOptions = {}) {
       const post = posts.find((p) => p.id === postId);
       if (!post) throw new Error("Post not found");
 
-      // Optimistically update the UI
       setPosts((currentPosts) =>
         currentPosts.map((p) =>
           p.id === postId
@@ -441,25 +423,20 @@ export function usePosts(options: PostQueryOptions = {}) {
       );
 
       if (post.isLikedByUser) {
-        // Unlike: Delete the like
         const { error } = await supabase
           .from("likes")
           .delete()
-          .match({ post_id: postId, author_id: user.id }); // Using auth UUID directly
+          .match({ post_id: postId, author_id: user.id });
 
         if (error) throw error;
       } else {
-        // Like: Insert new like
         const { error } = await supabase
           .from("likes")
-          .insert([{ post_id: postId, author_id: user.id }]); // Using auth UUID directly
+          .insert([{ post_id: postId, author_id: user.id }]);
 
         if (error) throw error;
       }
-
-      // The triggers will handle updating counts in the database
     } catch (err) {
-      // Revert optimistic update on error
       await fetchPosts();
       throw err instanceof Error ? err : new Error("Failed to toggle like");
     }
