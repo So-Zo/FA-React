@@ -4,6 +4,7 @@ import React, {
   useReducer,
   useCallback,
 } from "react";
+import { profileService } from "./services/profileService";
 import {
   ProfileState,
   ProfileData,
@@ -103,6 +104,9 @@ interface ProfileContextType extends ProfileState {
   refreshProfileData: () => Promise<void>;
   fetchProfilePosts: (page: number, limit: number) => Promise<void>;
   updateProfileData: (data: Partial<ProfileData>) => Promise<void>;
+  createPost: (
+    post: Omit<UserPost, "id" | "created_at" | "updated_at">
+  ) => Promise<void>;
 }
 
 const ProfileContext = createContext<ProfileContextType | null>(null);
@@ -124,30 +128,17 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
       });
 
       try {
-        const start = (page - 1) * limit;
-        const end = start + limit - 1;
-
-        const [postsResult, countResult] = await Promise.all([
-          supabase
-            .from("posts")
-            .select("*")
-            .eq("author_id", user.id)
-            .range(start, end)
-            .order("created_at", { ascending: false }),
-          supabase
-            .from("posts")
-            .select("id", { count: "exact", head: true })
-            .eq("author_id", user.id),
-        ]);
-
-        if (postsResult.error) throw postsResult.error;
-        if (countResult.error) throw countResult.error;
+        const { posts, total } = await profileService.getPosts(
+          user.id,
+          page,
+          limit
+        );
 
         dispatch({
           type: "SET_POSTS",
           payload: {
-            posts: postsResult.data || [],
-            totalPosts: countResult.count || 0,
+            posts: posts,
+            totalPosts: total,
           },
         });
       } catch (error) {
@@ -175,22 +166,14 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
       type: "SET_LOADING",
       payload: { key: "profileDataLoading", value: true },
     });
-    dispatch({
-      type: "SET_LOADING",
-      payload: { key: "statsDataLoading", value: true },
-    });
 
     try {
-      const [profileResult, statsResult] = await Promise.all([
-        supabase.from("user_profiles").select("*").eq("id", user.id).single(),
-        supabase.rpc("get_profile_stats", { user_id: user.id }),
-      ]);
+      // Single call to get both profile data and stats from normalized view
+      const { profileData, activityMetrics } =
+        await profileService.getCompleteProfileData(user.id);
 
-      if (profileResult.error) throw profileResult.error;
-      if (statsResult.error) throw statsResult.error;
-
-      dispatch({ type: "SET_PROFILE_DATA", payload: profileResult.data });
-      dispatch({ type: "SET_PROFILE_STATS", payload: statsResult.data });
+      dispatch({ type: "SET_PROFILE_DATA", payload: profileData });
+      dispatch({ type: "SET_PROFILE_STATS", payload: activityMetrics });
     } catch (error) {
       dispatch({
         type: "SET_ERROR",
@@ -203,10 +186,6 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
       dispatch({
         type: "SET_LOADING",
         payload: { key: "profileDataLoading", value: false },
-      });
-      dispatch({
-        type: "SET_LOADING",
-        payload: { key: "statsDataLoading", value: false },
       });
     }
   }, [user]);
@@ -248,6 +227,31 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     [user, refreshProfileData]
   );
 
+  const createPost = useCallback(
+    async (post: Omit<UserPost, "id" | "created_at" | "updated_at">) => {
+      if (!user) return;
+
+      try {
+        await profileService.createPost(post);
+
+        // Refresh both profile stats and posts
+        await Promise.all([
+          refreshProfileData(),
+          fetchProfilePosts(1, 10), // Refresh first page of posts
+        ]);
+      } catch (error) {
+        dispatch({
+          type: "SET_ERROR",
+          payload: {
+            key: "postsLoadError",
+            value: error instanceof Error ? error : new Error("Unknown error"),
+          },
+        });
+      }
+    },
+    [user, refreshProfileData, fetchProfilePosts]
+  );
+
   return (
     <ProfileContext.Provider
       value={{
@@ -255,6 +259,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
         refreshProfileData,
         fetchProfilePosts,
         updateProfileData,
+        createPost,
       }}
     >
       {children}

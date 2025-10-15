@@ -45,6 +45,50 @@
   font-size: var(--font-size-md);
 }
 
+
+
+/* non-editable section */
+.uni-section {
+ padding: var(--spacing-xl) var(--spacing-lg);
+  position: relative;
+  background: linear-gradient(
+    to top,
+    #c9c8c5 0%,
+    #c9c8c5 1%,
+    #dbdad7 31%,
+    #dcdad7 75%,
+    #d6d5d2 100%
+  ); /* subtle transparency */
+  border-radius: calc(var(--border-radius-base) * 2);
+  margin: var(--spacing-lg) auto;
+  color: var(--text-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid var(--fanarc-primary-color);
+  max-width: 70rem;
+  transition: box-shadow 0.2s;
+}
+
+
+
+.uni-section h1 {
+  margin-bottom: var(--spacing-md);
+}
+
+.uni-section p {
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-loose);
+  letter-spacing: 0.065rem;
+  font-size: var(--font-size-md);
+  text-align: left;
+}
+
+.uni-section ul,
+.uni-section ol,
+.uni-section dl {
+  color: var(--text-color);
+  font-size: var(--font-size-md);
+}
+
 /* Table of Contents styles */
 .toc-container {
   display: grid;

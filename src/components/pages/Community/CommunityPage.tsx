@@ -28,171 +28,225 @@ const CommunityPage: React.FC = () => {
   // Close dropdown when clicking outside
   const handleClickOutside = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    if (!target.closest(".filter-dropdown")) {
+    if (!target.closest(".filter-group")) {
       setActiveDropdown(null);
     }
   };
 
-  if (loading) {
+  const renderContent = () => {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Loading posts...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="error-container">
-        <p>Error: {error}</p>
-      </div>
-    );
-  }
-
-  return (
-    <div className="community-container" onClick={handleClickOutside}>
-      <h1>Community</h1>
-
-      <div className="filters-container">
-        {/* Post Type Filter */}
-        <div className="filter-dropdown">
-          <button
-            onClick={() => toggleDropdown("postType")}
-            className={`filter-button ${
-              activeDropdown === "postType" ? "active" : ""
-            }`}
-          >
-            {selectedPostType || "All Types"}
-          </button>
-          {activeDropdown === "postType" && (
-            <div className="dropdown-content">
-              <div onClick={() => setSelectedPostType(null)}>All Types</div>
-              <div onClick={() => setSelectedPostType("discussion")}>
-                Discussion
-              </div>
-              <div onClick={() => setSelectedPostType("question")}>
-                Question
-              </div>
-              <div onClick={() => setSelectedPostType("fan-art")}>Fan Art</div>
-              <div onClick={() => setSelectedPostType("fan-fiction")}>
-                Fan Fiction
-              </div>
-              <div onClick={() => setSelectedPostType("world-building")}>
-                World Building
-              </div>
-              <div onClick={() => setSelectedPostType("feedback")}>
-                Feedback
-              </div>
-              <div onClick={() => setSelectedPostType("review")}>Review</div>
-              <div onClick={() => setSelectedPostType("theory")}>Theory</div>
-              <div onClick={() => setSelectedPostType("news")}>News</div>
-              <div onClick={() => setSelectedPostType("meme")}>Meme</div>
-              <div onClick={() => setSelectedPostType("cosplay")}>Cosplay</div>
-            </div>
-          )}
-        </div>
-
-        {/* Sort Filter */}
-        <div className="filter-dropdown">
-          <button
-            onClick={() => toggleDropdown("sort")}
-            className={`filter-button ${
-              activeDropdown === "sort" ? "active" : ""
-            }`}
-          >
-            {selectedSort}
-          </button>
-          {activeDropdown === "sort" && (
-            <div className="dropdown-content">
-              <div onClick={() => setSelectedSort("latest")}>Latest</div>
-              <div onClick={() => setSelectedSort("trending")}>Trending</div>
-              <div onClick={() => setSelectedSort("top")}>Top</div>
-              <div onClick={() => setSelectedSort("most_commented")}>
-                Most Commented
-              </div>
-              <div onClick={() => setSelectedSort("most_liked")}>
-                Most Liked
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
       <div className="posts-container">
-        {posts.map((post) => (
-          <div key={post.id} className="post-card">
-            {/* Author info */}
-            <div className="post-header">
-              <div className="author-info">
-                <img
-                  src={post.author?.avatar_url || "/default-avatar.png"}
-                  alt={post.author?.display_name || "User"}
-                  className="author-avatar"
-                />
-                <div className="author-details">
-                  <span className="author-name">
-                    {post.author?.display_name || "Anonymous"}
-                  </span>
-                  <span className="author-username">
-                    @{post.author?.username || "anonymous"}
-                  </span>
+        {loading ? (
+          <div className="loading-state">Loading posts...</div>
+        ) : error ? (
+          <div className="error-state">Error: {error}</div>
+        ) : posts.length === 0 ? (
+          <div className="empty-state">No posts found</div>
+        ) : (
+          posts.map((post) => (
+            <article key={post.id} className="post-card">
+              <div className="post-card-header">
+                <div className="post-author-mini">
+                  <img
+                    src={post.author?.avatar_url || "/placeholder-avatar.jpg"}
+                    alt={`${post.author?.display_name}'s Profile`}
+                  />
+                  <div className="author-info">
+                    <span className="author-name">
+                      {post.author?.display_name || "Anonymous"}
+                    </span>
+                    <span className="post-timestamp">
+                      {new Date(post.created_at).toLocaleDateString()}
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className="post-meta">
-                <span className="post-type">{post.post_type}</span>
-                <span className="post-date">
-                  {new Date(post.created_at).toLocaleDateString()}
-                </span>
-              </div>
-            </div>
 
-            {/* Post content */}
-            <div className="post-content">
-              <h3 className="post-title">{post.title}</h3>
-              <p className="post-text">{post.content}</p>
-            </div>
-
-            {/* Media grid */}
-            {post.media && post.media.length > 0 && (
-              <div
-                className={`media-grid media-grid-${Math.min(
-                  post.media.length,
-                  4
-                )}`}
-              >
-                {post.media.map((media) => (
-                  <div key={media.id} className="media-item">
+              <div className="post-content">
+                <h2 className="post-title">{post.title}</h2>
+                {post.media && post.media.length > 0 && (
+                  <div className="post-media">
                     <img
-                      src={`/storage/${media.storage_path}`}
-                      alt={media.alt_text || "Post media"}
+                      src={`/storage/${post.media[0].storage_path}`}
+                      alt={post.media[0].alt_text || `Media for ${post.title}`}
                     />
                   </div>
-                ))}
-              </div>
-            )}
-
-            {/* Post footer with engagement metrics */}
-            <div className="post-footer">
-              <button
-                className="engagement-button"
-                onClick={() => toggleLike(post.id)}
-              >
-                {post.isLikedByUser ? (
-                  <AiFillHeart className="icon liked" />
-                ) : (
-                  <AiOutlineHeart className="icon" />
                 )}
-                <span>{post.likes_count}</span>
-              </button>
+                <p className="post-description">{post.content}</p>
+              </div>
 
-              <button className="engagement-button">
-                <AiOutlineComment className="icon" />
-                <span>{post.comments_count}</span>
-              </button>
+              <div className="post-interactions">
+                <div className="interaction-group">
+                  <button
+                    className={`action-btn ${
+                      post.isLikedByUser ? "liked" : ""
+                    }`}
+                    onClick={() => toggleLike(post.id)}
+                  >
+                    {post.isLikedByUser ? (
+                      <AiFillHeart className="action-icon" />
+                    ) : (
+                      <AiOutlineHeart className="action-icon" />
+                    )}{" "}
+                    {post.likes_count || 0}
+                  </button>
+                  <button className="action-btn">
+                    <AiOutlineComment className="action-icon" />{" "}
+                    {post.comments_count || 0}
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div className="community-page" onClick={handleClickOutside}>
+      <div id="app-container">
+        <section className="community-page-content">
+          <header className="main-header">
+            <h1>Community</h1>
+            <div className="search-group">
+              <input
+                type="search"
+                id="site-search-bar"
+                aria-label="Search Site Wide"
+                placeholder="Search for Characters, Universes, etc."
+              />
+              <div className="filter-buttons">
+                {/* Post Type Filter */}
+                <div className="filter-group">
+                  <button
+                    className={`filter-btn ${
+                      activeDropdown === "post-type" ? "active" : ""
+                    }`}
+                    onClick={() => toggleDropdown("post-type")}
+                  >
+                    Post type
+                  </button>
+                  <div
+                    className={`filter-dropdown ${
+                      activeDropdown === "post-type" ? "active" : ""
+                    }`}
+                  >
+                    <ul>
+                      {(
+                        [
+                          "discussion",
+                          "fan-art",
+                          "theory",
+                          "fan-fiction",
+                          "world-building",
+                          "feedback",
+                          "review",
+                          "news",
+                          "meme",
+                          "cosplay",
+                        ] as PostType[]
+                      ).map((type) => (
+                        <li key={type}>
+                          <label className="checkbox-wrapper">
+                            <input
+                              type="radio"
+                              name="post-type"
+                              value={type}
+                              checked={selectedPostType === type}
+                              onChange={() => setSelectedPostType(type)}
+                            />
+                            <span className="custom-checkbox"></span>
+                            <button onClick={() => setSelectedPostType(type)}>
+                              {type
+                                .split("-")
+                                .map(
+                                  (word) =>
+                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                )
+                                .join(" ")}
+                            </button>
+                          </label>
+                        </li>
+                      ))}
+                      {selectedPostType && (
+                        <li>
+                          <button
+                            className="clear-filter"
+                            onClick={() => setSelectedPostType(null)}
+                          >
+                            Show All
+                          </button>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Sort By Filter */}
+                <div className="filter-group">
+                  <button
+                    className={`filter-btn ${
+                      activeDropdown === "sort-by" ? "active" : ""
+                    }`}
+                    onClick={() => toggleDropdown("sort-by")}
+                  >
+                    Sort By:{" "}
+                    {selectedSort
+                      .split("_")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </button>
+                  <div
+                    className={`filter-dropdown ${
+                      activeDropdown === "sort-by" ? "active" : ""
+                    }`}
+                  >
+                    <ul>
+                      {(
+                        [
+                          "latest",
+                          "trending",
+                          "top",
+                          "most_commented",
+                          "most_liked",
+                        ] as SortOption[]
+                      ).map((sort) => (
+                        <li key={sort}>
+                          <label className="checkbox-wrapper">
+                            <input
+                              type="radio"
+                              name="sort"
+                              value={sort}
+                              checked={selectedSort === sort}
+                              onChange={() => setSelectedSort(sort)}
+                            />
+                            <span className="custom-checkbox"></span>
+                            <button onClick={() => setSelectedSort(sort)}>
+                              {sort
+                                .split("_")
+                                .map(
+                                  (word) =>
+                                    word.charAt(0).toUpperCase() + word.slice(1)
+                                )
+                                .join(" ")}
+                            </button>
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          </header>
+
+          <main className="community-feed">
+            <div className="community-feed-container">{renderContent()}</div>
+          </main>
+        </section>
       </div>
     </div>
   );

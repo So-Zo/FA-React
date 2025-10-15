@@ -1,0 +1,71 @@
+/* ========================================================================== 
+   PROFILE NAVIGATION COMPONENT STYLES
+   ========================================================================== 
+   
+   Organization:
+   1. VISUAL IMPACT - Colors, typography, visual effects
+   2. COMPONENT SIZING - Dimensions, borders, shadows
+   3. INTERACTIVE STATES - Hover effects, transitions, cursors
+   4. LAYOUT STRUCTURE - Flexbox, positioning, spacing
+   5. RESPONSIVE DESIGN - Media queries
+*/
+
+/* ==========================================================================
+   1. VISUAL IMPACT - Colors, Typography, Visual Effects
+   ========================================================================== */
+
+/* Navigation buttons - colors and typography */
+.profile-option-item {
+  background-color: rgba(0, 0, 0, 0.17);
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.45rem;
+}
+.profile-option-item.active,
+.profile-option-item:hover {
+  background-color: var(--accent-color, #8c52ff);
+  color: #fff;
+}
+
+/* ==========================================================================
+   3. INTERACTIVE STATES - Hover Effects, Transitions, Cursors
+   ========================================================================== */
+
+/* Navigation interactions */
+.profile-option-item {
+  cursor: pointer;
+  transition: background-color 0.17s;
+}
+
+/* ==========================================================================
+   4. LAYOUT STRUCTURE - Flexbox, Positioning, Spacing
+   ========================================================================== */
+
+/* Navigation layout */
+.profile-options-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.profile-option-item {
+  padding: 0.75rem 1.6rem;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN - Media Queries
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Navigation responsive stacking */
+  .profile-options-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .profile-option-item {
+    text-align: center;
+    width: 100%;
+  }
+}

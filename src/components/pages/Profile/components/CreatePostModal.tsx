@@ -1,5 +1,5 @@
-import React from "react";
-import { supabase } from "../../../../lib/supabaseClient";
+import React, { useState } from "react";
+import { profileService } from "../services/profileService";
 import { useModal, useFileUpload, useProfileForms } from "../hooks";
 import { useProfileContext } from "../ProfileContext";
 import { useAuth } from "../../../../shared/hooks/useAuth";
@@ -17,9 +17,36 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
   isOpen,
 }) => {
   const { user } = useAuth();
-  const { refreshProfileData } = useProfileContext();
+  const { createPost } = useProfileContext();
   const { handleModalClick } = useModal();
-  const { mediaPreview, handleFileChange, clearPreview } = useFileUpload();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle file upload to storage
+  const handleFileUpload = async (file: File): Promise<string> => {
+    if (!user) throw new Error("User not authenticated");
+
+    // Generate a temporary post ID for storage path
+    const tempPostId = `temp_${Date.now()}_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
+    const result = await profileService.uploadPostMedia(
+      user.id,
+      tempPostId,
+      file
+    );
+    return result.url;
+  };
+
+  const {
+    mediaPreview,
+    uploadedMediaId,
+    isUploading,
+    handleFileChange,
+    clearPreview,
+  } = useFileUpload({
+    onUpload: handleFileUpload,
+  });
+
   const { formState, updatePostForm, resetPostForm } = useProfileForms();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,6 +56,8 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const {
         postTitle,
@@ -36,35 +65,40 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
         postType,
         postMedium,
         postGenre,
-        postTags,
         postVisibility,
       } = formState.newPostForm;
 
-      const { error } = await supabase.from("posts").insert([
-        {
-          author_id: user.id,
-          title: postTitle,
-          content: postContent,
-          post_type: postType,
-          medium: postMedium,
-          genre: postGenre,
-          tags: postTags,
-          visibility: postVisibility,
-          media_url: mediaPreview,
+      // Create post with uploaded media ID (if any)
+      await createPost({
+        author_id: user.id,
+        title: postTitle,
+        content: postContent,
+        post_type: postType,
+        medium: postMedium,
+        genre: postGenre,
+        visibility: postVisibility,
+        media_ids: uploadedMediaId ? [uploadedMediaId] : [],
+        // These fields will be computed by the database/view
+        likes_count: 0,
+        comments_count: 0,
+        author: {
+          id: user.id,
+          display_name: "",
+          avatar_url: "",
+          is_verified: false,
         },
-      ]);
+      });
 
-      if (error) throw error;
-
-      // Reset form and refresh data
+      // Reset form and close modal
       resetPostForm();
       clearPreview();
-      await refreshProfileData();
       onClose();
       alert("Post created successfully!");
     } catch (err) {
       console.error("Error creating post:", err);
       alert("Failed to create post.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -223,13 +257,14 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                   type="file"
                   id="post-media"
                   className="media-upload-input"
-                  accept="image/*"
+                  accept=".jpg,.jpeg,.png,.webp,.gif"
                   onChange={handleFileChange}
+                  disabled={isUploading}
                 />
                 <label htmlFor="post-media" className="media-upload-label">
                   <span className="media-upload-icon">📷</span>
                   <span className="media-upload-text">
-                    Click to upload image
+                    {isUploading ? "Uploading..." : "Click to upload image"}
                   </span>
                 </label>
                 <div
@@ -237,6 +272,9 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 >
                   {mediaPreview && (
                     <img src={mediaPreview} alt="Post media preview" />
+                  )}
+                  {isUploading && (
+                    <div className="upload-spinner">Uploading...</div>
                   )}
                 </div>
               </div>
@@ -308,11 +346,16 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
                 type="button"
                 className="btn btn-outline cancel-post-btn"
                 onClick={onClose}
+                disabled={isSubmitting || isUploading}
               >
                 Cancel
               </button>
-              <button type="submit" className="btn btn-primary">
-                Create Post
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={isSubmitting || isUploading}
+              >
+                {isSubmitting ? "Creating..." : "Create Post"}
               </button>
             </div>
           </form>

@@ -2,20 +2,23 @@ import { PostType, Medium, Genre } from "../Community/hooks/usePosts";
 // User's post data structure
 export interface UserPost {
   id: string;
-  author_id: string;
+  created_at: string;
+  updated_at: string;
   title: string;
   content: string;
   post_type: PostType;
   medium: Medium;
   genre: Genre;
-  tags: string[];
+  author_id: string;
+  media_ids: string[];
   visibility: "public" | "followers" | "private";
-  media_url?: string;
-  created_at: string;
-  updated_at: string;
-  author?: {
+  likes_count: number;
+  comments_count: number;
+  author: {
+    id: string;
     display_name: string;
-    avatar_url?: string;
+    avatar_url: string;
+    is_verified: boolean;
   };
 }
 

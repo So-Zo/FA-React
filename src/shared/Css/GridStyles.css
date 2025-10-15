@@ -63,6 +63,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  color : var(--text-primary);
 }
 
 .user-info img.user-avatar {
@@ -79,7 +80,7 @@
 
 .timestamp {
   font-size: var(--font-size-sm);
-  color: var(--fanarc-text-secondary);
+  color: var(--text-secondary);
 }
 
 .category-tag {
@@ -99,13 +100,13 @@
 .content h4 {
   margin: 0 0 var(--spacing-sm);
   font-size: var(--font-size-lg);
-  color: var(--fanarc-text-primary);
+  color: var(--text-primary);
 }
 
 .content p {
   margin: 0 0 var(--spacing-md);
   line-height: 1.5;
-  color: var(--fanarc-text-secondary);
+  color: var(--text-secondary);
   max-width: 100%;
   overflow-wrap: break-word;
   word-wrap: break-word;

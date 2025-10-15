@@ -1,19 +1,124 @@
 import { supabase } from "../../../../lib/supabaseClient";
 import { ProfileData, UserActivityMetrics, UserPost } from "../types";
 
+// File upload configurations
+const PROFILE_IMAGE_CONFIG = {
+  maxSize: 5 * 1024 * 1024, // 5MB
+  allowedTypes: ["image/jpeg", "image/png", "image/webp"],
+  allowedExtensions: [".jpg", ".jpeg", ".png", ".webp"],
+};
+
+const POST_MEDIA_CONFIG = {
+  maxSize: 25 * 1024 * 1024, // 25MB
+  allowedTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],
+  allowedExtensions: [".jpg", ".jpeg", ".png", ".webp", ".gif"],
+};
+
+// File validation helper
+function validateFile(file: File, config: typeof PROFILE_IMAGE_CONFIG) {
+  // Check file size
+  if (file.size > config.maxSize) {
+    throw new Error(
+      `File size must be less than ${config.maxSize / (1024 * 1024)}MB`
+    );
+  }
+
+  // Check MIME type
+  if (!config.allowedTypes.includes(file.type)) {
+    throw new Error(
+      `File type ${
+        file.type
+      } is not allowed. Allowed types: ${config.allowedTypes.join(", ")}`
+    );
+  }
+
+  // Check file extension
+  const fileExt = "." + file.name.split(".").pop()?.toLowerCase();
+  if (!config.allowedExtensions.includes(fileExt)) {
+    throw new Error(
+      `File extension ${fileExt} is not allowed. Allowed extensions: ${config.allowedExtensions.join(
+        ", "
+      )}`
+    );
+  }
+}
+
 export const profileService = {
-  // Get profile data for a user
-  async getProfileData(userId: string): Promise<ProfileData> {
+  // Get complete profile data from normalized view (includes profile + stats)
+  async getCompleteProfileData(userId: string): Promise<{
+    profileData: ProfileData;
+    activityMetrics: UserActivityMetrics;
+  }> {
+    // Get profile data from view - this will include the normalized stats
     const { data, error } = await supabase
-      .from("user_profiles")
-      .select(
-        "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private"
-      )
-      .eq("id", userId)
+      .from("profile_view")
+      .select("*")
+      .eq("author_id", userId)
+      .limit(1)
       .single();
 
-    if (error) throw error;
-    return data;
+    console.log("Profile view data:", data);
+    console.log("Profile view error:", error);
+
+    if (error) {
+      // Fallback to user_profiles if no posts exist in view
+      const { data: profileData, error: profileError } = await supabase
+        .from("user_profiles")
+        .select(
+          "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private, total_posts, total_followers, total_following"
+        )
+        .eq("id", userId)
+        .single();
+
+      if (profileError) throw profileError;
+
+      console.log("Fallback user_profiles data:", profileData);
+
+      return {
+        profileData: {
+          id: profileData.id,
+          display_name: profileData.display_name,
+          username: profileData.username,
+          bio: profileData.bio,
+          avatar_url: profileData.avatar_url,
+          website_url: profileData.website_url,
+          location: profileData.location,
+          is_verified: profileData.is_verified,
+          is_private: profileData.is_private,
+        },
+        activityMetrics: {
+          totalPosts: profileData.total_posts || 0,
+          totalFollowers: profileData.total_followers || 0,
+          totalFollowing: profileData.total_following || 0,
+        },
+      };
+    }
+
+    // Extract profile and stats from view data
+    return {
+      profileData: {
+        id: data.author_id,
+        display_name: data.author[0]?.display_name,
+        username: data.author[0]?.username,
+        bio: data.author[0]?.bio,
+        avatar_url: data.author[0]?.avatar_url,
+        website_url: data.author[0]?.website_url,
+        location: data.author[0]?.location,
+        is_verified: data.author[0]?.is_verified,
+        is_private: data.author[0]?.is_private,
+      },
+      activityMetrics: {
+        totalPosts: data.author[0]?.total_posts || 0,
+        totalFollowers: data.author[0]?.total_followers || 0,
+        totalFollowing: data.author[0]?.total_following || 0,
+      },
+    };
+  },
+
+  // Get profile data for a user (legacy method for backward compatibility)
+  async getProfileData(userId: string): Promise<ProfileData> {
+    const { profileData } = await this.getCompleteProfileData(userId);
+    return profileData;
   },
 
   // Update profile data
@@ -32,19 +137,10 @@ export const profileService = {
     if (error) throw error;
   },
 
-  // Get profile statistics
+  // Get profile statistics (legacy method - now uses consolidated approach)
   async getProfileStats(userId: string): Promise<UserActivityMetrics> {
-    const { data, error } = await supabase.rpc("get_profile_stats", {
-      user_id: userId,
-    });
-
-    if (error) throw error;
-    // Transform database response to match our UserActivityMetrics interface
-    return {
-      totalFollowers: data.followers_count || 0,
-      totalFollowing: data.following_count || 0,
-      totalPosts: data.posts_count || 0,
-    };
+    const { activityMetrics } = await this.getCompleteProfileData(userId);
+    return activityMetrics;
   },
 
   // Get posts with pagination
@@ -58,29 +154,13 @@ export const profileService = {
 
     const [postsResult, countResult] = await Promise.all([
       supabase
-        .from("posts")
-        .select(
-          `
-          id,
-          author_id,
-          title,
-          content,
-          post_type,
-          medium,
-          genre,
-          tags,
-          visibility,
-          created_at,
-          updated_at,
-          media_url,
-          author:user_profiles(display_name, avatar_url)
-        `
-        )
+        .from("profile_view")
+        .select("*")
         .eq("author_id", userId)
         .range(start, end)
         .order("created_at", { ascending: false }),
       supabase
-        .from("posts")
+        .from("profile_view")
         .select("id", { count: "exact", head: true })
         .eq("author_id", userId),
     ]);
@@ -88,27 +168,27 @@ export const profileService = {
     if (postsResult.error) throw postsResult.error;
     if (countResult.error) throw countResult.error;
 
-    // Ensure we have the right shape before returning
+    // Transform the data to match the UserPost interface
     const posts: UserPost[] = (postsResult.data || []).map((post) => ({
       id: post.id,
-      author_id: post.author_id,
+      created_at: post.created_at,
+      updated_at: post.updated_at,
       title: post.title,
       content: post.content,
       post_type: post.post_type,
       medium: post.medium,
       genre: post.genre,
-      tags: post.tags || [],
+      author_id: post.author_id,
+      media_ids: post.media_ids || [],
       visibility: post.visibility,
-      media_url: post.media_url,
-      created_at: post.created_at,
-      updated_at: post.updated_at,
-      author:
-        post.author && post.author[0]
-          ? {
-              display_name: post.author[0].display_name,
-              avatar_url: post.author[0].avatar_url,
-            }
-          : undefined,
+      likes_count: post.likes_count || 0,
+      comments_count: post.comments_count || 0,
+      author: {
+        id: post.author_id,
+        display_name: post.author[0]?.display_name,
+        avatar_url: post.author[0]?.avatar_url,
+        is_verified: post.author[0]?.is_verified,
+      },
     }));
 
     return {
@@ -121,8 +201,33 @@ export const profileService = {
   async createPost(
     post: Omit<UserPost, "id" | "created_at" | "updated_at">
   ): Promise<void> {
-    const { error } = await supabase.from("posts").insert([post]);
-    if (error) throw error;
+    // Extract only the database fields (remove UI-only fields like author object)
+    const dbPost = {
+      author_id: post.author_id,
+      title: post.title,
+      content: post.content,
+      post_type: post.post_type,
+      medium: post.medium,
+      genre: post.genre,
+      visibility: post.visibility,
+      media_ids: post.media_ids,
+      // Don't include author object, likes_count, comments_count as they're computed/joined
+    };
+
+    console.log("Creating post with data:", dbPost);
+
+    // Insert the post
+    const { data, error: insertError } = await supabase
+      .from("posts")
+      .insert([dbPost])
+      .select();
+
+    if (insertError) {
+      console.error("Post creation failed:", insertError);
+      throw insertError;
+    }
+
+    console.log("Post created successfully:", data);
   },
 
   // Update a post
@@ -152,18 +257,31 @@ export const profileService = {
     userId: string,
     file: File
   ): Promise<{ url: string }> {
+    // Validate file before upload
+    validateFile(file, PROFILE_IMAGE_CONFIG);
+
     const fileExt = file.name.split(".").pop();
     const filePath = `${userId}/profile-image.${fileExt}`;
 
+    console.log("Uploading file to storage...", filePath);
     const { error: uploadError } = await supabase.storage
       .from("profile-images")
       .upload(filePath, file, { upsert: true });
 
-    if (uploadError) throw uploadError;
+    if (uploadError) {
+      console.error("Storage upload failed:", uploadError);
+      throw uploadError;
+    }
 
     const { data: publicURL } = supabase.storage
       .from("profile-images")
       .getPublicUrl(filePath);
+
+    console.log(
+      "File uploaded successfully, updating database...",
+      publicURL.publicUrl
+    );
+    console.log("Updating user_profiles for userId:", userId);
 
     await this.updateProfileData(userId, {
       avatar_url: publicURL.publicUrl,
@@ -178,6 +296,9 @@ export const profileService = {
     postId: string,
     file: File
   ): Promise<{ url: string }> {
+    // Validate file before upload
+    validateFile(file, POST_MEDIA_CONFIG);
+
     const fileExt = file.name.split(".").pop();
     const filePath = `${userId}/posts/${postId}.${fileExt}`;
 

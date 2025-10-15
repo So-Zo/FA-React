@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 interface UseFileUploadOptions {
-  onUpload?: (file: File) => void;
+  onUpload?: (file: File) => Promise<string | void>;
   onPreview?: (previewUrl: string) => void;
 }
 
@@ -10,11 +10,17 @@ export function useFileUpload({
   onPreview,
 }: UseFileUploadOptions = {}) {
   const [mediaPreview, setMediaPreview] = useState<string | null>(null);
+  const [uploadedMediaId, setUploadedMediaId] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
+        setSelectedFile(file);
+
+        // Create preview
         const reader = new FileReader();
         reader.onload = (event) => {
           if (event.target?.result) {
@@ -24,7 +30,21 @@ export function useFileUpload({
           }
         };
         reader.readAsDataURL(file);
-        onUpload?.(file);
+
+        // Handle upload if callback provided
+        if (onUpload) {
+          setIsUploading(true);
+          try {
+            const mediaId = await onUpload(file);
+            if (mediaId && typeof mediaId === "string") {
+              setUploadedMediaId(mediaId);
+            }
+          } catch (error) {
+            console.error("File upload failed:", error);
+          } finally {
+            setIsUploading(false);
+          }
+        }
       }
     },
     [onUpload, onPreview]
@@ -32,10 +52,16 @@ export function useFileUpload({
 
   const clearPreview = useCallback(() => {
     setMediaPreview(null);
+    setUploadedMediaId(null);
+    setSelectedFile(null);
+    setIsUploading(false);
   }, []);
 
   return {
     mediaPreview,
+    uploadedMediaId,
+    selectedFile,
+    isUploading,
     handleFileChange,
     clearPreview,
   };

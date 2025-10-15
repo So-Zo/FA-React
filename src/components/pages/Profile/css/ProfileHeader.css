@@ -1,0 +1,196 @@
+/* ========================================================================== 
+   PROFILE HEADER COMPONENT STYLES
+   ========================================================================== 
+   
+   Organization:
+   1. VISUAL IMPACT - Colors, typography, visual effects
+   2. COMPONENT SIZING - Dimensions, borders, shadows
+   3. INTERACTIVE STATES - Hover effects, transitions, cursors
+   4. LAYOUT STRUCTURE - Flexbox, positioning, spacing
+   5. RESPONSIVE DESIGN - Media queries
+*/
+
+/* ==========================================================================
+   1. VISUAL IMPACT - Colors, Typography, Visual Effects
+   ========================================================================== */
+
+/* Header colors and visual effects */
+.profile-header {
+  background: var(--fanarc-primary-color);
+  box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.04);
+}
+
+/* Avatar styling - colors and visual appearance */
+.profile-avatar {
+  background: #eaeafd;
+  border: 3px solid var(--accent-color, #8c52ff);
+  border-radius: 10%;
+}
+
+/* Avatar overlay label - colors and typography */
+.profile-image-label {
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.97rem;
+  border-radius: 0 0 0.7rem 0.7rem;
+  opacity: 0.92;
+}
+
+/* Typography - user name */
+.profile-user-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-primary, #231c3d);
+}
+
+/* Typography - stats */
+.stat-number {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: white;
+}
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b6b81;
+}
+
+/* ==========================================================================
+   2. COMPONENT SIZING - Dimensions, Borders, Shadows
+   ========================================================================== */
+
+/* Avatar sizing */
+.profile-avatar {
+  width: 10rem;
+  height: 12rem;
+  object-fit: cover;
+}
+.profile-image-label {
+  width: 100%;
+  min-width: 160px;
+}
+
+/* Avatar block sizing */
+.profile-avatar-block {
+  min-width: 10rem;
+}
+
+/* User overview sizing */
+.user-overview-block {
+  min-width: 200px;
+}
+
+/* ==========================================================================
+   3. INTERACTIVE STATES - Hover Effects, Transitions, Cursors
+   ========================================================================== */
+
+/* Avatar interactions */
+.profile-avatar {
+  cursor: pointer;
+}
+.profile-image-label {
+  cursor: pointer;
+  transition: opacity 0.18s;
+}
+.profile-avatar-block:hover .profile-image-label {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   4. LAYOUT STRUCTURE - Flexbox, Positioning, Spacing
+   ========================================================================== */
+
+/* Header layout */
+.profile-header {
+  padding: 2rem 1.5rem 1rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.profile-header-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+  justify-content: center;
+}
+
+/* Avatar block layout */
+.profile-avatar-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.profile-avatar {
+  margin-bottom: 0.45rem;
+}
+.profile-image-label {
+  display: block;
+  margin: 0 auto;
+  padding: 0.55rem 0.4rem 0.28rem 0.4rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* User overview layout */
+.user-overview-block {
+  flex: 1;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  justify-content: center;
+}
+.profile-user-name {
+  margin: 0 0 0.7rem 0;
+}
+
+/* Stats layout */
+.profile-stats-row {
+  display: flex;
+  gap: 2.6rem;
+}
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN - Media Queries
+   ========================================================================== */
+
+@media (max-width: 950px) {
+  /* Header responsive layout */
+  .profile-header-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  /* User overview responsive alignment */
+  .user-overview-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Stats responsive spacing */
+  .profile-stats-row {
+    gap: 1.3rem;
+  }
+}
+
+@media (max-width: 650px) {
+  /* Header responsive padding */
+  .profile-header {
+    padding: 1.1rem 0.28rem 0.9rem 0.28rem;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Header minimal padding for small screens */
+  .profile-header {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+}

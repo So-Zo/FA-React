@@ -1,0 +1,16 @@
+/* ========================================================================== 
+   PROFILE PAGE STYLES INDEX
+   ========================================================================== 
+   
+   This file imports all Profile page component styles.
+   Import this single file to get all Profile page styling.
+*/
+
+/* Main page styles */
+@import "./ProfilePage.css";
+
+/* Component styles */
+@import "./css/ProfileHeader.css";
+@import "./css/ProfileNavigation.css";
+@import "./css/ProfileSettings.css";
+@import "./css/CreatePostModal.css";

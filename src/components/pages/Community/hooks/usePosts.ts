@@ -76,9 +76,8 @@ interface PostFeedRow {
   username: string;
   avatar_url: string;
   is_verified: boolean;
-  actual_likes_count: number;
-  actual_comments_count: number;
-  engagement_score: number;
+  likes_count: number;
+  comments_count: number;
   likes: Like[];
   user_has_liked?: boolean;
 }
@@ -181,9 +180,8 @@ export function usePosts(options: PostQueryOptions = {}) {
         username,
         avatar_url,
         is_verified,
-        actual_likes_count,
-        actual_comments_count,
-        engagement_score
+        likes_count,
+        comments_count
       `);
 
       if (options.timeFilter) {
@@ -225,16 +223,12 @@ export function usePosts(options: PostQueryOptions = {}) {
 
       switch (options.sort) {
         case "trending":
-          query = query.order("engagement_score", { ascending: false });
-          break;
         case "top":
-          query = query.order("actual_likes_count", { ascending: false });
+        case "most_liked":
+          query = query.order("likes_count", { ascending: false });
           break;
         case "most_commented":
-          query = query.order("actual_comments_count", { ascending: false });
-          break;
-        case "most_liked":
-          query = query.order("actual_likes_count", { ascending: false });
+          query = query.order("comments_count", { ascending: false });
           break;
         default:
           query = query.order("created_at", { ascending: false });
@@ -267,8 +261,8 @@ export function usePosts(options: PostQueryOptions = {}) {
             visibility: post.visibility,
             location: post.location,
             updated_at: post.updated_at,
-            likes_count: post.actual_likes_count,
-            comments_count: post.actual_comments_count,
+            likes_count: post.likes_count,
+            comments_count: post.comments_count,
             reposts_count: 0,
             views_count: 0,
             is_pinned: false,
@@ -355,8 +349,8 @@ export function usePosts(options: PostQueryOptions = {}) {
           },
           isLikedByUser: userLikes[post.id] || false,
           media: mediaByPostId[post.id] || [],
-          likes_count: post.actual_likes_count || 0,
-          comments_count: post.actual_comments_count || 0,
+          likes_count: post.likes_count || 0,
+          comments_count: post.comments_count || 0,
           reposts_count: 0,
           views_count: 0,
           is_pinned: false,

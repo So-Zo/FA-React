@@ -31,7 +31,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           <input
             type="file"
             id="profile-image-upload"
-            accept="image/*"
+            accept=".jpg,.jpeg,.png,.webp"
             aria-label="Upload profile picture"
             style={{ display: "none" }}
             onChange={handleFileChange}

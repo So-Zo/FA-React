@@ -18,7 +18,8 @@
 /* Pages */
 @import url(./components/ui/HomePage.css);
 @import url(./components/ui/CommunityPage.css);
-@import url(./components/ui/ProfilePage.css);
+/*@import url(./components/ui/ProfilePage.css); */
+@import url(./components/pages/Profile/Profileimport.css);
 @import url(./components/ui/PowerRoomPage.css);
 @import url(./components/ui/AuthPage.css);
 @import url(./components/ui/CharStyles.css);

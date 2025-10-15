@@ -1,0 +1,40 @@
+/* ========================================================================== 
+   PROFILE PAGE - MAIN PAGE STYLES
+   ========================================================================== 
+   
+   This file contains only page-level styles and general layout that doesn't
+   belong to specific components. Component-specific styles are in the /css folder.
+   
+   Organization:
+   1. VISUAL IMPACT - Colors, typography, visual effects
+   2. COMPONENT SIZING - Dimensions, borders, shadows
+   3. INTERACTIVE STATES - Hover effects, transitions, cursors
+   4. LAYOUT STRUCTURE - Flexbox, positioning, spacing
+*/
+
+/* ==========================================================================
+   1. VISUAL IMPACT - Colors, Typography, Visual Effects
+   ========================================================================== */
+
+/* Base page background */
+.profile-page {
+  background: var(--fanarc-secondary-color);
+}
+
+/* ==========================================================================
+   2. COMPONENT SIZING - Dimensions, Borders, Shadows
+   ========================================================================== */
+
+/* Page structure sizing */
+.profile-page {
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   4. LAYOUT STRUCTURE - Flexbox, Positioning, Spacing
+   ========================================================================== */
+
+/* Main content layout */
+.profile-main {
+  width: 100%;
+}

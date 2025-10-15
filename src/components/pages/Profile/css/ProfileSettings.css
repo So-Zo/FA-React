@@ -1,0 +1,240 @@
+/* ========================================================================== 
+   PROFILE SETTINGS COMPONENT STYLES
+   ========================================================================== 
+   
+   Organization:
+   1. VISUAL IMPACT - Colors, typography, visual effects
+   2. COMPONENT SIZING - Dimensions, borders, shadows
+   3. INTERACTIVE STATES - Hover effects, transitions, cursors
+   4. LAYOUT STRUCTURE - Flexbox, positioning, spacing
+*/
+
+/* ==========================================================================
+   1. VISUAL IMPACT - Colors, Typography, Visual Effects
+   ========================================================================== */
+
+/* Settings group - colors and typography */
+.settings-group {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+}
+.settings-group h3 {
+  font-size: 1.14rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(36, 22, 47, 0.07);
+}
+.setting-description {
+  font-size: 0.88rem;
+  color: #696c81;
+}
+
+/* Form elements - colors and typography */
+.form-group label {
+  color: var(--text-primary, #231c3d);
+}
+.form-group input {
+  background: #f5f2fa;
+  border: 1px solid #d4d0e3;
+  border-radius: 0.4rem;
+  color: #231c3d;
+}
+.secondary-btn {
+  background: #f1edfa;
+  color: var(--text-primary, #231c3d);
+  border: 1px solid #d4d0e3;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+}
+.settings-textarea {
+  background: #faf8fc;
+  border: 1px solid #d4d0e3;
+  border-radius: 0.4rem;
+  color: #231c3d;
+}
+
+/* ==========================================================================
+   2. COMPONENT SIZING - Dimensions, Borders, Shadows
+   ========================================================================== */
+
+/* Form elements sizing */
+.form-group input,
+.settings-textarea {
+  width: 100%;
+}
+.settings-textarea {
+  min-height: 80px;
+}
+
+/* ==========================================================================
+   3. INTERACTIVE STATES - Hover Effects, Transitions, Cursors
+   ========================================================================== */
+
+/* Button interactions */
+.secondary-btn {
+  cursor: pointer;
+  transition: background-color 0.19s;
+}
+.secondary-btn:hover {
+  background: #edebfc;
+}
+
+/* Form interactions */
+.settings-textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   4. LAYOUT STRUCTURE - Flexbox, Positioning, Spacing
+   ========================================================================== */
+
+/* Settings layout */
+.settings-group {
+  padding: 1.1rem 1.1rem 1.25rem 1.1rem;
+  margin-bottom: 2.1rem;
+}
+.settings-group h3 {
+  margin-bottom: 1.08rem;
+  padding-bottom: 0.46rem;
+  text-align: left;
+}
+.setting-description {
+  margin-top: 0.42rem;
+}
+
+/* Form layout */
+.form-group {
+  margin-bottom: 1.22rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.41rem;
+}
+.form-group input {
+  padding: 0.7rem;
+}
+.secondary-btn {
+  padding: 0.74rem 1rem;
+}
+.settings-textarea {
+  padding: 0.7rem;
+}
+
+/* Additional styles for new settings elements */
+
+/* Settings subgroups */
+.settings-subgroup {
+  margin-bottom: 1.5rem;
+}
+.settings-subgroup h4 {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+/* Theme options styling */
+.theme-options-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.theme-options-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+.theme-options-list label {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.theme-options-list label:hover {
+  color: var(--accent-primary);
+}
+.theme-options-list input[type="radio"] {
+  cursor: pointer;
+}
+
+/* Dropdown styling */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.settings-dropdown {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  min-width: 200px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.settings-dropdown:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+/* Toggle switches styling */
+.settings-toggle-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.settings-toggle-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.settings-toggle-list li:last-child {
+  border-bottom: none;
+}
+.setting-label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Toggle switch component */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  border-radius: 0.75rem;
+  transition: 0.3s;
+}
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  left: 0.25rem;
+  bottom: 0.25rem;
+  background-color: white;
+  transition: 0.3s;
+}
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--accent-primary);
+}
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(1.5rem);
+}

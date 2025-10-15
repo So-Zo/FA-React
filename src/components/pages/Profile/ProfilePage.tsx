@@ -12,12 +12,19 @@ import {
   ErrorBoundary,
   LoadingSpinner,
 } from "./components";
+import { PostCard } from "../../../shared/Components/PostCard";
 import { profileService } from "./services";
 
-const ProfileContent: React.FC = () => {
+function ProfileContent() {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const { refreshProfileData } = useProfileContext();
+  const {
+    refreshProfileData,
+    userPosts,
+    loadingStates,
+    totalUserPosts,
+    fetchProfilePosts,
+  } = useProfileContext();
 
   // Custom hooks
   const { activeSection, navigateToSection } = useProfileNavigation();
@@ -39,16 +46,25 @@ const ProfileContent: React.FC = () => {
     }
   };
 
-  // Effect to handle auth state
+  // Effect to handle auth state and load initial data
   useEffect(() => {
     if (!authLoading) {
       if (!user) {
         navigate("/login");
       } else {
         refreshProfileData();
+        fetchProfilePosts(currentPage, postsPerPage);
       }
     }
-  }, [authLoading, user, navigate, refreshProfileData]);
+  }, [
+    authLoading,
+    user,
+    navigate,
+    refreshProfileData,
+    fetchProfilePosts,
+    currentPage,
+    postsPerPage,
+  ]);
 
   if (authLoading) {
     return <LoadingSpinner message="Loading your profile..." />;
@@ -64,43 +80,58 @@ const ProfileContent: React.FC = () => {
           onSectionChange={navigateToSection}
         />
 
-        <section className="profile-content-container">
+        <section className="uni-section">
           {/* Posts Section */}
           {activeSection === "posts" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <div className="section-header">
                 <h2>Your Posts</h2>
                 <button className="btn btn-primary" onClick={openModal}>
                   Create New Post
                 </button>
               </div>
+              <div className="two-column-grid">
+                {loadingStates.userPostsLoading ? (
+                  <div className="loading-state">Loading posts...</div>
+                ) : !userPosts || userPosts.length === 0 ? (
+                  <div className="empty-state">
+                    No posts yet. Create your first post!
+                  </div>
+                ) : (
+                  <>
+                    {userPosts.map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
+                  </>
+                )}
+              </div>
               <PostList
                 currentPage={currentPage}
+                totalPages={Math.ceil(totalUserPosts / postsPerPage)}
                 onPageChange={setCurrentPage}
-                postsPerPage={postsPerPage}
               />
             </div>
           )}
 
           {/* Comments Section */}
           {activeSection === "comments" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <h2>Recent Comments</h2>
-              <div className="comment-placeholder">No comments yet.</div>
+              <div className="empty-state">No comments yet.</div>
             </div>
           )}
 
           {/* Work Requests Section */}
           {activeSection === "work-requests" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <h2>Work Requests</h2>
-              <div className="work-requests-placeholder">No work requests.</div>
+              <div className="empty-state">No work requests.</div>
             </div>
           )}
 
           {/* Settings Section */}
           {activeSection === "settings" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <h2>Account Settings</h2>
               <ProfileSettings />
             </div>
@@ -108,17 +139,17 @@ const ProfileContent: React.FC = () => {
 
           {/* Drafts Section */}
           {activeSection === "drafts" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <h2>Drafts</h2>
-              <div className="drafts-placeholder">No drafts yet.</div>
+              <div className="empty-state">No drafts yet.</div>
             </div>
           )}
 
           {/* Notifications Section */}
           {activeSection === "notifications" && (
-            <div className="profile-content-section active">
+            <div className="active">
               <h2>Notifications</h2>
-              <div className="notifications-placeholder">No notifications.</div>
+              <div className="empty-state">No notifications.</div>
             </div>
           )}
         </section>
@@ -128,15 +159,15 @@ const ProfileContent: React.FC = () => {
       <CreatePostModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
-};
+}
 
-// Wrap the main component with the ProfileProvider
-const ProfilePage: React.FC = () => (
-  <ErrorBoundary>
-    <ProfileProvider>
-      <ProfileContent />
-    </ProfileProvider>
-  </ErrorBoundary>
-);
-
-export default ProfilePage;
+// Export the component wrapped in its providers
+export default function ProfilePage() {
+  return (
+    <ErrorBoundary>
+      <ProfileProvider>
+        <ProfileContent />
+      </ProfileProvider>
+    </ErrorBoundary>
+  );
+}
