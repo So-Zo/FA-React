@@ -42,10 +42,6 @@ const MangaDirectory: React.FC = () => {
           aria-label="Search From Manga Page"
           placeholder="Search for Characters, Series, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />

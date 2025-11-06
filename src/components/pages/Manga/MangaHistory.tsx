@@ -40,10 +40,6 @@ const MangaHistory: React.FC = () => {
           aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />
@@ -56,7 +52,6 @@ const MangaHistory: React.FC = () => {
       />
 
       <main id="main-content">
-
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">
           <h2>Timeline Breakdown</h2>

@@ -48,7 +48,7 @@ const AnimePage: React.FC = () => {
         <div className="image-header">
           <img
             src="/images/video-games/VideoGamesHeader.jpg"
-            alt="Video Games Overview"
+            alt="Anime Games Overview"
           />
         </div>
 
@@ -59,9 +59,7 @@ const AnimePage: React.FC = () => {
           placeholder="Search for Characters, Universes, etc."
         />
 
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
+      
       </header>
 
       <main id="main-content">

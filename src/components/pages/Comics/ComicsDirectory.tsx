@@ -40,10 +40,6 @@ const ComicsDirectory: React.FC = () => {
           aria-label="Search From Comics Page"
           placeholder="Search for Characters, Universes, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />

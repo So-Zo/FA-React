@@ -56,10 +56,6 @@ const WorldsUniversesDirectory: React.FC = () => {
           aria-label="Search Worlds & Universes"
           placeholder="Search for Worlds, Universes, Characters, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />
@@ -188,204 +184,197 @@ const WorldsUniversesDirectory: React.FC = () => {
           <h2>Browse by World Type</h2>
           <p>Find fictional worlds based on their genre and characteristics.</p>
 
-        
-              <h3>Fantasy Worlds</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Middle-earth"
-                    data-related-to="Worlds"
-                  >
-                    Middle-earth (Lord of the Rings)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Narnia"
-                    data-related-to="Worlds"
-                  >
-                    Narnia
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Westeros"
-                    data-related-to="Worlds"
-                  >
-                    Westeros (Game of Thrones)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Discworld"
-                    data-related-to="Worlds"
-                  >
-                    Discworld
-                  </a>
-                </li>
-              </ul>
-      
+          <h3>Fantasy Worlds</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Middle-earth"
+                data-related-to="Worlds"
+              >
+                Middle-earth (Lord of the Rings)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Narnia"
+                data-related-to="Worlds"
+              >
+                Narnia
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Westeros"
+                data-related-to="Worlds"
+              >
+                Westeros (Game of Thrones)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Discworld"
+                data-related-to="Worlds"
+              >
+                Discworld
+              </a>
+            </li>
+          </ul>
 
-            
-              <h3>Science Fiction Worlds</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Star Wars Galaxy"
-                    data-related-to="Worlds"
-                  >
-                    Star Wars Galaxy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Star Trek Universe"
-                    data-related-to="Worlds"
-                  >
-                    Star Trek Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Dune Universe"
-                    data-related-to="Worlds"
-                  >
-                    Dune Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Foundation Universe"
-                    data-related-to="Worlds"
-                  >
-                    Foundation Universe
-                  </a>
-                </li>
-              </ul>
-            
+          <h3>Science Fiction Worlds</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Star Wars Galaxy"
+                data-related-to="Worlds"
+              >
+                Star Wars Galaxy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Star Trek Universe"
+                data-related-to="Worlds"
+              >
+                Star Trek Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Dune Universe"
+                data-related-to="Worlds"
+              >
+                Dune Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Foundation Universe"
+                data-related-to="Worlds"
+              >
+                Foundation Universe
+              </a>
+            </li>
+          </ul>
 
-          
-              <h3>Superhero Universes</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Marvel Universe"
-                    data-related-to="Worlds"
-                  >
-                    Marvel Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="DC Universe"
-                    data-related-to="Worlds"
-                  >
-                    DC Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Watchmen World"
-                    data-related-to="Worlds"
-                  >
-                    Watchmen World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Invincible Universe"
-                    data-related-to="Worlds"
-                  >
-                    Invincible Universe
-                  </a>
-                </li>
-              </ul>
-          
+          <h3>Superhero Universes</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Marvel Universe"
+                data-related-to="Worlds"
+              >
+                Marvel Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="DC Universe"
+                data-related-to="Worlds"
+              >
+                DC Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Watchmen World"
+                data-related-to="Worlds"
+              >
+                Watchmen World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Invincible Universe"
+                data-related-to="Worlds"
+              >
+                Invincible Universe
+              </a>
+            </li>
+          </ul>
 
-        
-              <h3>Post-Apocalyptic Worlds</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Fallout World"
-                    data-related-to="Worlds"
-                  >
-                    Fallout World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Walking Dead World"
-                    data-related-to="Worlds"
-                  >
-                    The Walking Dead World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Mad Max Wasteland"
-                    data-related-to="Worlds"
-                  >
-                    Mad Max Wasteland
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Metro Universe"
-                    data-related-to="Worlds"
-                  >
-                    Metro Universe
-                  </a>
-                </li>
-              </ul>
+          <h3>Post-Apocalyptic Worlds</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Fallout World"
+                data-related-to="Worlds"
+              >
+                Fallout World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Walking Dead World"
+                data-related-to="Worlds"
+              >
+                The Walking Dead World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Mad Max Wasteland"
+                data-related-to="Worlds"
+              >
+                Mad Max Wasteland
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Metro Universe"
+                data-related-to="Worlds"
+              >
+                Metro Universe
+              </a>
+            </li>
+          </ul>
         </section>
 
         <section
@@ -396,204 +385,197 @@ const WorldsUniversesDirectory: React.FC = () => {
           <h2>Browse by Media Source</h2>
           <p>Explore fictional worlds based on their original medium.</p>
 
-         
-              <h3>Literature</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Middle-earth"
-                    data-related-to="Worlds"
-                  >
-                    Middle-earth (Tolkien)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Westeros"
-                    data-related-to="Worlds"
-                  >
-                    Westeros (Martin)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Discworld"
-                    data-related-to="Worlds"
-                  >
-                    Discworld (Pratchett)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Dune Universe"
-                    data-related-to="Worlds"
-                  >
-                    Dune Universe (Herbert)
-                  </a>
-                </li>
-              </ul>
-            
+          <h3>Literature</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Middle-earth"
+                data-related-to="Worlds"
+              >
+                Middle-earth (Tolkien)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Westeros"
+                data-related-to="Worlds"
+              >
+                Westeros (Martin)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Discworld"
+                data-related-to="Worlds"
+              >
+                Discworld (Pratchett)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Dune Universe"
+                data-related-to="Worlds"
+              >
+                Dune Universe (Herbert)
+              </a>
+            </li>
+          </ul>
 
-            
-              <h3>Film & Television</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Star Wars Galaxy"
-                    data-related-to="Worlds"
-                  >
-                    Star Wars Galaxy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Star Trek Universe"
-                    data-related-to="Worlds"
-                  >
-                    Star Trek Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Marvel Cinematic Universe"
-                    data-related-to="Worlds"
-                  >
-                    Marvel Cinematic Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Jurassic Park World"
-                    data-related-to="Worlds"
-                  >
-                    Jurassic Park World
-                  </a>
-                </li>
-              </ul>
-    
+          <h3>Film & Television</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Star Wars Galaxy"
+                data-related-to="Worlds"
+              >
+                Star Wars Galaxy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Star Trek Universe"
+                data-related-to="Worlds"
+              >
+                Star Trek Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Marvel Cinematic Universe"
+                data-related-to="Worlds"
+              >
+                Marvel Cinematic Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Jurassic Park World"
+                data-related-to="Worlds"
+              >
+                Jurassic Park World
+              </a>
+            </li>
+          </ul>
 
-      
-              <h3>Comics & Graphic Novels</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Marvel Comics Universe"
-                    data-related-to="Worlds"
-                  >
-                    Marvel Comics Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="DC Comics Universe"
-                    data-related-to="Worlds"
-                  >
-                    DC Comics Universe
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Walking Dead World"
-                    data-related-to="Worlds"
-                  >
-                    The Walking Dead World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Sandman Universe"
-                    data-related-to="Worlds"
-                  >
-                    The Sandman Universe
-                  </a>
-                </li>
-              </ul>
-          
+          <h3>Comics & Graphic Novels</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Marvel Comics Universe"
+                data-related-to="Worlds"
+              >
+                Marvel Comics Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="DC Comics Universe"
+                data-related-to="Worlds"
+              >
+                DC Comics Universe
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Walking Dead World"
+                data-related-to="Worlds"
+              >
+                The Walking Dead World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Sandman Universe"
+                data-related-to="Worlds"
+              >
+                The Sandman Universe
+              </a>
+            </li>
+          </ul>
 
-          
-              <h3>Video Games</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Elder Scrolls World"
-                    data-related-to="Worlds"
-                  >
-                    The Elder Scrolls World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Fallout World"
-                    data-related-to="Worlds"
-                  >
-                    Fallout World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Mass Effect Galaxy"
-                    data-related-to="Worlds"
-                  >
-                    Mass Effect Galaxy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Hyrule"
-                    data-related-to="Worlds"
-                  >
-                    Hyrule (Legend of Zelda)
-                  </a>
-                </li>
-              </ul>
+          <h3>Video Games</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Elder Scrolls World"
+                data-related-to="Worlds"
+              >
+                The Elder Scrolls World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Fallout World"
+                data-related-to="Worlds"
+              >
+                Fallout World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Mass Effect Galaxy"
+                data-related-to="Worlds"
+              >
+                Mass Effect Galaxy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Hyrule"
+                data-related-to="Worlds"
+              >
+                Hyrule (Legend of Zelda)
+              </a>
+            </li>
+          </ul>
         </section>
 
         <section
@@ -606,138 +588,131 @@ const WorldsUniversesDirectory: React.FC = () => {
             Explore fictional worlds based on their creators and worldbuilders.
           </p>
 
-          
-              <h3>J.R.R. Tolkien</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Middle-earth"
-                    data-related-to="Worlds"
-                  >
-                    Middle-earth
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Arda"
-                    data-related-to="Worlds"
-                  >
-                    Arda (The Complete World)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Númenor"
-                    data-related-to="Worlds"
-                  >
-                    Númenor
-                  </a>
-                </li>
-              </ul>
-            
+          <h3>J.R.R. Tolkien</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Middle-earth"
+                data-related-to="Worlds"
+              >
+                Middle-earth
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Arda"
+                data-related-to="Worlds"
+              >
+                Arda (The Complete World)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Númenor"
+                data-related-to="Worlds"
+              >
+                Númenor
+              </a>
+            </li>
+          </ul>
 
-            
-              <h3>George R.R. Martin</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Westeros & Essos"
-                    data-related-to="Worlds"
-                  >
-                    Westeros & Essos
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Thousand Worlds"
-                    data-related-to="Worlds"
-                  >
-                    The Thousand Worlds
-                  </a>
-                </li>
-              </ul>
-            
+          <h3>George R.R. Martin</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Westeros & Essos"
+                data-related-to="Worlds"
+              >
+                Westeros & Essos
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Thousand Worlds"
+                data-related-to="Worlds"
+              >
+                The Thousand Worlds
+              </a>
+            </li>
+          </ul>
 
-      
-              <h3>Brandon Sanderson</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="The Cosmere"
-                    data-related-to="Worlds"
-                  >
-                    The Cosmere
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Roshar"
-                    data-related-to="Worlds"
-                  >
-                    Roshar
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Scadrial"
-                    data-related-to="Worlds"
-                  >
-                    Scadrial
-                  </a>
-                </li>
-              </ul>
-          
+          <h3>Brandon Sanderson</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="The Cosmere"
+                data-related-to="Worlds"
+              >
+                The Cosmere
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Roshar"
+                data-related-to="Worlds"
+              >
+                Roshar
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Scadrial"
+                data-related-to="Worlds"
+              >
+                Scadrial
+              </a>
+            </li>
+          </ul>
 
-            
-              <h3>Ursula K. Le Guin</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Earthsea"
-                    data-related-to="Worlds"
-                  >
-                    Earthsea
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Hainish Cycle"
-                    data-related-to="Worlds"
-                  >
-                    Hainish Cycle
-                  </a>
-                </li>
-              </ul>
+          <h3>Ursula K. Le Guin</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Earthsea"
+                data-related-to="Worlds"
+              >
+                Earthsea
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Hainish Cycle"
+                data-related-to="Worlds"
+              >
+                Hainish Cycle
+              </a>
+            </li>
+          </ul>
         </section>
 
         <section
@@ -800,95 +775,92 @@ const WorldsUniversesDirectory: React.FC = () => {
             </a>
           </div>
 
-          
-              <h3>A</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Arrakis"
-                    data-related-to="Worlds"
-                  >
-                    Arrakis (Dune)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Azeroth"
-                    data-related-to="Worlds"
-                  >
-                    Azeroth (Warcraft)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Arda"
-                    data-related-to="Worlds"
-                  >
-                    Arda (Tolkien's Complete World)
-                  </a>
-                </li>
-                {/* More worlds starting with A */}
-              </ul>
-            
+          <h3>A</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Arrakis"
+                data-related-to="Worlds"
+              >
+                Arrakis (Dune)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Azeroth"
+                data-related-to="Worlds"
+              >
+                Azeroth (Warcraft)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Arda"
+                data-related-to="Worlds"
+              >
+                Arda (Tolkien's Complete World)
+              </a>
+            </li>
+            {/* More worlds starting with A */}
+          </ul>
 
-              <h3>B</h3>
-              <ul className="show-list">
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Barsoom"
-                    data-related-to="Worlds"
-                  >
-                    Barsoom (John Carter)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Blade Runner World"
-                    data-related-to="Worlds"
-                  >
-                    Blade Runner World
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="non-existent-link"
-                    data-page-type="world"
-                    data-page-title="Black Panther's Wakanda"
-                    data-related-to="Worlds"
-                  >
-                    Black Panther's Wakanda
-                  </a>
-                </li>
-                {/* More worlds starting with B */}
-              </ul>
-      
+          <h3>B</h3>
+          <ul className="show-list">
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Barsoom"
+                data-related-to="Worlds"
+              >
+                Barsoom (John Carter)
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Blade Runner World"
+                data-related-to="Worlds"
+              >
+                Blade Runner World
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="non-existent-link"
+                data-page-type="world"
+                data-page-title="Black Panther's Wakanda"
+                data-related-to="Worlds"
+              >
+                Black Panther's Wakanda
+              </a>
+            </li>
+            {/* More worlds starting with B */}
+          </ul>
 
-            {/* Continue with all letters */}
+          {/* Continue with all letters */}
         </section>
 
         <section className="section-content">
           <h2>Can't Find What You're Looking For?</h2>
-              <h3>Use Search</h3>
-              <p>
-                Try searching for specific worlds or universes using the search
-                bar at the top of the page.
-              </p>
+          <h3>Use Search</h3>
+          <p>
+            Try searching for specific worlds or universes using the search bar
+            at the top of the page.
+          </p>
         </section>
       </main>
     </div>

@@ -19,12 +19,6 @@ const PowerRoomPage: React.FC = () => {
         </p>
       </header>
 
-      <div className="wiki-controls-container">
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
-      </div>
-
       {/* Modern split grid layout */}
       <section
         className="power-comparison-grid"

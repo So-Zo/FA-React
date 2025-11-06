@@ -40,10 +40,6 @@ const AnimeHistory: React.FC = () => {
           aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />

@@ -40,10 +40,6 @@ const AnimeDirectory: React.FC = () => {
           aria-label="Search From Anime Page"
           placeholder="Search for Characters, Universes, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <hr />

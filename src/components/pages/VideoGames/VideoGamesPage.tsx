@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const VideoGamesPage: React.FC = () => {
   // Define TOC sections
@@ -56,10 +58,6 @@ const VideoGamesPage: React.FC = () => {
           aria-label="Search From Video Games Page"
           placeholder="Search for Characters, Universes, etc."
         />
-
-        <button className="wiki-edit-button" id="page-edit-button">
-          Edit Page
-        </button>
       </header>
 
       <main id="main-content">
@@ -71,54 +69,57 @@ const VideoGamesPage: React.FC = () => {
           description="Use this table of contents to navigate through the video games guide."
         />
 
-        {/* The Basics Section */}
-        <section id="the-basics" className="section-content">
-          <h2>The Basics</h2>
-          <p>
-            Video games are interactive electronic games played on various
-            platforms including consoles, computers, mobile devices, and virtual
-            reality systems. They combine elements of storytelling, art, music,
-            and technology to create immersive experiences that engage players
-            through challenges, narratives, and social interaction.
-          </p>
-          <p>
-            The term "video game" encompasses a vast range of experiences, from
-            simple puzzle games to complex open-world adventures, competitive
-            multiplayer titles, and narrative-driven epics. Games can be played
-            solo, cooperatively with friends, or competitively against other
-            players around the world.
-          </p>
-          <p>
-            Game development occurs globally, with major studios, independent
-            creators, and everything in between contributing to a diverse
-            ecosystem of interactive entertainment. The industry continues to
-            evolve rapidly with advances in technology enabling increasingly
-            sophisticated and immersive experiences.
-          </p>
-          <h4>Key Characteristics of Video Games</h4>
-          <ul>
-            <li>
-              <strong>Interactivity:</strong> Players directly influence the
-              experience through their actions and decisions
-            </li>
-            <li>
-              <strong>Challenge:</strong> Games present obstacles that require
-              skill, strategy, or problem-solving to overcome
-            </li>
-            <li>
-              <strong>Feedback Systems:</strong> Games provide immediate
-              responses to player actions
-            </li>
-            <li>
-              <strong>Goals:</strong> Most games have objectives that give
-              players direction and purpose
-            </li>
-            <li>
-              <strong>Immersion:</strong> Games create engaging worlds that
-              captivate players' attention and imagination
-            </li>
-          </ul>
-        </section>
+        {/* The Basics Section - TipTap Test */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <h2>The Basics</h2>
+            <p>
+              Video games are interactive electronic games played on various
+              platforms including consoles, computers, mobile devices, and virtual
+              reality systems. They combine elements of storytelling, art, music,
+              and technology to create immersive experiences that engage players
+              through challenges, narratives, and social interaction.
+            </p>
+            <p>
+              The term "video game" encompasses a vast range of experiences, from
+              simple puzzle games to complex open-world adventures, competitive
+              multiplayer titles, and narrative-driven epics. Games can be played
+              solo, cooperatively with friends, or competitively against other
+              players around the world.
+            </p>
+            <p>
+              Game development occurs globally, with major studios, independent
+              creators, and everything in between contributing to a diverse
+              ecosystem of interactive entertainment. The industry continues to
+              evolve rapidly with advances in technology enabling increasingly
+              sophisticated and immersive experiences.
+            </p>
+            <h4>Key Characteristics of Video Games</h4>
+            <ul>
+              <li>
+                <strong>Interactivity:</strong> Players directly influence the
+                experience through their actions and decisions
+              </li>
+              <li>
+                <strong>Challenge:</strong> Games present obstacles that require
+                skill, strategy, or problem-solving to overcome
+              </li>
+              <li>
+                <strong>Feedback Systems:</strong> Games provide immediate
+                responses to player actions
+              </li>
+              <li>
+                <strong>Goals:</strong> Most games have objectives that give
+                players direction and purpose
+              </li>
+              <li>
+                <strong>Immersion:</strong> Games create engaging worlds that
+                captivate players' attention and imagination
+              </li>
+            </ul>
+          `}
+        />
         <hr />
 
         {/* History of Video Games Section */}
