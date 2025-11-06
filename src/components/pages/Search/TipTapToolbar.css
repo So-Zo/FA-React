@@ -1,0 +1,135 @@
+/*
+ * TipTap Toolbar Sidebar Styles
+ * Right-side toolbar that appears when edit mode is active
+ * Matches design patterns from BottomNavigation.css
+ */
+
+.tiptap-toolbar-sidebar {
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 4.5rem;
+  height: 100vh;
+  background-color: var(--fanarc-primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  z-index: calc(var(--z-fixed) + 5);
+  box-shadow: -1px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* Header */
+.tiptap-toolbar-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  padding: 0 var(--spacing-sm);
+}
+
+.tiptap-toolbar-header h3 {
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content Area */
+.tiptap-toolbar-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Control Groups */
+.tiptap-control-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tiptap-control-group h4 {
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 500;
+  margin: 0 0 var(--spacing-sm) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Container */
+.tiptap-control-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+  align-items: center;
+}
+
+/* Individual Control Buttons */
+.tiptap-control-btn {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 600;
+}
+
+/* Text buttons (H2, H3) */
+.tiptap-control-btn {
+  font-size: 0.8rem;
+}
+
+/* Icon buttons */
+.tiptap-control-btn svg {
+  font-size: 1rem;
+}
+
+.tiptap-control-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.tiptap-control-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0.95);
+}
+
+.tiptap-control-btn.is-active {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* Hide on mobile - will be replaced with floating controls later */
+@media (max-width: 768px) {
+  .tiptap-toolbar-sidebar {
+    display: none;
+  }
+}
