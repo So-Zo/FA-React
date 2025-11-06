@@ -10,17 +10,8 @@
    2. COMPONENT SIZING - Dimensions, borders, shadows
    3. INTERACTIVE STATES - Hover effects, transitions, cursors
    4. LAYOUT STRUCTURE - Flexbox, positioning, spacing
-*/
 
-/* ==========================================================================
-   1. VISUAL IMPACT - Colors, Typography, Visual Effects
-   ========================================================================== */
-
-/* Base page background */
-.profile-page {
-  background: var(--fanarc-secondary-color);
-}
-
+   
 /* ==========================================================================
    2. COMPONENT SIZING - Dimensions, Borders, Shadows
    ========================================================================== */
@@ -28,6 +19,12 @@
 /* Page structure sizing */
 .profile-page {
   min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    min-height: auto; /* Let content determine height on mobile */
+  }
 }
 
 /* ==========================================================================

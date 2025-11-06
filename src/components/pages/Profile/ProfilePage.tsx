@@ -80,36 +80,38 @@ function ProfileContent() {
           onSectionChange={navigateToSection}
         />
 
-        <section className="uni-section">
+        
           {/* Posts Section */}
           {activeSection === "posts" && (
             <div className="active">
-              <div className="section-header">
-                <h2>Your Posts</h2>
-                <button className="btn btn-primary" onClick={openModal}>
-                  Create New Post
-                </button>
+              <div className="post-feed">
+                <div className="post-feed-header">
+                  <h2 className="post-feed-title">Your Posts</h2>
+                  <button className="btn btn-primary" onClick={openModal}>
+                    Create New Post
+                  </button>
+                </div>
+                <div className="post-feed-grid">
+                  {loadingStates.userPostsLoading ? (
+                    <div className="post-feed-loading">Loading posts...</div>
+                  ) : !userPosts || userPosts.length === 0 ? (
+                    <div className="post-feed-empty">
+                      No posts yet. Create your first post!
+                    </div>
+                  ) : (
+                    <>
+                      {userPosts.map((post) => (
+                        <PostCard key={post.id} post={post} />
+                      ))}
+                    </>
+                  )}
+                </div>
+                <PostList
+                  currentPage={currentPage}
+                  totalPages={Math.ceil(totalUserPosts / postsPerPage)}
+                  onPageChange={setCurrentPage}
+                />
               </div>
-              <div className="two-column-grid">
-                {loadingStates.userPostsLoading ? (
-                  <div className="loading-state">Loading posts...</div>
-                ) : !userPosts || userPosts.length === 0 ? (
-                  <div className="empty-state">
-                    No posts yet. Create your first post!
-                  </div>
-                ) : (
-                  <>
-                    {userPosts.map((post) => (
-                      <PostCard key={post.id} post={post} />
-                    ))}
-                  </>
-                )}
-              </div>
-              <PostList
-                currentPage={currentPage}
-                totalPages={Math.ceil(totalUserPosts / postsPerPage)}
-                onPageChange={setCurrentPage}
-              />
             </div>
           )}
 
@@ -152,7 +154,6 @@ function ProfileContent() {
               <div className="empty-state">No notifications.</div>
             </div>
           )}
-        </section>
       </main>
 
       {/* Create Post Modal */}

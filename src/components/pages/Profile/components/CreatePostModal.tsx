@@ -3,6 +3,7 @@ import { profileService } from "../services/profileService";
 import { useModal, useFileUpload, useProfileForms } from "../hooks";
 import { useProfileContext } from "../ProfileContext";
 import { useAuth } from "../../../../shared/hooks/useAuth";
+import { useProfileId } from "../../../../shared/utils/userUtils";
 import { PostType, Medium, Genre } from "../../Community/hooks/usePosts";
 
 type PostVisibility = "public" | "private" | "followers";
@@ -17,20 +18,21 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
   isOpen,
 }) => {
   const { user } = useAuth();
+  const profileId = useProfileId(user);
   const { createPost } = useProfileContext();
   const { handleModalClick } = useModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handle file upload to storage
   const handleFileUpload = async (file: File): Promise<string> => {
-    if (!user) throw new Error("User not authenticated");
+    if (!profileId) throw new Error("User not authenticated");
 
     // Generate a temporary post ID for storage path
     const tempPostId = `temp_${Date.now()}_${Math.random()
       .toString(36)
       .substr(2, 9)}`;
     const result = await profileService.uploadPostMedia(
-      user.id,
+      profileId,
       tempPostId,
       file
     );
@@ -51,7 +53,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
+    if (!profileId) {
       alert("You must be logged in to create a post.");
       return;
     }
@@ -70,7 +72,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
 
       // Create post with uploaded media ID (if any)
       await createPost({
-        author_id: user.id,
+        user_profile_id: profileId, // Changed from author_id to user_profile_id
         title: postTitle,
         content: postContent,
         post_type: postType,
@@ -81,12 +83,7 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
         // These fields will be computed by the database/view
         likes_count: 0,
         comments_count: 0,
-        author: {
-          id: user.id,
-          display_name: "",
-          avatar_url: "",
-          is_verified: false,
-        },
+        // Remove author object reconstruction - use view data instead
       });
 
       // Reset form and close modal

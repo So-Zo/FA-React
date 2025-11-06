@@ -14,58 +14,12 @@
    1. VISUAL IMPACT - Colors, Typography, Visual Effects
    ========================================================================== */
 
-/* Modal - colors and visual effects */
-.modal {
-  background: rgba(0, 0, 0, 0.67);
-}
-.modal-content {
-  background: var(--bg-primary, #fff);
-  border-radius: 0.59rem;
-  box-shadow: 0 6px 36px rgba(0, 0, 0, 0.15);
-}
-.modal-header {
-  border-bottom: 1px solid #ececf7;
-}
-.modal-header h2 {
-  color: var(--text-primary, #231c3d);
-  font-size: 1.25rem;
-}
-.modal-close {
-  color: #372151;
-  font-size: 1.65rem;
-}
-
-/* Form elements inside modal - colors and typography */
-.form-label {
-  color: #231c3d;
-  font-size: 0.99rem;
-}
-.form-input,
-.form-select,
-.form-textarea {
-  background: #faf8fc;
-  border: 1px solid #e5e3f4;
-  border-radius: 0.38rem;
-  color: #230d3a;
-  font-size: 1rem;
-}
-
-/* Buttons - colors and typography */
-.btn {
-  border-radius: 0.47rem;
-  font-weight: 500;
-  font-size: 1rem;
-}
-.btn-outline {
-  background: none;
-  border: 1px solid #ccbbf2;
-  color: #372151;
-}
-.btn-primary {
-  background: var(--accent-color, #8c52ff);
-  color: #fff;
-  border: none;
-}
+/* 
+   Note: Modal, form, and button base styles are now imported from:
+   - shared/Css/modals.css
+   - shared/Css/forms.css  
+   - shared/Css/buttons.css
+*/
 
 /* Media upload area - colors and visual effects */
 .media-upload-container {
@@ -84,38 +38,7 @@
    2. COMPONENT SIZING - Dimensions, Borders, Shadows
    ========================================================================== */
 
-/* Modal sizing */
-.modal-content {
-  width: 100%;
-  max-width: 520px; /*needs changing to responsive values and test what view size works */
-  max-height: 90vh;
-}
-
-/* Form elements sizing */
-.form-input,
-.form-select,
-.form-textarea {
-  width: 100%;
-}
-.form-textarea {
-  min-height: 80px;
-}
-
-/* ==========================================================================
-   3. INTERACTIVE STATES - Hover Effects, Transitions, Cursors
-   ========================================================================== */
-
-/* Button interactions */
-.btn {
-  cursor: pointer;
-  transition: background 0.18s;
-}
-.btn-outline:hover {
-  background: #edebfc;
-}
-.btn-primary:hover {
-  background: #5a1b8b;
-}
+/* Note: Base modal sizing, form sizing, and button interactions are handled by consolidated CSS files */
 
 /* Modal interactions */
 .modal-close {
@@ -144,7 +67,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1000;
+  z-index: var(--z-modal);
   justify-content: center;
   align-items: center;
   padding: 1.3rem;
@@ -172,40 +95,7 @@
   padding: 1.13rem 0.95rem;
 }
 
-/* Form container layout */
-.form-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.04rem;
-}
-.form-label {
-  display: block;
-  margin-bottom: 0.41rem;
-}
-.form-input,
-.form-select,
-.form-textarea {
-  padding: 0.68rem;
-}
-.form-radio {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.42rem;
-}
-.form-radio input[type="radio"] {
-  margin-right: 0.57rem;
-}
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1.07rem;
-  margin-top: 1.25rem;
-}
-
-/* Button layout */
-.btn {
-  padding: 0.7rem 1.4rem;
-}
+/* Note: Form container layout, form element styling, and button padding are handled by consolidated CSS files */
 
 /* Media upload layout */
 .media-upload-container {
@@ -233,12 +123,4 @@
    5. RESPONSIVE DESIGN - Media Queries
    ========================================================================== */
 
-@media (max-width: 600px) {
-  /* Form actions responsive stacking */
-  .form-actions {
-    flex-direction: column;
-  }
-  .btn {
-    width: 100%;
-  }
-}
+/* Note: Responsive form and button behavior is handled by consolidated CSS files */

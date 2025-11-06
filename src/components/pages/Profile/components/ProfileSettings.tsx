@@ -21,7 +21,9 @@ export const ProfileSettings: React.FC = () => {
     });
   };
 
-  const handleThemeChange = (newTheme: "light" | "dark" | "system") => {
+  const handleThemeChange = (
+    newTheme: "default" | "light" | "dark" | "system"
+  ) => {
     setTheme(newTheme);
   };
 
@@ -84,6 +86,17 @@ export const ProfileSettings: React.FC = () => {
         <div className="settings-subgroup">
           <h4>Site Theme</h4>
           <ul className="theme-options-list">
+            <li>
+              <label htmlFor="default-theme">FanArcs Default</label>
+              <input
+                type="radio"
+                id="default-theme"
+                name="theme"
+                value="default"
+                checked={currentTheme === "default"}
+                onChange={() => handleThemeChange("default")}
+              />
+            </li>
             <li>
               <label htmlFor="light-theme">Light Theme</label>
               <input

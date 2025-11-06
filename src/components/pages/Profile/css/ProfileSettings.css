@@ -28,16 +28,7 @@
   color: #696c81;
 }
 
-/* Form elements - colors and typography */
-.form-group label {
-  color: var(--text-primary, #231c3d);
-}
-.form-group input {
-  background: #f5f2fa;
-  border: 1px solid #d4d0e3;
-  border-radius: 0.4rem;
-  color: #231c3d;
-}
+/* Note: Form group styling is handled by shared/Css/forms.css */
 .secondary-btn {
   background: #f1edfa;
   color: var(--text-primary, #231c3d);
@@ -60,6 +51,9 @@
 .form-group input,
 .settings-textarea {
   width: 100%;
+  height: 2.5rem;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-sm);
 }
 .settings-textarea {
   min-height: 80px;
@@ -102,16 +96,7 @@
 }
 
 /* Form layout */
-.form-group {
-  margin-bottom: 1.22rem;
-}
-.form-group label {
-  display: block;
-  margin-bottom: 0.41rem;
-}
-.form-group input {
-  padding: 0.7rem;
-}
+/* Note: Form group layout is handled by shared/Css/forms.css */
 .secondary-btn {
   padding: 0.74rem 1rem;
 }

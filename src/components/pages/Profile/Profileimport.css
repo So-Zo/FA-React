@@ -7,7 +7,7 @@
 */
 
 /* Main page styles */
-@import "./ProfilePage.css";
+@import "../Profile/css/ProfilePage.css";
 
 /* Component styles */
 @import "./css/ProfileHeader.css";

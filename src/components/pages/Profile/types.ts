@@ -9,12 +9,13 @@ export interface UserPost {
   post_type: PostType;
   medium: Medium;
   genre: Genre;
-  author_id: string;
+  user_profile_id: string; // Changed from author_id to user_profile_id
   media_ids: string[];
   visibility: "public" | "followers" | "private";
   likes_count: number;
   comments_count: number;
-  author: {
+  // Author info comes from view joins, not reconstructed client-side
+  author?: {
     id: string;
     display_name: string;
     avatar_url: string;

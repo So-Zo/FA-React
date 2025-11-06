@@ -49,68 +49,58 @@ export const profileService = {
     profileData: ProfileData;
     activityMetrics: UserActivityMetrics;
   }> {
-    // Get profile data from view - this will include the normalized stats
-    const { data, error } = await supabase
-      .from("profile_view")
-      .select("*")
-      .eq("author_id", userId)
-      .limit(1)
+    // Just get profile data directly from user_profiles since master_view is for posts
+    const { data: profileData, error: profileError } = await supabase
+      .from("user_profiles")
+      .select(
+        "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private"
+      )
+      .eq("id", userId)
       .single();
 
-    console.log("Profile view data:", data);
-    console.log("Profile view error:", error);
+    if (profileError) throw profileError;
 
-    if (error) {
-      // Fallback to user_profiles if no posts exist in view
-      const { data: profileData, error: profileError } = await supabase
-        .from("user_profiles")
-        .select(
-          "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private, total_posts, total_followers, total_following"
-        )
-        .eq("id", userId)
-        .single();
+    console.log("User profile data:", profileData);
 
-      if (profileError) throw profileError;
+    // Get activity metrics from master_view (post counts, etc.)
+    const { data: statsData } = await supabase
+      .from("master_view")
+      .select("post_id")
+      .eq("post_author_profile_id", userId)
+      .not("post_id", "is", null); // Get all rows with posts
 
-      console.log("Fallback user_profiles data:", profileData);
+    // Deduplicate posts to get accurate count
+    const uniquePostIds = new Set(statsData?.map((row) => row.post_id) || []);
+    const postCount = uniquePostIds.size;
 
-      return {
-        profileData: {
-          id: profileData.id,
-          display_name: profileData.display_name,
-          username: profileData.username,
-          bio: profileData.bio,
-          avatar_url: profileData.avatar_url,
-          website_url: profileData.website_url,
-          location: profileData.location,
-          is_verified: profileData.is_verified,
-          is_private: profileData.is_private,
-        },
-        activityMetrics: {
-          totalPosts: profileData.total_posts || 0,
-          totalFollowers: profileData.total_followers || 0,
-          totalFollowing: profileData.total_following || 0,
-        },
-      };
-    }
+    // Get follower/following counts from follows table
+    const [followersResult, followingResult] = await Promise.all([
+      supabase
+        .from("follows")
+        .select("id", { count: "exact", head: true })
+        .eq("following_id", userId),
+      supabase
+        .from("follows")
+        .select("id", { count: "exact", head: true })
+        .eq("follower_id", userId),
+    ]);
 
-    // Extract profile and stats from view data
     return {
       profileData: {
-        id: data.author_id,
-        display_name: data.author[0]?.display_name,
-        username: data.author[0]?.username,
-        bio: data.author[0]?.bio,
-        avatar_url: data.author[0]?.avatar_url,
-        website_url: data.author[0]?.website_url,
-        location: data.author[0]?.location,
-        is_verified: data.author[0]?.is_verified,
-        is_private: data.author[0]?.is_private,
+        id: profileData.id,
+        display_name: profileData.display_name,
+        username: profileData.username,
+        bio: profileData.bio,
+        avatar_url: profileData.avatar_url,
+        website_url: profileData.website_url,
+        location: profileData.location,
+        is_verified: profileData.is_verified,
+        is_private: profileData.is_private,
       },
       activityMetrics: {
-        totalPosts: data.author[0]?.total_posts || 0,
-        totalFollowers: data.author[0]?.total_followers || 0,
-        totalFollowing: data.author[0]?.total_following || 0,
+        totalPosts: postCount,
+        totalFollowers: followersResult.count || 0,
+        totalFollowing: followingResult.count || 0,
       },
     };
   },
@@ -150,50 +140,58 @@ export const profileService = {
     limit: number
   ): Promise<{ posts: UserPost[]; total: number }> {
     const start = (page - 1) * limit;
-    const end = start + limit - 1;
 
-    const [postsResult, countResult] = await Promise.all([
+    const [postsResult] = await Promise.all([
       supabase
-        .from("profile_view")
+        .from("master_view") // Changed from profile_view to master_view
         .select("*")
-        .eq("author_id", userId)
-        .range(start, end)
-        .order("created_at", { ascending: false }),
-      supabase
-        .from("profile_view")
-        .select("id", { count: "exact", head: true })
-        .eq("author_id", userId),
+        .eq("post_author_profile_id", userId) // Use the correct column name from master_view
+        .not("post_id", "is", null) // Get all rows with posts
+        .order("post_created_at", { ascending: false }), // Use the correct column name
     ]);
 
     if (postsResult.error) throw postsResult.error;
-    if (countResult.error) throw countResult.error;
+
+    // Deduplicate posts since master_view can have multiple rows per post
+    const uniquePostsMap = new Map();
+    (postsResult.data || []).forEach((row: any) => {
+      if (row.post_id && !uniquePostsMap.has(row.post_id)) {
+        uniquePostsMap.set(row.post_id, row);
+      }
+    });
+
+    const uniquePostsData = Array.from(uniquePostsMap.values());
+    const totalUniquePosts = uniquePostsData.length;
+
+    // Apply pagination after deduplication
+    const paginatedPosts = uniquePostsData.slice(start, start + limit);
 
     // Transform the data to match the UserPost interface
-    const posts: UserPost[] = (postsResult.data || []).map((post) => ({
-      id: post.id,
-      created_at: post.created_at,
-      updated_at: post.updated_at,
+    const posts: UserPost[] = paginatedPosts.map((post) => ({
+      id: post.post_id, // Use the correct field name from master_view
+      created_at: post.post_created_at, // Use the correct field name from master_view
+      updated_at: post.post_updated_at, // Use the correct field name from master_view
       title: post.title,
-      content: post.content,
+      content: post.post_content, // Use the correct field name from master_view
       post_type: post.post_type,
       medium: post.medium,
       genre: post.genre,
-      author_id: post.author_id,
+      user_profile_id: post.post_author_profile_id, // Use the correct field name from master_view
       media_ids: post.media_ids || [],
       visibility: post.visibility,
       likes_count: post.likes_count || 0,
       comments_count: post.comments_count || 0,
       author: {
-        id: post.author_id,
-        display_name: post.author[0]?.display_name,
-        avatar_url: post.author[0]?.avatar_url,
-        is_verified: post.author[0]?.is_verified,
+        id: post.post_author_profile_id, // Use the correct field name from master_view
+        display_name: post.post_author_name, // Use the correct field name from master_view
+        avatar_url: post.post_author_avatar, // Use the correct field name from master_view
+        is_verified: post.post_author_verified, // Use the correct field name from master_view
       },
     }));
 
     return {
       posts,
-      total: countResult.count || 0,
+      total: totalUniquePosts,
     };
   },
 
@@ -203,7 +201,7 @@ export const profileService = {
   ): Promise<void> {
     // Extract only the database fields (remove UI-only fields like author object)
     const dbPost = {
-      author_id: post.author_id,
+      user_profile_id: post.user_profile_id, // Changed from author_id to user_profile_id
       title: post.title,
       content: post.content,
       post_type: post.post_type,

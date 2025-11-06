@@ -58,7 +58,7 @@
    5. RESPONSIVE DESIGN - Media Queries
    ========================================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   /* Navigation responsive stacking */
   .profile-options-bar {
     flex-direction: column;
