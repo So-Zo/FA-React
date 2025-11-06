@@ -1,0 +1,55 @@
+/* 
+ * TARGETED MOBILE DEBUG
+ * Test at exactly 769px vs 768px to see what breaks
+ */
+
+@media (max-width: 769px) {
+  .content-wrapper {
+    background: rgba(255, 0, 0, 0.2) !important;
+    outline: 3px solid red !important;
+  }
+
+  .content-wrapper::before {
+    content: "MOBILE MODE - 769px and below";
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: red;
+    color: white;
+    padding: 5px;
+    z-index: 9999;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 770px) {
+  .content-wrapper::before {
+    content: "DESKTOP MODE - 770px and above";
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: green;
+    color: white;
+    padding: 5px;
+    z-index: 9999;
+    font-size: 12px;
+  }
+}
+
+/* Show current grid columns */
+.content-wrapper {
+  position: relative;
+}
+
+.content-wrapper::after {
+  content: "Grid columns: " attr(style);
+  position: fixed;
+  top: 30px;
+  left: 0;
+  background: blue;
+  color: white;
+  padding: 5px;
+  z-index: 9998;
+  font-size: 10px;
+  max-width: 300px;
+}

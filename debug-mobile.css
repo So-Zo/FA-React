@@ -1,0 +1,61 @@
+/* 
+ * MOBILE DEBUG STYLES - TEMPORARY
+ * Add this to debug mobile height issues
+ * Remove after finding the culprit
+ */
+
+@media (max-width: 768px) {
+  /* Add red borders to see what's taking up space */
+  * {
+    outline: 1px solid red !important;
+  }
+
+  /* Highlight elements with large heights */
+  *[style*="height"],
+  *[class*="100vh"],
+  .content-wrapper,
+  .main-content,
+  body,
+  html,
+  #root {
+    background: rgba(255, 0, 0, 0.1) !important;
+    outline: 3px solid blue !important;
+  }
+
+  /* Show element info */
+  *::before {
+    content: attr(class) " " attr(id);
+    position: absolute;
+    background: yellow;
+    font-size: 10px;
+    z-index: 9999;
+    padding: 2px;
+    color: black;
+  }
+}
+
+/* Force height debugging */
+@media (max-width: 768px) {
+  body,
+  html,
+  #root {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .main-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .content-wrapper {
+    min-height: auto !important;
+    height: auto !important;
+    grid-template-rows: auto !important;
+    display: block !important;
+    grid-template-columns: none !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
