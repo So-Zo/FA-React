@@ -6,11 +6,11 @@ import React, {
   ReactNode,
 } from "react";
 
-type ThemeMode = "light" | "dark" | "system";
+type ThemeMode = "default" | "light" | "dark" | "system";
 
 interface ThemeState {
   currentTheme: ThemeMode;
-  effectiveTheme: "light" | "dark"; // The actual theme being applied (resolves 'system' to light/dark)
+  effectiveTheme: "default" | "light" | "dark"; // The actual theme being applied (resolves 'system' to light/dark)
   prefersDark: boolean; // System preference
 }
 
@@ -40,17 +40,25 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>(getInitialTheme);
   const [prefersDark, setPrefersDark] = useState(getSystemTheme());
-  const [effectiveTheme, setEffectiveTheme] = useState<"light" | "dark">(
+  const [effectiveTheme, setEffectiveTheme] = useState<
+    "default" | "light" | "dark"
+  >(
     currentTheme === "system"
       ? getSystemTheme()
         ? "dark"
         : "light"
+      : currentTheme === "default"
+      ? "default"
       : currentTheme
   );
 
   // Apply theme to document
-  const applyTheme = (theme: "light" | "dark") => {
-    document.documentElement.setAttribute("data-theme", theme);
+  const applyTheme = (theme: "default" | "light" | "dark") => {
+    if (theme === "default") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
     setEffectiveTheme(theme);
   };
 
@@ -73,6 +81,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   useEffect(() => {
     if (currentTheme === "system") {
       applyTheme(prefersDark ? "dark" : "light");
+    } else if (currentTheme === "default") {
+      applyTheme("default");
     } else {
       applyTheme(currentTheme);
     }
