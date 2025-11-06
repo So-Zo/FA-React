@@ -1,0 +1,237 @@
+/* Mobile TipTap Controls */
+
+/* Floating Action Button */
+.tiptap-mobile-fab {
+  position: fixed;
+  /* Initial position will be set by JavaScript */
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--primary-color, #007acc);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  z-index: 9999; /* High z-index to stay above everything */
+  transition: all 0.2s ease;
+  user-select: none;
+  touch-action: none; /* Prevent scrolling while dragging */
+}
+
+.tiptap-mobile-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tiptap-mobile-fab:active,
+.tiptap-mobile-fab.dragging {
+  cursor: grabbing;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: none; /* Disable transitions while dragging */
+}
+
+/* Only show on mobile when in edit mode */
+@media (min-width: 769px) {
+  .tiptap-mobile-fab {
+    display: none;
+  }
+}
+
+/* Modal Overlay */
+.tiptap-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Solid dark background */
+  z-index: 10000; /* Above the floating button */
+  animation: fadeIn 0.2s ease;
+}
+
+/* Modal Container */
+.tiptap-mobile-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff; /* Solid white background */
+  border-radius: 1rem 1rem 0 0;
+  height: 90vh; /* Fixed height with 10vh gap at top */
+  overflow: hidden; /* Container doesn't scroll, but content inside will */
+  z-index: 10001; /* Above the overlay and button */
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Header */
+.tiptap-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f9fa; /* Solid light gray background */
+  border-radius: 1rem 1rem 0 0;
+  flex-shrink: 0; /* Don't shrink this header */
+  z-index: 10;
+}
+
+.tiptap-mobile-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333333; /* Solid dark text */
+}
+
+.tiptap-mobile-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #666666; /* Solid gray */
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.tiptap-mobile-close:hover {
+  background: #e9ecef; /* Solid light gray hover */
+  color: #333333;
+}
+
+/* Controls Container */
+.tiptap-mobile-controls {
+  padding: 1rem 1.5rem 2rem;
+  background-color: #ffffff; /* Solid white background */
+  flex: 1; /* Fill remaining space */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Space between sections */
+  overflow-y: auto; /* Allow scrolling if content is too tall */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Section */
+.tiptap-mobile-section {
+  margin-bottom: 0; /* Remove margin, using gap from parent */
+}
+
+.tiptap-mobile-section:last-child {
+  margin-bottom: 0;
+}
+
+.tiptap-mobile-section h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333; /* Solid dark text */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.875rem;
+}
+
+/* Buttons Grid */
+.tiptap-mobile-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Button */
+.tiptap-mobile-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #f8f9fa; /* Solid light gray background */
+  border: 1px solid #dee2e6; /* Solid border */
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  text-align: left;
+  min-height: 3.5rem;
+  color: #333333; /* Solid text color */
+}
+
+.tiptap-mobile-btn:hover {
+  background: #e9ecef; /* Solid hover background */
+  border-color: #007acc; /* Blue border on hover */
+}
+
+.tiptap-mobile-btn:active {
+  transform: scale(0.98);
+}
+
+.tiptap-mobile-btn.is-active {
+  background: #007acc; /* Solid blue for active */
+  border-color: #007acc;
+  color: white;
+}
+
+.tiptap-mobile-btn svg {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.tiptap-mobile-btn span {
+  font-weight: 500;
+}
+
+.tiptap-mobile-btn .heading-text {
+  font-size: 1rem;
+  font-weight: bold;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .tiptap-mobile-modal {
+    background: var(--background-dark);
+  }
+
+  .tiptap-mobile-header {
+    background: var(--card-background-dark);
+    border-bottom-color: var(--border-color-dark);
+  }
+
+  .tiptap-mobile-btn {
+    background: var(--card-background-dark);
+    border-color: var(--border-color-dark);
+    color: var(--text-color-dark);
+  }
+
+  .tiptap-mobile-btn:hover {
+    background: var(--hover-background-dark);
+  }
+}
