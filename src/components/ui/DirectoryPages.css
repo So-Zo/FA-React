@@ -13,7 +13,7 @@
 
 /*.view-more-container a {
   padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: var(--border-radius-base);
+  border-radius: var(--radius-lg);
   background-color: var(--fanarc-primary-color);
   color: white;
   transition: all var(--transition-base);

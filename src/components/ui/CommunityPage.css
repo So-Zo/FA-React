@@ -1,35 +1,28 @@
 .community-page {
   min-height: 100vh;
-  background-color: var(--fanarc-secondary-color);
-  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .community-page {
+    min-height: auto; /* Let content determine height on mobile */
+  }
 }
 
 /* Main layout */
-#app-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.community-page-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-}
 
 /* Header styles */
 .main-header {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+  border-bottom: var(--border-2) solid rgba(255, 255, 255, 0.1);
+  width: 100%;
 }
 
 .main-header h1 {
-  font-size: 2rem;
+  font-size: 2rem; /* Custom page heading - larger than var(--font-size-lg) */
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
@@ -38,7 +31,7 @@
 .header-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-lg);
 }
 
 .logo {
@@ -49,172 +42,24 @@
 /* Search and filter section */
 .search-group {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 #site-search-bar {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.5rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-2) solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
 #site-search-bar::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.filter-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0;
-  position: relative;
-}
-
-.filter-group {
-  position: relative;
-  min-width: 150px;
-}
-
-.filter-btn {
-  width: 100%;
-  background-color: white;
-  border: 2px solid var(--accent-color);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1.25rem;
-  color: var(--text-primary);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background-color: var(--accent-color);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.filter-dropdown {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  background-color: white;
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  width: 280px;
-  max-height: 400px;
-  overflow-y: auto;
-  z-index: 100;
-  display: none;
-  backdrop-filter: blur(8px);
-}
-
-.filter-dropdown.active {
-  display: block;
-}
-
-.filter-dropdown ul {
-  list-style: none;
-  padding: 0.75rem;
-  margin: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.filter-dropdown li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--border-color);
-  transition: all 0.2s ease;
-}
-
-.filter-dropdown li:last-child {
-  border-bottom: none;
-}
-
-.filter-dropdown li:hover {
-  background: var(--fanarc-primary-color);
-  border-radius: 0.5rem;
-}
-
-.checkbox-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  width: 100%;
-}
-
-.checkbox-wrapper input[type="checkbox"],
-.checkbox-wrapper input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.custom-checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent-color);
-  border-radius: 6px;
-  display: inline-block;
-  position: relative;
-  transition: all 0.2s ease;
-  background: var(--bg-surface);
-}
-
-.checkbox-wrapper input:checked + .custom-checkbox {
-  background: var(--accent-color);
-}
-
-.checkbox-wrapper input:checked + .custom-checkbox::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  left: 6px;
-  width: 6px;
-  height: 12px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-.checkbox-wrapper button {
-  width: 100%;
-  text-align: left;
-  padding: 0.25rem 0.5rem;
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.checkbox-wrapper button:hover {
-  color: var(--accent-color);
-}
-
-.checkbox-wrapper button {
-  background: none;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  text-align: left;
-  padding: 0;
-}
+/* Note: .checkbox-wrapper and .custom-checkbox styles moved to shared/Css/forms.css */
 
 .category-count {
   color: #888;
@@ -222,168 +67,16 @@
 }
 
 /* Community feed */
-.community-feed {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-}
 
-.community-feed-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
+/* 
+   Note: Post card styles now handled by shared PostCard component
+   which uses grid-card classes from shared/Css/cards.css
+*/
 
-.posts-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-  width: 100%;
-}
-
-/* Post Card Styles */
-.post-card {
-  background-color: var(--bg-surface);
-  border-radius: 1rem;
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-  border-color: var(--accent-color);
-}
-
-.post-card-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background: var(--bg-surface-hover);
-}
-
-.post-author-mini {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.post-author-mini img {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.author-name {
-  font-weight: 600;
-  color: #333;
-}
-
-.post-timestamp {
-  font-size: 0.8em;
-  color: #888;
-}
-
-.post-category-tag {
-  background-color: rgba(169, 151, 223, 0.2);
-  color: var(--fanarc-primary-color);
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.8em;
-  font-weight: 500;
-}
-
-.post-content {
-  padding: 1rem;
-  flex-grow: 1;
-}
-
-.post-title {
-  font-size: 1.2em;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #222;
-}
-
-.post-media {
-  margin-bottom: 0.75rem;
-}
-
-.post-media img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
-.post-description {
-  color: #555;
-  line-height: 1.6;
-  margin-top: 0.75rem;
-}
-
-.post-interactions {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  padding: 1rem;
-  border-top: 1px solid var(--border-color);
-  background: var(--bg-surface-hover);
-}
-
-.interaction-group {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.interaction-group button,
-.save-btn button {
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.interaction-group button:hover,
-.save-btn button:hover {
-  color: var(--fanarc-primary-color);
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  #app-container {
-    padding: 1.5rem;
-  }
-
-  .posts-container {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 992px) {
+/* Mobile/tablet responsive adjustments */
+@media (max-width: 768px) {
   .community-page-content {
+    padding: 1rem;
     gap: 1.5rem;
   }
 
@@ -392,23 +85,7 @@
   }
 
   .main-header h1 {
-    font-size: 1.75rem;
-  }
-
-  .filter-buttons {
-    gap: 0.75rem;
-  }
-}
-
-@media (max-width: 768px) {
-  #app-container {
-    padding: 1rem;
-  }
-
-  .posts-container {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
+    font-size: 1.5rem;
   }
 
   .filter-buttons {
@@ -432,40 +109,14 @@
     right: 0;
   }
 
-  .post-card-header {
-    padding: 0.75rem;
-  }
-
-  .post-content {
-    padding: 0.75rem;
-  }
-
-  .post-interactions {
-    padding: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-header h1 {
-    font-size: 1.5rem;
+  .posts-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   #site-search-bar {
     font-size: 0.875rem;
     padding: 0.5rem 0.75rem;
-  }
-
-  .post-author-mini img {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .interaction-group {
-    gap: 1rem;
-  }
-
-  .author-name {
-    font-size: 0.875rem;
   }
 
   .post-timestamp {

@@ -3,9 +3,13 @@
   margin: 0 auto;
 }
 
-
 .main-content {
   flex: 1;
   padding-bottom: 3.5rem; /* Add padding to account for the bottom navigation bar */
 }
 
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 1rem; /* Reduce padding on mobile */
+  }
+}

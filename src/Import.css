@@ -1,6 +1,6 @@
 /* Base */
 @import url(./shared/Css/reset.css);
-@import url(./shared/Css/variables.css);
+@import url(./shared/Css/themes.css); /* Contains all variables + theme definitions */
 @import url(./shared/Css/global.css);
 
 /* Layout */
@@ -15,6 +15,12 @@
 @import url(./shared/Css/cards.css);
 @import url(./shared/Css/TableOfContents.css);
 
+/* Consolidated Patterns */
+@import url(./shared/Css/buttons.css);
+@import url(./shared/Css/modals.css);
+@import url(./shared/Css/forms.css);
+@import url(./shared/Css/postfeed.css);
+
 /* Pages */
 @import url(./components/ui/HomePage.css);
 @import url(./components/ui/CommunityPage.css);
@@ -22,7 +28,6 @@
 @import url(./components/pages/Profile/Profileimport.css);
 @import url(./components/ui/PowerRoomPage.css);
 @import url(./components/ui/AuthPage.css);
-@import url(./components/ui/CharStyles.css);
 
 /* States & Utilities */
 @import url(./shared/Css/BgColors.css);

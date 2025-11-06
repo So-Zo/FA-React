@@ -6,6 +6,13 @@
   background-color: #f0f2f5;
 }
 
+@media (max-width: 768px) {
+  .auth-page-container {
+    min-height: auto; /* Let content determine height on mobile */
+    padding: var(--spacing-lg);
+  }
+}
+
 .auth-form-wrapper {
   background: white;
   padding: 2rem;
