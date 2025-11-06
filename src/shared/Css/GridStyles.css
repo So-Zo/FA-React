@@ -32,8 +32,8 @@
 
 /* Grid card utility for grid children */
 .grid-card {
-  background: white;
-  border-radius: calc(var(--border-radius-base) * 1.5);
+  background: var(--bpost-color, rgb(89, 88, 88));
+  border-radius: calc(var(--radius-lg) * 1.5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: var(--spacing-md);
@@ -47,6 +47,22 @@
 .grid-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Clickable card styling for preview mode */
+.clickable-card {
+  transition: all 0.2s ease;
+}
+
+.clickable-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.clickable-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Card header with user info */
@@ -63,7 +79,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  color : var(--text-primary);
+  color: var(--text-primary);
 }
 
 .user-info img.user-avatar {
@@ -117,7 +133,7 @@
 
 .media-container {
   margin-top: var(--spacing-md);
-  border-radius: var(--border-radius-base);
+  border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
@@ -127,6 +143,55 @@
   display: block;
   object-fit: cover;
 }
+
+/* Read more hint for preview cards */
+.read-more-hint {
+  color: var(--fanarc-secondary-color);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.clickable-card:hover .read-more-hint {
+  opacity: 1;
+  color: var(--fanarc-primary-color);
+}
+
+/* Post interactions (likes/comments) */
+.post-interactions {
+  padding: var(--spacing-sm);
+  border-top: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  margin-top: var(--spacing-sm);
+}
+
+.interaction-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  transition: color 0.2s ease;
+  font-size: var(--font-size-base);
+}
+
+.action-btn:hover {
+  color: var(--fanarc-primary-color);
+}
+
+.action-btn.liked {
+  color: #e74c3c;
+}
 /* === Wikipedia-style Typography Enhancements === */
 
 .two-column-grid h2,
@@ -134,12 +199,12 @@
   font-size: var(--font-size-xxxl);
   margin-bottom: var(--spacing-md);
   font-weight: 700;
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height-normal);
   text-align: center;
 }
 
 /* Responsive adjustments for grids */
-@media (max-width: 40rem) {
+@media (max-width: 768px) {
   .two-column-grid,
   .three-column-grid {
     grid-template-columns: 1fr;

@@ -2,11 +2,11 @@
 .error-state,
 .empty-state {
   width: 100%;
-  padding: 2rem;
+  padding: var(--spacing-xl);
   text-align: center;
-  background: var(--surface-background);
+  background: var(--surface-primary);
   border-radius: var(--border-radius);
-  margin: 1rem 0;
+  margin: var(--spacing-md) 0;
 }
 
 .loading-state {

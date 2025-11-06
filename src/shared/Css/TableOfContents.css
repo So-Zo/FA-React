@@ -14,7 +14,7 @@
 /* TOC section */
 .toc-section {
   background-color: white;
-  border-radius: var(--border-radius-base);
+  border-radius: var(--radius-lg);
   border: 1px solid #eee;
   overflow: hidden;
 }

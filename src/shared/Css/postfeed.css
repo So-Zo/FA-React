@@ -1,0 +1,90 @@
+/*
+ * Post Feed Layouts for FanArcs React
+ * Unified styling for Community and Profile page post displays
+ * Separate from general grid utilities to avoid conflicts
+ */
+
+/* ==========================================================================
+   POST FEED CONTAINER
+   ========================================================================== */
+
+/* Main post feed wrapper with uni-section background */
+.post-feed {
+  background: var(--section-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-lg) 0;
+  box-shadow: var(--shadow-md);
+  width: 95%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Post grid layout */
+.post-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+/* ==========================================================================
+   POST FEED STATES
+   ========================================================================== */
+
+.post-feed-loading,
+.post-feed-error,
+.post-feed-empty {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  color: var(--txt-on-section);
+  font-size: var(--font-size-base);
+}
+
+.post-feed-error {
+  color: var(--danger);
+}
+
+/* ==========================================================================
+   POST FEED HEADER
+   ========================================================================== */
+
+.post-feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.post-feed-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--txt-on-section);
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Mobile/tablet responsive design */
+@media (max-width: 768px) {
+  .post-feed {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+  }
+
+  .post-feed-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .post-feed-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: stretch;
+  }
+}

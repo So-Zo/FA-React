@@ -12,7 +12,7 @@
 
 /* Default link styling */
 .default-links {
-  color: var(--fanarc-primary-color);
+  color: white;
   text-decoration: none;
   position: relative;
   transition: color var(--transition-base);
@@ -46,7 +46,7 @@
   left: 0;
   width: 0;
   height: 0.125rem;
-  background-color: #4B3F72;
+  background-color: #4b3f72;
   transition: width var(--transition-base);
 }
 
@@ -85,10 +85,11 @@
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
   padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-base);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
   text-decoration: none;
-  transition: transform var(--transition-base), background-color var(--transition-base);
+  transition: transform var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .quick-link:hover {
@@ -97,7 +98,7 @@
 }
 
 .quick-link .icon {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   margin-right: var(--spacing-sm);
 }
 
@@ -112,7 +113,7 @@
   display: inline-block;
   background-color: rgba(255, 255, 255, 0.1);
   padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--border-radius-base);
+  border-radius: var(--radius-lg);
   color: var(--text-primary);
   text-decoration: none;
   font-weight: bold;
@@ -162,14 +163,14 @@
   transform: translateX(-50%);
   background-color: var(--fanarc-primary-color);
   color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--border-radius-small);
-  font-size: var(--font-size-xs);
+  padding: calc(var(--spacing-sm) * 0.5) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition-base), visibility var(--transition-base);
   white-space: nowrap;
-  z-index: var(--z-index-tooltip);
+  z-index: var(--z-tooltip);
   pointer-events: none;
 }
 
@@ -193,7 +194,8 @@
   font-weight: bold;
   display: inline-block;
   margin-bottom: var(--spacing-sm);
-  transition: transform var(--transition-base), text-shadow var(--transition-base);
+  transition: transform var(--transition-base),
+    text-shadow var(--transition-base);
   text-align: center;
   position: relative;
 }

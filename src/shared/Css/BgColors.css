@@ -24,14 +24,14 @@ body[data-page="power-room"] {
   background: var(--power-room-gradient);
 }
 body[data-page="community"] {
-  background: var(--fanarc-primary-color);
+  background: var(--surface-primary);
 }
 body[data-page="profile"] {
-  background: var(--fanarc-primary-color);
+  background: var(--surface-primary);
 }
 body[data-page="characters"] {
   background: linear-gradient(to right, #2c3e50 0%, #2980b9 50%, #f1c40f 100%);
 }
 body[data-page="home"] {
-  background: var(--home-body-gradient);
+  background: var(--surface-primary);
 }

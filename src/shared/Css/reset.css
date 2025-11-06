@@ -28,8 +28,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Mobile viewport fix - use dvh (dynamic viewport height) when supported */
+@supports (height: 100dvh) {
+  body {
+    min-height: 100dvh;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    min-height: auto; /* Let content determine height on mobile */
+  }
+}
+
 /* Typography resets */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   margin: 0;
 }
@@ -39,7 +57,8 @@ p {
 }
 
 /* List resets */
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -65,7 +84,9 @@ button {
   padding: 0;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font: inherit;
   border: none;
 }
