@@ -1,0 +1,131 @@
+/*
+ * Button Styles for FanArcs React
+ * Only contains the styles actually being used
+ */
+
+/* Base Button Styles */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) 1.4rem;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  transition: var(--transition-base);
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  line-height: var(--line-height-normal);
+}
+
+/* Button Variants - Only the ones actually used */
+.btn-primary {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-outline {
+  background: none;
+  border: var(--border-2) solid var(--accent-color);
+  color: var(--accent-color);
+}
+
+.btn-outline:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+/* Button States */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Filter Buttons for Community Page */
+.filter-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  position: relative;
+  justify-content: center;
+}
+
+.filter-btn {
+  background-color: rgba(0, 0, 0, 0.17);
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 0.45rem;
+  height: 2.5rem;
+  width: 10rem;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background-color: var(--accent-color, #8c52ff);
+  color: #fff;
+}
+
+.filter-group {
+  position: relative;
+  min-width: 150px;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-sm));
+  left: 0;
+  background-color: white;
+  border: var(--border-2) solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  width: 280px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: var(--z-dropdown);
+  display: none;
+  backdrop-filter: blur(8px);
+}
+
+.filter-dropdown.active {
+  display: block;
+}
+
+.filter-dropdown ul {
+  list-style: none;
+  padding: var(--spacing-sm);
+  margin: 0;
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.filter-dropdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm);
+  border-bottom: var(--border-2) solid var(--border-color);
+  transition: all var(--duration-200) ease;
+}
+
+.filter-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.filter-dropdown li:hover {
+  background: var(--fanarc-primary-color);
+  border-radius: 0.5rem;
+}
