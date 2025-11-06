@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../hooks/ThemeContext";
+import { useEditMode } from "../../edit/editMode";
 import {
   FaHome,
   FaUsers,
@@ -16,12 +18,27 @@ import {
   FaInfoCircle,
   FaQuestionCircle,
   FaDownload,
+  FaMoon,
+  FaSun,
+  FaEdit,
+  FaSave,
 } from "react-icons/fa";
 
 const BottomNavigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [categoriesExpanded, setCategoriesExpanded] = useState(false);
   const [infoExpanded, setInfoExpanded] = useState(false);
+
+  // Header controls
+  const { currentTheme, toggleTheme } = useTheme();
+  const { isEditing, toggle: toggleEdit, saveAll } = useEditMode();
+
+  const handleEditSaveClick = async () => {
+    if (isEditing) {
+      await saveAll();
+    }
+    toggleEdit();
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -112,6 +129,25 @@ const BottomNavigation: React.FC = () => {
           <FaArrowUp />
         </button>
 
+        {/* Header controls */}
+        <button
+          onClick={toggleTheme}
+          aria-label={`Switch to ${
+            currentTheme === "light" ? "dark" : "light"
+          } mode`}
+          title="Toggle theme"
+        >
+          {currentTheme === "light" ? <FaMoon /> : <FaSun />}
+        </button>
+
+        <button
+          onClick={handleEditSaveClick}
+          aria-label={isEditing ? "Save changes" : "Enter edit mode"}
+          title={isEditing ? "Save" : "Edit"}
+        >
+          {isEditing ? <FaSave /> : <FaEdit />}
+        </button>
+
         <div
           className={`hamburger-menu-icon ${isMenuOpen ? "active" : ""}`}
           aria-label="Open navigation menu"
@@ -122,7 +158,7 @@ const BottomNavigation: React.FC = () => {
       </div>
 
       {/* The navigation menu that will show/hide */}
-      <nav className={`main-navigation ${isMenuOpen ? "active" : ""}`}>
+      <nav className={`sidebar-dropdown-menu ${isMenuOpen ? "active" : ""}`}>
         <ul>
           {/* Categories dropdown */}
           <li>

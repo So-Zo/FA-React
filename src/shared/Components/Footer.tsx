@@ -53,22 +53,7 @@ const Footer: React.FC = () => {
           <Link to="/cookies">Cookie Policy</Link>
         </div>
       </div>
-      {/* Mobile navigation */}
-      <div className="mobile-nav">
-        <Link to="/" className="mobile-nav-item" aria-label="Home">
-          <span aria-hidden="true">🏠</span>
-        </Link>
-        <Link
-          to="/community"
-          className="mobile-nav-item"
-          aria-label="Community"
-        >
-          <span aria-hidden="true">👥</span>
-        </Link>
-        <Link to="/profile" className="mobile-nav-item" aria-label="Profile">
-          <span aria-hidden="true">👤</span>
-        </Link>
-      </div>
+     
     </footer>
   );
 };
