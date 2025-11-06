@@ -3,15 +3,15 @@
 * Base styles that apply throughout the application
 */
 
-@import "./variables.css";
 @import "./reset.css"; /* Import consolidated reset styles */
+@import "../../../debug-targeted.css"; /* TARGETED DEBUG */
 
 /* Base styles - these remain as they are styling choices, not resets */
 body {
-  font-family: var(--font-family-base);
-  line-height: var(--line-height-base);
-  color: var(--text-color);
-  background-color: var(--bg-color);
+  font-family: var(--font-primary);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
 }
 
 .visually-hidden {
@@ -28,12 +28,12 @@ body {
 
 .skip-link {
   position: absolute;
-  top: -2.5rem;
+  top: -40px; /* Using px for this specific positioning */
   left: 0;
   background: var(--fanarc-primary-color);
   color: white;
   padding: var(--spacing-sm) var(--spacing-md);
-  z-index: var(--z-index-tooltip);
+  z-index: var(--z-tooltip);
   transition: top var(--transition-base);
 }
 
@@ -44,13 +44,23 @@ body {
 /* Content wrapper for main content to avoid sidebar overlap */
 .content-wrapper {
   display: grid;
-  grid-template-columns: 1fr; /* Mobile-first: single column */
+  grid-template-columns: 4.5rem 1fr; /* Desktop: sidebar + main content */
   max-width: 100%;
   margin: 0 auto;
 }
 
-@media (min-width: 1024px) {
+/* When edit mode is active, add space for right TipTap toolbar */
+.content-wrapper.edit-mode {
+  grid-template-columns: 4.5rem 1fr 4.5rem; /* Desktop: left sidebar + main content + tiptap toolbar */
+}
+
+@media (max-width: 768px) {
   .content-wrapper {
-    grid-template-columns: 4.5rem 1fr; /* Sidebar width + main content */
+    grid-template-columns: 1fr; /* Mobile: single column, no sidebar */
+    padding-bottom: 80px; /* Space for bottom navigation */
+  }
+
+  .content-wrapper.edit-mode {
+    grid-template-columns: 1fr; /* Mobile: still single column, tiptap controls will be floating */
   }
 }

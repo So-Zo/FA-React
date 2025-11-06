@@ -1,0 +1,246 @@
+/*
+* Theme Definitions for FanArcs React
+* Default FanArcs brand theme + Universal light/dark themes
+* Includes all base variables (spacing, typography, etc.) and theme-specific colors
+*/
+
+/* ==========================================================================
+   BASE VARIABLES & DEFAULT COLORS (Your branded vision)
+   ========================================================================== */
+:root {
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
+  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+    "Courier New", monospace;
+
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+
+  --letter-spacing: 0.065rem;
+
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* ==========================================================================
+     SPACING & SIZING
+     ========================================================================== */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+
+  --radius-sm: 0.125rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --border-2: 2px;
+
+  /* ==========================================================================
+     ANIMATION & TRANSITIONS
+     ========================================================================== */
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --transition-base: all var(--duration-200) var(--ease-out);
+
+  /* ==========================================================================
+     Z-INDEX & SHADOWS (Standardized stacking order)
+     ========================================================================== */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  /* ==========================================================================
+     GRADIENTS & SPECIAL COLORS
+     ========================================================================== */
+  /* Base gradients for general use */
+  --base-post-clr: rgb(89, 88, 88);
+  --base-light-gradient: linear-gradient(
+    to top,
+    #d5d4d0 0%,
+    #d5d4d0 1%,
+    #eeeeec 31%,
+    #efeeec 75%,
+    #e9e9e7 100%
+  );
+
+  /* Page-specific gradients */
+  --anime-gradient: linear-gradient(
+    137deg,
+    #ff6b35 0%,
+    #f7931e 20%,
+    #ffd23f 50%,
+    #3282b8 80%,
+    #0f3460 100%
+  );
+  --manga-gradient: linear-gradient(to top, #000000 0%, #434343 100%);
+  --comics-gradient: linear-gradient(to top, #0056b3 0%, #d35400 100%);
+  --tv-gradient: linear-gradient(135deg, #000000 0%, #f9a826 50%, #1a1a1a 100%);
+  --video-games-gradient: linear-gradient(
+    137deg,
+    #0b0b2d 0%,
+    #6b24bf 50%,
+    #00ffff 100%
+  );
+  --worlds-gradient: linear-gradient(135deg, #c49a6c, #61a7d4, #568a3e);
+  --power-room-gradient: radial-gradient(
+      circle at 50% 30%,
+      rgba(111, 26, 91, 0.9) 10%,
+      rgba(0, 0, 0, 0.9) 60%
+    ),
+    linear-gradient(
+      to bottom,
+      #820082 5%,
+      #660066 30%,
+      #4d004d 60%,
+      #6f1a5f 100%
+    );
+
+  /* Non-existent content link colors */
+  --non-existent-link-color: #ff6b6b;
+  --non-existent-link-hover-color: #ff8e8e;
+  --non-existent-link-border: #ff6b6b;
+
+  /* ==========================================================================
+     DEFAULT COLORS (Your FanArcs branded vision)
+     ========================================================================== */
+  /* Text Colors */
+  --text-primary: #0b0b0b;
+  --text-secondary: #e0d9ff;
+  --text-muted: #b8aeff;
+  --text-on-section: #333333;
+
+  /* FanArcs Brand */
+  --fanarc-primary-color: #2a1a6f;
+  --fanarc-secondary-color: #a997df;
+
+  /* UI Colors */
+  --border-color: #060a2d;
+  --accent-color: #7247f4;
+  --accent-hover: #9f85f4;
+  --success-color: #2ccf47;
+  --warning-color: #ffd43b;
+  --danger-color: #ff6b6b;
+
+  /* Surface Colors */
+  --surface-primary: radial-gradient(
+      circle at 50% 15%,
+      rgba(42, 26, 111, 0.9) 20%,
+      rgba(0, 0, 92, 0) 60%
+    ),
+    linear-gradient(
+      to bottom,
+      #4b0082 5%,
+      #330066 30%,
+      #1d004d 60%,
+      #2a1a6f 100%
+    );
+  --surface-secondary: #1a0e5c;
+  --surface-hover: #25146d;
+
+  /* Section Background */
+  --section-bg: linear-gradient(
+    to top,
+    #d5d4d0 0%,
+    #d5d4d0 1%,
+    #eeeeec 31%,
+    #efeeec 75%,
+    #e9e9e7 100%
+  );
+
+  /* Shadows */
+  --shadow: rgba(0, 0, 0, 0.2);
+  --shadow-strong: rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   LIGHT THEME (User preference - only overrides what's different)
+   ========================================================================== */
+[data-theme="light"] {
+  /* Different text colors for light theme */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --text-on-section: #212529;
+
+  /* Different UI colors */
+  --border-color: #ced4da;
+  --accent-color: #0d6efd;
+  --accent-hover: #0b5ed7;
+
+  /* Different status colors */
+  --success-color: #198754;
+  --warning-color: #fd7e14;
+  --danger-color: #dc3545;
+
+  /* Different surface colors */
+  --surface-primary: #ffffff;
+  --surface-secondary: #f8f9fa;
+  --surface-hover: #f5f5f5;
+
+  /* Different section background for light */
+  --section-bg: linear-gradient(
+    to top,
+    #f8f9fa 0%,
+    #f8f9fa 1%,
+    #ffffff 31%,
+    #ffffff 75%,
+    #f1f3f5 100%
+  );
+
+  /* Different shadows for light */
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-strong: rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   DARK THEME (User preference - only overrides what's different)
+   ========================================================================== */
+[data-theme="dark"] {
+  /* Different text colors for dark theme */
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted: #808080;
+  --text-on-section: #ffffff;
+
+  /* Different UI colors */
+  --border-color: #525252;
+  --accent-color: #3c82f4;
+  --accent-hover: #030ff8;
+
+  /* Keep same status colors (they work well in dark) */
+  /* --success-color, --warning-color, --danger-color use root values */
+
+  /* Different surface colors */
+  --surface-primary: #121212;
+  --surface-secondary: #1e1e1e;
+  --surface-hover: #404040;
+
+  /* Different section background for dark */
+  --section-bg: linear-gradient(
+    to top,
+    #2a2a2a 0%,
+    #2a2a2a 1%,
+    #3a3a3a 31%,
+    #404040 75%,
+    #4a4a4a 100%
+  );
+
+  /* Different shadows for dark */
+  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.7);
+}
