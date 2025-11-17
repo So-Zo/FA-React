@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 interface UseFileUploadOptions {
-  onUpload?: (file: File) => Promise<string | void>;
+  onUpload?: (file: File) => Promise<string | undefined>;
   onPreview?: (previewUrl: string) => void;
 }
 

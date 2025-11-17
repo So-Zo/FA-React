@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const VideoGamesHistory: React.FC = () => {
   // Define TOC sections
@@ -36,12 +39,7 @@ const VideoGamesHistory: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
       <hr />
       {/* Table of Contents */}
@@ -53,6 +51,22 @@ const VideoGamesHistory: React.FC = () => {
 
       <main id="main-content">
         <hr />
+        {/* Video Games History Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="videogames-history-intro">
+              <h2>History of Video Games</h2>
+              <p>
+                The history of video games spans over five decades of technological innovation 
+                and cultural evolution. From early arcade machines to modern virtual reality, 
+                gaming has become one of the world's largest entertainment industries.
+                <strong>Explore the timeline and edit content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">
           <h2>Timeline Breakdown</h2>

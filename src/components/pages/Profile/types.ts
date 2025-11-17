@@ -55,6 +55,15 @@ export interface ProfileData {
   location?: string;
   is_verified?: boolean;
   is_private?: boolean;
+  // Privacy & Online Status Settings
+  show_online_status?: boolean;
+  // Notification Settings
+  email_notifications?: boolean;
+  comment_notifications?: boolean;
+  follower_notifications?: boolean;
+  content_notifications?: boolean;
+  // Activity tracking
+  last_seen?: string;
 }
 
 // Loading and error states for profile data
@@ -71,6 +80,15 @@ export interface ProfileState {
 export interface ProfileSettingsInputs {
   userDisplayName: string;
   userBio: string;
+  // Privacy Settings
+  isPrivateProfile: boolean;
+  showOnlineStatus: boolean;
+  allowTagging: boolean;
+  // Notification Settings
+  emailNotifications: boolean;
+  commentNotifications: boolean;
+  followerNotifications: boolean;
+  contentNotifications: boolean;
 }
 
 export interface NewPostInputs {

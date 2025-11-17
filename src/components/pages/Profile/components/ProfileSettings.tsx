@@ -2,23 +2,86 @@ import React from "react";
 import { useProfileContext } from "../ProfileContext";
 import { useProfileForms } from "../hooks";
 import { useTheme } from "../../../../shared/hooks/ThemeContext";
+import { supabase } from "../../../../lib/supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileSettings: React.FC = () => {
   const { profileData, updateProfileData } = useProfileContext();
   const { currentTheme, setTheme } = useTheme();
+  const navigate = useNavigate();
+  // Debug: Log profile data on component render
+  console.log("ProfileSettings - profileData:", profileData);
+  console.log("ProfileSettings - is_private value:", profileData?.is_private);
+  console.log(
+    "ProfileSettings - show_online_status value:",
+    profileData?.show_online_status
+  );
+
   const { formState, updateSettingsForm } = useProfileForms({
     settingsForm: {
       userDisplayName: profileData?.display_name || "",
       userBio: profileData?.bio || "",
+      // Privacy Settings
+      isPrivateProfile: profileData?.is_private ?? false, // Default to public (false) when undefined
+      showOnlineStatus: profileData?.show_online_status ?? true, // Default to visible (true) when undefined
+      allowTagging: true, // This might need to be added to ProfileData later
+      // Notification Settings
+      emailNotifications: profileData?.email_notifications ?? true,
+      commentNotifications: profileData?.comment_notifications ?? true,
+      followerNotifications: profileData?.follower_notifications ?? true,
+      contentNotifications: profileData?.content_notifications ?? true,
     },
   });
 
+  // Debug: Log form state
+  console.log("ProfileSettings - formState:", formState.settingsForm);
+
   const handleSaveSettings = async () => {
-    const { userDisplayName, userBio } = formState.settingsForm;
-    await updateProfileData({
+    console.log("=== SAVE SETTINGS DEBUG ===");
+    const {
+      userDisplayName,
+      userBio,
+      isPrivateProfile,
+      showOnlineStatus,
+      emailNotifications,
+      commentNotifications,
+      followerNotifications,
+      contentNotifications,
+    } = formState.settingsForm;
+
+    console.log("Form state values being saved:");
+    console.log("  isPrivateProfile:", isPrivateProfile);
+    console.log("  showOnlineStatus:", showOnlineStatus);
+    console.log("  emailNotifications:", emailNotifications);
+
+    const updateData = {
       display_name: userDisplayName,
       bio: userBio,
-    });
+      is_private: isPrivateProfile,
+      show_online_status: showOnlineStatus,
+      email_notifications: emailNotifications,
+      comment_notifications: commentNotifications,
+      follower_notifications: followerNotifications,
+      content_notifications: contentNotifications,
+    };
+
+    console.log("Data being sent to updateProfileData:", updateData);
+
+    try {
+      await updateProfileData(updateData);
+      console.log("ProfileSettings - updateProfileData completed successfully");
+    } catch (error) {
+      console.error("ProfileSettings - updateProfileData failed:", error);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/"); // Redirect to home page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   const handleThemeChange = (
@@ -133,148 +196,164 @@ export const ProfileSettings: React.FC = () => {
           </ul>
         </div>
 
-        <div className="settings-subgroup">
-          <h4>Section Content Theme</h4>
-          <div className="dropdown-container">
-            <label htmlFor="section-content-theme">
-              Choose how section content appears:
-            </label>
-            <select
-              id="section-content-theme"
-              name="section-content-theme"
-              className="settings-dropdown"
-            >
-              <option value="light">Light Background</option>
-              <option value="dark">Dark Background</option>
-              <option value="auto">Match Site Theme</option>
-            </select>
-          </div>
-          <p className="setting-description">
-            This affects the background color of content sections across the
-            site.
-          </p>
+        {/* Privacy Settings */}
+        <div className="settings-group">
+          <h3>Privacy Settings</h3>
+          <ul className="settings-toggle-list">
+            <li>
+              <span className="setting-label">Show my profile to everyone</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="public-profile"
+                  name="public-profile"
+                  checked={!formState.settingsForm.isPrivateProfile}
+                  onChange={(e) => {
+                    console.log(
+                      "Public profile toggle clicked - checked:",
+                      e.target.checked
+                    );
+                    console.log(
+                      "Setting isPrivateProfile to:",
+                      !e.target.checked
+                    );
+                    updateSettingsForm({ isPrivateProfile: !e.target.checked });
+                  }}
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+            <li>
+              <span className="setting-label">Show my online status</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="show-online-status"
+                  name="show-online-status"
+                  checked={formState.settingsForm.showOnlineStatus}
+                  onChange={(e) => {
+                    console.log(
+                      "Online status toggle clicked - checked:",
+                      e.target.checked
+                    );
+                    updateSettingsForm({ showOnlineStatus: e.target.checked });
+                  }}
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+            <li>
+              <span className="setting-label">
+                Allow others to tag me in posts
+              </span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="allow-tagging"
+                  name="allow-tagging"
+                  defaultChecked
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+          </ul>
         </div>
 
-        <div className="settings-subgroup">
-          <h4>Content Layout</h4>
-          <div className="dropdown-container">
-            <label htmlFor="content-layout">Default content view:</label>
-            <select
-              id="content-layout"
-              name="content-layout"
-              className="settings-dropdown"
+        {/* Notification Preferences */}
+        <div className="settings-group">
+          <h3>Notification Preferences</h3>
+          <ul className="settings-toggle-list">
+            <li>
+              <span className="setting-label">Email notifications</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="email-notifications"
+                  name="email-notifications"
+                  checked={formState.settingsForm.emailNotifications}
+                  onChange={(e) =>
+                    updateSettingsForm({ emailNotifications: e.target.checked })
+                  }
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+            <li>
+              <span className="setting-label">Comment replies</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="comment-notifications"
+                  name="comment-notifications"
+                  checked={formState.settingsForm.commentNotifications}
+                  onChange={(e) =>
+                    updateSettingsForm({
+                      commentNotifications: e.target.checked,
+                    })
+                  }
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+            <li>
+              <span className="setting-label">New followers</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="follower-notifications"
+                  name="follower-notifications"
+                  checked={formState.settingsForm.followerNotifications}
+                  onChange={(e) =>
+                    updateSettingsForm({
+                      followerNotifications: e.target.checked,
+                    })
+                  }
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+            <li>
+              <span className="setting-label">Content updates</span>
+              <label className="toggle-switch">
+                <input
+                  type="checkbox"
+                  id="content-notifications"
+                  name="content-notifications"
+                  checked={formState.settingsForm.contentNotifications}
+                  onChange={(e) =>
+                    updateSettingsForm({
+                      contentNotifications: e.target.checked,
+                    })
+                  }
+                />
+                <span className="toggle-slider"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div className="form-group">
+          <button onClick={handleSaveSettings} className="btn btn-primary">
+            Save Changes
+          </button>
+        </div>
+
+        {/* Account Actions */}
+        <div className="settings-group">
+          <h3>Account Actions</h3>
+          <div className="form-group">
+            <button
+              onClick={handleLogout}
+              className="btn btn-secondary logout-btn"
             >
-              <option value="grid">Grid View</option>
-              <option value="list">List View</option>
-            </select>
+              Log Out
+            </button>
+            <p className="setting-description">
+              You'll be signed out of your account and redirected to the home
+              page.
+            </p>
           </div>
         </div>
-      </div>
-
-      {/* Privacy Settings */}
-      <div className="settings-group">
-        <h3>Privacy Settings</h3>
-        <ul className="settings-toggle-list">
-          <li>
-            <span className="setting-label">Show my profile to everyone</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="public-profile"
-                name="public-profile"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-          <li>
-            <span className="setting-label">Show my online status</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="show-online-status"
-                name="show-online-status"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-          <li>
-            <span className="setting-label">
-              Allow others to tag me in posts
-            </span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="allow-tagging"
-                name="allow-tagging"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      {/* Notification Preferences */}
-      <div className="settings-group">
-        <h3>Notification Preferences</h3>
-        <ul className="settings-toggle-list">
-          <li>
-            <span className="setting-label">Email notifications</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="email-notifications"
-                name="email-notifications"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-          <li>
-            <span className="setting-label">Comment replies</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="comment-notifications"
-                name="comment-notifications"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-          <li>
-            <span className="setting-label">New followers</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="follower-notifications"
-                name="follower-notifications"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-          <li>
-            <span className="setting-label">Content updates</span>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                id="content-notifications"
-                name="content-notifications"
-                defaultChecked
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </li>
-        </ul>
-      </div>
-
-      <div className="form-group">
-        <button onClick={handleSaveSettings} className="btn btn-primary">
-          Save Changes
-        </button>
       </div>
     </div>
   );

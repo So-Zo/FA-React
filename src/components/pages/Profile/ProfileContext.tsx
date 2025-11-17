@@ -162,19 +162,35 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
   const refreshProfileData = useCallback(async () => {
     if (!user) return;
 
+    console.log("=== REFRESH PROFILE DATA DEBUG ===");
+    console.log(
+      "ProfileContext - refreshProfileData called for user:",
+      user.id
+    );
+
     dispatch({
       type: "SET_LOADING",
       payload: { key: "profileDataLoading", value: true },
     });
 
     try {
+      console.log(
+        "ProfileContext - calling profileService.getCompleteProfileData..."
+      );
       // Single call to get both profile data and stats from normalized view
       const { profileData, activityMetrics } =
         await profileService.getCompleteProfileData(user.id);
 
+      console.log("ProfileContext - received profileData:", profileData);
+      console.log(
+        "ProfileContext - received activityMetrics:",
+        activityMetrics
+      );
+
       dispatch({ type: "SET_PROFILE_DATA", payload: profileData });
       dispatch({ type: "SET_PROFILE_STATS", payload: activityMetrics });
     } catch (error) {
+      console.error("ProfileContext - refreshProfileData failed:", error);
       dispatch({
         type: "SET_ERROR",
         payload: {
@@ -194,22 +210,35 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
     async (data: Partial<ProfileData>) => {
       if (!user) return;
 
+      console.log("=== PROFILE CONTEXT UPDATE DEBUG ===");
+      console.log("ProfileContext - updateProfileData called with:", data);
+      console.log("ProfileContext - user.id:", user.id);
+
       dispatch({
         type: "SET_LOADING",
         payload: { key: "profileDataLoading", value: true },
       });
 
       try {
+        console.log("ProfileContext - calling supabase update...");
         const { error } = await supabase
           .from("user_profiles")
           .update(data)
           .eq("id", user.id);
 
-        if (error) throw error;
+        if (error) {
+          console.error("ProfileContext - supabase update error:", error);
+          throw error;
+        }
 
+        console.log(
+          "ProfileContext - supabase update successful, refreshing profile data..."
+        );
         // Refresh profile data after update
         await refreshProfileData();
+        console.log("ProfileContext - profile data refreshed successfully");
       } catch (error) {
+        console.error("ProfileContext - updateProfileData failed:", error);
         dispatch({
           type: "SET_ERROR",
           payload: {

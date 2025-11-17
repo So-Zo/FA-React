@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const TVHistory: React.FC = () => {
   // Define TOC sections
@@ -34,14 +37,7 @@ const TVHistory: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
-
-       
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <hr />
@@ -54,6 +50,21 @@ const TVHistory: React.FC = () => {
       />
 
       <main id="main-content">
+        {/* TV History Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="tv-history-intro">
+              <h2>History of Television</h2>
+              <p>
+                Television history spans over a century of technological innovation and cultural impact.
+                From early mechanical systems to modern streaming platforms, TV has revolutionized 
+                how we consume entertainment, news, and information.
+                <strong>Explore the timeline below and edit content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
 
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">

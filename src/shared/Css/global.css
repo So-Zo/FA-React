@@ -4,7 +4,7 @@
 */
 
 @import "./reset.css"; /* Import consolidated reset styles */
-@import "../../../debug-targeted.css"; /* TARGETED DEBUG */
+/*@import "../../../debug-targeted.css"; /* TARGETED DEBUG */
 
 /* Base styles - these remain as they are styling choices, not resets */
 body {

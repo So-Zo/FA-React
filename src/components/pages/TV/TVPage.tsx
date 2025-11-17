@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const TVPage: React.FC = () => {
   // Define TOC sections
@@ -43,12 +46,7 @@ const TVPage: React.FC = () => {
           <img src="/images/TV/TVHeader.jpg" alt="Television Overview" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <main id="main-content">
@@ -62,6 +60,24 @@ const TVPage: React.FC = () => {
         />
 
         <hr />
+
+        {/* TV Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="tv-basics">
+              <h2>The Basics of Television</h2>
+              <p>
+                Television is a medium that combines visual storytelling with audio
+                to create episodic narratives that can span from a single season to
+                decades of continuous storytelling. From broadcast networks to
+                streaming platforms, TV has evolved into one of the most influential
+                forms of entertainment and information distribution.
+                <strong>This content is editable when edit mode is enabled!</strong>
+              </p>
+            </section>
+          `}
+        />
 
         {/* The Basics Section */}
         <section id="the-basics" className="section-content">

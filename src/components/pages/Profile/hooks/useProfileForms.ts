@@ -30,13 +30,27 @@ export function useProfileForms(initialData?: Partial<ProfileFormsState>) {
 
   // Update settings form
   const updateSettingsForm = (updates: Partial<ProfileSettingsInputs>) => {
-    setFormState((prev) => ({
-      ...prev,
-      settingsForm: {
-        ...prev.settingsForm,
-        ...updates,
-      },
-    }));
+    console.log("=== FORM HOOK DEBUG ===");
+    console.log("useProfileForms - updateSettingsForm called with:", updates);
+    console.log(
+      "useProfileForms - current formState before update:",
+      formState.settingsForm
+    );
+
+    setFormState((prev) => {
+      const newState = {
+        ...prev,
+        settingsForm: {
+          ...prev.settingsForm,
+          ...updates,
+        },
+      };
+      console.log(
+        "useProfileForms - new formState after update:",
+        newState.settingsForm
+      );
+      return newState;
+    });
   };
 
   // Update post form

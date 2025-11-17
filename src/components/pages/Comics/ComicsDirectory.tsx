@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const ComicsDirectory: React.FC = () => {
   // Define TOC sections
@@ -34,12 +37,7 @@ const ComicsDirectory: React.FC = () => {
           <img src="/images/comics/ComicsHeader.jpg" alt="Comics Overview" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Comics Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <hr />
@@ -52,6 +50,21 @@ const ComicsDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
+        {/* Comics Introduction - WikiEditor Example */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="comics-intro">
+              <h2>Welcome to Comics Directory</h2>
+              <p>
+                Comics are a visual storytelling medium that combines art and narrative to create engaging stories. 
+                This directory features popular series, characters, and publishers from the world of comics.
+                <strong>You can edit this content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* Popular Series Section */}
         <section
           id="popular-series"

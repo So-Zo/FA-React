@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const ComicsPage: React.FC = () => {
   // Define TOC sections
@@ -50,6 +52,23 @@ const ComicsPage: React.FC = () => {
           description="Use this table of contents to navigate through the comics guide."
         />
         <hr />
+
+        {/* Comics Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="comics-intro">
+              <h2>What are Comics?</h2>
+              <p>
+                Welcome to the Comics Encyclopedia! This comprehensive guide covers everything 
+                about comics, from basics to advanced topics. Use the table of contents 
+                to navigate and feel free to edit content when edit mode is active.
+                <strong>Click Edit to start contributing!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* The Basics Section */}
         <section id="the-basics" className="section-content">
           <h2>The Basics</h2>

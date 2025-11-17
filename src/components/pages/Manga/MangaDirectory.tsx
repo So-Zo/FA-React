@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const MangaDirectory: React.FC = () => {
   // Define TOC sections
@@ -36,12 +39,7 @@ const MangaDirectory: React.FC = () => {
           <img src="/images/Manga/MangaHeader.jpg" alt="Manga Overview" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Manga Page"
-          placeholder="Search for Characters, Series, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Series, etc." />
       </header>
 
       <hr />
@@ -54,6 +52,21 @@ const MangaDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
+        {/* Manga Introduction - WikiEditor Example */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="manga-intro">
+              <h2>Welcome to Manga Directory</h2>
+              <p>
+                Manga is a Japanese form of comic books and graphic novels. 
+                This directory showcases popular series, genres, and creators from the manga world.
+                <strong>Content can be edited when edit mode is enabled!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* Popular Series Section */}
         <section
           id="popular-series"

@@ -6,11 +6,10 @@ import Footer from "./shared/Components/Footer";
 import BottomNavigation from "./shared/Components/BottomNavigation";
 import "./Import.css";
 import { EditModeProvider } from "./edit/EditModeContext";
-import GlobalEditMode from "./edit/GlobalEditMode";
+import { useEditMode } from "./edit/editMode";
 import { TipTapProvider } from "./components/pages/Search/TipTapContext";
 import TipTapToolbar from "./components/pages/Search/TipTapToolbar";
 import "./components/pages/Search/TipTapToolbar.css";
-import { useEditMode } from "./edit/editMode";
 
 // Import page components
 import HomePage from "./components/pages/Home/HomePage";
@@ -119,7 +118,6 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <EditModeProvider>
-          <GlobalEditMode />
           <PageDataAttributeSetter />
           <AppContent />
         </EditModeProvider>

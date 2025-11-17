@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import WikiSearchBar from "../../shared/WikiSearchBar";
 
 // This is the main homepage component that corresponds to the original index.html
 const HomePage: React.FC = () => {
@@ -10,11 +11,9 @@ const HomePage: React.FC = () => {
           <img src="/images/home/HomeHeader.jpg" alt="FanArcs Home" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search FanArcs"
+        <WikiSearchBar
           placeholder="Search for media, characters, universes, etc."
+          className="home-search-bar"
         />
       </header>
       <hr />

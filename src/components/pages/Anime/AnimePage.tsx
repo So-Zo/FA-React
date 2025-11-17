@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
-
-
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const AnimePage: React.FC = () => {
   // Define TOC sections
@@ -52,14 +53,10 @@ const AnimePage: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
+        <WikiSearchBar
           placeholder="Search for Characters, Universes, etc."
+          className="anime-search-bar"
         />
-
-      
       </header>
 
       <main id="main-content">
@@ -69,6 +66,24 @@ const AnimePage: React.FC = () => {
           sections={tocSections}
           title="Anime Encyclopedia"
           description="Use this table of contents to navigate through the anime guide."
+        />
+
+        {/* Anime Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="anime-basics">
+              <h2>The Basics of Anime</h2>
+              <p>
+                "Anime" refers to animation originating from Japan. In Japan itself,
+                the term "anime" (アニメ) is used for all animation regardless of
+                origin, but internationally it has come to specifically mean
+                Japanese-style animation. This distinctive art form is characterized
+                by colorful graphics, vibrant characters, and fantastical themes.
+                <strong>This content is editable when edit mode is enabled!</strong>
+              </p>
+            </section>
+          `}
         />
 
         {/* The Basics Section */}
@@ -876,5 +891,3 @@ const AnimePage: React.FC = () => {
 };
 
 export default AnimePage;
-
-

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearch } from "../../../shared/hooks/useSearch";
+import { supabase } from "../../../lib/supabaseClient";
 
 // Wiki search types - we'll expand these as we build tables
 export interface WikiSearchResult {
@@ -9,6 +10,7 @@ export interface WikiSearchResult {
   description?: string;
   tags?: string[];
   created_at: string;
+  full_path: string; // Added for routing
 }
 
 export interface WikiSearchOptions {
@@ -46,16 +48,45 @@ export function useWikiSearch(options: WikiSearchOptions = {}) {
       setLoading(true);
       setError(null);
 
-      // For now, return empty results since we don't have wiki tables yet
-      // TODO: Implement actual wiki search when tables are created
       console.log(
         `🔍 Wiki search for: "${query}" with options:`,
         searchOptions
       );
 
-      // Placeholder - will be replaced with real Supabase queries
-      setResults([]);
+      // Build Supabase query
+      let supabaseQuery = supabase
+        .from("wiki_pages")
+        .select("id, title, full_path, page_type, genre, created_at")
+        .textSearch("search_vector", query);
+
+      // Apply filters if provided
+      if (searchOptions.type) {
+        supabaseQuery = supabaseQuery.eq("page_type", searchOptions.type);
+      }
+
+      // Execute query
+      const { data, error } = await supabaseQuery.limit(
+        searchOptions.limit || 10
+      );
+
+      if (error) {
+        throw error;
+      }
+
+      // Transform to WikiSearchResult format
+      const searchResults: WikiSearchResult[] = (data || []).map((page) => ({
+        id: page.id,
+        name: page.title,
+        type: page.page_type as "character" | "world" | "series",
+        description: `${page.page_type} in ${page.genre || "general"}`,
+        tags: [], // We don't have tags in our simplified schema
+        created_at: page.created_at,
+        full_path: page.full_path,
+      }));
+
+      setResults(searchResults);
     } catch (err) {
+      console.error("Wiki search failed:", err);
       setError(err instanceof Error ? err.message : "Failed to search wiki");
     } finally {
       setLoading(false);

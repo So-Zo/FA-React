@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const AnimeDirectory: React.FC = () => {
   // Define TOC sections
@@ -34,12 +37,7 @@ const AnimeDirectory: React.FC = () => {
           <img src="/images/anime/AnimeHeader.jpg" alt="Anime Overview" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Anime Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <hr />
@@ -52,6 +50,21 @@ const AnimeDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
+        {/* Anime Introduction - WikiEditor Example */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="anime-intro">
+              <h2>Welcome to Anime Directory</h2>
+              <p>
+                Anime is a style of Japanese animation that has gained worldwide popularity. 
+                This directory contains information about popular series, genres, and more.
+                <strong>Click the edit button to modify this content when edit mode is enabled!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* Popular Series Section */}
         <section id="popular-series" className="section-content">
           <h2>Popular Anime Series</h2>

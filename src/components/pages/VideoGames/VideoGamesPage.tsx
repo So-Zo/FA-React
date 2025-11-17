@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
 import WikiEditor from "../Search/WikiEditor";
 import "../Search/WikiEditor.css";
 
@@ -52,12 +53,7 @@ const VideoGamesPage: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <main id="main-content">

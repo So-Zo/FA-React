@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PostType, SortOption, usePosts } from "./hooks/usePosts";
 import { PostCard } from "../../../shared/Components/PostCard";
 import { useSearch } from "../../../shared/hooks/useSearch";
+import WikiSearchBar from "../../shared/WikiSearchBar";
 
 const CommunityPage: React.FC = () => {
   const [selectedPostType, setSelectedPostType] = useState<PostType | null>(
@@ -65,13 +66,8 @@ const CommunityPage: React.FC = () => {
         <header className="main-header">
           <h1>Community</h1>
           <div className="search-group">
-            <input
-              type="search"
-              id="site-search-bar"
-              aria-label="Search Posts"
+            <WikiSearchBar
               placeholder={`Search posts...${isTyping ? " (typing...)" : ""}`}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <div className="filter-buttons">
               {/* Post Type Filter */}

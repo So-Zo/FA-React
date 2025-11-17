@@ -49,18 +49,30 @@ export const profileService = {
     profileData: ProfileData;
     activityMetrics: UserActivityMetrics;
   }> {
+    console.log("=== PROFILE SERVICE DEBUG ===");
+    console.log(
+      "profileService - getCompleteProfileData called for userId:",
+      userId
+    );
+
     // Just get profile data directly from user_profiles since master_view is for posts
     const { data: profileData, error: profileError } = await supabase
       .from("user_profiles")
       .select(
-        "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private"
+        "id, display_name, username, bio, avatar_url, website_url, location, is_verified, is_private, show_online_status, email_notifications, comment_notifications, follower_notifications, content_notifications, last_seen"
       )
       .eq("id", userId)
       .single();
 
-    if (profileError) throw profileError;
+    if (profileError) {
+      console.error(
+        "profileService - error fetching profile data:",
+        profileError
+      );
+      throw profileError;
+    }
 
-    console.log("User profile data:", profileData);
+    console.log("profileService - raw profile data from DB:", profileData);
 
     // Get activity metrics from master_view (post counts, etc.)
     const { data: statsData } = await supabase
@@ -85,18 +97,34 @@ export const profileService = {
         .eq("follower_id", userId),
     ]);
 
+    const formattedProfileData = {
+      id: profileData.id,
+      display_name: profileData.display_name,
+      username: profileData.username,
+      bio: profileData.bio,
+      avatar_url: profileData.avatar_url,
+      website_url: profileData.website_url,
+      location: profileData.location,
+      is_verified: profileData.is_verified,
+      is_private: profileData.is_private,
+      // Privacy & Online Status Settings
+      show_online_status: profileData.show_online_status,
+      // Notification Settings
+      email_notifications: profileData.email_notifications,
+      comment_notifications: profileData.comment_notifications,
+      follower_notifications: profileData.follower_notifications,
+      content_notifications: profileData.content_notifications,
+      // Activity tracking
+      last_seen: profileData.last_seen,
+    };
+
+    console.log(
+      "profileService - formatted profile data:",
+      formattedProfileData
+    );
+
     return {
-      profileData: {
-        id: profileData.id,
-        display_name: profileData.display_name,
-        username: profileData.username,
-        bio: profileData.bio,
-        avatar_url: profileData.avatar_url,
-        website_url: profileData.website_url,
-        location: profileData.location,
-        is_verified: profileData.is_verified,
-        is_private: profileData.is_private,
-      },
+      profileData: formattedProfileData,
       activityMetrics: {
         totalPosts: postCount,
         totalFollowers: followersResult.count || 0,
@@ -116,6 +144,11 @@ export const profileService = {
     userId: string,
     updates: Partial<ProfileData>
   ): Promise<void> {
+    console.log("=== PROFILE SERVICE UPDATE DEBUG ===");
+    console.log("profileService - updateProfileData called");
+    console.log("  userId:", userId);
+    console.log("  updates:", updates);
+
     const { error } = await supabase
       .from("user_profiles")
       .update({
@@ -124,7 +157,12 @@ export const profileService = {
       })
       .eq("id", userId);
 
-    if (error) throw error;
+    if (error) {
+      console.error("profileService - update failed:", error);
+      throw error;
+    }
+
+    console.log("profileService - update completed successfully");
   },
 
   // Get profile statistics (legacy method - now uses consolidated approach)

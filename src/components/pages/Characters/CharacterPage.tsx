@@ -1,4 +1,5 @@
 import React from "react";
+import WikiSearchBar from "../../shared/WikiSearchBar";
 
 const CharacterPage: React.FC = () => {
   return (
@@ -12,12 +13,7 @@ const CharacterPage: React.FC = () => {
           />
           <div className="content-category-badge">Character</div>
         </div>
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search Site"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <main id="main-content">

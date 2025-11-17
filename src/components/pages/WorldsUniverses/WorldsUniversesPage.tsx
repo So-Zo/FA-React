@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const WorldsUniversesPage: React.FC = () => {
   // Define TOC sections
@@ -52,12 +55,7 @@ const WorldsUniversesPage: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <hr />
@@ -66,6 +64,22 @@ const WorldsUniversesPage: React.FC = () => {
         sections={tocSections}
         title="Worlds & Universes Encyclopedia"
         description="Use this table of contents to navigate through the worlds and universes guide."
+      />
+
+      {/* Worlds & Universes Introduction - WikiEditor */}
+      <WikiEditor
+        className="section-content"
+        content={`
+          <section id="worlds-basics">
+            <h2>The Basics of Fictional Worlds</h2>
+            <p>
+              Fictional worlds and universes serve as the foundation for storytelling across all media.
+              From the wizarding world of Harry Potter to the galaxy far, far away in Star Wars,
+              these settings provide the context and rules that make stories compelling and believable.
+              <strong>This content is editable when edit mode is enabled!</strong>
+            </p>
+          </section>
+        `}
       />
 
       {/* The Basics Section */}

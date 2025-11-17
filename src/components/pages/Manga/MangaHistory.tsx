@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const MangaHistory: React.FC = () => {
   // Define TOC sections
@@ -34,12 +37,7 @@ const MangaHistory: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Characters, Universes, etc."
-        />
+        <WikiSearchBar placeholder="Search for Characters, Universes, etc." />
       </header>
 
       <hr />
@@ -52,6 +50,23 @@ const MangaHistory: React.FC = () => {
       />
 
       <main id="main-content">
+        <hr />
+        {/* Manga History Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="manga-history-intro">
+              <h2>History of Manga</h2>
+              <p>
+                The history of manga spans over a century of artistic evolution and cultural development. 
+                From traditional Japanese art forms to modern digital publishing, manga has become 
+                one of the world's most influential forms of visual storytelling.
+                <strong>Explore the timeline and edit content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* 2. Timeline Breakdown */}
         <section className="section-content" id="timeline-breakdown">
           <h2>Timeline Breakdown</h2>

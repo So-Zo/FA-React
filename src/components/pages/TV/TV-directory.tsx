@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const TelevisionDirectory: React.FC = () => {
   const tocSections: TocSectionProps[] = [
@@ -33,13 +36,7 @@ const TelevisionDirectory: React.FC = () => {
           <img src="/images/tv/TVHeader.jpg" alt="Television Directory" />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search TV Shows"
-          placeholder="Search for shows, characters, etc."
-          data-search-type="tv"
-        />
+        <WikiSearchBar placeholder="Search for shows, characters, etc." />
       </header>
 
       <hr />
@@ -52,6 +49,20 @@ const TelevisionDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
+        {/* TV Introduction - WikiEditor Example */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="tv-intro">
+              <h2>Welcome to TV Directory</h2>
+              <p>
+                Television encompasses a vast range of storytelling formats from sitcoms to dramas, documentaries to reality shows. 
+                This directory showcases popular series, genres, and creators from the world of television.
+                <strong>Edit this content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
         {/* Directory Intro Section */}
         {/* Popular Series Section */}
         <section id="popular-series" className="section-content">
@@ -1071,7 +1082,6 @@ const TelevisionDirectory: React.FC = () => {
                 Contribute to FanArcs by creating a page for your favorite TV
                 series.
               </p>
-            
             </div>
           </div>
         </section>

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const WorldsUniversesDirectory: React.FC = () => {
   // Define TOC sections
@@ -50,12 +53,7 @@ const WorldsUniversesDirectory: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search Worlds & Universes"
-          placeholder="Search for Worlds, Universes, Characters, etc."
-        />
+        <WikiSearchBar placeholder="Search for Worlds, Universes, Characters, etc." />
       </header>
 
       <hr />
@@ -66,6 +64,22 @@ const WorldsUniversesDirectory: React.FC = () => {
           sections={tocSections}
           title="Worlds & Universes Directory"
           description="Use this table of contents to navigate through the worlds and universes directory."
+        />
+
+        {/* Worlds & Universes Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="worlds-intro">
+              <h2>Welcome to Worlds & Universes</h2>
+              <p>
+                Fictional worlds and universes are the backbone of great storytelling across all media.
+                This directory explores the rich settings, lore, and mythologies that make stories memorable.
+                From fantasy realms to sci-fi galaxies, discover the worlds that captivate our imagination.
+                <strong>Edit this content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
         />
 
         <section

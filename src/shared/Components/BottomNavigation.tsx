@@ -56,7 +56,7 @@ const BottomNavigation: React.FC = () => {
       const target = event.target as HTMLElement;
       if (
         isMenuOpen &&
-        !target.closest(".main-navigation") &&
+        !target.closest(".sidebar-dropdown-menu") &&
         !target.closest(".hamburger-menu-icon")
       ) {
         setIsMenuOpen(false);

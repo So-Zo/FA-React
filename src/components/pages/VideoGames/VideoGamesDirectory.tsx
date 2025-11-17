@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const VideoGamesDirectory: React.FC = () => {
   // Define TOC sections
@@ -47,12 +50,7 @@ const VideoGamesDirectory: React.FC = () => {
           />
         </div>
 
-        <input
-          type="search"
-          id="site-search-bar"
-          aria-label="Search From Video Games Page"
-          placeholder="Search for Games, Characters, etc."
-        />
+        <WikiSearchBar placeholder="Search for Games, Characters, etc." />
       </header>
 
       <hr />
@@ -65,6 +63,22 @@ const VideoGamesDirectory: React.FC = () => {
       />
 
       <main id="main-content" role="main">
+        {/* Video Games Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="videogames-intro">
+              <h2>Welcome to Video Games Directory</h2>
+              <p>
+                Video games are interactive entertainment experiences that combine storytelling, 
+                art, music, and technology. This directory showcases popular games, genres, 
+                platforms, and creators from the gaming world.
+                <strong>Edit this content when edit mode is active!</strong>
+              </p>
+            </section>
+          `}
+        />
+
         {/* Popular Games Section */}
         <section id="popular-games" className="section-content">
           <h2>Popular Video Games</h2>

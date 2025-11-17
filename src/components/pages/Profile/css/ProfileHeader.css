@@ -27,13 +27,33 @@
   border-radius: 10%;
 }
 
-/* Avatar overlay label - colors and typography */
+/* Avatar overlay label - colors and typography (hidden by default) */
 .profile-image-label {
   background: rgba(0, 0, 0, 0.65);
   color: #fff;
   font-size: 0.97rem;
   border-radius: 0 0 0.7rem 0.7rem;
-  opacity: 0.92;
+  opacity: 0;
+}
+
+/* Online status indicator dot */
+.online-status-dot {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.online-status-dot.online {
+  background-color: #22c55e; /* Green for online */
+}
+
+.online-status-dot.offline {
+  background-color: #94a3b8; /* Gray for offline */
 }
 
 /* Typography - user name */
@@ -91,8 +111,9 @@
   cursor: pointer;
   transition: opacity 0.18s;
 }
+/* Show label only on hover */
 .profile-avatar-block:hover .profile-image-label {
-  opacity: 1;
+  opacity: 0.92;
 }
 
 /* ==========================================================================

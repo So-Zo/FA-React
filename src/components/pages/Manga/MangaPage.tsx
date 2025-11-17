@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
+import WikiEditor from "../Search/WikiEditor";
+import "../Search/WikiEditor.css";
 
 const MangaPage: React.FC = () => {
   // Define TOC sections
@@ -53,6 +55,22 @@ const MangaPage: React.FC = () => {
         />
 
         <hr />
+
+        {/* Manga Introduction - WikiEditor */}
+        <WikiEditor
+          className="section-content"
+          content={`
+            <section id="manga-intro">
+              <h2>What is Manga?</h2>
+              <p>
+                Welcome to the Manga Encyclopedia! This comprehensive guide covers everything 
+                about Japanese comics, from basics to advanced topics. Use the table of contents 
+                to navigate and feel free to edit content when edit mode is active.
+                <strong>Click Edit to start contributing!</strong>
+              </p>
+            </section>
+          `}
+        />
 
         {/* The Basics Section */}
         <section id="the-basics" className="section-content">
