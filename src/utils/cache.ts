@@ -1,0 +1,128 @@
+/**
+ * Simple in-memory cache for data service
+ * Prevents repeated API calls for the same data
+ */
+
+interface CacheEntry<T> {
+  data: T;
+  timestamp: number;
+  expires: number;
+}
+
+class SimpleCache {
+  private cache = new Map<string, CacheEntry<any>>();
+  private defaultTTL = 5 * 60 * 1000; // 5 minutes
+
+  /**
+   * Get cached data or execute fetch function
+   */
+  async get<T>(
+    key: string,
+    fetchFn: () => Promise<T>,
+    ttl: number = this.defaultTTL
+  ): Promise<T> {
+    const now = Date.now();
+    const cached = this.cache.get(key);
+
+    // Return cached data if still valid
+    if (cached && now < cached.expires) {
+      console.debug(`Cache HIT: ${key}`);
+      return cached.data;
+    }
+
+    // Fetch fresh data
+    console.debug(`Cache MISS: ${key}`);
+    try {
+      const data = await fetchFn();
+      this.cache.set(key, {
+        data,
+        timestamp: now,
+        expires: now + ttl,
+      });
+      return data;
+    } catch (error) {
+      // If we have stale data and fetch fails, return stale data
+      if (cached) {
+        console.warn(`Using stale cache data for ${key}`, error);
+        return cached.data;
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Manually invalidate cache entry
+   */
+  invalidate(key: string): void {
+    this.cache.delete(key);
+    console.debug(`Cache INVALIDATED: ${key}`);
+  }
+
+  /**
+   * Invalidate cache entries matching pattern
+   */
+  invalidatePattern(pattern: string): void {
+    for (const key of this.cache.keys()) {
+      if (key.includes(pattern)) {
+        this.cache.delete(key);
+      }
+    }
+    console.debug(`Cache INVALIDATED pattern: ${pattern}`);
+  }
+
+  /**
+   * Clear all cache
+   */
+  clear(): void {
+    this.cache.clear();
+    console.debug("Cache CLEARED");
+  }
+
+  /**
+   * Get cache stats for debugging
+   */
+  stats() {
+    return {
+      size: this.cache.size,
+      entries: Array.from(this.cache.keys()),
+    };
+  }
+
+  /**
+   * Clean up expired entries
+   */
+  cleanup(): void {
+    const now = Date.now();
+    let cleaned = 0;
+
+    for (const [key, entry] of this.cache.entries()) {
+      if (now >= entry.expires) {
+        this.cache.delete(key);
+        cleaned++;
+      }
+    }
+
+    if (cleaned > 0) {
+      console.debug(`Cache CLEANUP: removed ${cleaned} expired entries`);
+    }
+  }
+}
+
+// Export singleton instance
+export const cache = new SimpleCache();
+
+// Auto-cleanup every 10 minutes
+setInterval(() => cache.cleanup(), 10 * 60 * 1000);
+
+/**
+ * Helper function for easy caching
+ */
+export const withCache = <T>(
+  key: string,
+  fetchFn: () => Promise<T>,
+  ttl?: number
+): Promise<T> => {
+  return cache.get(key, fetchFn, ttl);
+};
+
+export default cache;

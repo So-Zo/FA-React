@@ -1,22 +1,55 @@
 /*
- * Consolidated Modal Patterns for FanArcs React
- * Extracted from ProfilePage.css, CreatePostModal.css, and other components
- * Uses the cleaned variable system
+ * Consolidated Modal System for FanArcs React
+ * Handles all modal types with consistent styling and behavior
  */
 
-/* Modal Overlay */
+/* CSS Variables for z-index management */
+:root {
+  --z-modal-overlay: 9999;
+  --z-modal-content: 10000;
+}
+
+/* Body scroll lock when modal is open */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Base Modal Overlay - used by all modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: var(--z-modal-overlay);
+  padding: 1rem;
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+/* Backward compatibility - keep .modal class working */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.67);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: var(--z-tooltip);
-  padding: var(--spacing-md);
+  z-index: var(--z-modal-overlay);
+  padding: 1rem;
+  backdrop-filter: blur(2px);
 }
 
 .modal.active {
@@ -25,14 +58,16 @@
 
 /* Modal Content Container */
 .modal-content {
-  background: var(--bg-primary);
-  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border-radius: 12px;
   width: 100%;
   max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   position: relative;
+  z-index: var(--z-modal-content);
 }
 
 /* Modal Header */
@@ -83,42 +118,56 @@
   border-top: var(--border-2) solid var(--border-color);
 }
 
-/* Modal Sizes */
-.modal-sm .modal-content {
-  max-width: 400px;
+/* Report Modal Specific Styles */
+.report-modal {
+  max-width: 520px;
 }
 
-.modal-lg .modal-content {
-  max-width: 800px;
+.report-description {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 
-.modal-xl .modal-content {
-  max-width: 1200px;
+.report-modal .form-group {
+  margin-bottom: var(--spacing-md);
 }
 
-/* Full Height Modals */
-.modal-full-height .modal-content {
-  height: 90vh;
-  max-height: none;
+.report-modal .text-muted {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
 }
 
-/* Modal Animation */
-.modal {
-  opacity: 0;
-  transition: opacity var(--duration-200) ease;
+.report-modal .modal-footer {
+  gap: var(--spacing-sm);
 }
 
-.modal.active {
-  opacity: 1;
+/* Feedback Message Styles */
+.feedback-message {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  text-align: center;
 }
 
-.modal-content {
-  transform: scale(0.95);
-  transition: transform var(--duration-200) ease;
+.feedback-message.success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #059669;
+  border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
-.modal.active .modal-content {
-  transform: scale(1);
+.feedback-message.duplicate {
+  background-color: rgba(251, 191, 36, 0.1);
+  color: #d97706;
+  border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.feedback-message.error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Responsive Modal */
