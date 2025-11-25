@@ -5,9 +5,14 @@ import TableOfContents, {
 } from "../../../components/ui/TableOfContents";
 import WikiSearchBar from "../../shared/WikiSearchBar";
 import WikiEditor from "../Search/WikiEditor";
+import { usePageContributors } from "../../shared/hooks/usePageContributors";
+import { PageContributor } from "../../shared/PageContributor";
 import "../Search/WikiEditor.css";
 
 const AnimePage: React.FC = () => {
+  // Get page contributors
+  const { contributors } = usePageContributors("anime-main-page");
+
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
@@ -886,6 +891,12 @@ const AnimePage: React.FC = () => {
         </section>
         <hr />
       </main>
+
+      <PageContributor
+        pageId="anime-main-page"
+        contributors={contributors}
+        historyPath="/anime/history"
+      />
     </div>
   );
 };

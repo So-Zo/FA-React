@@ -129,3 +129,40 @@
   background: var(--fanarc-primary-color);
   border-radius: 0.5rem;
 }
+
+/* Secondary and Danger Button Variants */
+.btn-secondary {
+  background: var(--surface-secondary, #374151);
+  color: var(--text-primary, #ffffff);
+  border: var(--border-2) solid var(--border-color, #4b5563);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover, #4b5563);
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-danger:disabled {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+/* Report Button Specific Styles */
+.action-btn.report-btn {
+  color: #dc2626;
+  transition: var(--transition-base);
+}
+
+.action-btn.report-btn:hover {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+}

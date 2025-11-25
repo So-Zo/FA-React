@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { PostType, SortOption, usePosts } from "./hooks/usePosts";
+import { PostType, SortOption } from "../../../types";
+import { usePosts } from "./hooks/usePosts";
 import { PostCard } from "../../../shared/Components/PostCard";
+import { ReportModal } from "../../../shared/Components/ReportModal";
 import { useSearch } from "../../../shared/hooks/useSearch";
-import WikiSearchBar from "../../shared/WikiSearchBar";
+import { useReporting } from "../../../shared/hooks/useReporting";
 
 const CommunityPage: React.FC = () => {
   const [selectedPostType, setSelectedPostType] = useState<PostType | null>(
@@ -14,6 +16,9 @@ const CommunityPage: React.FC = () => {
   const { searchQuery, debouncedSearchQuery, setSearchQuery, isTyping } =
     useSearch();
 
+  // Use the reporting hook
+  const { submitReport } = useReporting();
+
   const { posts, loading, error, toggleLike } = usePosts({
     postType: selectedPostType || undefined,
     sort: selectedSort,
@@ -22,6 +27,77 @@ const CommunityPage: React.FC = () => {
 
   // State for active filter dropdowns
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  // Report Modal State
+  const [reportModal, setReportModal] = useState<{
+    isOpen: boolean;
+    postId: string;
+    postAuthor: string;
+  }>({
+    isOpen: false,
+    postId: "",
+    postAuthor: "",
+  });
+
+  // Handle opening report modal for specific post
+  const handleOpenReport = (postId: string, postAuthor: string) => {
+    setReportModal({
+      isOpen: true,
+      postId,
+      postAuthor,
+    });
+  };
+
+  // Handle closing report modal
+  const handleCloseReport = () => {
+    setReportModal({
+      isOpen: false,
+      postId: "",
+      postAuthor: "",
+    });
+  };
+
+  // Handle report submission
+  const handleReportSubmit = async (reason: string, description?: string) => {
+    try {
+      const result = await submitReport({
+        reported_user_id:
+          posts.find((p) => p.id === reportModal.postId)?.author?.id || "",
+        post_id: reportModal.postId,
+        reason,
+        description,
+      });
+
+      return {
+        success: true,
+        isDuplicate: false,
+        data: result.data,
+      };
+    } catch (error) {
+      // Handle duplicate reports and other errors
+      if (error instanceof Error) {
+        if (error.message.includes("already reported")) {
+          return {
+            success: false,
+            isDuplicate: true,
+            error: error.message,
+          };
+        } else {
+          return {
+            success: false,
+            isDuplicate: false,
+            error: error.message,
+          };
+        }
+      }
+
+      return {
+        success: false,
+        isDuplicate: false,
+        error: "Failed to submit report. Please try again.",
+      };
+    }
+  };
 
   // Toggle dropdown visibility
   const toggleDropdown = (dropdownId: string) => {
@@ -52,7 +128,12 @@ const CommunityPage: React.FC = () => {
             <div className="post-feed-empty">No posts found</div>
           ) : (
             posts.map((post) => (
-              <PostCard key={post.id} post={post} onToggleLike={toggleLike} />
+              <PostCard
+                key={post.id}
+                post={post}
+                onToggleLike={toggleLike}
+                onReport={handleOpenReport}
+              />
             ))
           )}
         </div>
@@ -66,8 +147,12 @@ const CommunityPage: React.FC = () => {
         <header className="main-header">
           <h1>Community</h1>
           <div className="search-group">
-            <WikiSearchBar
+            <input
+              type="text"
               placeholder={`Search posts...${isTyping ? " (typing...)" : ""}`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
             />
             <div className="filter-buttons">
               {/* Post Type Filter */}
@@ -196,6 +281,15 @@ const CommunityPage: React.FC = () => {
 
         <main className="community-feed">{renderContent()}</main>
       </section>
+
+      {/* Report Modal - Single instance for entire page */}
+      <ReportModal
+        isOpen={reportModal.isOpen}
+        onClose={handleCloseReport}
+        postId={reportModal.postId}
+        postAuthor={reportModal.postAuthor}
+        onSubmit={handleReportSubmit}
+      />
     </div>
   );
 };

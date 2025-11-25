@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Character } from "../../../../types";
+import { PowerRoomCharacter } from "../../../../types";
 import { dataService } from "../../../../services/dataService";
 import { withCache } from "../../../../utils/cache";
 
 export const useCharacterDetails = (characterId: string | null) => {
-  const [character, setCharacter] = useState<Character | null>(null);
+  const [character, setCharacter] = useState<PowerRoomCharacter | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,9 +26,10 @@ export const useCharacterDetails = (characterId: string | null) => {
           5 * 60 * 1000 // 5 minute cache
         );
 
-        // Transform data to match our Character interface
-        const transformedCharacter: Character = {
+        // Transform data to match our PowerRoomCharacter interface
+        const transformedCharacter: PowerRoomCharacter = {
           ...data,
+          created_by: data.created_by || "",
           abilities: data.character_abilities?.[0] || {
             id: "",
             character_id: characterId,
@@ -51,6 +52,28 @@ export const useCharacterDetails = (characterId: string | null) => {
           },
           notable_feats: data.character_feats || [],
         };
+
+        console.log("🔍 Character data from DB:", data);
+        console.log("🔄 Transformed character:", transformedCharacter);
+        console.log("📋 Timeline data (raw):", data.character_events);
+        console.log(
+          "📋 Timeline data (transformed):",
+          transformedCharacter.timeline
+        );
+        console.log(
+          "📋 Timeline count:",
+          transformedCharacter.timeline?.length || 0
+        );
+        console.log("🏆 Feats data:", data.character_feats);
+        console.log("🌍 World info data:", data.character_world_info);
+
+        // Debug: Check if timeline transformation is working
+        if (data.character_events && data.character_events.length > 0) {
+          console.log("✅ Timeline events found in DB data");
+          console.log("🔍 First event structure:", data.character_events[0]);
+        } else {
+          console.log("❌ No timeline events found in DB data");
+        }
 
         setCharacter(transformedCharacter);
       } catch (err) {

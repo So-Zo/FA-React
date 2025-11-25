@@ -1,12 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
 import WikiSearchBar from "../../shared/WikiSearchBar";
 import WikiEditor from "../Search/WikiEditor";
 import "../Search/WikiEditor.css";
 
 const TVHistory: React.FC = () => {
-  // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
       title: "OVERVIEW",

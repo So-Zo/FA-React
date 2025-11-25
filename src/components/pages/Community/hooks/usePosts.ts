@@ -1,53 +1,25 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../lib/supabaseClient";
 import { useAuth } from "../../../../shared/hooks/useAuth";
+import {
+  PostType,
+  Medium,
+  Genre,
+  Like,
+  Post,
+  PostQueryOptions,
+} from "../../../../types";
 
-export type PostType =
-  | "discussion"
-  | "question"
-  | "fan-art"
-  | "fan-fiction"
-  | "world-building"
-  | "feedback"
-  | "review"
-  | "theory"
-  | "news"
-  | "meme"
-  | "cosplay";
+// Export the types that other modules need
+export type {
+  PostType,
+  Medium,
+  Genre,
+  SortOption,
+  TimeFilter,
+} from "../../../../types";
 
-export type Medium =
-  | "anime"
-  | "manga"
-  | "comics"
-  | "tv"
-  | "movies"
-  | "games"
-  | "books"
-  | "other";
-
-export type Genre =
-  | "comedy"
-  | "horror"
-  | "drama"
-  | "romance"
-  | "action"
-  | "adventure"
-  | "fantasy"
-  | "sci-fi"
-  | "other";
-
-interface Like {
-  id: string;
-  post_id: string;
-  user_profile_id: string; // Changed from author_id to user_profile_id
-  created_at: string;
-  user?: {
-    display_name: string;
-    username: string;
-    avatar_url: string;
-  };
-}
-
+// Local interface for PostFeedRow (specific to this service)
 interface PostFeedRow {
   id: string;
   created_at: string;
@@ -57,7 +29,7 @@ interface PostFeedRow {
   medium: Medium;
   genre: Genre;
   tags: string[];
-  user_profile_id: string; // Changed from author_id to user_profile_id
+  user_profile_id: string;
   media_ids: string[];
   hashtags: string[];
   mentions: string[];
@@ -72,62 +44,6 @@ interface PostFeedRow {
   comments_count: number;
   likes: Like[];
   user_has_liked?: boolean;
-}
-
-export type SortOption =
-  | "latest"
-  | "trending"
-  | "top"
-  | "most_commented"
-  | "most_liked";
-export type TimeFilter = "today" | "this_week" | "this_month" | "all_time";
-export interface PostQueryOptions {
-  sort?: SortOption;
-  timeFilter?: TimeFilter;
-  postType?: PostType;
-  medium?: Medium;
-  genre?: Genre;
-  searchQuery?: string;
-}
-
-export interface Post {
-  id: string;
-  created_at: string;
-  title: string;
-  content: string;
-  post_type: PostType;
-  medium: Medium;
-  genre: Genre;
-  tags: string[];
-  user_profile_id: string; // Changed from author_id to user_profile_id
-  media_ids: string[];
-  hashtags: string[];
-  mentions: string[];
-  likes_count: number;
-  comments_count: number;
-  reposts_count: number;
-  views_count: number;
-  is_pinned: boolean;
-  is_archived: boolean;
-  visibility: "public" | "private" | "followers";
-  location?: string;
-  updated_at: string;
-  author?: {
-    id: string;
-    display_name: string;
-    username: string;
-    avatar_url: string;
-    is_verified: boolean;
-  };
-  likes?: Like[];
-  isLikedByUser?: boolean;
-  media?: Array<{
-    id: string;
-    file_name: string;
-    storage_path: string;
-    alt_text?: string;
-    blurhash?: string;
-  }>;
 }
 
 export function usePosts(options: PostQueryOptions = {}) {

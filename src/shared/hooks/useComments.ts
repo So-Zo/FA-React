@@ -2,23 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../shared/hooks/useAuth";
 import { useProfileId } from "../utils/userUtils";
-
-// Comment interface based on Supabase comments table structure
-export interface Comment {
-  id: string;
-  post_id: string;
-  user_profile_id: string; // Changed from author_id to user_profile_id
-  content: string;
-  created_at: string;
-  updated_at: string;
-  author: {
-    id: string;
-    display_name: string;
-    username: string;
-    avatar_url: string;
-    is_verified: boolean;
-  };
-}
+import { Comment } from "../../types";
 
 interface UseCommentsOptions {
   postId: string;
@@ -73,10 +57,11 @@ export function useComments({ postId }: UseCommentsOptions) {
         (comment: any) => ({
           id: comment.comment_id, // Updated field name from master_view
           post_id: comment.post_id,
-          user_profile_id: comment.comment_author_profile_id, // Updated field name from master_view
+          user_id: comment.comment_author_profile_id, // Updated field name from master_view
           content: comment.comment_content, // Updated field name from master_view
           created_at: comment.comment_created_at, // Updated field name from master_view
           updated_at: comment.comment_updated_at, // Updated field name from master_view
+          like_count: comment.comment_like_count || 0, // Default to 0 if not available
           author: {
             id: comment.comment_author_profile_id, // Updated field name from master_view
             display_name: comment.comment_author_name || "Unknown User", // Updated field name from master_view
@@ -161,7 +146,7 @@ export function useComments({ postId }: UseCommentsOptions) {
         throw new Error("Comment not found");
       }
 
-      if (comment.user_profile_id !== profileId) {
+      if (comment.user_id !== profileId) {
         throw new Error("You can only delete your own comments");
       }
 

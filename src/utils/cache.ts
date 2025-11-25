@@ -55,7 +55,6 @@ class SimpleCache {
    */
   invalidate(key: string): void {
     this.cache.delete(key);
-    console.debug(`Cache INVALIDATED: ${key}`);
   }
 
   /**
@@ -67,7 +66,6 @@ class SimpleCache {
         this.cache.delete(key);
       }
     }
-    console.debug(`Cache INVALIDATED pattern: ${pattern}`);
   }
 
   /**
@@ -75,7 +73,6 @@ class SimpleCache {
    */
   clear(): void {
     this.cache.clear();
-    console.debug("Cache CLEARED");
   }
 
   /**

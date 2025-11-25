@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useProfile } from "../hooks/useProfile";
+import { useProfileId } from "../utils/userUtils";
 
 interface CommentInputProps {
   onSubmit: (content: string) => Promise<void>;
@@ -18,6 +20,8 @@ export const CommentInput: React.FC<CommentInputProps> = ({
   const [error, setError] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { user } = useAuth();
+  const profileId = useProfileId(user);
+  const { data: profile } = useProfile(profileId);
 
   // Auto-focus and auto-resize textarea
   useEffect(() => {
@@ -83,13 +87,13 @@ export const CommentInput: React.FC<CommentInputProps> = ({
       <form onSubmit={handleSubmit} className="comment-input-form">
         <div className="comment-input-header">
           <img
-            src={user.user_metadata?.avatar_url || "/placeholder-avatar.jpg"}
+            src={profile?.avatar_url || "/placeholder-avatar.jpg"}
             alt="Your avatar"
             className="comment-input-avatar"
           />
           <div className="comment-input-info">
             <span className="comment-input-name">
-              {user.user_metadata?.display_name || user.email}
+              {profile?.display_name || user?.email || "User"}
             </span>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useProfileContext } from "../ProfileContext";
 import { useAuth } from "../../../../shared/hooks/useAuth";
+import { useFollow } from "../../../../shared/hooks/useFollow";
 
 interface ProfileHeaderProps {
   onProfileImageChange: (file: File) => void;
@@ -9,8 +10,10 @@ interface ProfileHeaderProps {
 export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   onProfileImageChange,
 }) => {
-  const { profileData, activityMetrics } = useProfileContext();
+  const { profileData, activityMetrics, isOwnProfile } = useProfileContext();
   const { user, session } = useAuth();
+  const { isFollowing, loading, followersCount, toggleFollow, canFollow } =
+    useFollow(profileData?.id || "");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -64,28 +67,44 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             />
           )}
 
-          <input
-            type="file"
-            id="profile-image-upload"
-            accept=".jpg,.jpeg,.png,.webp"
-            aria-label="Upload profile picture"
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
-          <button
-            className="profile-image-label"
-            type="button"
-            onClick={() =>
-              document.getElementById("profile-image-upload")?.click()
-            }
-          >
-            Change Profile Picture
-          </button>
+          {isOwnProfile && (
+            <>
+              <input
+                type="file"
+                id="profile-image-upload"
+                accept=".jpg,.jpeg,.png,.webp"
+                aria-label="Upload profile picture"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <button
+                className="profile-image-label"
+                type="button"
+                onClick={() =>
+                  document.getElementById("profile-image-upload")?.click()
+                }
+              >
+                Change Profile Picture
+              </button>
+            </>
+          )}
         </div>
         <div className="user-overview-block">
-          <h1 className="profile-user-name">
-            {profileData?.display_name || "user"}
-          </h1>
+          <div className="profile-header-top">
+            <h1 className="profile-user-name">
+              {profileData?.display_name || "user"}
+            </h1>
+            {/* Show follow button only for other users */}
+            {canFollow && !isOwnProfile && (
+              <button
+                className={`follow-btn ${isFollowing ? "following" : ""}`}
+                onClick={toggleFollow}
+                disabled={loading}
+              >
+                {loading ? "Loading..." : isFollowing ? "Unfollow" : "Follow"}
+              </button>
+            )}
+          </div>
           <div className="profile-stats-row">
             <div className="profile-stat">
               <span className="stat-number">{activityMetrics.totalPosts}</span>
@@ -93,7 +112,9 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             </div>
             <div className="profile-stat">
               <span className="stat-number">
-                {activityMetrics.totalFollowers}
+                {!isOwnProfile && canFollow
+                  ? followersCount
+                  : activityMetrics.totalFollowers}
               </span>
               <span className="stat-label">Followers</span>
             </div>

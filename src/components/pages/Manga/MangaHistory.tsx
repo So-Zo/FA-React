@@ -1,12 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
 import WikiSearchBar from "../../shared/WikiSearchBar";
 import WikiEditor from "../Search/WikiEditor";
+import { usePageContributors } from "../../shared/hooks/usePageContributors";
+import { PageContributor } from "../../shared/PageContributor";
 import "../Search/WikiEditor.css";
 
 const MangaHistory: React.FC = () => {
-  // Define TOC sections
+  const { contributors } = usePageContributors("manga-history-page");
+
   const tocSections: TocSectionProps[] = [
     {
       title: "OVERVIEW",
@@ -499,6 +501,12 @@ const MangaHistory: React.FC = () => {
           </ul>
         </section>
       </main>
+
+      <PageContributor
+        pageId="manga-history-page"
+        contributors={contributors}
+        historyPath="/manga/history"
+      />
     </div>
   );
 };

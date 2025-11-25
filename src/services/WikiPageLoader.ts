@@ -1,27 +1,5 @@
 import { supabase } from "../lib/supabaseClient";
-
-// Wiki page interface matching our database schema
-export interface WikiPage {
-  id: string;
-  full_path: string;
-  title: string;
-  slug: string;
-  page_type: string;
-  genre?: string;
-  content: any; // TipTap JSON content
-  created_by?: string;
-  created_at: string;
-  updated_at: string;
-}
-
-// Contributor interface for tracking page edits
-export interface WikiContributor {
-  user_id: string;
-  display_name: string;
-  contribution_count: number;
-  first_contributed_at: string;
-  last_contributed_at: string;
-}
+import { WikiPage, WikiContributor } from "../types";
 
 // Service class for loading and saving wiki pages
 export class WikiPageLoader {
@@ -142,6 +120,9 @@ export class WikiPageLoader {
       if (error) throw error;
 
       return (data || []).map((contributor: any) => ({
+        id: contributor.user_profile_id,
+        wiki_page_id: pageId,
+        user_profile_id: contributor.user_profile_id,
         user_id: contributor.user_profile_id,
         display_name: contributor.user_profiles?.display_name || "Unknown User",
         contribution_count: contributor.contribution_count,

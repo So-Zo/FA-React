@@ -10,7 +10,6 @@ export const EditModeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Simple saveAll that just logs for now - TipTap will handle actual saving
   const saveAll = useCallback(async () => {
-    console.log("💾 Save triggered - TipTap editors will handle saving");
     // Individual WikiEditor components will handle their own saving
   }, []);
 

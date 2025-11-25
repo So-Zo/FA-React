@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Character, CharacterComparison } from "../types";
+import { PowerRoomCharacter, CharacterComparison } from "../../../../types";
 
 export const useCharacterComparison = () => {
   const [comparison, setComparison] = useState<CharacterComparison>({
@@ -8,15 +8,15 @@ export const useCharacterComparison = () => {
     activeTab: "abilities",
   });
 
-  const setLeftCharacter = (character: Character | null) => {
-    setComparison((prev) => ({
+  const setLeftCharacter = (character: PowerRoomCharacter | null) => {
+    setComparison((prev: CharacterComparison) => ({
       ...prev,
       leftCharacter: character,
     }));
   };
 
-  const setRightCharacter = (character: Character | null) => {
-    setComparison((prev) => ({
+  const setRightCharacter = (character: PowerRoomCharacter | null) => {
+    setComparison((prev: CharacterComparison) => ({
       ...prev,
       rightCharacter: character,
     }));

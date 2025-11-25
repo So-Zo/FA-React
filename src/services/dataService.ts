@@ -1,4 +1,5 @@
 import { supabase } from "../lib/supabaseClient";
+import { cache } from "../utils/cache";
 
 /**
  * Centralized data service for optimized database queries
@@ -12,23 +13,105 @@ export const dataService = {
    * Get complete character data in a single query
    * Replaces 4 separate queries with 1 optimized join
    */
+  /**
+   * Get complete character data with all relationships from master view
+   */
   async getCharacterComplete(characterId: string) {
     const { data, error } = await supabase
-      .from("characters")
-      .select(
-        `
-        *,
-        character_abilities(*),
-        character_events(*),
-        character_world_info(*),
-        character_feats(*)
-      `
-      )
-      .eq("id", characterId)
-      .single();
+      .from("character_master_view")
+      .select("*")
+      .eq("character_id", characterId);
 
     if (error) throw error;
-    return data;
+
+    // Transform the flattened master_view data into nested structure
+    if (!data || data.length === 0) {
+      throw new Error("Character not found");
+    }
+
+    // Group the flat rows back into structured data
+    const character = data[0]; // Get base character info from first row
+
+    const result = {
+      id: character.character_id,
+      name: character.character_name,
+      universe: character.universe,
+      universe_type: character.universe_type,
+      description: character.character_description,
+      image_url: character.character_image,
+      created_at: character.character_created_at,
+      updated_at: character.character_updated_at,
+      created_by: character.character_created_by,
+
+      // Abilities (should be same across all rows for a character)
+      character_abilities: character.ability_id
+        ? [
+            {
+              id: character.ability_id,
+              character_id: character.character_id,
+              primary_powers: character.primary_powers || [],
+              special_techniques: character.special_techniques || [],
+              weaknesses: character.weaknesses || [],
+              power_description: character.power_description || "",
+              updated_at: character.abilities_updated_at,
+            },
+          ]
+        : [],
+
+      // Events (collect unique events from all rows)
+      character_events: data
+        .filter((row) => row.event_id)
+        .map((row) => ({
+          id: row.event_id,
+          character_id: row.character_id,
+          title: row.event_title,
+          description: row.event_description,
+          category: row.event_category,
+          order_index: row.event_order,
+          created_at: row.event_created_at,
+        }))
+        .filter(
+          (event, index, self) =>
+            index === self.findIndex((e) => e.id === event.id)
+        ), // Remove duplicates
+
+      // Feats (collect unique feats from all rows)
+      character_feats: data
+        .filter((row) => row.feat_id)
+        .map((row) => ({
+          id: row.feat_id,
+          character_id: row.character_id,
+          title: row.feat_title,
+          description: row.feat_description,
+          power_level: row.feat_power_level,
+          difficulty: row.feat_difficulty,
+          context: row.feat_context,
+          created_at: row.feat_created_at,
+        }))
+        .filter(
+          (feat, index, self) =>
+            index === self.findIndex((f) => f.id === feat.id)
+        ), // Remove duplicates
+
+      // World info (should be same across all rows for a character)
+      character_world_info: character.world_id
+        ? [
+            {
+              id: character.world_id,
+              character_id: character.character_id,
+              universe_name: character.universe_name,
+              universe_description: character.universe_description || "",
+              notable_locations: character.notable_locations || [],
+              power_system_description:
+                character.power_system_description || "",
+              scaling_context: character.scaling_context || "",
+              updated_at: character.world_updated_at,
+            },
+          ]
+        : [],
+    };
+
+    return result;
   },
 
   /**
@@ -36,9 +119,11 @@ export const dataService = {
    */
   async searchCharacters(searchTerm: string, universeType?: string) {
     let query = supabase
-      .from("characters")
-      .select("id, name, universe, universe_type, image_url")
-      .ilike("name", `%${searchTerm}%`)
+      .from("character_master_view")
+      .select(
+        "character_id, character_name, universe, universe_type, character_image"
+      )
+      .ilike("character_name", `%${searchTerm}%`)
       .limit(20);
 
     if (universeType) {
@@ -47,7 +132,22 @@ export const dataService = {
 
     const { data, error } = await query;
     if (error) throw error;
-    return data;
+
+    // Transform to expected format and deduplicate
+    const uniqueCharacters = new Map();
+    data?.forEach((row) => {
+      if (!uniqueCharacters.has(row.character_id)) {
+        uniqueCharacters.set(row.character_id, {
+          id: row.character_id,
+          name: row.character_name,
+          universe: row.universe,
+          universe_type: row.universe_type,
+          image_url: row.character_image,
+        });
+      }
+    });
+
+    return Array.from(uniqueCharacters.values());
   },
 
   /**
@@ -175,22 +275,30 @@ export const dataService = {
    * Get user's posts with engagement data
    */
   async getUserPosts(userId: string, offset = 0, limit = 20) {
-    const { data, error } = await supabase
-      .from("posts")
-      .select(
-        `
-        *,
-        comments(*),
-        post_likes(count),
-        users(username, avatar_url)
-      `
-      )
-      .eq("user_id", userId)
-      .range(offset, offset + limit - 1)
-      .order("created_at", { ascending: false });
+    const cacheKey = `user-posts-${userId}-${offset}-${limit}`;
 
-    if (error) throw error;
-    return data;
+    return await cache.get(
+      cacheKey,
+      async () => {
+        const { data, error } = await supabase
+          .from("posts")
+          .select(
+            `
+          *,
+          comments(*),
+          post_likes(count),
+          users(username, avatar_url)
+        `
+          )
+          .eq("user_id", userId)
+          .range(offset, offset + limit - 1)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+        return data;
+      },
+      5 * 60 * 1000
+    ); // 5 minute cache
   },
 
   /**
@@ -262,6 +370,30 @@ export const dataService = {
     return data;
   },
 
+  /**
+   * Get contributors for a specific wiki page
+   */
+  async getPageContributors(pageId: string) {
+    const { data, error } = await supabase
+      .from("wiki_contributors")
+      .select(
+        `
+        *,
+        users(
+          id,
+          display_name,
+          username,
+          avatar_url
+        )
+      `
+      )
+      .eq("wiki_page_id", pageId)
+      .order("last_contributed_at", { ascending: false });
+
+    if (error) throw error;
+    return data;
+  },
+
   // ============= AUTHENTICATION & USER DATA =============
 
   /**
@@ -283,6 +415,151 @@ export const dataService = {
 
     if (error) throw error;
     return data;
+  },
+
+  /**
+   * Update user profile data with caching invalidation
+   */
+  async updateUserProfile(userId: string, updates: Record<string, any>) {
+    console.log(
+      "📝 dataService.updateUserProfile called for userId:",
+      userId,
+      "updates:",
+      updates
+    );
+
+    const { data, error } = await supabase
+      .from("user_profiles")
+      .update(updates)
+      .eq("id", userId)
+      .select()
+      .single();
+
+    if (error) {
+      console.log("❌ dataService.updateUserProfile error:", error);
+      throw error;
+    }
+
+    // Invalidate relevant cache entries
+    console.log("🗑️ Invalidating cache for user:", userId);
+    cache.invalidatePattern(`user-${userId}`);
+    cache.invalidatePattern(`profile-${userId}`);
+    cache.invalidatePattern(`profile-complete-${userId}`);
+    console.log("✅ dataService.updateUserProfile success, cache invalidated");
+
+    return data;
+  },
+
+  /**
+   * Get complete user profile with all related data from master_view
+   * Single query to rule them all!
+   */
+  async getUserProfileComplete(userId: string) {
+    const cacheKey = `profile-complete-${userId}`;
+    console.log(
+      "🔍 dataService.getUserProfileComplete called for userId:",
+      userId
+    );
+
+    return await cache.get(
+      cacheKey,
+      async () => {
+        console.log(
+          "🚀 CACHE MISS - Fetching profile data from master_view for userId:",
+          userId
+        );
+
+        // Get ALL profile data from master_view in ONE query
+        const { data, error } = await supabase
+          .from("master_view")
+          .select("*")
+          .eq("post_author_profile_id", userId); // Use correct column name from master_view
+
+        if (error) {
+          console.log("❌ dataService.getUserProfileComplete error:", error);
+          throw error;
+        }
+
+        if (!data || data.length === 0) {
+          // User exists but has no posts - get basic profile from user_profiles
+          const { data: profileData, error: profileError } = await supabase
+            .from("user_profiles")
+            .select("*")
+            .eq("id", userId)
+            .single();
+
+          if (profileError) {
+            console.log(
+              "❌ dataService.getUserProfileComplete profile error:",
+              profileError
+            );
+            throw profileError;
+          }
+
+          return {
+            ...profileData,
+            posts: [],
+            follows_followers: [],
+            follows_following: [],
+          };
+        }
+
+        // Transform master_view data to match expected profile structure
+        const firstRow = data[0];
+        const profileData = {
+          id: firstRow.post_author_profile_id,
+          username: firstRow.post_author_username,
+          display_name: firstRow.post_author_name,
+          bio: firstRow.post_author_bio,
+          avatar_url: firstRow.post_author_avatar,
+          is_verified: firstRow.post_author_verified,
+          created_at: firstRow.post_created_at, // Will use first post's creation as fallback
+          updated_at: firstRow.post_updated_at,
+        };
+
+        // Extract unique posts from the data
+        const postsMap = new Map();
+        data.forEach((row) => {
+          if (row.post_id && !postsMap.has(row.post_id)) {
+            postsMap.set(row.post_id, {
+              id: row.post_id,
+              title: row.title,
+              content: row.post_content,
+              post_type: row.post_type,
+              medium: row.medium,
+              genre: row.genre,
+              tags: row.tags || [],
+              media_ids: row.media_ids || [],
+              hashtags: row.hashtags || [],
+              mentions: row.mentions || [],
+              visibility: row.visibility,
+              location: row.location,
+              likes_count: row.likes_count || 0,
+              comments_count: row.comments_count || 0,
+              created_at: row.post_created_at,
+              updated_at: row.post_updated_at,
+              user_profile_id: row.post_author_profile_id,
+            });
+          }
+        });
+
+        const posts = Array.from(postsMap.values());
+
+        // TODO: Add follows data when you need it
+        const result = {
+          ...profileData,
+          posts,
+          follows_followers: [], // Will implement when needed
+          follows_following: [], // Will implement when needed
+        };
+
+        console.log(
+          "✅ dataService.getUserProfileComplete success, transformed master_view data"
+        );
+        return result;
+      },
+      5 * 60 * 1000
+    ); // 5 minute cache
   },
 };
 

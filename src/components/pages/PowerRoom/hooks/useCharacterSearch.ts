@@ -14,11 +14,6 @@ export const useCharacterSearch = () => {
 
   useEffect(() => {
     const searchCharacters = async () => {
-      if (!searchQuery.trim() && selectedUniverse === "all") {
-        setResults([]);
-        return;
-      }
-
       setLoading(true);
       setError(null);
 
@@ -38,15 +33,36 @@ export const useCharacterSearch = () => {
             2 * 60 * 1000 // 2 minute cache for searches
           );
         } else {
-          // Get all characters for selected universe
-          const cacheKey = `characters-by-universe-${selectedUniverse}`;
+          // Get default preview characters (2-3 alphabetically)
+          const cacheKey =
+            selectedUniverse === "all"
+              ? `characters-preview-all`
+              : `characters-preview-${selectedUniverse}`;
+
           data = await withCache(
             cacheKey,
-            () =>
-              dataService.getCharactersByUniverse(
-                selectedUniverse as UniverseType
-              ),
-            10 * 60 * 1000 // 10 minute cache for universe listings
+            async () => {
+              if (selectedUniverse === "all") {
+                // Get a few characters from all universes, sorted alphabetically
+                const allCharacters = await dataService.searchCharacters(
+                  "",
+                  undefined
+                );
+                return allCharacters
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .slice(0, 3);
+              } else {
+                // Get characters for selected universe, sorted alphabetically
+                const universeCharacters =
+                  await dataService.getCharactersByUniverse(
+                    selectedUniverse as UniverseType
+                  );
+                return universeCharacters
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .slice(0, 3);
+              }
+            },
+            10 * 60 * 1000 // 10 minute cache for preview listings
           );
         }
 

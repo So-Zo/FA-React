@@ -118,9 +118,19 @@
   transform: scale(0.95);
 }
 
-.tiptap-control-btn.is-active {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
+/* Active state - needs higher specificity and more contrast */
+.tiptap-control-btn.is-active,
+.tiptap-toolbar-sidebar .tiptap-control-btn.is-active {
+  background: var(--accent-color, #ff6b35) !important;
+  border-color: var(--accent-color, #ff6b35) !important;
+  color: white !important;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.4);
+  transform: none;
+}
+
+.tiptap-control-btn.is-active:hover {
+  background: var(--accent-hover, #e55a2b) !important;
+  transform: scale(1.02);
 }
 
 /* Hide on mobile - will be replaced with floating controls later */

@@ -1,9 +1,9 @@
 import React from "react";
-import { Character } from "../../../../types";
+import { PowerRoomCharacter } from "../../../../types";
 
 interface FeatsTabProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
 }
 
 export const FeatsTab: React.FC<FeatsTabProps> = ({
@@ -11,7 +11,7 @@ export const FeatsTab: React.FC<FeatsTabProps> = ({
   rightCharacter,
 }) => {
   return (
-    <div className="comparison-panel" id="feats-panel">
+    <div className="comparison-panel active" id="feats-panel">
       <div className="comparison-panel-header">
         <h3>
           Notable Feats{" "}
@@ -36,7 +36,7 @@ export const FeatsTab: React.FC<FeatsTabProps> = ({
                 {leftCharacter.notable_feats &&
                 leftCharacter.notable_feats.length > 0 ? (
                   <div className="feats-list">
-                    {leftCharacter.notable_feats.map((feat, index) => (
+                    {leftCharacter.notable_feats.map((feat) => (
                       <div key={feat.id} className="feat-entry">
                         <div className="feat-header">
                           <h5 className="feat-title">{feat.title}</h5>
@@ -78,13 +78,16 @@ export const FeatsTab: React.FC<FeatsTabProps> = ({
             <h4>Achievement Highlights</h4>
             {rightCharacter ? (
               <div className="character-feats">
-                {rightCharacter.feats.length > 0 ? (
+                {rightCharacter.notable_feats &&
+                rightCharacter.notable_feats.length > 0 ? (
                   <div className="feats-list">
-                    {rightCharacter.feats.map((feat, index) => (
-                      <div key={index} className="feat-entry">
+                    {rightCharacter.notable_feats.map((feat) => (
+                      <div key={feat.id} className="feat-entry">
                         <div className="feat-header">
-                          <h5 className="feat-title">{feat.feat_name}</h5>
-                          <span className="feat-category">{feat.category}</span>
+                          <h5 className="feat-title">{feat.title}</h5>
+                          <span className="feat-category">
+                            {feat.power_level}
+                          </span>
                         </div>
                         <p className="feat-description">{feat.description}</p>
                         {feat.power_level && (
@@ -95,11 +98,6 @@ export const FeatsTab: React.FC<FeatsTabProps> = ({
                         {feat.context && (
                           <div className="feat-context">
                             <em>Context:</em> {feat.context}
-                          </div>
-                        )}
-                        {feat.scaling_notes && (
-                          <div className="feat-scaling">
-                            <strong>Scaling Notes:</strong> {feat.scaling_notes}
                           </div>
                         )}
                       </div>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
-import { Post } from "../../components/pages/Community/hooks/usePosts";
-import { UserPost } from "../../components/pages/Profile/types";
+import { Post, UserPost } from "../../types";
 import { useComments } from "../hooks/useComments";
 import UserComm from "./UserComm";
 import CommentInput from "./CommentInput";
@@ -102,37 +101,12 @@ export const PostDetailPage: React.FC<PostDetailPageProps> = () => {
       setLoading(true);
       setError(null);
 
-      // Query the posts table directly with joined user profile data
-      // This ensures we always get the post data regardless of comments
+      // Use master_view for optimized server-side joins
       const { data, error: fetchError } = await supabase
-        .from("posts")
-        .select(
-          `
-          id,
-          created_at,
-          title,
-          content,
-          post_type,
-          medium,
-          genre,
-          tags,
-          user_profile_id,
-          media_ids,
-          hashtags,
-          mentions,
-          visibility,
-          location,
-          updated_at,
-          user_profiles!posts_user_profile_id_fkey (
-            id,
-            display_name,
-            username,
-            avatar_url,
-            is_verified
-          )
-        `
-        )
-        .eq("id", postId)
+        .from("master_view")
+        .select("*")
+        .eq("post_id", postId)
+        .limit(1)
         .single();
 
       if (fetchError) {
@@ -143,44 +117,31 @@ export const PostDetailPage: React.FC<PostDetailPageProps> = () => {
         throw new Error("Post not found");
       }
 
-      // Get likes and comments count separately
-      const [likesResult, commentsResult] = await Promise.all([
-        supabase
-          .from("likes")
-          .select("id", { count: "exact" })
-          .eq("post_id", postId),
-        supabase
-          .from("comments")
-          .select("id", { count: "exact" })
-          .eq("post_id", postId),
-      ]);
-
-      // Transform the data to match our Post interface
+      // Transform the master_view data to match our Post interface
       const transformedPost: DetailPost = {
-        id: data.id,
-        created_at: data.created_at,
-        title: data.title,
-        content: data.content,
+        id: data.post_id,
+        created_at: data.post_created_at,
+        title: data.post_title,
+        content: data.post_content,
         post_type: data.post_type,
-        medium: data.medium,
-        genre: data.genre,
-        tags: data.tags,
-        user_profile_id: data.user_profile_id,
-        media_ids: data.media_ids,
-        hashtags: data.hashtags,
-        mentions: data.mentions,
-        visibility: data.visibility,
-        location: data.location,
-        updated_at: data.updated_at,
-        likes_count: likesResult.count || 0,
-        comments_count: commentsResult.count || 0,
+        medium: data.post_medium,
+        genre: data.post_genre,
+        tags: data.post_tags || [],
+        user_profile_id: data.post_author_profile_id,
+        media_ids: data.post_media_ids || [],
+        hashtags: data.post_hashtags || [],
+        mentions: data.post_mentions || [],
+        visibility: data.post_visibility || "public",
+        location: data.post_location,
+        updated_at: data.post_updated_at,
+        likes_count: data.post_like_count || 0,
+        comments_count: data.post_comment_count || 0,
         author: {
-          id: data.user_profiles[0]?.id || "",
-          display_name: data.user_profiles[0]?.display_name || "Unknown User",
-          username: data.user_profiles[0]?.username || "unknown",
-          avatar_url:
-            data.user_profiles[0]?.avatar_url || "/placeholder-avatar.jpg",
-          is_verified: data.user_profiles[0]?.is_verified || false,
+          id: data.post_author_profile_id || "",
+          display_name: data.post_author_name || "Unknown User",
+          username: data.post_author_username || "unknown",
+          avatar_url: data.post_author_avatar || "/placeholder-avatar.jpg",
+          is_verified: data.post_author_verified || false,
         },
       };
 
@@ -199,6 +160,13 @@ export const PostDetailPage: React.FC<PostDetailPageProps> = () => {
       navigate(-1);
     } else {
       navigate("/community");
+    }
+  };
+
+  const handleUserClick = () => {
+    // Navigate to user's profile page
+    if (post?.author?.id) {
+      navigate(`/user/${post.author.id}`);
     }
   };
 
@@ -246,10 +214,16 @@ export const PostDetailPage: React.FC<PostDetailPageProps> = () => {
               <img
                 src={post.author?.avatar_url || "/placeholder-avatar.jpg"}
                 alt={`${post.author?.display_name}'s avatar`}
-                className="author-avatar"
+                className="author-avatar clickable-avatar"
+                onClick={handleUserClick}
+                style={{ cursor: "pointer" }}
               />
               <div className="author-details">
-                <h3 className="author-name">
+                <h3
+                  className="author-name clickable-username"
+                  onClick={handleUserClick}
+                  style={{ cursor: "pointer" }}
+                >
                   {post.author?.display_name}
                   {post.author?.is_verified && (
                     <span className="verified-badge">✓</span>

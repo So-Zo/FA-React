@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaBold, FaItalic, FaList, FaLink, FaImage } from "react-icons/fa";
 import { useEditMode } from "../../../edit/editMode";
 import { useTipTapEditor } from "./TipTapContext";
@@ -6,6 +6,26 @@ import { useTipTapEditor } from "./TipTapContext";
 const TipTapToolbar: React.FC = () => {
   const { isEditing } = useEditMode();
   const { editor } = useTipTapEditor();
+  const [, setIsUpdated] = useState(0);
+
+  // Force re-render when editor state changes
+  useEffect(() => {
+    if (!editor) return;
+
+    const updateHandler = () => {
+      // Force component re-render
+      setIsUpdated(Date.now());
+    };
+
+    // Listen for selection and transaction updates
+    editor.on("selectionUpdate", updateHandler);
+    editor.on("transaction", updateHandler);
+
+    return () => {
+      editor.off("selectionUpdate", updateHandler);
+      editor.off("transaction", updateHandler);
+    };
+  }, [editor]);
 
   if (!isEditing || !editor) {
     return null; // Don't render when not in edit mode or no editor
@@ -63,6 +83,7 @@ const TipTapToolbar: React.FC = () => {
               onClick={handleBold}
               title="Bold"
               type="button"
+              data-active={editor.isActive("bold")}
             >
               <FaBold />
             </button>
@@ -73,6 +94,7 @@ const TipTapToolbar: React.FC = () => {
               onClick={handleItalic}
               title="Italic"
               type="button"
+              data-active={editor.isActive("italic")}
             >
               <FaItalic />
             </button>
@@ -90,6 +112,7 @@ const TipTapToolbar: React.FC = () => {
               onClick={handleH2}
               title="Heading 2"
               type="button"
+              data-active={editor.isActive("heading", { level: 2 })}
             >
               H2
             </button>
@@ -100,6 +123,7 @@ const TipTapToolbar: React.FC = () => {
               onClick={handleH3}
               title="Heading 3"
               type="button"
+              data-active={editor.isActive("heading", { level: 3 })}
             >
               H3
             </button>
@@ -117,6 +141,7 @@ const TipTapToolbar: React.FC = () => {
               onClick={handleBulletList}
               title="Bullet List"
               type="button"
+              data-active={editor.isActive("bulletList")}
             >
               <FaList />
             </button>

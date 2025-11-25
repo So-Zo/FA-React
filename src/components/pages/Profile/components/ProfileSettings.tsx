@@ -9,13 +9,6 @@ export const ProfileSettings: React.FC = () => {
   const { profileData, updateProfileData } = useProfileContext();
   const { currentTheme, setTheme } = useTheme();
   const navigate = useNavigate();
-  // Debug: Log profile data on component render
-  console.log("ProfileSettings - profileData:", profileData);
-  console.log("ProfileSettings - is_private value:", profileData?.is_private);
-  console.log(
-    "ProfileSettings - show_online_status value:",
-    profileData?.show_online_status
-  );
 
   const { formState, updateSettingsForm } = useProfileForms({
     settingsForm: {
@@ -33,11 +26,7 @@ export const ProfileSettings: React.FC = () => {
     },
   });
 
-  // Debug: Log form state
-  console.log("ProfileSettings - formState:", formState.settingsForm);
-
   const handleSaveSettings = async () => {
-    console.log("=== SAVE SETTINGS DEBUG ===");
     const {
       userDisplayName,
       userBio,
@@ -48,11 +37,6 @@ export const ProfileSettings: React.FC = () => {
       followerNotifications,
       contentNotifications,
     } = formState.settingsForm;
-
-    console.log("Form state values being saved:");
-    console.log("  isPrivateProfile:", isPrivateProfile);
-    console.log("  showOnlineStatus:", showOnlineStatus);
-    console.log("  emailNotifications:", emailNotifications);
 
     const updateData = {
       display_name: userDisplayName,
@@ -65,11 +49,8 @@ export const ProfileSettings: React.FC = () => {
       content_notifications: contentNotifications,
     };
 
-    console.log("Data being sent to updateProfileData:", updateData);
-
     try {
       await updateProfileData(updateData);
-      console.log("ProfileSettings - updateProfileData completed successfully");
     } catch (error) {
       console.error("ProfileSettings - updateProfileData failed:", error);
     }
@@ -209,14 +190,6 @@ export const ProfileSettings: React.FC = () => {
                   name="public-profile"
                   checked={!formState.settingsForm.isPrivateProfile}
                   onChange={(e) => {
-                    console.log(
-                      "Public profile toggle clicked - checked:",
-                      e.target.checked
-                    );
-                    console.log(
-                      "Setting isPrivateProfile to:",
-                      !e.target.checked
-                    );
                     updateSettingsForm({ isPrivateProfile: !e.target.checked });
                   }}
                 />
@@ -232,10 +205,6 @@ export const ProfileSettings: React.FC = () => {
                   name="show-online-status"
                   checked={formState.settingsForm.showOnlineStatus}
                   onChange={(e) => {
-                    console.log(
-                      "Online status toggle clicked - checked:",
-                      e.target.checked
-                    );
                     updateSettingsForm({ showOnlineStatus: e.target.checked });
                   }}
                 />

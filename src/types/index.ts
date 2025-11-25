@@ -1,20 +1,166 @@
 /**
- * Centralized type definitions for the entire application
- * Matches database schema exactly
+ * =========================================================================
+ * SINGLE SOURCE OF TRUTH - ALL APPLICATION TYPES
+ * =========================================================================
+ * This is the ONLY types file - everything else gets imported from here
  */
+
+import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 
 // ============= BASE TYPES =============
 
 export type UniverseType = "anime" | "comics" | "manga" | "tv" | "games";
-
 export type PageType =
   | "home"
   | "directory"
   | "character"
   | "wiki"
   | "community";
-
 export type UserRole = "user" | "moderator" | "admin";
+
+// ============= AUTH TYPES =============
+
+export interface AuthContextType {
+  user: SupabaseUser | null;
+  session: Session | null;
+  loading: boolean;
+}
+
+// ============= COMMUNITY & POSTS TYPES =============
+
+export type PostType =
+  | "discussion"
+  | "question"
+  | "fan-art"
+  | "fan-fiction"
+  | "world-building"
+  | "feedback"
+  | "review"
+  | "theory"
+  | "news"
+  | "meme"
+  | "cosplay";
+
+export type Medium =
+  | "anime"
+  | "manga"
+  | "comics"
+  | "tv"
+  | "movies"
+  | "games"
+  | "books"
+  | "other";
+
+export type Genre =
+  | "comedy"
+  | "horror"
+  | "drama"
+  | "romance"
+  | "action"
+  | "adventure"
+  | "fantasy"
+  | "sci-fi"
+  | "other";
+
+export type SortOption =
+  | "latest"
+  | "trending"
+  | "top"
+  | "most_commented"
+  | "most_liked";
+
+export type TimeFilter = "today" | "this_week" | "this_month" | "all_time";
+
+export interface PostQueryOptions {
+  sort?: SortOption;
+  timeFilter?: TimeFilter;
+  postType?: PostType;
+  medium?: Medium;
+  genre?: Genre;
+  searchQuery?: string;
+}
+
+export interface Like {
+  id: string;
+  user_profile_id: string;
+  post_id: string;
+  created_at: string;
+}
+
+export interface Post {
+  id: string;
+  created_at: string;
+  title: string;
+  content: string;
+  post_type: PostType;
+  medium: Medium;
+  genre: Genre;
+  tags: string[];
+  user_profile_id: string;
+  media_ids: string[];
+  hashtags: string[];
+  mentions: string[];
+  likes_count: number;
+  comments_count: number;
+  reposts_count: number;
+  views_count: number;
+  is_pinned: boolean;
+  is_archived: boolean;
+  visibility: "public" | "private" | "followers";
+  location?: string;
+  updated_at: string;
+  author?: {
+    id: string;
+    display_name: string;
+    username: string;
+    avatar_url: string;
+    is_verified: boolean;
+  };
+  likes?: Like[];
+  isLikedByUser?: boolean;
+  media?: Array<{
+    id: string;
+    file_name: string;
+    storage_path: string;
+    alt_text?: string;
+    blurhash?: string;
+  }>;
+}
+
+export interface PostLike {
+  id: string;
+  post_id: string;
+  user_id: string;
+  created_at: string;
+}
+
+// ============= COMMENT TYPES =============
+
+export interface Comment {
+  id: string;
+  content: string;
+  parent_comment_id?: string;
+  post_id?: string;
+  page_id?: string;
+  like_count: number;
+  created_at: string;
+  updated_at: string;
+  user_id: string;
+  users?: User;
+  replies?: Comment[];
+  author?: {
+    id: string;
+    display_name: string;
+    username: string;
+    avatar_url?: string;
+    is_verified: boolean;
+  };
+}
+
+export interface CommentForm {
+  content: string;
+  parent_comment_id?: string;
+}
 
 // ============= CHARACTER TYPES =============
 
@@ -29,8 +175,7 @@ export interface Character {
   created_at: string;
   updated_at: string;
   created_by: string;
-
-  // Related data (from joins)
+  // Related data (from joins) - OPTIONAL for base queries
   abilities?: CharacterAbilities;
   timeline?: CharacterEvent[];
   world_info?: WorldInfo;
@@ -79,13 +224,130 @@ export interface NotableFeat {
   created_at: string;
 }
 
-// For search and selection
 export interface CharacterSearchResult {
   id: string;
   name: string;
   universe: string;
   universe_type: UniverseType;
   image_url?: string;
+}
+
+export interface CharacterForm {
+  name: string;
+  universe: string;
+  universe_type: UniverseType;
+  description?: string;
+  image_url?: string;
+  abilities: {
+    primary_powers: string[];
+    special_techniques: string[];
+    weaknesses: string[];
+    power_description?: string;
+  };
+}
+
+// ============= POWERROOM CHARACTER TYPES =============
+// PowerRoom needs REQUIRED relationships for comparison
+
+export interface PowerRoomCharacter
+  extends Omit<
+    Character,
+    "abilities" | "timeline" | "world_info" | "notable_feats"
+  > {
+  // These are REQUIRED for character comparison
+  abilities: CharacterAbilities;
+  timeline: CharacterEvent[];
+  world_info: WorldInfo;
+  notable_feats: NotableFeat[];
+}
+
+export interface CharacterComparison {
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
+  activeTab: "abilities" | "timelines" | "worlds" | "feats";
+}
+
+export interface CharacterComparisonProps {
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
+  activeTab: "abilities" | "timeline" | "worlds" | "feats";
+}
+
+export interface TabComponentProps {
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
+}
+
+// ============= WIKI TYPES =============
+
+export interface WikiPage {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  summary?: string;
+  is_featured: boolean;
+  view_count: number;
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+  wiki_sections?: WikiSection[];
+  wiki_revisions?: WikiRevision[];
+  wiki_contributors?: WikiContributor[];
+}
+
+export interface WikiSection {
+  id: string;
+  wiki_page_id: string;
+  title: string;
+  content: string;
+  order_index: number;
+  created_at: string;
+}
+
+export interface WikiRevision {
+  id: string;
+  wiki_page_id: string;
+  title: string;
+  content: string;
+  edit_summary?: string;
+  is_major_edit: boolean;
+  created_at: string;
+  created_by: string;
+  users?: User;
+  wiki_pages?: Pick<WikiPage, "title" | "slug">;
+}
+
+export interface WikiContributor {
+  id: string;
+  wiki_page_id: string;
+  user_profile_id: string; // Updated to match database schema
+  contribution_count: number;
+  first_contributed_at: string;
+  last_contributed_at: string; // Updated to match database schema
+  users?: User;
+}
+
+export interface WikiSearchResult {
+  id: string;
+  name: string;
+  type: "character" | "world" | "series";
+  description?: string;
+  tags?: string[];
+  created_at: string;
+  full_path: string;
+}
+
+export interface WikiSearchOptions {
+  type?: "character" | "world" | "series" | "all";
+  tags?: string[];
+  limit?: number;
+}
+
+export interface WikiEditorRef {
+  getContent: () => string;
+  setContent: (content: string) => void;
+  focus: () => void;
 }
 
 // ============= PAGE/CONTENT TYPES =============
@@ -102,8 +364,6 @@ export interface Page {
   created_at: string;
   updated_at: string;
   created_by: string;
-
-  // Related data (from joins)
   page_sections?: PageSection[];
   page_metadata?: PageMetadata;
   comments?: Comment[];
@@ -129,104 +389,6 @@ export interface PageMetadata {
   updated_at: string;
 }
 
-// ============= WIKI TYPES =============
-
-export interface WikiPage {
-  id: string;
-  title: string;
-  slug: string;
-  content: string;
-  summary?: string;
-  is_featured: boolean;
-  view_count: number;
-  created_at: string;
-  updated_at: string;
-  created_by: string;
-
-  // Related data
-  wiki_sections?: WikiSection[];
-  wiki_revisions?: WikiRevision[];
-  wiki_contributors?: WikiContributor[];
-}
-
-export interface WikiSection {
-  id: string;
-  wiki_page_id: string;
-  title: string;
-  content: string;
-  order_index: number;
-  created_at: string;
-}
-
-export interface WikiRevision {
-  id: string;
-  wiki_page_id: string;
-  title: string;
-  content: string;
-  edit_summary?: string;
-  is_major_edit: boolean;
-  created_at: string;
-  created_by: string;
-
-  // Related data
-  users?: User;
-  wiki_pages?: Pick<WikiPage, "title" | "slug">;
-}
-
-export interface WikiContributor {
-  id: string;
-  wiki_page_id: string;
-  user_id: string;
-  contribution_count: number;
-  last_contribution: string;
-
-  // Related data
-  users?: User;
-}
-
-// ============= COMMUNITY TYPES =============
-
-export interface Post {
-  id: string;
-  title: string;
-  content: string;
-  universe_type?: UniverseType;
-  is_pinned: boolean;
-  like_count: number;
-  comment_count: number;
-  created_at: string;
-  updated_at: string;
-  user_id: string;
-
-  // Related data
-  comments?: Comment[];
-  post_likes?: PostLike[];
-  users?: User;
-}
-
-export interface Comment {
-  id: string;
-  content: string;
-  parent_comment_id?: string;
-  post_id?: string;
-  page_id?: string;
-  like_count: number;
-  created_at: string;
-  updated_at: string;
-  user_id: string;
-
-  // Related data
-  users?: User;
-  replies?: Comment[];
-}
-
-export interface PostLike {
-  id: string;
-  post_id: string;
-  user_id: string;
-  created_at: string;
-}
-
 // ============= USER TYPES =============
 
 export interface User {
@@ -240,11 +402,144 @@ export interface User {
   last_login?: string;
   created_at: string;
   updated_at: string;
-
-  // Aggregated data (from joins)
   posts?: { count: number }[];
   comments?: { count: number }[];
   wiki_revisions?: { count: number }[];
+}
+
+// ============= PROFILE TYPES =============
+// NOTE: Profile types stay in Profile folder per user request
+
+export interface UserPost {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  content: string;
+  post_type: PostType;
+  medium: Medium;
+  genre: Genre;
+  user_profile_id: string;
+  media_ids: string[];
+  visibility: "public" | "followers" | "private";
+  likes_count: number;
+  comments_count: number;
+  author?: {
+    id: string;
+    display_name: string;
+    avatar_url: string;
+    is_verified: boolean;
+  };
+}
+
+export interface UserActivityMetrics {
+  totalFollowers: number;
+  totalFollowing: number;
+  totalPosts: number;
+}
+
+export interface LoadingStates {
+  profileDataLoading: boolean;
+  userPostsLoading: boolean;
+  statsDataLoading: boolean;
+}
+
+export interface OperationErrors {
+  profileLoadError: Error | null;
+  postsLoadError: Error | null;
+  statsLoadError: Error | null;
+}
+
+export interface ProfileData {
+  id: string;
+  display_name: string;
+  username: string;
+  bio: string;
+  avatar_url?: string;
+  banner_url?: string;
+  website_url?: string;
+  location?: string;
+  is_verified?: boolean;
+  is_private?: boolean;
+  show_online_status?: boolean;
+  email_notifications?: boolean;
+  comment_notifications?: boolean;
+  follower_notifications?: boolean;
+  content_notifications?: boolean;
+  last_seen?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProfileState {
+  loadingStates: LoadingStates;
+  operationErrors: OperationErrors;
+  profileData: ProfileData | null;
+  activityMetrics: UserActivityMetrics;
+  userPosts: UserPost[];
+  totalUserPosts: number;
+}
+
+export interface ProfileSettingsInputs {
+  userDisplayName: string;
+  userBio: string;
+  isPrivateProfile: boolean;
+  showOnlineStatus: boolean;
+  allowTagging: boolean;
+  emailNotifications: boolean;
+  commentNotifications: boolean;
+  followerNotifications: boolean;
+  contentNotifications: boolean;
+}
+
+export interface NewPostInputs {
+  postTitle: string;
+  postContent: string;
+  postType: PostType;
+  postMedium: Medium;
+  postGenre: Genre;
+  postTags: string[];
+  postVisibility: UserPost["visibility"];
+}
+
+export interface ProfileFormsState {
+  settingsForm: ProfileSettingsInputs;
+  newPostForm: NewPostInputs;
+}
+
+// ============= REPORT TYPES =============
+
+export interface Report {
+  id: string;
+  created_at: string;
+  resolved_at?: string;
+  reporter_id: string;
+  reported_user_id: string;
+  post_id?: string;
+  comment_id?: string;
+  reason: string;
+  description?: string;
+  status: "pending" | "reviewed" | "resolved" | "dismissed";
+  moderator_id?: string;
+  moderator_notes?: string;
+}
+
+export interface CreateReportRequest {
+  reported_user_id: string;
+  post_id?: string;
+  comment_id?: string;
+  reason: string;
+  description?: string;
+}
+
+export interface UpdateReportRequest {
+  status: Report["status"];
+  moderator_notes?: string;
+}
+
+export interface ReportSubmission {
+  reason: string;
+  description?: string;
 }
 
 // ============= SEARCH TYPES =============
@@ -256,7 +551,7 @@ export interface SearchResult {
     "id" | "title" | "description" | "universe_type" | "page_type"
   >[];
   wiki?: Pick<WikiPage, "id" | "title" | "summary" | "slug">[];
-  post?: Pick<Post, "id" | "title" | "content" | "universe_type">[];
+  post?: Pick<Post, "id" | "title" | "content">[];
 }
 
 export interface SearchParams {
@@ -302,45 +597,151 @@ export interface PaginatedDataHookReturn<T> extends DataHookReturn<T[]> {
 
 // ============= FORM TYPES =============
 
-export interface CharacterForm {
-  name: string;
-  universe: string;
-  universe_type: UniverseType;
-  description?: string;
-  image_url?: string;
-
-  abilities: {
-    primary_powers: string[];
-    special_techniques: string[];
-    weaknesses: string[];
-    power_description?: string;
-  };
-}
-
 export interface PostForm {
   title: string;
   content: string;
   universe_type?: UniverseType;
   is_pinned?: boolean;
-}
+} // ============= PROFILE TYPES (from Profile/types.ts) =============
 
-export interface CommentForm {
+export interface UserPost {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  title: string;
   content: string;
-  parent_comment_id?: string;
+  post_type: PostType;
+  medium: Medium;
+  genre: Genre;
+  user_profile_id: string;
+  media_ids: string[];
+  visibility: "public" | "followers" | "private";
+  likes_count: number;
+  comments_count: number;
+  author?: {
+    id: string;
+    display_name: string;
+    avatar_url: string;
+    is_verified: boolean;
+  };
 }
 
-// ============= COMPONENT PROP TYPES =============
-
-export interface CharacterComparisonProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
-  activeTab: "abilities" | "timeline" | "worlds" | "feats";
+export interface UserActivityMetrics {
+  totalFollowers: number;
+  totalFollowing: number;
+  totalPosts: number;
 }
 
-export interface TabComponentProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
+export interface LoadingStates {
+  profileDataLoading: boolean;
+  userPostsLoading: boolean;
+  statsDataLoading: boolean;
+}
+
+export interface OperationErrors {
+  profileLoadError: Error | null;
+  postsLoadError: Error | null;
+  statsLoadError: Error | null;
+}
+
+export interface ProfileData {
+  id: string;
+  display_name: string;
+  username: string;
+  bio: string;
+  avatar_url?: string;
+  banner_url?: string;
+  website_url?: string;
+  location?: string;
+  is_verified?: boolean;
+  is_private?: boolean;
+  show_online_status?: boolean;
+  email_notifications?: boolean;
+  comment_notifications?: boolean;
+  follower_notifications?: boolean;
+  content_notifications?: boolean;
+  last_seen?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProfileState {
+  loadingStates: LoadingStates;
+  operationErrors: OperationErrors;
+  profileData: ProfileData | null;
+  activityMetrics: UserActivityMetrics;
+  userPosts: UserPost[];
+  totalUserPosts: number;
+}
+
+export interface ProfileSettingsInputs {
+  userDisplayName: string;
+  userBio: string;
+  isPrivateProfile: boolean;
+  showOnlineStatus: boolean;
+  allowTagging: boolean;
+  emailNotifications: boolean;
+  commentNotifications: boolean;
+  followerNotifications: boolean;
+  contentNotifications: boolean;
+}
+
+export interface NewPostInputs {
+  postTitle: string;
+  postContent: string;
+  postType: PostType;
+  postMedium: Medium;
+  postGenre: Genre;
+  postTags: string[];
+  postVisibility: UserPost["visibility"];
+}
+
+export interface ProfileFormsState {
+  settingsForm: ProfileSettingsInputs;
+  newPostForm: NewPostInputs;
+}
+
+export type ProfileSection =
+  | "comments"
+  | "posts"
+  | "work-requests"
+  | "settings"
+  | "drafts"
+  | "notifications";
+
+// ============= REPORT TYPES (from shared/types/reports.ts) =============
+
+export interface Report {
+  id: string;
+  created_at: string;
+  resolved_at?: string;
+  reporter_id: string;
+  reported_user_id: string;
+  post_id?: string;
+  comment_id?: string;
+  reason: string;
+  description?: string;
+  status: "pending" | "reviewed" | "resolved" | "dismissed";
+  moderator_id?: string;
+  moderator_notes?: string;
+}
+
+export interface CreateReportRequest {
+  reported_user_id: string;
+  post_id?: string;
+  comment_id?: string;
+  reason: string;
+  description?: string;
+}
+
+export interface UpdateReportRequest {
+  status: Report["status"];
+  moderator_notes?: string;
+}
+
+export interface ReportSubmission {
+  reason: string;
+  description?: string;
 }
 
 // ============= EXPORT ALL =============
-export * from "./character"; // Keep existing character types for backwards compatibility

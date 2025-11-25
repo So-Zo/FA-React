@@ -48,6 +48,33 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Follow button */
+.follow-btn {
+  background: var(--fanarc-accent-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.follow-btn:hover {
+  background: var(--fanarc-accent-hover, #6d3bcc);
+}
+
+.follow-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.follow-btn.following {
+  background: var(--fanarc-border-color);
+  color: var(--fanarc-text-primary);
+}
+
 .online-status-dot.online {
   background-color: #22c55e; /* Green for online */
 }
@@ -61,6 +88,15 @@
   font-size: 2rem;
   font-weight: bold;
   color: var(--text-primary, #231c3d);
+}
+
+/* Profile header top layout */
+.profile-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Typography - stats */

@@ -3,13 +3,20 @@ import {
   ProfileFormsState,
   ProfileSettingsInputs,
   NewPostInputs,
-} from "../types";
+} from "../../../../types";
 
 // Initial form state
 const initialFormState: ProfileFormsState = {
   settingsForm: {
     userDisplayName: "",
     userBio: "",
+    isPrivateProfile: false,
+    showOnlineStatus: true,
+    allowTagging: true,
+    emailNotifications: true,
+    commentNotifications: false,
+    followerNotifications: false,
+    contentNotifications: false,
   },
   newPostForm: {
     postTitle: "",

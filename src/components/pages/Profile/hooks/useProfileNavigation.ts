@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { ProfileSection } from "../types";
+import { ProfileSection } from "../../../../types";
 
 export function useProfileNavigation(initialSection: ProfileSection = "posts") {
   const [activeSection, setActiveSection] =

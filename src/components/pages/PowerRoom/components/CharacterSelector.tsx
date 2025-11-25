@@ -81,6 +81,8 @@ export const CharacterSelector: React.FC<CharacterSelectorProps> = ({
           <option value="games">Games</option>
         </select>
 
+
+
         <ul
           className="character-list"
           role="listbox"

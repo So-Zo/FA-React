@@ -4,9 +4,14 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../../components/ui/TableOfContents";
 import WikiEditor from "../Search/WikiEditor";
+import { usePageContributors } from "../../shared/hooks/usePageContributors";
+import { PageContributor } from "../../shared/PageContributor";
 import "../Search/WikiEditor.css";
 
 const ComicsPage: React.FC = () => {
+  // Get page contributors
+  const { contributors } = usePageContributors("comics-main-page");
+
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
@@ -810,6 +815,12 @@ const ComicsPage: React.FC = () => {
         </section>
         <hr />
       </main>
+
+      <PageContributor
+        pageId="comics-main-page"
+        contributors={contributors}
+        historyPath="/comics/history"
+      />
     </div>
   );
 };

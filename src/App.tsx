@@ -33,6 +33,8 @@ import WorldsUniversesDirectory from "./components/pages/WorldsUniverses/WorldsU
 import PowerRoomPage from "./components/pages/PowerRoom/PowerRoomPage";
 import CommunityPage from "./components/pages/Community/CommunityPage";
 import ProfilePage from "./components/pages/Profile/ProfilePage";
+import { ProfileProvider } from "./components/pages/Profile/ProfileContext";
+import UserProfilePage from "./components/pages/Profile/UserProfilePage";
 import CharacterPage from "./components/pages/Characters/CharacterPage";
 import LoginPage from "./components/pages/Auth/LoginPage";
 import PostDetailPage from "./shared/Components/PostDetailPage";
@@ -98,14 +100,23 @@ const AppContent = () => {
               <Route path="/power-room" element={<PowerRoomPage />} />
               <Route path="/community" element={<CommunityPage />} />
               <Route path="/post/:id" element={<PostDetailPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProfileProvider>
+                    <ProfilePage />
+                  </ProfileProvider>
+                }
+              />
+              <Route path="/user/:userId" element={<UserProfilePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/characters" element={<CharacterPage />} />
               {/* Add more routes as we create the page components */}
               {/* <Route path="*" element={<NotFoundPage />} /> */}
             </Routes>
           </main>
-          {location.pathname !== "/profile" && <Footer />}
+          {location.pathname !== "/profile" &&
+            !location.pathname.startsWith("/user/") && <Footer />}
         </div>
         <TipTapToolbar />
       </div>

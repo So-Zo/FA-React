@@ -8,6 +8,8 @@ import {
   FeatsTab,
 } from "./components";
 import { useCharacterDetails } from "./hooks";
+import { usePageContributors } from "../../shared/hooks/usePageContributors";
+import { PageContributor } from "../../shared/PageContributor";
 
 const PowerRoomPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("abilities");
@@ -23,6 +25,10 @@ const PowerRoomPage: React.FC = () => {
   const { character: rightCharacterDetails } = useCharacterDetails(
     rightCharacter?.id || null
   );
+
+  // Get page contributors for PowerRoom page
+  // Using a static page ID for now - could be dynamic based on actual page ID
+  const { contributors } = usePageContributors("powerroom-main-page");
 
   // Handles tab switching
   const handleTabClick = (tabId: string) => {
@@ -129,21 +135,11 @@ const PowerRoomPage: React.FC = () => {
         </div>
       </section>
 
-      <footer className="contributor-footer">
-        <div className="contributor-info">
-          <img
-            src="/placeholder-avatar.jpg"
-            alt="Last Editor"
-            className="contributor-avatar"
-          />
-          <span>
-            Last edited by <a href="#">Editor Name</a> on Date
-          </span>
-        </div>
-        <a href="#page-history" className="page-history-link">
-          View Page History
-        </a>
-      </footer>
+      <PageContributor
+        pageId="powerroom-main-page"
+        contributors={contributors}
+        historyPath="/powerroom/history"
+      />
     </div>
   );
 };

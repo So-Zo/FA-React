@@ -1,5 +1,6 @@
 import React from "react";
-import { Comment } from "../hooks/useComments";
+import { useNavigate } from "react-router-dom";
+import { Comment } from "../../types";
 import { useAuth } from "../hooks/useAuth";
 import { useProfileId } from "../utils/userUtils";
 
@@ -9,9 +10,10 @@ interface UserCommProps {
 }
 
 export const UserComm: React.FC<UserCommProps> = ({ comment, onDelete }) => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const profileId = useProfileId(user);
-  const canDelete = profileId && profileId === comment.user_profile_id;
+  const canDelete = profileId && profileId === comment.user_id;
 
   const handleDelete = () => {
     if (onDelete && canDelete) {
@@ -21,19 +23,32 @@ export const UserComm: React.FC<UserCommProps> = ({ comment, onDelete }) => {
     }
   };
 
+  const handleUserClick = () => {
+    // Navigate to user's profile page
+    if (comment.author?.id) {
+      navigate(`/user/${comment.author.id}`);
+    }
+  };
+
   return (
     <div className="user-comm">
       <div className="user-comm-header">
         <div className="user-comm-author">
           <img
-            src={comment.author.avatar_url || "/placeholder-avatar.jpg"}
-            alt={`${comment.author.display_name}'s avatar`}
-            className="user-comm-avatar"
+            src={comment.author?.avatar_url || "/placeholder-avatar.jpg"}
+            alt={`${comment.author?.display_name || "User"}'s avatar`}
+            className="user-comm-avatar clickable-avatar"
+            onClick={handleUserClick}
+            style={{ cursor: "pointer" }}
           />
           <div className="user-comm-author-info">
-            <h4 className="user-comm-author-name">
-              {comment.author.display_name}
-              {comment.author.is_verified && (
+            <h4
+              className="user-comm-author-name clickable-username"
+              onClick={handleUserClick}
+              style={{ cursor: "pointer" }}
+            >
+              {comment.author?.display_name || "Unknown User"}
+              {comment.author?.is_verified && (
                 <span className="verified-badge">✓</span>
               )}
             </h4>

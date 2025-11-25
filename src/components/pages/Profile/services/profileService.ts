@@ -1,5 +1,5 @@
 import { supabase } from "../../../../lib/supabaseClient";
-import { ProfileData, UserActivityMetrics, UserPost } from "../types";
+import { ProfileData, UserActivityMetrics, UserPost } from "../../../../types";
 
 // File upload configurations
 const PROFILE_IMAGE_CONFIG = {
@@ -116,6 +116,9 @@ export const profileService = {
       content_notifications: profileData.content_notifications,
       // Activity tracking
       last_seen: profileData.last_seen,
+      // Add required timestamps with defaults
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
     };
 
     console.log(
@@ -215,7 +218,8 @@ export const profileService = {
       medium: post.medium,
       genre: post.genre,
       user_profile_id: post.post_author_profile_id, // Use the correct field name from master_view
-      media_ids: post.media_ids || [],
+      tags: post.tags || [], // Add default empty tags
+      media_ids: post.media_ids,
       visibility: post.visibility,
       likes_count: post.likes_count || 0,
       comments_count: post.comments_count || 0,
@@ -253,7 +257,7 @@ export const profileService = {
     console.log("Creating post with data:", dbPost);
 
     // Insert the post
-    const { data, error: insertError } = await supabase
+    const { error: insertError } = await supabase
       .from("posts")
       .insert([dbPost])
       .select();
@@ -262,8 +266,6 @@ export const profileService = {
       console.error("Post creation failed:", insertError);
       throw insertError;
     }
-
-    console.log("Post created successfully:", data);
   },
 
   // Update a post

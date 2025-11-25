@@ -3,8 +3,11 @@ import React, {
   useContext,
   useReducer,
   useCallback,
+  useEffect,
 } from "react";
 import { profileService } from "./services/profileService";
+import { dataService } from "../../../services/dataService";
+import { useProfile } from "../../../shared/hooks/useProfile";
 import {
   ProfileState,
   ProfileData,
@@ -12,7 +15,6 @@ import {
   UserPost,
 } from "./types";
 import { useAuth } from "../../../shared/hooks/useAuth";
-import { supabase } from "../../../lib/supabaseClient";
 
 // Initial state
 const initialState: ProfileState = {
@@ -107,20 +109,77 @@ interface ProfileContextType extends ProfileState {
   createPost: (
     post: Omit<UserPost, "id" | "created_at" | "updated_at">
   ) => Promise<void>;
+  isOwnProfile: boolean; // Add this to help components know if viewing own profile
 }
 
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
 // Provider component
-export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ProfileProvider: React.FC<{
+  children: React.ReactNode;
+  userId?: string;
+}> = ({ children, userId }) => {
   const { user } = useAuth();
   const [state, dispatch] = useReducer(profileReducer, initialState);
 
+  const targetUserId = userId !== undefined ? userId : user?.id;
+  const isOwnProfile = Boolean(
+    user && targetUserId && user.id === targetUserId
+  );
+
+  const {
+    data: profileData,
+    loading: profileLoading,
+    error: profileError,
+    refresh,
+  } = useProfile(targetUserId || null);
+
+  // Sync profile data to local state when it changes
+  useEffect(() => {
+    if (profileData) {
+      const transformedData = {
+        id: profileData.id,
+        username: profileData.username,
+        display_name: profileData.display_name,
+        bio: profileData.bio,
+        avatar_url: profileData.avatar_url,
+        banner_url: profileData.banner_url,
+        created_at: profileData.created_at,
+        updated_at: profileData.updated_at,
+      };
+
+      const activityMetrics = {
+        totalPosts: profileData.posts?.length || 0,
+        totalLikes: 0,
+        totalFollowers: profileData.follows_followers?.length || 0,
+        totalFollowing: profileData.follows_following?.length || 0,
+        joinDate: profileData.created_at,
+      };
+
+      dispatch({ type: "SET_PROFILE_DATA", payload: transformedData });
+      dispatch({ type: "SET_PROFILE_STATS", payload: activityMetrics });
+    }
+  }, [profileData]);
+
+  // Sync loading state
+  useEffect(() => {
+    dispatch({
+      type: "SET_LOADING",
+      payload: { key: "profileDataLoading", value: profileLoading },
+    });
+  }, [profileLoading]);
+
+  // Sync error state
+  useEffect(() => {
+    dispatch({
+      type: "SET_ERROR",
+      payload: { key: "profileLoadError", value: profileError },
+    });
+  }, [profileError]);
+
   const fetchProfilePosts = useCallback(
     async (page: number, limit: number) => {
-      if (!user) return;
+      if (!targetUserId) return;
 
       dispatch({
         type: "SET_LOADING",
@@ -129,7 +188,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
 
       try {
         const { posts, total } = await profileService.getPosts(
-          user.id,
+          targetUserId, // Use dynamic user ID instead of hardcoded user.id
           page,
           limit
         );
@@ -156,89 +215,24 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
         });
       }
     },
-    [user]
+    [targetUserId] // Update dependency to targetUserId instead of user
   );
 
   const refreshProfileData = useCallback(async () => {
-    if (!user) return;
-
-    console.log("=== REFRESH PROFILE DATA DEBUG ===");
-    console.log(
-      "ProfileContext - refreshProfileData called for user:",
-      user.id
-    );
-
-    dispatch({
-      type: "SET_LOADING",
-      payload: { key: "profileDataLoading", value: true },
-    });
-
-    try {
-      console.log(
-        "ProfileContext - calling profileService.getCompleteProfileData..."
-      );
-      // Single call to get both profile data and stats from normalized view
-      const { profileData, activityMetrics } =
-        await profileService.getCompleteProfileData(user.id);
-
-      console.log("ProfileContext - received profileData:", profileData);
-      console.log(
-        "ProfileContext - received activityMetrics:",
-        activityMetrics
-      );
-
-      dispatch({ type: "SET_PROFILE_DATA", payload: profileData });
-      dispatch({ type: "SET_PROFILE_STATS", payload: activityMetrics });
-    } catch (error) {
-      console.error("ProfileContext - refreshProfileData failed:", error);
-      dispatch({
-        type: "SET_ERROR",
-        payload: {
-          key: "profileLoadError",
-          value: error instanceof Error ? error : new Error("Unknown error"),
-        },
-      });
-    } finally {
-      dispatch({
-        type: "SET_LOADING",
-        payload: { key: "profileDataLoading", value: false },
-      });
-    }
-  }, [user]);
+    await refresh();
+  }, [refresh]);
 
   const updateProfileData = useCallback(
     async (data: Partial<ProfileData>) => {
-      if (!user) return;
-
-      console.log("=== PROFILE CONTEXT UPDATE DEBUG ===");
-      console.log("ProfileContext - updateProfileData called with:", data);
-      console.log("ProfileContext - user.id:", user.id);
-
-      dispatch({
-        type: "SET_LOADING",
-        payload: { key: "profileDataLoading", value: true },
-      });
+      if (!user || !isOwnProfile) {
+        throw new Error("Can only update your own profile");
+      }
 
       try {
-        console.log("ProfileContext - calling supabase update...");
-        const { error } = await supabase
-          .from("user_profiles")
-          .update(data)
-          .eq("id", user.id);
-
-        if (error) {
-          console.error("ProfileContext - supabase update error:", error);
-          throw error;
-        }
-
-        console.log(
-          "ProfileContext - supabase update successful, refreshing profile data..."
-        );
-        // Refresh profile data after update
-        await refreshProfileData();
-        console.log("ProfileContext - profile data refreshed successfully");
+        await dataService.updateUserProfile(user.id, data);
+        // Refresh to get updated data (cache was invalidated)
+        await refresh();
       } catch (error) {
-        console.error("ProfileContext - updateProfileData failed:", error);
         dispatch({
           type: "SET_ERROR",
           payload: {
@@ -246,19 +240,17 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
             value: error instanceof Error ? error : new Error("Unknown error"),
           },
         });
-      } finally {
-        dispatch({
-          type: "SET_LOADING",
-          payload: { key: "profileDataLoading", value: false },
-        });
       }
     },
-    [user, refreshProfileData]
+    [user, isOwnProfile, refresh]
   );
 
   const createPost = useCallback(
     async (post: Omit<UserPost, "id" | "created_at" | "updated_at">) => {
-      if (!user) return;
+      // Security: Only allow creating posts on your own profile
+      if (!user || !isOwnProfile) {
+        throw new Error("Can only create posts on your own profile");
+      }
 
       try {
         await profileService.createPost(post);
@@ -289,6 +281,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({
         fetchProfilePosts,
         updateProfileData,
         createPost,
+        isOwnProfile, // Include isOwnProfile in the context value
       }}
     >
       {children}

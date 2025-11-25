@@ -1,9 +1,9 @@
 import React from "react";
-import { Character } from "../../../../types";
+import { PowerRoomCharacter } from "../../../../types";
 
 interface WorldsTabProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
 }
 
 export const WorldsTab: React.FC<WorldsTabProps> = ({
@@ -11,7 +11,7 @@ export const WorldsTab: React.FC<WorldsTabProps> = ({
   rightCharacter,
 }) => {
   return (
-    <div className="comparison-panel" id="worlds-panel">
+    <div className="comparison-panel active" id="worlds-panel">
       <div className="comparison-panel-header">
         <h3>
           Worlds & Universes{" "}
@@ -33,50 +33,32 @@ export const WorldsTab: React.FC<WorldsTabProps> = ({
             <h4>World Information</h4>
             {leftCharacter ? (
               <div className="character-worlds">
-                {leftCharacter.world_info.length > 0 ? (
+                {leftCharacter.world_info ? (
                   <div className="world-entries">
-                    {leftCharacter.world_info.map((world, index) => (
-                      <div key={index} className="world-entry">
-                        <h5 className="world-type">{world.world_type}</h5>
-                        <div className="world-details">
-                          <p className="world-description">
-                            {world.description}
-                          </p>
-                          {world.rules && world.rules.length > 0 && (
+                    <div className="world-entry">
+                      <h5 className="world-type">
+                        {leftCharacter.world_info.universe_name}
+                      </h5>
+                      <div className="world-details">
+                        <p className="world-description">
+                          {leftCharacter.world_info.universe_description}
+                        </p>
+                        {leftCharacter.world_info.notable_locations &&
+                          leftCharacter.world_info.notable_locations.length >
+                            0 && (
                             <div className="world-rules">
-                              <strong>Universal Rules:</strong>
+                              <strong>Notable Locations:</strong>
                               <ul>
-                                {world.rules.map((rule, ruleIndex) => (
-                                  <li key={ruleIndex}>{rule}</li>
-                                ))}
+                                {leftCharacter.world_info.notable_locations.map(
+                                  (location, locationIndex) => (
+                                    <li key={locationIndex}>{location}</li>
+                                  )
+                                )}
                               </ul>
                             </div>
                           )}
-                          {world.physics && world.physics.length > 0 && (
-                            <div className="world-physics">
-                              <strong>Physics & Laws:</strong>
-                              <ul>
-                                {world.physics.map((law, lawIndex) => (
-                                  <li key={lawIndex}>{law}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-                          {world.technology_level && (
-                            <div className="world-tech">
-                              <strong>Technology Level:</strong>{" "}
-                              {world.technology_level}
-                            </div>
-                          )}
-                          {world.power_scaling && (
-                            <div className="world-scaling">
-                              <strong>Power Scaling:</strong>{" "}
-                              {world.power_scaling}
-                            </div>
-                          )}
-                        </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 ) : (
                   <div className="empty-state">
@@ -95,50 +77,32 @@ export const WorldsTab: React.FC<WorldsTabProps> = ({
             <h4>World Information</h4>
             {rightCharacter ? (
               <div className="character-worlds">
-                {rightCharacter.world_info.length > 0 ? (
+                {rightCharacter.world_info ? (
                   <div className="world-entries">
-                    {rightCharacter.world_info.map((world, index) => (
-                      <div key={index} className="world-entry">
-                        <h5 className="world-type">{world.world_type}</h5>
-                        <div className="world-details">
-                          <p className="world-description">
-                            {world.description}
-                          </p>
-                          {world.rules && world.rules.length > 0 && (
+                    <div className="world-entry">
+                      <h5 className="world-type">
+                        {rightCharacter.world_info.universe_name}
+                      </h5>
+                      <div className="world-details">
+                        <p className="world-description">
+                          {rightCharacter.world_info.universe_description}
+                        </p>
+                        {rightCharacter.world_info.notable_locations &&
+                          rightCharacter.world_info.notable_locations.length >
+                            0 && (
                             <div className="world-rules">
-                              <strong>Universal Rules:</strong>
+                              <strong>Notable Locations:</strong>
                               <ul>
-                                {world.rules.map((rule, ruleIndex) => (
-                                  <li key={ruleIndex}>{rule}</li>
-                                ))}
+                                {rightCharacter.world_info.notable_locations.map(
+                                  (location, locationIndex) => (
+                                    <li key={locationIndex}>{location}</li>
+                                  )
+                                )}
                               </ul>
                             </div>
                           )}
-                          {world.physics && world.physics.length > 0 && (
-                            <div className="world-physics">
-                              <strong>Physics & Laws:</strong>
-                              <ul>
-                                {world.physics.map((law, lawIndex) => (
-                                  <li key={lawIndex}>{law}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )}
-                          {world.technology_level && (
-                            <div className="world-tech">
-                              <strong>Technology Level:</strong>{" "}
-                              {world.technology_level}
-                            </div>
-                          )}
-                          {world.power_scaling && (
-                            <div className="world-scaling">
-                              <strong>Power Scaling:</strong>{" "}
-                              {world.power_scaling}
-                            </div>
-                          )}
-                        </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 ) : (
                   <div className="empty-state">

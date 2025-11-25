@@ -1,9 +1,9 @@
 import React from "react";
-import { Character } from "../../../../types";
+import { PowerRoomCharacter } from "../../../../types";
 
 interface AbilitiesTabProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
 }
 
 export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
@@ -36,7 +36,7 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
                 <h5>Primary Powers</h5>
                 <ul className="abilities-list">
                   {leftCharacter.abilities.primary_powers.map(
-                    (power, index) => (
+                    (power: string, index: number) => (
                       <li key={index}>{power}</li>
                     )
                   )}
@@ -48,7 +48,7 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
                 <h5>Special Techniques</h5>
                 <ul className="abilities-list">
                   {leftCharacter.abilities.special_techniques.map(
-                    (technique, index) => (
+                    (technique: string, index: number) => (
                       <li key={index}>{technique}</li>
                     )
                   )}
@@ -61,9 +61,11 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
 
                 <h5>Weaknesses</h5>
                 <ul className="abilities-list">
-                  {leftCharacter.abilities.weaknesses.map((weakness, index) => (
-                    <li key={index}>{weakness}</li>
-                  ))}
+                  {leftCharacter.abilities.weaknesses.map(
+                    (weakness: string, index: number) => (
+                      <li key={index}>{weakness}</li>
+                    )
+                  )}
                   {leftCharacter.abilities.weaknesses.length === 0 && (
                     <li className="empty-state">No known weaknesses</li>
                   )}
@@ -92,7 +94,7 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
                 <h5>Primary Powers</h5>
                 <ul className="abilities-list">
                   {rightCharacter.abilities.primary_powers.map(
-                    (power, index) => (
+                    (power: string, index: number) => (
                       <li key={index}>{power}</li>
                     )
                   )}
@@ -104,7 +106,7 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
                 <h5>Special Techniques</h5>
                 <ul className="abilities-list">
                   {rightCharacter.abilities.special_techniques.map(
-                    (technique, index) => (
+                    (technique: string, index: number) => (
                       <li key={index}>{technique}</li>
                     )
                   )}
@@ -118,7 +120,7 @@ export const AbilitiesTab: React.FC<AbilitiesTabProps> = ({
                 <h5>Weaknesses</h5>
                 <ul className="abilities-list">
                   {rightCharacter.abilities.weaknesses.map(
-                    (weakness, index) => (
+                    (weakness: string, index: number) => (
                       <li key={index}>{weakness}</li>
                     )
                   )}

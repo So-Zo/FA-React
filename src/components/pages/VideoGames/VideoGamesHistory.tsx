@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
 import WikiSearchBar from "../../shared/WikiSearchBar";
 import WikiEditor from "../Search/WikiEditor";

@@ -8,7 +8,6 @@ import WikiEditor from "../Search/WikiEditor";
 import "../Search/WikiEditor.css";
 
 const VideoGamesPage: React.FC = () => {
-  // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
       title: "FUNDAMENTALS",

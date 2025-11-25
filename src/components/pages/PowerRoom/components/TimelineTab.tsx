@@ -1,17 +1,31 @@
 import React from "react";
-import { Character } from "../../../../types";
+import { PowerRoomCharacter } from "../../../../types";
 
 interface TimelineTabProps {
-  leftCharacter: Character | null;
-  rightCharacter: Character | null;
+  leftCharacter: PowerRoomCharacter | null;
+  rightCharacter: PowerRoomCharacter | null;
 }
 
 export const TimelineTab: React.FC<TimelineTabProps> = ({
   leftCharacter,
   rightCharacter,
 }) => {
+  // Debug: Check individual timeline events
+  if (leftCharacter?.timeline && leftCharacter.timeline.length > 0) {
+    console.log(
+      "🕒 TimelineTab - First left event:",
+      leftCharacter.timeline[0]
+    );
+  }
+  if (rightCharacter?.timeline && rightCharacter.timeline.length > 0) {
+    console.log(
+      "🕒 TimelineTab - First right event:",
+      rightCharacter.timeline[0]
+    );
+  }
+
   return (
-    <div className="comparison-panel" id="timeline-panel">
+    <div className="comparison-panel active" id="timeline-panel">
       <div className="comparison-panel-header">
         <h3>
           Timeline & Events{" "}
@@ -36,8 +50,8 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
                 {leftCharacter.timeline && leftCharacter.timeline.length > 0 ? (
                   <div className="timeline-events">
                     {leftCharacter.timeline
-                      .sort((a, b) => a.order_index - b.order_index)
-                      .map((event) => (
+                      .sort((a: any, b: any) => a.order_index - b.order_index)
+                      .map((event: any) => (
                         <div key={event.id} className="timeline-event">
                           <div className="event-header">
                             <h5 className="event-title">{event.title}</h5>
@@ -48,7 +62,7 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
                             )}
                           </div>
                           <p className="event-description">
-                            {event.description}
+                            DEBUG: {event.description}
                           </p>
                         </div>
                       ))}
@@ -75,7 +89,7 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
                   <div className="timeline-events">
                     {rightCharacter.timeline
                       .sort((a, b) => a.order_index - b.order_index)
-                      .map((event) => (
+                      .map((event: any) => (
                         <div key={event.id} className="timeline-event">
                           <div className="event-header">
                             <h5 className="event-title">{event.title}</h5>
@@ -86,7 +100,7 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
                             )}
                           </div>
                           <p className="event-description">
-                            {event.description}
+                            DEBUG: {event.description}
                           </p>
                         </div>
                       ))}

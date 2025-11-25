@@ -4,7 +4,6 @@
 */
 
 @import "./reset.css"; /* Import consolidated reset styles */
-/*@import "../../../debug-targeted.css"; /* TARGETED DEBUG */
 
 /* Base styles - these remain as they are styling choices, not resets */
 body {
@@ -39,6 +38,17 @@ body {
 
 .skip-link:focus {
   top: 0;
+}
+
+/* Clickable user elements */
+.clickable-avatar:hover,
+.clickable-username:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.clickable-username:hover {
+  text-decoration: underline;
 }
 
 /* Content wrapper for main content to avoid sidebar overlap */
