@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { PostType, SortOption } from "../../../types";
 import { usePosts } from "./hooks/usePosts";
-import { PostCard } from "../../../shared/Components/PostCard";
-import { ReportModal } from "../../../shared/Components/ReportModal";
-import { useSearch } from "../../../shared/hooks/useSearch";
-import { useReporting } from "../../../shared/hooks/useReporting";
+import { PostCard } from "../../../FaShared/Components/PostCard";
+import { ReportModal } from "../../../FaShared/Components/ReportModal";
+import { useSearch } from "../../../FaShared/hooks/useSearch";
+import { useReporting } from "../../../FaShared/hooks/useReporting";
 
 const CommunityPage: React.FC = () => {
   const [selectedPostType, setSelectedPostType] = useState<PostType | null>(
     null
   );
-  const [selectedSort, setSelectedSort] = useState<SortOption>("latest");
+  const [selectedSort, setSelectedSort] = useState<SortOption>("top");
 
   // Use the shared search hook
   const { searchQuery, debouncedSearchQuery, setSearchQuery, isTyping } =

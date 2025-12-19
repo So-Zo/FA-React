@@ -1,5 +1,5 @@
 import React from "react";
-import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 
 const CharacterPage: React.FC = () => {
   return (

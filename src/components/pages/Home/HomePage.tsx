@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import WikiSearchBar from "../../shared/WikiSearchBar";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 
 // This is the main homepage component that corresponds to the original index.html
 const HomePage: React.FC = () => {

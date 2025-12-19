@@ -371,27 +371,103 @@ export const dataService = {
   },
 
   /**
-   * Get contributors for a specific wiki page
+   * Get contributors for a specific wiki page using master view
    */
-  async getPageContributors(pageId: string) {
+  async getPageContributors(fullPath: string) {
     const { data, error } = await supabase
-      .from("wiki_contributors")
+      .from("wiki_master_view")
       .select(
         `
-        *,
-        users(
-          id,
-          display_name,
-          username,
-          avatar_url
-        )
+        contributor_id,
+        page_id,
+        contributor_profile_id,
+        contribution_count,
+        first_contributed_at,
+        last_contributed_at,
+        contributor_name,
+        contributor_username,
+        contributor_avatar,
+        contributor_verified
       `
       )
-      .eq("wiki_page_id", pageId)
+      .eq("page_path", fullPath)
+      .not("contributor_id", "is", null) // Only get rows with actual contributors
       .order("last_contributed_at", { ascending: false });
 
-    if (error) throw error;
+    if (error) {
+      console.error("Failed to get page contributors:", error);
+      return [];
+    }
+
+    // Transform the normalized data back to our expected interface
+    return (data || []).map((row: any) => ({
+      id: row.contributor_id,
+      wiki_page_id: row.page_id,
+      user_profile_id: row.contributor_profile_id,
+      contribution_count: row.contribution_count,
+      first_contributed_at: row.first_contributed_at,
+      last_contributed_at: row.last_contributed_at,
+      user_profiles: {
+        id: row.contributor_profile_id,
+        display_name: row.contributor_name,
+        username: row.contributor_username,
+        avatar_url: row.contributor_avatar,
+        is_verified: row.contributor_verified,
+      },
+    }));
+  },
+
+  /**
+   * Get basic page info using master view (faster than separate queries)
+   */
+  async getPageInfo(fullPath: string) {
+    const { data, error } = await supabase
+      .from("wiki_master_view")
+      .select(
+        `
+        page_id,
+        page_title,
+        page_slug,
+        page_path,
+        page_type,
+        genre,
+        page_created_at,
+        page_updated_at,
+        page_creator_name,
+        page_creator_avatar
+      `
+      )
+      .eq("page_path", fullPath)
+      .is("contributor_id", null) // Get page info row (not contributor rows)
+      .single();
+
+    if (error) {
+      console.error("Failed to get page info:", error);
+      return null;
+    }
+
     return data;
+  },
+
+  /**
+   * Get combined page info and contributors in one optimized call
+   */
+  async getPageWithContributors(fullPath: string) {
+    return await cache.get(
+      `page-with-contributors-${fullPath}`,
+      async () => {
+        const [pageInfo, contributors] = await Promise.all([
+          this.getPageInfo(fullPath),
+          this.getPageContributors(fullPath),
+        ]);
+
+        return {
+          page: pageInfo,
+          contributors: contributors || [],
+        };
+      },
+      10 * 60 * 1000 // 10 minute cache for combined data
+    );
   },
 
   // ============= AUTHENTICATION & USER DATA =============

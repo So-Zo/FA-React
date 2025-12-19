@@ -35,3 +35,133 @@
 .profile-main {
   width: 100%;
 }
+
+/* ==========================================================================
+   COMMENT FEED STYLES (matching post-feed pattern)
+   ========================================================================== */
+
+/* Main comment feed wrapper with uni-section background */
+.comment-feed {
+  background: var(--section-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-lg) 0;
+  box-shadow: var(--shadow-md);
+  width: 95%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Comment grid layout */
+.comment-feed-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+/* Comment feed states */
+.comment-feed-loading,
+.comment-feed-error,
+.comment-feed-empty {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  color: var(--txt-on-section);
+  font-size: var(--font-size-base);
+}
+
+.comment-feed-error {
+  color: var(--danger);
+}
+
+/* Comment feed header */
+.comment-feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.comment-feed-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--txt-on-section);
+  margin: 0;
+}
+
+/* Individual comment card */
+.comment-card {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  transition: var(--transition-smooth);
+}
+
+.comment-card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+/* Comment card header */
+.comment-header {
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.comment-context {
+  color: var(--text-muted);
+}
+
+.comment-post-link {
+  color: var(--accent-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.comment-post-link:hover {
+  text-decoration: underline;
+}
+
+.comment-author {
+  color: var(--text-muted);
+}
+
+/* Comment card content */
+.comment-content {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+}
+
+/* Comment card footer */
+.comment-footer {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .comment-feed {
+    width: 100%;
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+  }
+
+  .comment-feed-grid {
+    gap: var(--spacing-sm);
+  }
+
+  .comment-card {
+    padding: var(--spacing-sm);
+  }
+}

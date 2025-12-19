@@ -352,4 +352,76 @@ export const profileService = {
 
     return { url: publicURL.publicUrl };
   },
+
+  // Get user comments with post context
+  async getUserComments(
+    userId: string,
+    page: number = 1,
+    limit: number = 10
+  ): Promise<{ comments: any[]; total: number }> {
+    try {
+      const offset = (page - 1) * limit;
+
+      // Fetch comments by user from master_view with post context
+      const {
+        data,
+        error: fetchError,
+        count,
+      } = await supabase
+        .from("master_view")
+        .select(
+          `
+          comment_id,
+          post_id,
+          title,
+          comment_content,
+          comment_created_at,
+          comment_updated_at,
+          post_author_name,
+          post_author_username,
+          post_author_avatar,
+          medium,
+          genre
+        `,
+          { count: "exact" }
+        )
+        .eq("comment_author_profile_id", userId)
+        .not("comment_id", "is", null) // Only get comments, not posts
+        .order("comment_created_at", { ascending: false })
+        .range(offset, offset + limit - 1);
+
+      if (fetchError) throw fetchError;
+
+      // Transform the data to match our UserComment interface
+      const comments = (data || []).map((item) => ({
+        id: item.comment_id,
+        post_id: item.post_id,
+        content: item.comment_content,
+        created_at: item.comment_created_at,
+        updated_at: item.comment_updated_at,
+        post: {
+          id: item.post_id,
+          title: item.title,
+          author: {
+            display_name: item.post_author_name,
+            avatar_url: item.post_author_avatar,
+          },
+        },
+        author: {
+          id: userId, // The comment author is the user we're fetching for
+          display_name: "", // We don't have this in master_view, could add if needed
+          avatar_url: undefined,
+          is_verified: false,
+        },
+      }));
+
+      return {
+        comments,
+        total: count || 0,
+      };
+    } catch (error) {
+      console.error("Error fetching user comments:", error);
+      throw error;
+    }
+  },
 };

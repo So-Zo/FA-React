@@ -1,7 +1,7 @@
 import React from "react";
 import { useProfileContext } from "../ProfileContext";
 import { useProfileForms } from "../hooks";
-import { useTheme } from "../../../../shared/hooks/ThemeContext";
+import { useTheme } from "../../../../FaShared/hooks/ThemeContext";
 import { supabase } from "../../../../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 

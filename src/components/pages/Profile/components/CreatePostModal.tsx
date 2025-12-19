@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { profileService } from "../services/profileService";
 import { useModal, useFileUpload, useProfileForms } from "../hooks";
 import { useProfileContext } from "../ProfileContext";
-import { useAuth } from "../../../../shared/hooks/useAuth";
-import { useProfileId } from "../../../../shared/utils/userUtils";
+import { useAuth } from "../../../../FaShared/hooks/useAuth";
+import { useProfileId } from "../../../../FaShared/utils/userUtils";
 import { PostType, Medium, Genre } from "../../../../types";
 
 type PostVisibility = "public" | "private" | "followers";
@@ -79,7 +79,6 @@ export const CreatePostModal: React.FC<CreatePostModalProps> = ({
         medium: postMedium,
         genre: postGenre,
         visibility: postVisibility,
-        tags: [], // Add default empty tags
         media_ids: uploadedMediaId ? [uploadedMediaId] : [],
         // These fields will be computed by the database/view
         likes_count: 0,

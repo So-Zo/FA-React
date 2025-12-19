@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../lib/supabaseClient";
-import { useAuth } from "../../../../shared/hooks/useAuth";
+import { useAuth } from "../../../../FaShared/hooks/useAuth";
 import {
   PostType,
   Medium,

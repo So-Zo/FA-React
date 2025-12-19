@@ -7,25 +7,28 @@ import React, {
 } from "react";
 import { profileService } from "./services/profileService";
 import { dataService } from "../../../services/dataService";
-import { useProfile } from "../../../shared/hooks/useProfile";
+import { useProfile } from "../../../FaShared/hooks/useProfile";
 import {
   ProfileState,
   ProfileData,
   UserActivityMetrics,
   UserPost,
-} from "./types";
-import { useAuth } from "../../../shared/hooks/useAuth";
+  UserComment,
+} from "../../../types";
+import { useAuth } from "../../../FaShared/hooks/useAuth";
 
 // Initial state
 const initialState: ProfileState = {
   loadingStates: {
     profileDataLoading: false,
     userPostsLoading: false,
+    userCommentsLoading: false,
     statsDataLoading: false,
   },
   operationErrors: {
     profileLoadError: null,
     postsLoadError: null,
+    commentsLoadError: null,
     statsLoadError: null,
   },
   profileData: null,
@@ -35,7 +38,9 @@ const initialState: ProfileState = {
     totalPosts: 0,
   },
   userPosts: [],
+  userComments: [],
   totalUserPosts: 0,
+  totalUserComments: 0,
 };
 
 // Action types
@@ -54,6 +59,10 @@ type ProfileAction =
   | { type: "SET_PROFILE_DATA"; payload: ProfileData }
   | { type: "SET_PROFILE_STATS"; payload: UserActivityMetrics }
   | { type: "SET_POSTS"; payload: { posts: UserPost[]; totalPosts: number } }
+  | {
+      type: "SET_COMMENTS";
+      payload: { comments: UserComment[]; totalComments: number };
+    }
   | { type: "RESET_STATE" };
 
 // Reducer
@@ -94,6 +103,12 @@ function profileReducer(
         userPosts: action.payload.posts,
         totalUserPosts: action.payload.totalPosts,
       };
+    case "SET_COMMENTS":
+      return {
+        ...state,
+        userComments: action.payload.comments,
+        totalUserComments: action.payload.totalComments,
+      };
     case "RESET_STATE":
       return initialState;
     default:
@@ -105,6 +120,7 @@ function profileReducer(
 interface ProfileContextType extends ProfileState {
   refreshProfileData: () => Promise<void>;
   fetchProfilePosts: (page: number, limit: number) => Promise<void>;
+  fetchUserComments: (page: number, limit: number) => Promise<void>;
   updateProfileData: (data: Partial<ProfileData>) => Promise<void>;
   createPost: (
     post: Omit<UserPost, "id" | "created_at" | "updated_at">
@@ -218,6 +234,47 @@ export const ProfileProvider: React.FC<{
     [targetUserId] // Update dependency to targetUserId instead of user
   );
 
+  const fetchUserComments = useCallback(
+    async (page: number, limit: number) => {
+      if (!targetUserId) return;
+
+      dispatch({
+        type: "SET_LOADING",
+        payload: { key: "userCommentsLoading", value: true },
+      });
+
+      try {
+        const { comments, total } = await profileService.getUserComments(
+          targetUserId,
+          page,
+          limit
+        );
+
+        dispatch({
+          type: "SET_COMMENTS",
+          payload: {
+            comments: comments,
+            totalComments: total,
+          },
+        });
+      } catch (error) {
+        dispatch({
+          type: "SET_ERROR",
+          payload: {
+            key: "commentsLoadError",
+            value: error instanceof Error ? error : new Error("Unknown error"),
+          },
+        });
+      } finally {
+        dispatch({
+          type: "SET_LOADING",
+          payload: { key: "userCommentsLoading", value: false },
+        });
+      }
+    },
+    [targetUserId]
+  );
+
   const refreshProfileData = useCallback(async () => {
     await refresh();
   }, [refresh]);
@@ -279,6 +336,7 @@ export const ProfileProvider: React.FC<{
         ...state,
         refreshProfileData,
         fetchProfilePosts,
+        fetchUserComments,
         updateProfileData,
         createPost,
         isOwnProfile, // Include isOwnProfile in the context value

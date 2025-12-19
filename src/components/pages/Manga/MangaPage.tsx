@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
-} from "../../../components/ui/TableOfContents";
-import WikiEditor from "../Search/WikiEditor";
-import "../Search/WikiEditor.css";
+} from "../../PageUIs/TableOfContents";
+import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import "../../../FaShared/Css/WikiEditor.css";
 
 const MangaPage: React.FC = () => {
   // Define TOC sections

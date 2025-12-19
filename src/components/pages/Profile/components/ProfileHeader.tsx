@@ -1,7 +1,7 @@
 import React from "react";
 import { useProfileContext } from "../ProfileContext";
-import { useAuth } from "../../../../shared/hooks/useAuth";
-import { useFollow } from "../../../../shared/hooks/useFollow";
+import { useAuth } from "../../../../FaShared/hooks/useAuth";
+import { useFollow } from "../../../../FaShared/hooks/useFollow";
 
 interface ProfileHeaderProps {
   onProfileImageChange: (file: File) => void;

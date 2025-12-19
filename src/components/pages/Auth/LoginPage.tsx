@@ -2,7 +2,7 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../../../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../shared/hooks/useAuth";
+import { useAuth } from "../../../FaShared/hooks/useAuth";
 import { useEffect } from "react";
 
 const LoginPage = () => {

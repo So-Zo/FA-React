@@ -1,18 +1,51 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import TableOfContents, {
   TocSectionProps,
-} from "../../../components/ui/TableOfContents";
-import WikiSearchBar from "../../shared/WikiSearchBar";
-import WikiEditor from "../Search/WikiEditor";
-import { usePageContributors } from "../../shared/hooks/usePageContributors";
-import { PageContributor } from "../../shared/PageContributor";
-import "../Search/WikiEditor.css";
+} from "../../PageUIs/TableOfContents";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
+import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
+import { PageContributor } from "../../../FaShared/Components/PageContributor";
+import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
+import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useAuth } from "../../../FaShared/hooks/useAuth";
+import "../../../FaShared/Css/WikiEditor.css";
 
 const AnimePage: React.FC = () => {
+  // Load dynamic content from database
+  const {
+    page: wikiPage,
+    loading: pageLoading,
+    error: pageError,
+    refreshPage,
+  } = useWikiPage("/anime");
+
   // Get page contributors
   const { contributors } = usePageContributors("anime-main-page");
 
+  // Get current user for saving
+  const { user } = useAuth();
+
+  // Handle content updates from WikiEditor
+  const handleContentUpdate = useCallback(
+    async (newContent: any) => {
+      if (!wikiPage?.id) {
+        console.warn("Cannot save: no page ID available");
+        return;
+      }
+
+      try {
+        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
+        // Refresh the page data to show updated content
+        await refreshPage();
+      } catch (error) {
+        console.error("Failed to save wiki page:", error);
+        // You might want to show a toast notification here
+      }
+    },
+    [wikiPage?.id, user?.id, refreshPage]
+  );
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
@@ -73,25 +106,36 @@ const AnimePage: React.FC = () => {
           description="Use this table of contents to navigate through the anime guide."
         />
 
-        {/* Anime Introduction - WikiEditor */}
-        <WikiEditor
-          className="section-content"
-          content={`
-            <section id="anime-basics">
-              <h2>The Basics of Anime</h2>
-              <p>
-                "Anime" refers to animation originating from Japan. In Japan itself,
-                the term "anime" (アニメ) is used for all animation regardless of
-                origin, but internationally it has come to specifically mean
-                Japanese-style animation. This distinctive art form is characterized
-                by colorful graphics, vibrant characters, and fantastical themes.
-                <strong>This content is editable when edit mode is enabled!</strong>
-              </p>
-            </section>
-          `}
-        />
+        {/* Anime Introduction - Dynamic WikiEditor */}
+        {pageLoading ? (
+          <div className="section-content">
+            <p>Loading page content...</p>
+          </div>
+        ) : pageError ? (
+          <div className="section-content error">
+            <h2>⚠️ Error Loading Content</h2>
+            <p>Failed to load page content: {pageError}</p>
+          </div>
+        ) : wikiPage?.content ? (
+          <WikiEditor
+            className="section-content"
+            content={wikiPage.content}
+            onUpdate={handleContentUpdate}
+          />
+        ) : (
+          <div className="section-content placeholder">
+            <h2>📄 No Database Content Yet</h2>
+            <p>
+              <strong>This page is now dynamic!</strong> The content will be
+              loaded from the database once it's added. Currently showing:{" "}
+              <code>wikiPage = {wikiPage ? "exists but empty" : "null"}</code>
+            </p>
+            <p>Enable edit mode to add the first content to the database!</p>
+          </div>
+        )}
 
-        {/* The Basics Section */}
+        {/* ======== STATIC SECTIONS COMMENTED OUT FOR DYNAMIC TESTING ======== */}
+        {/*
         <section id="the-basics" className="section-content">
           <h2>The Basics</h2>
           <p>
@@ -890,13 +934,32 @@ const AnimePage: React.FC = () => {
           </ul>
         </section>
         <hr />
-      </main>
 
-      <PageContributor
-        pageId="anime-main-page"
-        contributors={contributors}
-        historyPath="/anime/history"
-      />
+        {/* ======== TEMPORARY: SHOWING ONLY DYNAMIC CONTENT ======== */}
+        <div className="section-content dynamic-notice">
+          <h2>🚀 Dynamic Content Testing Mode</h2>
+          <p>
+            The hardcoded static sections have been commented out to clearly
+            show the difference between static and dynamic content loading.
+          </p>
+          <p>
+            <strong>Page State:</strong>
+            <br />• Loading: {pageLoading ? "Yes" : "No"}
+            <br />• Error: {pageError || "None"}
+            <br />• Has Database Content: {wikiPage?.content ? "Yes" : "No"}
+            <br />• Page ID: {wikiPage?.id || "Not found"}
+          </p>
+        </div>
+        <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="anime-main-page"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
+      </main>
     </div>
   );
 };

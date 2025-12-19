@@ -1,15 +1,12 @@
 import React from "react";
-import TableOfContents, { TocSectionProps } from "../../ui/TableOfContents";
-import WikiSearchBar from "../../shared/WikiSearchBar";
-import WikiEditor from "../Search/WikiEditor";
-import { usePageContributors } from "../../shared/hooks/usePageContributors";
-import { PageContributor } from "../../shared/PageContributor";
-import "../Search/WikiEditor.css";
+import TableOfContents, {
+  TocSectionProps,
+} from "../../PageUIs/TableOfContents";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
+import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import "../../../FaShared/Css/WikiEditor.css";
 
 const AnimeHistory: React.FC = () => {
-  // Get page contributors
-  const { contributors } = usePageContributors("anime-history-page");
-
   // Define TOC sections
   const tocSections: TocSectionProps[] = [
     {
@@ -515,12 +512,6 @@ const AnimeHistory: React.FC = () => {
           </ul>
         </section>
       </main>
-
-      <PageContributor
-        pageId="anime-history-page"
-        contributors={contributors}
-        historyPath="/anime/history"
-      />
     </div>
   );
 };

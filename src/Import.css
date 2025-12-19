@@ -1,36 +1,36 @@
 /* Base */
-@import url(./shared/Css/reset.css);
-@import url(./shared/Css/themes.css); /* Contains all variables + theme definitions */
-@import url(./shared/Css/global.css);
+@import url(./FaShared/Css/reset.css);
+@import url(./FaShared/Css/themes.css); /* Contains all variables + theme definitions */
+@import url(./FaShared/Css/global.css);
 
 /* Layout */
-@import url(./shared/Css/sections.css);
-@import url(./shared/Css/GridStyles.css);
+@import url(./FaShared/Css/sections.css);
+@import url(./FaShared/Css/GridStyles.css);
 
 /* Components */
-@import url(./shared/Css/Header.css);
-@import url(./shared/Css/Navigation.css);
-@import url(./shared/Css/BottomNavigation.css);
-@import url(./shared/Css/Footer.css);
-@import url(./shared/Css/cards.css);
-@import url(./shared/Css/TableOfContents.css);
+@import url(./FaShared/Css/Header.css);
+@import url(./FaShared/Css/Navigation.css);
+@import url(./FaShared/Css/BottomNavigation.css);
+@import url(./FaShared/Css/Footer.css);
+@import url(./FaShared/Css/cards.css);
+@import url(./FaShared/Css/TableOfContents.css);
 
 /* Consolidated Patterns */
-@import url(./shared/Css/buttons.css);
-@import url(./shared/Css/modals.css);
-@import url(./shared/Css/forms.css);
-@import url(./shared/Css/postfeed.css);
+@import url(./FaShared/Css/buttons.css);
+@import url(./FaShared/Css/modals.css);
+@import url(./FaShared/Css/forms.css);
+@import url(./FaShared/Css/postfeed.css);
 
 /* Pages */
-@import url(./components/ui/HomePage.css);
-@import url(./components/ui/CommunityPage.css);
+@import url(./components/PageUIs/HomePage.css);
+@import url(./components/PageUIs/CommunityPage.css);
 /*@import url(./components/ui/ProfilePage.css); */
 @import url(./components/pages/Profile/Profileimport.css);
-@import url(./components/ui/PowerRoomPage.css);
-@import url(./components/ui/AuthPage.css);
+@import url(./components/PageUIs/PowerRoomPage.css);
+@import url(./components/PageUIs/AuthPage.css);
 
 /* States & Utilities */
-@import url(./shared/Css/BgColors.css);
-@import url(./shared/Css/links.css);
-@import url(./shared/Css/LoadingStates.css);
-@import url(./components/ui/LoadingAndError.css);
+@import url(./FaShared/Css/BgColors.css);
+@import url(./FaShared/Css/links.css);
+@import url(./FaShared/Css/LoadingStates.css);
+@import url(./components/PageUIs/LoadingAndError.css);

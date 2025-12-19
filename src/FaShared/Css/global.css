@@ -1,0 +1,116 @@
+/*
+* Global CSS for FanArcs React
+* Base styles that apply throughout the application
+*/
+
+@import "./reset.css"; /* Import consolidated reset styles */
+
+/* Base styles - these remain as they are styling choices, not resets */
+body {
+  font-family: var(--font-primary);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px; /* Using px for this specific positioning */
+  left: 0;
+  background: var(--fanarc-primary-color);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  z-index: var(--z-tooltip);
+  transition: top var(--transition-base);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Clickable user elements */
+.clickable-avatar:hover,
+.clickable-username:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.clickable-username:hover {
+  text-decoration: underline;
+}
+
+/* Content wrapper for main content - grid with sticky sidebars */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr; /* Desktop: sidebar + main content */
+  max-width: 100%;
+  margin: 0 auto;
+  /* Make the grid container handle the sticky positioning */
+  position: relative;
+  /* Smooth transition when grid changes */
+  transition: grid-template-columns 0.3s ease;
+}
+
+/* Make grid children stick to viewport */
+.content-wrapper > *:first-child {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Main content area - center itself better and transition smoothly */
+.content-wrapper > *:nth-child(2) {
+  /* Center the content within its available space */
+  max-width: 1400px; /* Prevent content from getting too wide */
+  margin: 0 auto; /* Center horizontally */
+  padding: 0 2rem; /* Add consistent padding */
+  transition: all 0.3s ease; /* Smooth transitions */
+  /* Maintain reading width even when toolbar appears */
+  container-type: inline-size;
+}
+
+/* When edit mode is active, add space for right TipTap toolbar */
+.content-wrapper.edit-mode {
+  grid-template-columns: 4.5rem 1fr 4.5rem; /* Desktop: left sidebar + main content + tiptap toolbar */
+}
+
+/* In edit mode, adjust content centering to compensate for toolbar */
+.content-wrapper.edit-mode > *:nth-child(2) {
+  /* Shift content slightly left to visually center between sidebars */
+  transform: translateX(-0.25rem);
+  /* Reduce max-width slightly to maintain comfortable reading */
+  max-width: 1300px;
+}
+
+/* Make the right toolbar sticky too when present */
+.content-wrapper.edit-mode > *:last-child {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    grid-template-columns: 1fr; /* Mobile: single column, no sidebar */
+    padding-bottom: 80px; /* Space for bottom navigation */
+  }
+
+  .content-wrapper.edit-mode {
+    grid-template-columns: 1fr; /* Mobile: still single column, tiptap controls will be floating */
+    /* TipTap toolbar will be hidden on mobile and replaced with floating controls */
+  }
+}

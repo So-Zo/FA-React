@@ -1,0 +1,139 @@
+import React, { useCallback } from "react";
+import TableOfContents, {
+  TocSectionProps,
+} from "../../PageUIs/TableOfContents";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
+import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
+import { PageContributor } from "../../../FaShared/Components/PageContributor";
+import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
+import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useAuth } from "../../../FaShared/hooks/useAuth";
+import "../../../FaShared/Css/WikiEditor.css";
+
+const VideoGamesPage: React.FC = () => {
+  // Load dynamic content from database
+  const {
+    page: wikiPage,
+    loading: pageLoading,
+    error: pageError,
+    refreshPage,
+  } = useWikiPage("/video-games");
+
+  // Get page contributors
+  const { contributors } = usePageContributors("video-games-main-page");
+
+  // Get current user for saving
+  const { user } = useAuth();
+
+  // Handle content updates from WikiEditor
+  const handleContentUpdate = useCallback(
+    async (newContent: any) => {
+      if (!wikiPage?.id) {
+        console.warn("Cannot save: no page ID available");
+        return;
+      }
+
+      try {
+        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
+        await refreshPage();
+      } catch (error) {
+        console.error("Failed to save wiki page:", error);
+      }
+    },
+    [wikiPage?.id, user?.id, refreshPage]
+  );
+
+  const tocSections: TocSectionProps[] = [
+    {
+      title: "FUNDAMENTALS",
+      quickLinks: [
+        { label: "Basics", anchor: "#the-basics" },
+        { label: "History", anchor: "#history-of-videogames" },
+        { label: "Terms", anchor: "#terminology-guide" },
+      ],
+      deepLinks: [
+        { label: "Full History", path: "/video-games/history", exists: true },
+      ],
+    },
+    {
+      title: "CATEGORIES & STYLES",
+      quickLinks: [
+        { label: "Genres", anchor: "#videogame-genres" },
+        { label: "Worlds", anchor: "#videogame-worlds" },
+        { label: "Platforms", anchor: "#platforms" },
+      ],
+      deepLinks: [
+        { label: "Directory", path: "/video-games/directory", exists: true },
+      ],
+    },
+  ];
+
+  return (
+    <div className="video-games-page">
+      <header>
+        <div className="image-header">
+          <img
+            src="/images/video-games/VideoGamesHeader.jpg"
+            alt="Video Games Overview"
+          />
+        </div>
+        <WikiSearchBar
+          placeholder="Search for Characters, Universes, etc."
+          className="video-games-search-bar"
+        />
+      </header>
+
+      <main id="main-content">
+        <hr />
+        <TableOfContents
+          sections={tocSections}
+          title="Video Games Encyclopedia"
+          description="Use this table of contents to navigate through the video games guide."
+        />
+
+        {pageLoading ? (
+          <div className="section-content loading">
+            <h2>📚 Loading Video Games Content...</h2>
+            <p>Fetching the latest content from the database...</p>
+          </div>
+        ) : pageError ? (
+          <div className="section-content error">
+            <h2>⚠️ Error Loading Content</h2>
+            <p>Failed to load page content: {pageError}</p>
+            <button onClick={refreshPage} className="retry-button">
+              Try Again
+            </button>
+          </div>
+        ) : wikiPage?.content ? (
+          <WikiEditor
+            className="section-content"
+            content={wikiPage.content}
+            onUpdate={handleContentUpdate}
+          />
+        ) : (
+          <div className="section-content placeholder">
+            <h2>📄 No Database Content Yet</h2>
+            <p>
+              <strong>This page is fully dynamic!</strong> Content will be
+              loaded from the database once it's added.
+            </p>
+            <p>
+              Page ID: <code>{wikiPage?.id || "Not found"}</code>
+            </p>
+          </div>
+        )}
+
+        <hr />
+        <PageContributor
+          pageId="video-games-main-page"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
+      </main>
+    </div>
+  );
+};
+
+export default VideoGamesPage;

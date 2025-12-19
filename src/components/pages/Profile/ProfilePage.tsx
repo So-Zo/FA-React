@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../shared/hooks/useAuth";
+import { useAuth } from "../../../FaShared/hooks/useAuth";
 import { useProfileContext } from "./ProfileContext";
 import { useProfileNavigation, useModal } from "./hooks";
 import {
@@ -12,7 +12,7 @@ import {
   ErrorBoundary,
   LoadingSpinner,
 } from "./components";
-import { PostCard } from "../../../shared/Components/PostCard";
+import { PostCard } from "../../../FaShared/Components/PostCard";
 import { profileService } from "./services";
 
 function ProfileContent() {
@@ -21,9 +21,11 @@ function ProfileContent() {
   const {
     refreshProfileData,
     userPosts,
+    userComments,
     loadingStates,
     totalUserPosts,
     fetchProfilePosts,
+    fetchUserComments,
     isOwnProfile,
     profileData,
   } = useProfileContext();
@@ -67,6 +69,13 @@ function ProfileContent() {
     currentPage,
     postsPerPage,
   ]);
+
+  // Effect to fetch comments when comments section is active
+  useEffect(() => {
+    if (activeSection === "comments" && !authLoading && user) {
+      fetchUserComments(1, 10); // Fetch first page of comments
+    }
+  }, [activeSection, authLoading, user, fetchUserComments]);
 
   if (authLoading) {
     return <LoadingSpinner message="Loading your profile..." />;
@@ -131,8 +140,57 @@ function ProfileContent() {
         {/* Comments Section */}
         {activeSection === "comments" && (
           <div className="active">
-            <h2>Recent Comments</h2>
-            <div className="empty-state">No comments yet.</div>
+            <div className="comment-feed">
+              <div className="comment-feed-header">
+                <h2 className="comment-feed-title">
+                  {isOwnProfile
+                    ? "Your Comments"
+                    : `${profileData?.display_name}'s Comments`}
+                </h2>
+              </div>
+              <div className="comment-feed-grid">
+                {loadingStates.userCommentsLoading ? (
+                  <div className="comment-feed-loading">
+                    Loading comments...
+                  </div>
+                ) : !userComments || userComments.length === 0 ? (
+                  <div className="comment-feed-empty">No comments yet.</div>
+                ) : (
+                  <>
+                    {userComments.map((comment) => (
+                      <div key={comment.id} className="comment-card">
+                        <div className="comment-header">
+                          <span className="comment-context">Commented on </span>
+                          <button
+                            className="comment-post-link"
+                            onClick={() => navigate(`/post/${comment.post_id}`)}
+                          >
+                            "{comment.post.title}"
+                          </button>
+                          <span className="comment-author">
+                            {" "}
+                            by {comment.post.author.display_name}
+                          </span>
+                        </div>
+                        <div className="comment-content">{comment.content}</div>
+                        <div className="comment-footer">
+                          {new Date(comment.created_at).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            }
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         )}
 

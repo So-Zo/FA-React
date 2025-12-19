@@ -162,6 +162,29 @@ export interface CommentForm {
   parent_comment_id?: string;
 }
 
+// User comment with post context for profile page
+export interface UserComment {
+  id: string;
+  post_id: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  post: {
+    id: string;
+    title: string;
+    author: {
+      display_name: string;
+      avatar_url?: string;
+    };
+  };
+  author: {
+    id: string;
+    display_name: string;
+    avatar_url?: string;
+    is_verified: boolean;
+  };
+}
+
 // ============= CHARACTER TYPES =============
 
 export interface Character {
@@ -284,10 +307,11 @@ export interface WikiPage {
   id: string;
   title: string;
   slug: string;
+  full_path: string;
+  page_type: string;
+  genre?: string;
   content: string;
   summary?: string;
-  is_featured: boolean;
-  view_count: number;
   created_at: string;
   updated_at: string;
   created_by: string;
@@ -321,11 +345,16 @@ export interface WikiRevision {
 export interface WikiContributor {
   id: string;
   wiki_page_id: string;
-  user_profile_id: string; // Updated to match database schema
+  user_profile_id: string;
   contribution_count: number;
   first_contributed_at: string;
-  last_contributed_at: string; // Updated to match database schema
-  users?: User;
+  last_contributed_at: string;
+  user_profiles?: {
+    id: string;
+    username: string;
+    display_name: string;
+    avatar_url?: string;
+  };
 }
 
 export interface WikiSearchResult {
@@ -441,12 +470,14 @@ export interface UserActivityMetrics {
 export interface LoadingStates {
   profileDataLoading: boolean;
   userPostsLoading: boolean;
+  userCommentsLoading: boolean;
   statsDataLoading: boolean;
 }
 
 export interface OperationErrors {
   profileLoadError: Error | null;
   postsLoadError: Error | null;
+  commentsLoadError: Error | null;
   statsLoadError: Error | null;
 }
 
@@ -478,6 +509,8 @@ export interface ProfileState {
   activityMetrics: UserActivityMetrics;
   userPosts: UserPost[];
   totalUserPosts: number;
+  userComments: UserComment[];
+  totalUserComments: number;
 }
 
 export interface ProfileSettingsInputs {
@@ -506,6 +539,14 @@ export interface ProfileFormsState {
   settingsForm: ProfileSettingsInputs;
   newPostForm: NewPostInputs;
 }
+
+export type ProfileSection =
+  | "comments"
+  | "posts"
+  | "work-requests"
+  | "settings"
+  | "drafts"
+  | "notifications";
 
 // ============= REPORT TYPES =============
 
@@ -602,146 +643,6 @@ export interface PostForm {
   content: string;
   universe_type?: UniverseType;
   is_pinned?: boolean;
-} // ============= PROFILE TYPES (from Profile/types.ts) =============
-
-export interface UserPost {
-  id: string;
-  created_at: string;
-  updated_at: string;
-  title: string;
-  content: string;
-  post_type: PostType;
-  medium: Medium;
-  genre: Genre;
-  user_profile_id: string;
-  media_ids: string[];
-  visibility: "public" | "followers" | "private";
-  likes_count: number;
-  comments_count: number;
-  author?: {
-    id: string;
-    display_name: string;
-    avatar_url: string;
-    is_verified: boolean;
-  };
-}
-
-export interface UserActivityMetrics {
-  totalFollowers: number;
-  totalFollowing: number;
-  totalPosts: number;
-}
-
-export interface LoadingStates {
-  profileDataLoading: boolean;
-  userPostsLoading: boolean;
-  statsDataLoading: boolean;
-}
-
-export interface OperationErrors {
-  profileLoadError: Error | null;
-  postsLoadError: Error | null;
-  statsLoadError: Error | null;
-}
-
-export interface ProfileData {
-  id: string;
-  display_name: string;
-  username: string;
-  bio: string;
-  avatar_url?: string;
-  banner_url?: string;
-  website_url?: string;
-  location?: string;
-  is_verified?: boolean;
-  is_private?: boolean;
-  show_online_status?: boolean;
-  email_notifications?: boolean;
-  comment_notifications?: boolean;
-  follower_notifications?: boolean;
-  content_notifications?: boolean;
-  last_seen?: string;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface ProfileState {
-  loadingStates: LoadingStates;
-  operationErrors: OperationErrors;
-  profileData: ProfileData | null;
-  activityMetrics: UserActivityMetrics;
-  userPosts: UserPost[];
-  totalUserPosts: number;
-}
-
-export interface ProfileSettingsInputs {
-  userDisplayName: string;
-  userBio: string;
-  isPrivateProfile: boolean;
-  showOnlineStatus: boolean;
-  allowTagging: boolean;
-  emailNotifications: boolean;
-  commentNotifications: boolean;
-  followerNotifications: boolean;
-  contentNotifications: boolean;
-}
-
-export interface NewPostInputs {
-  postTitle: string;
-  postContent: string;
-  postType: PostType;
-  postMedium: Medium;
-  postGenre: Genre;
-  postTags: string[];
-  postVisibility: UserPost["visibility"];
-}
-
-export interface ProfileFormsState {
-  settingsForm: ProfileSettingsInputs;
-  newPostForm: NewPostInputs;
-}
-
-export type ProfileSection =
-  | "comments"
-  | "posts"
-  | "work-requests"
-  | "settings"
-  | "drafts"
-  | "notifications";
-
-// ============= REPORT TYPES (from shared/types/reports.ts) =============
-
-export interface Report {
-  id: string;
-  created_at: string;
-  resolved_at?: string;
-  reporter_id: string;
-  reported_user_id: string;
-  post_id?: string;
-  comment_id?: string;
-  reason: string;
-  description?: string;
-  status: "pending" | "reviewed" | "resolved" | "dismissed";
-  moderator_id?: string;
-  moderator_notes?: string;
-}
-
-export interface CreateReportRequest {
-  reported_user_id: string;
-  post_id?: string;
-  comment_id?: string;
-  reason: string;
-  description?: string;
-}
-
-export interface UpdateReportRequest {
-  status: Report["status"];
-  moderator_notes?: string;
-}
-
-export interface ReportSubmission {
-  reason: string;
-  description?: string;
 }
 
 // ============= EXPORT ALL =============

@@ -1,10 +1,10 @@
 import React from "react";
 import TableOfContents, {
   TocSectionProps,
-} from "../../../components/ui/TableOfContents";
-import WikiSearchBar from "../../shared/WikiSearchBar";
-import WikiEditor from "../Search/WikiEditor";
-import "../Search/WikiEditor.css";
+} from "../../PageUIs/TableOfContents";
+import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
+import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import "../../../FaShared/Css/WikiEditor.css";
 
 const MangaDirectory: React.FC = () => {
   // Define TOC sections

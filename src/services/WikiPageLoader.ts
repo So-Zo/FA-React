@@ -1,30 +1,62 @@
 import { supabase } from "../lib/supabaseClient";
 import { WikiPage, WikiContributor } from "../types";
+import { withCache } from "../utils/cache";
 
 // Service class for loading and saving wiki pages
 export class WikiPageLoader {
   // Load a wiki page by its full path (e.g., "/anime", "/anime/history")
   static async loadWikiPage(path: string): Promise<WikiPage | null> {
-    try {
-      const { data, error } = await supabase
-        .from("wiki_pages")
-        .select("*")
-        .eq("full_path", path)
-        .single();
+    return withCache(
+      `wiki-page-${path}`,
+      async () => {
+        try {
+          // Query the wiki_pages table directly to avoid contributor join issues
+          const { data, error } = await supabase
+            .from("wiki_pages")
+            .select(
+              `
+              id,
+              title,
+              slug,
+              full_path,
+              page_type,
+              genre,
+              content,
+              created_at,
+              updated_at,
+              created_by
+            `
+            )
+            .eq("full_path", path)
+            .single();
 
-      if (error) {
-        if (error.code === "PGRST116") {
-          // No rows returned - page doesn't exist
-          return null;
+          if (error) {
+            if (error.code === "PGRST116") {
+              // No rows returned - page doesn't exist
+              return null;
+            }
+            throw error;
+          }
+
+          return {
+            id: data.id,
+            title: data.title,
+            slug: data.slug,
+            full_path: data.full_path,
+            page_type: data.page_type,
+            genre: data.genre,
+            content: data.content,
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            created_by: data.created_by, // We'll get creator name separately if needed
+          };
+        } catch (error) {
+          console.error("Failed to load wiki page:", error);
+          throw error;
         }
-        throw error;
-      }
-
-      return data as WikiPage;
-    } catch (error) {
-      console.error("Failed to load wiki page:", error);
-      throw error;
-    }
+      },
+      30 * 60 * 1000 // 30 minute cache
+    );
   }
 
   // Save wiki page content and track contributor
@@ -98,40 +130,57 @@ export class WikiPageLoader {
     }
   }
 
-  // Get contributors for a wiki page
-  static async getPageContributors(pageId: string): Promise<WikiContributor[]> {
-    try {
-      const { data, error } = await supabase
-        .from("wiki_contributors")
-        .select(
-          `
-          user_profile_id,
-          contribution_count,
-          first_contributed_at,
-          last_contributed_at,
-          user_profiles (
-            display_name
-          )
-        `
-        )
-        .eq("wiki_page_id", pageId)
-        .order("contribution_count", { ascending: false });
+  // Get contributors for a wiki page by full path
+  static async getPageContributors(
+    fullPath: string
+  ): Promise<WikiContributor[]> {
+    return withCache(
+      `wiki-contributors-${fullPath}`,
+      async () => {
+        try {
+          const { data, error } = await supabase
+            .from("wiki_master_view")
+            .select(
+              `
+              contributor_id,
+              page_id,
+              contributor_profile_id,
+              contribution_count,
+              first_contributed_at,
+              last_contributed_at,
+              contributor_name,
+              contributor_username,
+              contributor_avatar,
+              contributor_verified
+            `
+            )
+            .eq("page_path", fullPath)
+            .not("contributor_id", "is", null)
+            .order("last_contributed_at", { ascending: false });
 
-      if (error) throw error;
+          if (error) throw error;
 
-      return (data || []).map((contributor: any) => ({
-        id: contributor.user_profile_id,
-        wiki_page_id: pageId,
-        user_profile_id: contributor.user_profile_id,
-        user_id: contributor.user_profile_id,
-        display_name: contributor.user_profiles?.display_name || "Unknown User",
-        contribution_count: contributor.contribution_count,
-        first_contributed_at: contributor.first_contributed_at,
-        last_contributed_at: contributor.last_contributed_at,
-      }));
-    } catch (error) {
-      console.error("Failed to get page contributors:", error);
-      return [];
-    }
+          return (data || []).map((row: any) => ({
+            id: row.contributor_id,
+            wiki_page_id: row.page_id,
+            user_profile_id: row.contributor_profile_id,
+            contribution_count: row.contribution_count,
+            first_contributed_at: row.first_contributed_at,
+            last_contributed_at: row.last_contributed_at,
+            user_profiles: {
+              id: row.contributor_profile_id,
+              display_name: row.contributor_name,
+              username: row.contributor_username,
+              avatar_url: row.contributor_avatar,
+              is_verified: row.contributor_verified,
+            },
+          }));
+        } catch (error) {
+          console.error("Failed to get page contributors:", error);
+          return [];
+        }
+      },
+      15 * 60 * 1000 // 15 minute cache
+    );
   }
 }
