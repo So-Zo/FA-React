@@ -1,6 +1,5 @@
 import React from "react";
 import { WikiContributor } from "../../types";
-import "../Css/PageContributor.css";
 
 interface PageContributorProps {
   pageId: string;

@@ -1,9 +1,24 @@
+/*
+ * ⚠️  DEPRECATED: TipTapToolbar Component ⚠️
+ *
+ * This sidebar toolbar is being replaced with floating mobile controls (TipTapMobileControls)
+ * for all screen sizes to provide a consistent, unified experience.
+ *
+ * STATUS: This component is no longer used in the layout (hidden via CSS)
+ * TODO: Eventually remove this component entirely once floating controls are stable
+ *
+ * The floating controls provide:
+ * - Consistent UX across all devices
+ * - Better accessibility with draggable positioning
+ * - Modal interface that doesn't compete for layout space
+ * - Simpler grid layout without complex edit-mode transitions
+ */
+
 import React, { useEffect, useState } from "react";
 import { FaBold, FaItalic, FaList, FaLink, FaImage } from "react-icons/fa";
 import { useEditMode } from "../types/editMode";
 import { useTipTapEditor } from "../hooks/TipTapContext";
 import { useHasEditableContent } from "../hooks/useHasEditableContent";
-import "../Css/TipTapToolbar.css";
 
 const TipTapToolbar: React.FC = () => {
   const { isEditing } = useEditMode();

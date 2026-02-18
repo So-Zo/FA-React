@@ -81,9 +81,8 @@ export const PostCard: React.FC<PostCardProps> = ({
   };
   return (
     <div
-      className={`grid-card ${isPreview ? "clickable-card" : ""}`}
+      className={`post-card ${isPreview ? "post-card--clickable" : ""}`}
       onClick={isPreview ? handleCardClick : undefined}
-      style={{ cursor: isPreview ? "pointer" : "default" }}
     >
       <div className="grid-block">
         <div className="card-header">

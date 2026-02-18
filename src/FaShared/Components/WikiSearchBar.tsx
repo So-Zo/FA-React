@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useWikiSearch } from "../hooks/useWikiSearch";
-import "../Css/WikiSearchBar.css";
 
 interface WikiSearchBarProps {
   placeholder?: string;

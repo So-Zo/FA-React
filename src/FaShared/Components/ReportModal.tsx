@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../Css/modals.css";
 
 interface ReportModalProps {
   isOpen: boolean;

@@ -6,7 +6,6 @@ import Image from "@tiptap/extension-image";
 import { useEditMode } from "../types/editMode";
 import { useTipTapEditor } from "../hooks/TipTapContext";
 import TipTapMobileControls from "./TipTapMobileControls";
-import "../Css/TipTapMobileControls.css";
 
 interface WikiEditorProps {
   content?: string; // Initial HTML content from your existing sections

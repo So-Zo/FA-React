@@ -5,7 +5,6 @@ import { Post, UserPost } from "../../types";
 import { useComments } from "../hooks/useComments";
 import UserComm from "./UserComm";
 import CommentInput from "./CommentInput";
-import "../Css/PostDetailPage.css";
 
 interface PostDetailPageProps {}
 
