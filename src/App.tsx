@@ -4,26 +4,15 @@ import { AuthProvider } from "./FaShared/hooks/AuthProvider";
 import { ThemeProvider } from "./FaShared/hooks/ThemeContext";
 import Footer from "./FaShared/Components/Footer";
 import BottomNavigation from "./FaShared/Components/BottomNavigation";
-import TipTapToolbar from "./FaShared/Components/TipTapToolbar";
 import { PageContributor } from "./FaShared/Components/PageContributor";
 import { usePageContributors } from "./FaShared/hooks/usePageContributors";
 import "./Import.css";
 import { EditModeProvider } from "./FaShared/hooks/EditModeContext";
-import { useEditMode } from "./FaShared/types/editMode";
 import { TipTapProvider } from "./FaShared/hooks/TipTapContext";
 import { ProfileProvider } from "./components/pages/Profile/ProfileContext";
-import { useHasEditableContent } from "./FaShared/hooks/useHasEditableContent";
 
 // 🚀 LAZY LOADED PAGE COMPONENTS - No more loading everything at once!
 const HomePage = lazy(() => import("./components/pages/Home/HomePage"));
-
-// COMMENTED OUT - Using new dynamic wiki-pages versions instead
-// const AnimePage = lazy(() => import("./components/pages/Anime/AnimePage"));
-// const MangaPage = lazy(() => import("./components/pages/Manga/MangaPage"));
-// const ComicsPage = lazy(() => import("./components/pages/Comics/ComicsPage"));
-// const TVPage = lazy(() => import("./components/pages/TV/TVPage"));
-// const VideoGamesPage = lazy(() => import("./components/pages/VideoGames/VideoGamesPage"));
-// const WorldsUniversesPage = lazy(() => import("./components/pages/WorldsUniverses/WorldsUniversesPage"));
 
 // NEW DYNAMIC WIKI PAGES
 const AnimePage = lazy(() => import("./components/wiki-pages/Anime/AnimePage"));
@@ -72,38 +61,6 @@ const WorldsUniversesDirectory = lazy(
   () =>
     import("./components/wiki-pages/WorldsUniverses/WorldsUniversesDirectory")
 );
-
-// COMMENTED OUT - Moving to dynamic wiki-pages versions
-// KEEP OLD SUB-PAGES FOR NOW (History, Directory, etc.)
-// const AnimeHistory = lazy(
-//   () => import("./components/pages/Anime/AnimeHistory")
-// );
-// const AnimeDirectory = lazy(
-//   () => import("./components/pages/Anime/AnimeDirectory")
-// );
-// const MangaHistory = lazy(
-//   () => import("./components/pages/Manga/MangaHistory")
-// );
-// const MangaDirectory = lazy(
-//   () => import("./components/pages/Manga/MangaDirectory")
-// );
-// const ComicsHistory = lazy(
-//   () => import("./components/pages/Comics/ComicsHistory")
-// );
-// const ComicsDirectory = lazy(
-//   () => import("./components/pages/Comics/ComicsDirectory")
-// );
-// const TVHistory = lazy(() => import("./components/pages/TV/TVHistory"));
-// const TVDirectory = lazy(() => import("./components/pages/TV/TV-directory"));
-// const VideoGamesDirectory = lazy(
-//   () => import("./components/pages/VideoGames/VideoGamesDirectory")
-// );
-// const VideoGamesHistory = lazy(
-//   () => import("./components/pages/VideoGames/VideoGamesHistory")
-// );
-// const WorldsUniversesDirectory = lazy(
-//   () => import("./components/pages/WorldsUniverses/WorldsUniversesDirectory")
-// );
 const PowerRoomPage = lazy(
   () => import("./components/pages/PowerRoom/PowerRoomPage")
 );
@@ -129,6 +86,9 @@ const ContributePage = lazy(
 );
 const PageHistory = lazy(
   () => import("./components/pages/PageHistory/PageHistory")
+);
+const NotFoundPage = lazy(
+  () => import("./components/pages/NotFound/NotFoundPage")
 );
 
 const PageDataAttributeSetter = () => {
@@ -200,17 +160,10 @@ const AppPageContributor = () => {
 
 const AppContent = () => {
   const location = useLocation();
-  const { isEditing } = useEditMode();
-  const hasEditableContent = useHasEditableContent();
-
-  // Only apply edit-mode class if we're editing AND on an editable page
-  const shouldShowEditMode = isEditing && hasEditableContent;
 
   return (
     <TipTapProvider>
-      <div
-        className={`content-wrapper ${shouldShowEditMode ? "edit-mode" : ""}`}
-      >
+      <div className="content-wrapper">
         <BottomNavigation />
         <div>
           {/* Skip to content link for accessibility */}
@@ -275,9 +228,9 @@ const AppContent = () => {
                 <Route path="/characters" element={<CharacterPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contribute" element={<ContributePage />} />
-                <Route path="/page-history/*" element={<PageHistory />} />
-                {/* Add more routes as we create the page components */}
-                {/* <Route path="*" element={<NotFoundPage />} /> */}
+                <Route path="/page-history/:pageId" element={<PageHistory />} />
+                {/* Catch all other routes with 404 page */}
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
           </main>
@@ -285,7 +238,6 @@ const AppContent = () => {
           {location.pathname !== "/profile" &&
             !location.pathname.startsWith("/user/") && <Footer />}
         </div>
-        <TipTapToolbar />
       </div>
     </TipTapProvider>
   );
