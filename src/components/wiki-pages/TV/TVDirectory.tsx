@@ -9,7 +9,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const TVDirectory: React.FC = () => {
   // Load dynamic content from database
@@ -21,7 +20,7 @@ const TVDirectory: React.FC = () => {
   } = useWikiPage("/tv/directory");
 
   // Get page contributors
-  const { contributors } = usePageContributors("tv-directory-page");
+  const { contributors } = usePageContributors("/tv/directory");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -112,13 +111,6 @@ const TVDirectory: React.FC = () => {
         )}
 
         <hr />
-
-        <PageContributor
-          pageId="tv-directory-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

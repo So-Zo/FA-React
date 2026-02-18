@@ -9,7 +9,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const AnimeHistory: React.FC = () => {
   // Load dynamic content from database
@@ -21,7 +20,7 @@ const AnimeHistory: React.FC = () => {
   } = useWikiPage("/anime/history");
 
   // Get page contributors
-  const { contributors } = usePageContributors("anime-history-page");
+  const { contributors } = usePageContributors("/anime/history");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -112,13 +111,6 @@ const AnimeHistory: React.FC = () => {
         )}
 
         <hr />
-
-        <PageContributor
-          pageId="anime-history-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

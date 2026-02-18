@@ -4,12 +4,9 @@ import TableOfContents, {
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
-import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
-import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const WorldsUniversesPage: React.FC = () => {
   // Load dynamic content from database
@@ -19,9 +16,6 @@ const WorldsUniversesPage: React.FC = () => {
     error: pageError,
     refreshPage,
   } = useWikiPage("/worlds-universes");
-
-  // Get page contributors
-  const { contributors } = usePageContributors("worldsuniverses-main-page");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -127,12 +121,6 @@ const WorldsUniversesPage: React.FC = () => {
         )}
 
         <hr />
-        <PageContributor
-          pageId="worldsuniverses-main-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

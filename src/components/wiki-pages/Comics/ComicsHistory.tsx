@@ -9,7 +9,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const ComicsHistory: React.FC = () => {
   // Load dynamic content from database
@@ -21,7 +20,7 @@ const ComicsHistory: React.FC = () => {
   } = useWikiPage("/comics/history");
 
   // Get page contributors
-  const { contributors } = usePageContributors("comics-history-page");
+  const { contributors } = usePageContributors("/comics/history");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -112,13 +111,6 @@ const ComicsHistory: React.FC = () => {
         )}
 
         <hr />
-
-        <PageContributor
-          pageId="comics-history-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

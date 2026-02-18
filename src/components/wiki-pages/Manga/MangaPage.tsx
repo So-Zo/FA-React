@@ -9,7 +9,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const MangaPage: React.FC = () => {
   // Load dynamic content from database
@@ -21,7 +20,7 @@ const MangaPage: React.FC = () => {
   } = useWikiPage("/manga");
 
   // Get page contributors
-  const { contributors } = usePageContributors("manga-main-page");
+  const { contributors } = usePageContributors("/manga");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -122,12 +121,6 @@ const MangaPage: React.FC = () => {
         )}
 
         <hr />
-        <PageContributor
-          pageId="manga-main-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

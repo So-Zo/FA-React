@@ -9,7 +9,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const VideoGamesHistory: React.FC = () => {
   // Load dynamic content from database
@@ -21,7 +20,7 @@ const VideoGamesHistory: React.FC = () => {
   } = useWikiPage("/video-games/history");
 
   // Get page contributors
-  const { contributors } = usePageContributors("video-games-history-page");
+  const { contributors } = usePageContributors("/video-games/history");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -123,13 +122,6 @@ const VideoGamesHistory: React.FC = () => {
         )}
 
         <hr />
-
-        <PageContributor
-          pageId="video-games-history-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );

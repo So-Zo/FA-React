@@ -4,12 +4,9 @@ import TableOfContents, {
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
-import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
-import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const AnimePage: React.FC = () => {
   // Load dynamic content from database
@@ -19,9 +16,6 @@ const AnimePage: React.FC = () => {
     error: pageError,
     refreshPage,
   } = useWikiPage("/anime");
-
-  // Get page contributors
-  const { contributors } = usePageContributors("anime-main-page");
 
   // Get current user for saving
   const { user } = useAuth();
@@ -146,14 +140,6 @@ const AnimePage: React.FC = () => {
         )}
 
         <hr />
-
-        {/* Page Contributors */}
-        <PageContributor
-          pageId="anime-main-page"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
       </main>
     </div>
   );
