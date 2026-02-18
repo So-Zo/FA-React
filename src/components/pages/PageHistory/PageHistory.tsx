@@ -2,22 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { WikiContributor } from "../../../types";
 import { dataService } from "../../../services/dataService";
-import "../../PageUIs/LoadingAndError.css";
-import "./PageHistory.css";
 
 const PageHistory: React.FC = () => {
-  const { fullPath } = useParams<{ fullPath: string }>();
+  const { pageId } = useParams<{ pageId: string }>();
   const [contributors, setContributors] = useState<WikiContributor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pageTitle, setPageTitle] = useState<string>("");
 
-  // Decode the full path from URL params
-  const decodedPath = fullPath ? decodeURIComponent(fullPath) : "";
+  // Decode the pageId from URL params
+  const decodedPageId = pageId ? decodeURIComponent(pageId) : "";
 
   useEffect(() => {
     const fetchPageHistory = async () => {
-      if (!decodedPath) {
+      if (!decodedPageId) {
         setError("No page specified");
         setLoading(false);
         return;
@@ -28,12 +26,12 @@ const PageHistory: React.FC = () => {
         setError(null);
 
         // Get page info and contributors in one optimized call
-        const result = await dataService.getPageWithContributors(decodedPath);
+        const result = await dataService.getPageWithContributors(decodedPageId);
 
         setContributors(result.contributors || []);
 
         // Use the actual page title from the database, or fallback to path-based title
-        const pathSegments = decodedPath.split("/").filter(Boolean);
+        const pathSegments = decodedPageId.split("/").filter(Boolean);
         const title =
           result.page?.page_title ||
           (pathSegments.length > 0
@@ -49,7 +47,7 @@ const PageHistory: React.FC = () => {
     };
 
     fetchPageHistory();
-  }, [decodedPath]);
+  }, [decodedPageId]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -86,7 +84,7 @@ const PageHistory: React.FC = () => {
       <header className="page-history-header">
         <h1>Edit History</h1>
         <h2>{pageTitle}</h2>
-        <p className="page-path">{decodedPath}</p>
+        <p className="page-path">{decodedPageId}</p>
       </header>
 
       <main className="page-history-content">

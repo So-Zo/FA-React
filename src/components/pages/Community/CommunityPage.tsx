@@ -152,7 +152,7 @@ const CommunityPage: React.FC = () => {
               placeholder={`Search posts...${isTyping ? " (typing...)" : ""}`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
+              className="community-search-input"
             />
             <div className="filter-buttons">
               {/* Post Type Filter */}

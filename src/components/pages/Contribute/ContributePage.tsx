@@ -1,6 +1,4 @@
 import React from "react";
-import "../../../FaShared/Css/sections.css";
-import "../../../FaShared/Css/themes.css";
 
 const ContributePage: React.FC = () => {
   return (
