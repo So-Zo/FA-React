@@ -149,13 +149,15 @@
   gap: 0.5rem;
 }
 .settings-dropdown {
-  background: var(--bg-primary);
+  background: var(--surface-primary);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   border-radius: 0.25rem;
   padding: 0.5rem;
   min-width: 200px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .settings-dropdown:focus {
   border-color: var(--accent-primary);

@@ -70,6 +70,7 @@ body {
   text-align: center; /* Center all text in sections */
   margin: var(--spacing-lg) auto;
   max-width: 65rem;
+  border: 1px solid black;
 }
 
 /* Section paragraph styling */

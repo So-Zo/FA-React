@@ -11,10 +11,12 @@
   /* ==========================================================================
      TYPOGRAPHY
      ========================================================================== */
-  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
-  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
-    "Courier New", monospace;
+  --font-primary:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  --font-mono:
+    "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New",
+    monospace;
 
   --font-size-sm: 0.875rem; /* 14px */
   --font-size-base: 1rem; /* 16px */
@@ -61,8 +63,8 @@
   --z-tooltip: 1070;
   --z-toast: 1080;
 
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   /* ==========================================================================
      GRADIENTS & SPECIAL COLORS
@@ -80,7 +82,7 @@
 
   /* Page-specific gradients */
   --anime-gradient: linear-gradient(
-    137deg,
+    to right,
     #ff6b35 0%,
     #f7931e 20%,
     #ffd23f 50%,
@@ -97,7 +99,8 @@
     #00ffff 100%
   );
   --worlds-gradient: linear-gradient(135deg, #c49a6c, #61a7d4, #568a3e);
-  --power-room-gradient: radial-gradient(
+  --power-room-gradient:
+    radial-gradient(
       circle at 50% 30%,
       rgba(111, 26, 91, 0.9) 10%,
       rgba(0, 0, 0, 0.9) 60%
@@ -127,6 +130,11 @@
   /* FanArcs Brand */
   --fanarc-primary-color: #2a1a6f;
   --fanarc-secondary-color: #a997df;
+  --fanarc-accent-color: #ffd700; /* Gold accent for buttons/highlights */
+  --fanarc-accent-hover: #ffc700; /* Darker gold for hover */
+  --fanarc-text-primary: #e0d9ff; /* Light text for dark backgrounds */
+  --fanarc-text-secondary: #b8aeff; /* Secondary text for dark backgrounds */
+  --fanarc-border-color: #4a3d7f; /* Border color for FanArcs components */
 
   /* UI Colors */
   --border-color: #060a2d;
@@ -137,7 +145,8 @@
   --danger-color: #ff6b6b;
 
   /* Surface Colors */
-  --surface-primary: radial-gradient(
+  --surface-primary:
+    radial-gradient(
       circle at 50% 15%,
       rgba(42, 26, 111, 0.9) 20%,
       rgba(0, 0, 92, 0) 60%
@@ -165,6 +174,30 @@
   /* Shadows */
   --shadow: rgba(0, 0, 0, 0.2);
   --shadow-strong: rgba(0, 0, 0, 0.4);
+
+  /* Component-Specific Colors */
+  /* Post Cards */
+  --post-card-background: rgb(89, 88, 88);
+  --post-card-border: rgba(11, 11, 11, 0.04);
+  --post-card-shadow: rgba(0, 0, 0, 0.06);
+  --post-card-shadow-hover: rgba(0, 0, 0, 0.12);
+
+  /* Header & Navigation */
+  --header-background: var(--fanarc-primary-color);
+  --header-text: #ffffff;
+  --nav-background: var(--fanarc-primary-color);
+  --nav-text: #ffffff;
+  --nav-hover: rgba(255, 255, 255, 0.1);
+  --nav-dropdown-background: #ffffff;
+  --nav-dropdown-text: #333333;
+
+  /* Profile Header */
+  --profile-header-background: var(--fanarc-primary-color);
+  --profile-avatar-border: var(--accent-color);
+  --profile-avatar-background: #eaeafd;
+
+  /* Home Page Introduction */
+  --content-intro-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 /* ==========================================================================
@@ -175,8 +208,22 @@
   --text-primary: #212529;
   --text-secondary: #6c757d;
   --text-muted: #adb5bd;
-  --text-on-section: #212529;
+  --text-on-section: #5e5e58;
 
+  /* Component overrides for light theme */
+  /* Post Cards */
+  --post-card-background: #f1f3f3;
+  --post-card-border: #e5e7eb;
+  --post-card-shadow: rgba(0, 0, 0, 0.05);
+  --post-card-shadow-hover: rgba(0, 0, 0, 0.1);
+
+  /* Header & Navigation */
+  --header-background: var(--fanarc-primary-color);
+  --nav-dropdown-background: #ffffff;
+  --nav-dropdown-text: #1f2937;
+
+  /* Profile Header */
+  --profile-avatar-background: #f3f4f6;
   /* Different UI colors */
   --border-color: #ced4da;
   --accent-color: #0d6efd;
@@ -188,23 +235,42 @@
   --danger-color: #dc3545;
 
   /* Different surface colors */
-  --surface-primary: #ffffff;
+  --surface-primary: #e4fdfd;
   --surface-secondary: #f8f9fa;
   --surface-hover: #f5f5f5;
 
   /* Different section background for light */
-  --section-bg: linear-gradient(
-    to top,
-    #f8f9fa 0%,
-    #f8f9fa 1%,
-    #ffffff 31%,
-    #ffffff 75%,
-    #f1f3f5 100%
-  );
+  --section-bg: #d2e4e8;
 
   /* Different shadows for light */
   --shadow: rgba(0, 0, 0, 0.1);
   --shadow-strong: rgba(0, 0, 0, 0.25);
+
+  /* Light theme home page section gradients */
+  --anime-gradient: linear-gradient(
+    to right,
+    #ffb399 0%,
+    #ffc080 20%,
+    #ffe699 50%,
+    #87c4e6 80%,
+    #6b8fb3 100%
+  );
+  --manga-gradient: linear-gradient(to top, #e8e8e8 0%, #f5f5f5 100%);
+  --comics-gradient: linear-gradient(to top, #4a9ee6 0%, #ff8c42 100%);
+  --tv-gradient: linear-gradient(135deg, #f5f5f5 0%, #ffd966 50%, #e8e8e8 100%);
+  --video-games-gradient: linear-gradient(
+    137deg,
+    #c4c4f0 0%,
+    #b890e8 50%,
+    #99f2ff 100%
+  );
+  --worlds-gradient: linear-gradient(135deg, #e6d4b8, #b3d7f0, #a8d49e);
+  --power-room-gradient: linear-gradient(
+    135deg,
+    #f0d4e6 0%,
+    #e6b3d7 50%,
+    #d4a8d4 100%
+  );
 }
 
 /* ==========================================================================
@@ -212,10 +278,10 @@
    ========================================================================== */
 [data-theme="dark"] {
   /* Different text colors for dark theme */
-  --text-primary: #ffffff;
+  --text-primary: #ebebeb;
   --text-secondary: #b3b3b3;
-  --text-muted: #808080;
-  --text-on-section: #ffffff;
+  --text-muted: #969595;
+  --text-on-section: #d8d8d8;
 
   /* Different UI colors */
   --border-color: #525252;
@@ -226,21 +292,61 @@
   /* --success-color, --warning-color, --danger-color use root values */
 
   /* Different surface colors */
-  --surface-primary: #121212;
+  --surface-primary: #021034;
   --surface-secondary: #1e1e1e;
+
+  /* Component overrides for dark theme */
+  /* Post Cards */
+  --post-card-background: #1f2937;
+  --post-card-border: #374151;
+  --post-card-shadow: rgba(0, 0, 0, 0.3);
+  --post-card-shadow-hover: rgba(0, 0, 0, 0.5);
+
+  /* Header & Navigation */
+  --header-background: #1f2937;
+  --nav-background: #111827;
+  --nav-hover: rgba(255, 255, 255, 0.05);
+  --nav-dropdown-background: #1f2937;
+  --nav-dropdown-text: #f3f4f6;
+
+  /* Profile Header */
+  --profile-header-background: #1f2937;
+  --profile-avatar-background: #374151;
+
+  /* Home Page Introduction */
+  --content-intro-gradient: linear-gradient(135deg, #4c51bf 0%, #5a3e8c 100%);
   --surface-hover: #404040;
 
-  /* Different section background for dark */
-  --section-bg: linear-gradient(
-    to top,
-    #2a2a2a 0%,
-    #2a2a2a 1%,
-    #3a3a3a 31%,
-    #404040 75%,
-    #4a4a4a 100%
-  );
+  /* Different section background for dark - vintage aged paper aesthetic */
+  --section-bg: #433f3b;
 
   /* Different shadows for dark */
   --shadow: rgba(0, 0, 0, 0.5);
   --shadow-strong: rgba(0, 0, 0, 0.7);
+
+  /* Dark theme home page section gradients */
+  --anime-gradient: linear-gradient(
+    to right,
+    #cc5528 0%,
+    #d17615 20%,
+    #e6b830 50%,
+    #2a6a99 80%,
+    #0c2a4d 100%
+  );
+  --manga-gradient: linear-gradient(to top, #1a1a1a 0%, #3a3a3a 100%);
+  --comics-gradient: linear-gradient(to top, #004a99 0%, #b83800 100%);
+  --tv-gradient: linear-gradient(135deg, #1a1a1a 0%, #d69620 50%, #0d0d0d 100%);
+  --video-games-gradient: linear-gradient(
+    137deg,
+    #090926 0%,
+    #5a1f9f 50%,
+    #00d9e6 100%
+  );
+  --worlds-gradient: linear-gradient(135deg, #a67d56, #4d8ab0, #456f32);
+  --power-room-gradient: linear-gradient(
+    135deg,
+    #5a0a4d 0%,
+    #3d1a3d 50%,
+    #2a0d2a 100%
+  );
 }

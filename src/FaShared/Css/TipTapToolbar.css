@@ -1,4 +1,17 @@
 /*
+ * ⚠️  DEPRECATED: TipTap Toolbar Sidebar Styles ⚠️ 
+ * 
+ * These styles are for the deprecated sidebar toolbar.
+ * We've switched to floating mobile controls (TipTapMobileControls.css) for all screen sizes.
+ * 
+ * This toolbar is now hidden on ALL screen sizes and will be removed in the future.
+ * The floating controls provide a better, more consistent experience.
+ * 
+ * STATUS: Hidden via display: none !important
+ * TODO: Remove this file when the component is fully deprecated
+ */
+
+/*
  * TipTap Toolbar Sidebar Styles
  * Right-side toolbar that appears when edit mode is active
  * Matches design patterns from BottomNavigation.css
@@ -129,9 +142,13 @@
   transform: scale(1.02);
 }
 
-/* Hide on mobile - will be replaced with floating controls later */
-@media (max-width: 768px) {
+/* DEPRECATED: Hide sidebar toolbar on all screen sizes - now using floating controls everywhere */
+.tiptap-toolbar-sidebar {
+  display: none !important; /* Hidden on all screen sizes */
+}
+
+/* @media (max-width: 768px) {
   .tiptap-toolbar-sidebar {
     display: none;
   }
-}
+} */

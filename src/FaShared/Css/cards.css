@@ -15,7 +15,8 @@
   padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-md);
-  transition: transform var(--transition-base),
+  transition:
+    transform var(--transition-base),
     box-shadow var(--transition-base);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
@@ -58,7 +59,8 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   margin-bottom: var(--spacing-md);
-  transition: transform var(--transition-base),
+  transition:
+    transform var(--transition-base),
     box-shadow var(--transition-base);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
@@ -116,6 +118,45 @@
   grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
   gap: var(--spacing-lg);
   margin: var(--spacing-md) 0;
+}
+
+/*
+ * POST CARD
+ * For community posts and user posts - uses theme-aware post-card variables
+ */
+.post-card {
+  background: var(--post-card-background);
+  border-radius: calc(var(--radius-lg) * 1.5);
+  box-shadow: 0 2px 8px var(--post-card-shadow);
+  transition:
+    transform var(--duration-200) ease,
+    box-shadow var(--duration-200) ease;
+  padding: var(--spacing-md);
+  border: 1px solid var(--post-card-border);
+  height: auto;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--post-card-shadow-hover);
+}
+
+/* Clickable variant for preview mode */
+.post-card--clickable {
+  cursor: pointer;
+}
+
+.post-card--clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px var(--post-card-shadow-hover);
+}
+
+.post-card--clickable:active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--post-card-shadow);
 }
 
 /* Media queries for responsive design */

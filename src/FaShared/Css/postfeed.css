@@ -9,24 +9,16 @@
    ========================================================================== */
 
 /* Main post feed wrapper with uni-section background */
-.post-feed {
-  background: var(--section-bg);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
-  margin: var(--spacing-lg) 0;
-  box-shadow: var(--shadow-md);
-  width: 95%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 /* Post grid layout */
 .post-feed-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--spacing-xl);
-  width: 100%;
+  gap: var(--spacing-md);
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ==========================================================================

@@ -3,25 +3,25 @@ body[data-page] {
   background: #f5f6fa; /* fallback neutral background */
 }
 body[data-page="anime"] {
-  background:var(--anime-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="manga"] {
-  background: var(--manga-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="comics"] {
-  background: var(--comics-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="tv"] {
-  background: var(--tv-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="video-games"] {
-  background: var(--video-games-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="worlds-universes"] {
-  background: var(--worlds-gradient)
+  background: var(--surface-primary);
 }
 body[data-page="power-room"] {
-  background: var(--power-room-gradient);
+  background: var(--surface-primary);
 }
 body[data-page="community"] {
   background: var(--surface-primary);

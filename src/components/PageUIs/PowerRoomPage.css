@@ -140,7 +140,7 @@
   padding: var(--spacing-sm);
   border: 1px solid var(--border-color, #ccd0e6);
   border-radius: var(--radius-lg);
-  background-color: var(--bg-primary, #f8f8fc);
+  background-color: var(--surface-primary, #f8f8fc);
   margin-bottom: 1.1rem;
   font-size: 1rem;
 }
@@ -194,7 +194,7 @@
   border-radius: var(--radius-sm);
   object-fit: cover;
   margin-right: var(--spacing-sm);
-  background-color: var(--bg-secondary, #f0f0f0);
+  background-color: var(--surface-primary, #f0f0f0);
 }
 
 .character-list-info {
@@ -251,7 +251,7 @@
 .comparison-tabs {
   display: flex;
   border-bottom: 1px solid var(--border-color, #d9dde9);
-  background-color: var(--bg-secondary, #f3f4fb);
+  background-color: var(--surface-primary, #f3f4fb);
   margin-bottom: 1.2rem;
 }
 .tab-button {
@@ -261,7 +261,8 @@
   cursor: pointer;
   font-weight: bold;
   color: var(--text-secondary, #7e869d);
-  transition: background var(--transition-base, 0.18s),
+  transition:
+    background var(--transition-base, 0.18s),
     color var(--transition-base, 0.18s);
   font-size: 1rem;
   outline: none;
@@ -333,7 +334,7 @@
   align-items: center;
   margin-bottom: var(--spacing-md, 1rem);
   padding: var(--spacing-sm, 0.8rem);
-  background-color: var(--bg-primary, #f8f9ff);
+  background-color: var(--surface-primary, #f8f9ff);
   border-radius: var(--border-radius-base, 0.75rem);
 }
 .stat-label {
@@ -343,7 +344,7 @@
 .stat-bar {
   flex: 1;
   height: 15px;
-  background-color: var(--bg-primary, #eaeef5);
+  background-color: var(--surface-primary, #eaeef5);
   border-radius: var(--border-radius-base, 0.5rem);
   overflow: hidden;
   margin: 0 var(--spacing-md, 1rem);
@@ -383,7 +384,7 @@
 }
 .timeline-event {
   padding: var(--spacing-md, 0.98rem);
-  background-color: var(--bg-secondary, #f6f7fc);
+  background-color: var(--surface-primary, #f6f7fc);
   border-radius: var(--border-radius-base, 0.7rem);
   border-left: 4px solid var(--fanarc-primary-color);
 }
@@ -411,7 +412,7 @@
 }
 .feat-item {
   padding: var(--spacing-lg, 1.36rem);
-  background-color: var(--bg-primary, #f6f8fa);
+  background-color: var(--surface-primary, #f6f8fa);
   border-radius: var(--border-radius-lg, 0.9rem);
   border-left: 6px solid var(--fanarc-accent-color, #ebc952);
   margin-bottom: var(--spacing-md, 0.88rem);
@@ -434,7 +435,7 @@
   align-items: center;
   padding: var(--spacing-md, 1rem) var(--spacing-lg, 2rem);
   margin: var(--spacing-xl, 2.3rem) 0 0 0;
-  background-color: var(--bg-secondary, #f3f4fb);
+  background-color: var(--surface-primary, #f3f4fb);
   border-radius: var(--border-radius-base, 0.6rem);
 }
 .contributor-info {

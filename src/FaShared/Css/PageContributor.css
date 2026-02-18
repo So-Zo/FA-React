@@ -5,7 +5,7 @@
   align-items: center;
   padding: 1rem;
   border-top: 1px solid var(--border-color, #e2e8f0);
-  background-color: var(--bg-secondary, #f8fafc);
+  background-color: var(--surface-primary, #f8fafc);
   margin-top: 2rem;
   font-size: 0.875rem;
   color: var(--text-secondary, #64748b);
@@ -28,7 +28,7 @@
 }
 
 .contributor-link {
-  color: var(--primary-color, #3b82f6);
+  color: var(--accent-color, #3b82f6);
   text-decoration: none;
   font-weight: 500;
 }

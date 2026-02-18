@@ -45,18 +45,33 @@
   margin-bottom: var(--spacing-xl);
 }
 
-#site-search-bar {
+.community-search-input {
   width: 100%;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border: var(--border-2) solid rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
+  font-size: var(--font-size-base);
+  background: white;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-base);
   margin-bottom: var(--spacing-md);
 }
 
-#site-search-bar::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+.community-search-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.community-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Responsive font size adjustment */
+@media (max-width: 768px) {
+  .community-search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
 }
 
 /* Note: .checkbox-wrapper and .custom-checkbox styles moved to shared/Css/forms.css */

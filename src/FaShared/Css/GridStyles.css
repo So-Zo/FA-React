@@ -38,7 +38,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: var(--spacing-md);
   border: 1px solid rgba(11, 11, 11, 0.04);
-  height: fit-content;
+  height: auto;
   min-width: 0; /* Prevent grid item overflow */
   word-wrap: break-word; /* Ensure text wraps */
   overflow-wrap: break-word;
@@ -52,6 +52,7 @@
 /* Clickable card styling for preview mode */
 .clickable-card {
   transition: all 0.2s ease;
+  
 }
 
 .clickable-card:hover {

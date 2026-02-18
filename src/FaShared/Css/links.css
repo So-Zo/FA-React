@@ -12,7 +12,7 @@
 
 /* Default link styling */
 .default-links {
-  color: white;
+  color: var(--fanarc-primary-color);
   text-decoration: none;
   position: relative;
   transition: color var(--transition-base);
@@ -57,7 +57,7 @@
 
 /* Visited links */
 .default-links:visited {
-  color: var(--fanarc-primary-color);
+  color: rgb(123, 123, 123) ;
 }
 
 /* Active links */

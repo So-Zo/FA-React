@@ -4,12 +4,108 @@
  */
 
 /* ==========================================================================
+   REUSABLE COMPONENTS (Avatar & Button System)
+   ========================================================================== */
+
+/* Avatar Base & Modifiers */
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--fanarc-border-color);
+}
+
+.avatar--lg {
+  width: 60px;
+  height: 60px;
+  border-color: var(--fanarc-primary-color);
+}
+
+.avatar--md {
+  width: 40px;
+  height: 40px;
+}
+
+.avatar--sm {
+  width: 36px;
+  height: 36px;
+}
+
+/* Button Base & Modifiers */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: none;
+  border: 1px solid var(--fanarc-border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  color: var(--fanarc-text-secondary);
+}
+
+.btn:hover {
+  background: var(--fanarc-primary-color);
+  color: white;
+  border-color: var(--fanarc-primary-color);
+  transform: translateY(-1px);
+}
+
+.btn--icon {
+  padding: var(--spacing-xs);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  border: none;
+  font-size: 18px;
+}
+
+.btn--icon:hover {
+  transform: none;
+}
+
+.btn--delete:hover {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn--back {
+  gap: var(--spacing-sm);
+  border: none;
+}
+
+.btn--back:hover {
+  background: none;
+  color: var(--fanarc-primary-color);
+  transform: translateX(-2px);
+}
+
+/* Verified Badge */
+.verified-badge {
+  background: var(--success);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* ==========================================================================
    POST DETAIL PAGE LAYOUT
    ========================================================================== */
 
 .post-detail-page {
   min-height: 100vh;
-  background: var(--section-bg); /*need to just do data page color in bgcolors*/
+  background: var(
+    --surface-primary
+  ); /*need to just do data page color in bgcolors*/
   padding: var(--spacing-lg) 0;
 }
 
@@ -20,7 +116,7 @@
 }
 
 .post-detail-container {
-  max-width: 800px;
+  max-width: 80%;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
 }
@@ -33,6 +129,7 @@
   margin-bottom: var(--spacing-xl);
 }
 
+/* Legacy class - use .btn.btn--back instead */
 .back-btn {
   display: inline-flex;
   align-items: center;
@@ -50,11 +147,12 @@
    ========================================================================== */
 
 .post-detail-card {
-  background: white;
+  background: var(--section-bg);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   margin-bottom: var(--spacing-xl);
+  color: var(--text-on-section);
 }
 
 /* ==========================================================================
@@ -63,7 +161,7 @@
 
 .post-detail-header {
   padding: var(--spacing-xl);
-  border-bottom: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border-bottom: 1px solid var(--fanarc-border-color);
 }
 
 .post-author-info {
@@ -72,6 +170,7 @@
   gap: var(--spacing-md);
 }
 
+/* Legacy class - use .avatar.avatar--lg instead */
 .author-avatar {
   width: 60px;
   height: 60px;
@@ -87,33 +186,21 @@
 .author-name {
   font-size: var(--font-size-lg);
   font-weight: 700;
-  color: var(--fanarc-text-primary);
+  color: var(--text-on-section);
   margin: 0 0 var(--spacing-xs);
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
 }
 
-.verified-badge {
-  color: var(--success);
-  font-size: var(--font-size-sm);
-  background: var(--success);
-  color: white;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-}
+/* Verified badge now defined in REUSABLE COMPONENTS section above */
 
 .post-metadata {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-md);
   font-size: var(--font-size-sm);
-  color: var(--fanarc-text-secondary);
+  color: var(--text-muted);
 }
 
 .post-medium,
@@ -143,7 +230,7 @@
 .post-content {
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
-  color: var(--fanarc-text-primary);
+  color: var(--text-on-section);
   margin-bottom: var(--spacing-xl);
 }
 
@@ -211,8 +298,8 @@
 
 .post-detail-footer {
   padding: var(--spacing-lg) var(--spacing-xl);
-  border-top: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
-  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--fanarc-border-color);
+  background: var(--surface-hover);
 }
 
 .post-interactions {
@@ -226,13 +313,14 @@
   gap: var(--spacing-lg);
 }
 
+/* Legacy class - use .btn instead */
 .action-btn {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-sm) var(--spacing-md);
   background: none;
-  border: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border: 1px solid var(--fanarc-border-color);
   border-radius: var(--radius-md);
   color: var(--fanarc-text-secondary);
   font-size: var(--font-size-sm);
@@ -263,7 +351,7 @@
    ========================================================================== */
 
 .comments-section {
-  background: white;
+  background: var(--section-bg);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
   padding: var(--spacing-xl);
@@ -272,10 +360,10 @@
 .comments-section h3 {
   font-size: var(--font-size-lg);
   font-weight: 700;
-  color: var(--fanarc-text-primary);
+  color: var(--text-on-section);
   margin: 0 0 var(--spacing-lg);
   padding-bottom: var(--spacing-md);
-  border-bottom: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border-bottom: 1px solid var(--fanarc-border-color);
 }
 
 .comments-loading,
@@ -283,7 +371,7 @@
 .comments-empty {
   text-align: center;
   padding: var(--spacing-xl);
-  color: var(--fanarc-text-secondary);
+  color: var(--text-on-section);
   font-style: italic;
 }
 
@@ -301,7 +389,7 @@
 
 .user-comm {
   padding: var(--spacing-lg);
-  border-bottom: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border-bottom: 1px solid var(--fanarc-border-color);
   transition: background-color var(--transition-base);
 }
 
@@ -310,7 +398,7 @@
 }
 
 .user-comm:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--surface-hover);
 }
 
 .user-comm-header {
@@ -326,12 +414,13 @@
   gap: var(--spacing-sm);
 }
 
+/* Legacy class - use .avatar.avatar--md instead */
 .user-comm-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border: 2px solid var(--fanarc-border-color);
 }
 
 .user-comm-author-info {
@@ -355,6 +444,7 @@
   color: var(--fanarc-text-secondary);
 }
 
+/* Legacy class - use .btn.btn--icon.btn--delete instead */
 .user-comm-delete-btn {
   background: none;
   border: none;
@@ -377,7 +467,7 @@
 }
 
 .user-comm-content {
-  color: var(--fanarc-text-primary);
+  color: var(--text-on-section);
   line-height: var(--line-height-relaxed);
 }
 
@@ -396,7 +486,7 @@
 .comment-input-wrapper {
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-lg);
-  background: rgba(0, 0, 0, 0.02);
+  background: var(--surface-hover);
   border-radius: var(--radius-lg);
 }
 
@@ -404,26 +494,29 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  color: var(--text-on-section);
 }
 
 .comment-input-header {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  color: var(--text-on-section);
 }
 
+/* Legacy class - use .avatar.avatar--sm instead */
 .comment-input-avatar {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.1));
+  border: 2px solid var(--fanarc-border-color);
 }
 
 .comment-input-name {
   font-size: var(--font-size-sm);
   font-weight: 600;
-  color: var(--fanarc-text-primary);
+  color: var(--text-on-section);
 }
 
 .comment-input-body {
@@ -436,11 +529,14 @@
   width: 100%;
   min-height: 80px;
   padding: var(--spacing-md);
-  border: 1px solid var(--fanarc-border-color, rgba(0, 0, 0, 0.2));
+  border: 1px solid var(--fanarc-border-color);
   border-radius: var(--radius-md);
   font-family: inherit;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base);
+  color: var(--text-on-section);
+  background-color: var(--surface-secondary);
+  caret-color: var(--text-on-section);
   resize: vertical;
   transition: border-color var(--transition-base);
 }
@@ -468,7 +564,7 @@
 }
 
 .comment-input-hint {
-  color: var(--fanarc-text-secondary);
+  color: var(--text-on-section);
 }
 
 .comment-input-actions {
@@ -486,24 +582,7 @@
   margin-bottom: var(--spacing-md);
 }
 
-/* ==========================================================================
-   VERIFIED BADGE
-   ========================================================================== */
-
-.verified-badge {
-  color: var(--success);
-  font-size: var(--font-size-xs);
-  background: var(--success);
-  color: white;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: bold;
-}
+/* Verified badge moved to REUSABLE COMPONENTS section at top of file */
 
 /* ==========================================================================
    STATES
@@ -554,6 +633,8 @@
     gap: var(--spacing-sm);
   }
 
+  /* Avatar responsive sizes - use .avatar--md on mobile */
+  .avatar--lg,
   .author-avatar {
     width: 40px;
     height: 40px;
@@ -573,6 +654,8 @@
     gap: var(--spacing-sm);
   }
 
+  /* Button responsive sizes */
+  .btn,
   .action-btn {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: var(--font-size-xs);
@@ -586,11 +669,14 @@
     padding: var(--spacing-md);
   }
 
+  /* Avatar responsive sizes */
+  .avatar--md,
   .user-comm-avatar {
     width: 36px;
     height: 36px;
   }
 
+  .avatar--sm,
   .comment-input-avatar {
     width: 32px;
     height: 32px;

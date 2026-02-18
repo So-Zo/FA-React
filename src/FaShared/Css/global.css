@@ -10,7 +10,7 @@ body {
   font-family: var(--font-primary);
   line-height: var(--line-height-normal);
   color: var(--text-primary);
-  background-color: var(--bg-primary);
+  background-color: var(--surface-primary);
 }
 
 .visually-hidden {
@@ -51,66 +51,47 @@ body {
   text-decoration: underline;
 }
 
-/* Content wrapper for main content - grid with sticky sidebars */
+/* Content wrapper for main content - simplified single column with left sidebar */
 .content-wrapper {
   display: grid;
-  grid-template-columns: 4.5rem 1fr; /* Desktop: sidebar + main content */
+  grid-template-columns: 4.5rem 1fr; /* Desktop: sidebar + main content only */
   max-width: 100%;
   margin: 0 auto;
-  /* Make the grid container handle the sticky positioning */
   position: relative;
-  /* Smooth transition when grid changes */
-  transition: grid-template-columns 0.3s ease;
 }
 
-/* Make grid children stick to viewport */
-.content-wrapper > *:first-child {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-}
-
-/* Main content area - center itself better and transition smoothly */
+/* Main content area - simplified without edit mode complexity */
 .content-wrapper > *:nth-child(2) {
   /* Center the content within its available space */
   max-width: 1400px; /* Prevent content from getting too wide */
   margin: 0 auto; /* Center horizontally */
   padding: 0 2rem; /* Add consistent padding */
-  transition: all 0.3s ease; /* Smooth transitions */
-  /* Maintain reading width even when toolbar appears */
   container-type: inline-size;
 }
 
-/* When edit mode is active, add space for right TipTap toolbar */
-.content-wrapper.edit-mode {
-  grid-template-columns: 4.5rem 1fr 4.5rem; /* Desktop: left sidebar + main content + tiptap toolbar */
-}
+/* DEPRECATED: Edit mode grid changes no longer needed with floating controls */
+/* .content-wrapper.edit-mode {
+  grid-template-columns: 4.5rem 1fr 4.5rem; 
+} */
 
-/* In edit mode, adjust content centering to compensate for toolbar */
-.content-wrapper.edit-mode > *:nth-child(2) {
-  /* Shift content slightly left to visually center between sidebars */
+/* DEPRECATED: Edit mode content adjustments no longer needed */
+/* .content-wrapper.edit-mode > *:nth-child(2) {
   transform: translateX(-0.25rem);
-  /* Reduce max-width slightly to maintain comfortable reading */
   max-width: 1300px;
-}
+} */
 
-/* Make the right toolbar sticky too when present */
-.content-wrapper.edit-mode > *:last-child {
+/* DEPRECATED: Right toolbar sticky positioning no longer needed */
+/* .content-wrapper.edit-mode > *:last-child {
   position: sticky;
   top: 0;
   height: 100vh;
   overflow-y: auto;
-}
+} */
 
 @media (max-width: 768px) {
   .content-wrapper {
-    grid-template-columns: 1fr; /* Mobile: single column, no sidebar */
-    padding-bottom: 80px; /* Space for bottom navigation */
-  }
-
-  .content-wrapper.edit-mode {
-    grid-template-columns: 1fr; /* Mobile: still single column, tiptap controls will be floating */
-    /* TipTap toolbar will be hidden on mobile and replaced with floating controls */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
   }
 }

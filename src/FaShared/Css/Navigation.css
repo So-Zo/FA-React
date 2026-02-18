@@ -158,6 +158,7 @@
 @media (max-width: 768px) {
   .sidebar-dropdown-menu {
     position: fixed;
+    top: auto; /* Override desktop top: 0 */
     bottom: 64px; /* Above bottom navigation bar */
     left: 0;
     right: 0;
