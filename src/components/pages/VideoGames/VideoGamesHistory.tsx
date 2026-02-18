@@ -4,7 +4,6 @@ import TableOfContents, {
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const VideoGamesHistory: React.FC = () => {
   // Define TOC sections

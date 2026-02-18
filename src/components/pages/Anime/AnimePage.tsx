@@ -10,7 +10,6 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const AnimePage: React.FC = () => {
   // Load dynamic content from database

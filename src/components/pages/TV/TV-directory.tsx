@@ -5,7 +5,6 @@ import TableOfContents, {
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const TelevisionDirectory: React.FC = () => {
   const tocSections: TocSectionProps[] = [

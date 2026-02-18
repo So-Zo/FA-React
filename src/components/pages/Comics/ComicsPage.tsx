@@ -4,7 +4,6 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
-import "../../../FaShared/Css/WikiEditor.css";
 
 const ComicsPage: React.FC = () => {
   // Define TOC sections
