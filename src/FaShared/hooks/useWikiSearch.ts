@@ -48,11 +48,6 @@ export function useWikiSearch(options: WikiSearchOptions = {}) {
       setLoading(true);
       setError(null);
 
-      console.log(
-        `🔍 Wiki search for: "${query}" with options:`,
-        searchOptions
-      );
-
       // Build Supabase query
       let supabaseQuery = supabase
         .from("wiki_pages")

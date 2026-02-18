@@ -497,13 +497,6 @@ export const dataService = {
    * Update user profile data with caching invalidation
    */
   async updateUserProfile(userId: string, updates: Record<string, any>) {
-    console.log(
-      "📝 dataService.updateUserProfile called for userId:",
-      userId,
-      "updates:",
-      updates
-    );
-
     const { data, error } = await supabase
       .from("user_profiles")
       .update(updates)
@@ -512,16 +505,14 @@ export const dataService = {
       .single();
 
     if (error) {
-      console.log("❌ dataService.updateUserProfile error:", error);
       throw error;
     }
 
     // Invalidate relevant cache entries
-    console.log("🗑️ Invalidating cache for user:", userId);
+
     cache.invalidatePattern(`user-${userId}`);
     cache.invalidatePattern(`profile-${userId}`);
     cache.invalidatePattern(`profile-complete-${userId}`);
-    console.log("✅ dataService.updateUserProfile success, cache invalidated");
 
     return data;
   },
