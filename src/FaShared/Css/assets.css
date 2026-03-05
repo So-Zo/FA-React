@@ -1,0 +1,177 @@
+/* ==========================================================================
+   ASSET SIZING UTILITIES
+   =========================================================================
+   Helper classes for consistent sizing of uploaded images across the site
+   Apply these classes to img elements: <img src="..." class="asset-hero" />
+   ========================================================================== */
+
+/* Hero Images - Large full-width headers */
+.asset-hero {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .asset-hero {
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .asset-hero {
+    height: 180px;
+  }
+}
+
+/* Banner Images - Medium full-width sections */
+.asset-banner {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .asset-banner {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .asset-banner {
+    height: 120px;
+  }
+}
+
+/* Logo Images - Fixed size, centered, maintain aspect ratio */
+.asset-logo {
+  width: 200px;
+  height: auto;
+  max-height: 100px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .asset-logo {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .asset-logo {
+    width: 120px;
+  }
+}
+
+/* Icon Images - Small fixed size */
+.asset-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .asset-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Thumbnail Images - Card-sized images with rounded corners */
+.asset-thumbnail {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .asset-thumbnail {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .asset-thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Background Images - Full container coverage */
+.asset-background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Favicon/Small Branding - Very small size */
+.asset-favicon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Full Width Image - No height restriction, responsive width */
+.asset-full-width {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Avatar/Profile Images - Square with rounded corners */
+.asset-avatar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .asset-avatar {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ===== USAGE REFERENCE =====
+ *
+ * Hero images (page headers):
+ * <img src={asset.public_url} className="asset-hero" />
+ *
+ * Banners (section dividers):
+ * <img src={asset.public_url} className="asset-banner" />
+ *
+ * Logo (header/branding):
+ * <img src={asset.public_url} className="asset-logo" />
+ *
+ * Icons (UI elements):
+ * <img src={asset.public_url} className="asset-icon" />
+ *
+ * Thumbnails (cards/previews):
+ * <img src={asset.public_url} className="asset-thumbnail" />
+ *
+ * Background (decorative):
+ * <img src={asset.public_url} className="asset-background" />
+ *
+ * ========================== */
