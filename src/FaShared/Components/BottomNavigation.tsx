@@ -17,12 +17,12 @@ import {
   FaGlobe,
   FaInfoCircle,
   FaQuestionCircle,
-  FaDownload,
   FaFistRaised,
   FaMoon,
   FaSun,
   FaEdit,
   FaSave,
+  FaTools,
 } from "react-icons/fa";
 
 const BottomNavigation: React.FC = () => {
@@ -266,8 +266,8 @@ const BottomNavigation: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/downloads" className="default-links">
-                  Downloads <FaDownload className="icon" />
+                <Link to="/admin" className="default-links">
+                  Admin Page <FaTools className="icon" />
                 </Link>
               </li>
             </ul>

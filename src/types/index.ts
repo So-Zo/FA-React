@@ -272,11 +272,10 @@ export interface CharacterForm {
 // ============= POWERROOM CHARACTER TYPES =============
 // PowerRoom needs REQUIRED relationships for comparison
 
-export interface PowerRoomCharacter
-  extends Omit<
-    Character,
-    "abilities" | "timeline" | "world_info" | "notable_feats"
-  > {
+export interface PowerRoomCharacter extends Omit<
+  Character,
+  "abilities" | "timeline" | "world_info" | "notable_feats"
+> {
   // These are REQUIRED for character comparison
   abilities: CharacterAbilities;
   timeline: CharacterEvent[];
@@ -643,6 +642,48 @@ export interface PostForm {
   content: string;
   universe_type?: UniverseType;
   is_pinned?: boolean;
+}
+
+// ============= ADMIN / SITE ASSETS TYPES =============
+
+export type AssetType =
+  | "hero"
+  | "logo"
+  | "banner"
+  | "icon"
+  | "thumbnail"
+  | "background"
+  | "other";
+
+export interface SiteAsset {
+  id: string;
+  file_name: string;
+  storage_path: string;
+  public_url: string;
+  asset_type: AssetType;
+  page_section: string | null;
+  alt_text: string | null;
+  width?: number;
+  height?: number;
+  file_size?: number;
+  mime_type?: string;
+  uploaded_by?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UploadAssetParams {
+  file: File;
+  assetType: AssetType;
+  altText?: string;
+  pageSection?: string;
+}
+
+export interface UpdateAssetParams {
+  assetId: string;
+  altText?: string;
+  pageSection?: string;
+  assetType?: AssetType;
 }
 
 // ============= EXPORT ALL =============
