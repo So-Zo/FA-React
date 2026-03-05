@@ -9,6 +9,7 @@ import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
 import { WikiPageLoader } from "../../../services/WikiPageLoader";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
+import { usePageAssets } from "../../../context/AssetContext";
 
 const MangaPage: React.FC = () => {
   // Load dynamic content from database
@@ -25,6 +26,9 @@ const MangaPage: React.FC = () => {
   // Get current user for saving
   const { user } = useAuth();
 
+  // Get page assets (hero image, logo, etc)
+  const { mangaHero } = usePageAssets();
+
   // Handle content updates from WikiEditor
   const handleContentUpdate = useCallback(
     async (newContent: any) => {
@@ -40,7 +44,7 @@ const MangaPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage?.id, user?.id, refreshPage],
   );
 
   const tocSections: TocSectionProps[] = [
@@ -72,7 +76,11 @@ const MangaPage: React.FC = () => {
     <div className="manga-page">
       <header>
         <div className="image-header">
-          <img src="/images/manga/MangaHeader.jpg" alt="Manga Overview" />
+          <img
+            src={mangaHero?.public_url || "/images/manga/MangaHeader.jpg"}
+            alt={mangaHero?.alt_text || "Manga Overview"}
+            className="asset-hero"
+          />
         </div>
         <WikiSearchBar
           placeholder="Search for Characters, Universes, etc."

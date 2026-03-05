@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, Suspense, lazy } from "react";
 import { AuthProvider } from "./FaShared/hooks/AuthProvider";
 import { ThemeProvider } from "./FaShared/hooks/ThemeContext";
+import { AssetProvider } from "./context/AssetContext";
 import Footer from "./FaShared/Components/Footer";
 import BottomNavigation from "./FaShared/Components/BottomNavigation";
 import { PageContributor } from "./FaShared/Components/PageContributor";
@@ -18,77 +19,82 @@ const HomePage = lazy(() => import("./components/pages/Home/HomePage"));
 const AnimePage = lazy(() => import("./components/wiki-pages/Anime/AnimePage"));
 const MangaPage = lazy(() => import("./components/wiki-pages/Manga/MangaPage"));
 const ComicsPage = lazy(
-  () => import("./components/wiki-pages/Comics/ComicsPage")
+  () => import("./components/wiki-pages/Comics/ComicsPage"),
 );
 const TVPage = lazy(() => import("./components/wiki-pages/TV/TVPage"));
 const VideoGamesPage = lazy(
-  () => import("./components/wiki-pages/VideoGames/VideoGamesPage")
+  () => import("./components/wiki-pages/VideoGames/VideoGamesPage"),
 );
 const WorldsUniversesPage = lazy(
-  () => import("./components/wiki-pages/WorldsUniverses/WorldsUniversesPage")
+  () => import("./components/wiki-pages/WorldsUniverses/WorldsUniversesPage"),
 );
 
 // NEW DYNAMIC HISTORY AND DIRECTORY PAGES
 const AnimeHistory = lazy(
-  () => import("./components/wiki-pages/Anime/AnimeHistory")
+  () => import("./components/wiki-pages/Anime/AnimeHistory"),
 );
 const AnimeDirectory = lazy(
-  () => import("./components/wiki-pages/Anime/AnimeDirectory")
+  () => import("./components/wiki-pages/Anime/AnimeDirectory"),
 );
 const MangaHistory = lazy(
-  () => import("./components/wiki-pages/Manga/MangaHistory")
+  () => import("./components/wiki-pages/Manga/MangaHistory"),
 );
 const MangaDirectory = lazy(
-  () => import("./components/wiki-pages/Manga/MangaDirectory")
+  () => import("./components/wiki-pages/Manga/MangaDirectory"),
 );
 const ComicsHistory = lazy(
-  () => import("./components/wiki-pages/Comics/ComicsHistory")
+  () => import("./components/wiki-pages/Comics/ComicsHistory"),
 );
 const ComicsDirectory = lazy(
-  () => import("./components/wiki-pages/Comics/ComicsDirectory")
+  () => import("./components/wiki-pages/Comics/ComicsDirectory"),
 );
 const TVHistory = lazy(() => import("./components/wiki-pages/TV/TVHistory"));
 const TVDirectory = lazy(
-  () => import("./components/wiki-pages/TV/TVDirectory")
+  () => import("./components/wiki-pages/TV/TVDirectory"),
 );
 const VideoGamesDirectory = lazy(
-  () => import("./components/wiki-pages/VideoGames/VideoGamesDirectory")
+  () => import("./components/wiki-pages/VideoGames/VideoGamesDirectory"),
 );
 const VideoGamesHistory = lazy(
-  () => import("./components/wiki-pages/VideoGames/VideoGamesHistory")
+  () => import("./components/wiki-pages/VideoGames/VideoGamesHistory"),
 );
 const WorldsUniversesDirectory = lazy(
   () =>
-    import("./components/wiki-pages/WorldsUniverses/WorldsUniversesDirectory")
+    import("./components/wiki-pages/WorldsUniverses/WorldsUniversesDirectory"),
 );
 const PowerRoomPage = lazy(
-  () => import("./components/pages/PowerRoom/PowerRoomPage")
+  () => import("./components/pages/PowerRoom/PowerRoomPage"),
 );
 const CommunityPage = lazy(
-  () => import("./components/pages/Community/CommunityPage")
+  () => import("./components/pages/Community/CommunityPage"),
 );
 const ProfilePage = lazy(
-  () => import("./components/pages/Profile/ProfilePage")
+  () => import("./components/pages/Profile/ProfilePage"),
 );
 const UserProfilePage = lazy(
-  () => import("./components/pages/Profile/UserProfilePage")
+  () => import("./components/pages/Profile/UserProfilePage"),
 );
 const CharacterPage = lazy(
-  () => import("./components/pages/Characters/CharacterPage")
+  () => import("./components/pages/Characters/CharacterPage"),
 );
 const LoginPage = lazy(() => import("./components/pages/Auth/LoginPage"));
 const PostDetailPage = lazy(
-  () => import("./FaShared/Components/PostDetailPage")
+  () => import("./FaShared/Components/PostDetailPage"),
 );
 const AboutPage = lazy(() => import("./components/pages/About/AboutPage"));
 const ContributePage = lazy(
-  () => import("./components/pages/Contribute/ContributePage")
+  () => import("./components/pages/Contribute/ContributePage"),
 );
 const PageHistory = lazy(
-  () => import("./components/pages/PageHistory/PageHistory")
+  () => import("./components/pages/PageHistory/PageHistory"),
 );
+
+const AdminAssetsPage = lazy(
+  () => import("./components/pages/Admin/AdminAssetsPage"),
+);
+
 const NotFoundPage = lazy(
-  () => import("./components/pages/NotFound/NotFoundPage")
+  () => import("./components/pages/NotFound/NotFoundPage"),
 );
 
 const PageDataAttributeSetter = () => {
@@ -113,7 +119,7 @@ const AppPageContributor = () => {
   const shouldExclude = excludedPaths.some(
     (excludedPath) =>
       location.pathname === excludedPath ||
-      location.pathname.startsWith(excludedPath + "/")
+      location.pathname.startsWith(excludedPath + "/"),
   );
 
   if (shouldExclude) {
@@ -229,6 +235,7 @@ const AppContent = () => {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contribute" element={<ContributePage />} />
                 <Route path="/page-history/:pageId" element={<PageHistory />} />
+                <Route path="/admin" element={<AdminAssetsPage />} />
                 {/* Catch all other routes with 404 page */}
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
@@ -247,10 +254,12 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <EditModeProvider>
-          <PageDataAttributeSetter />
-          <AppContent />
-        </EditModeProvider>
+        <AssetProvider>
+          <EditModeProvider>
+            <PageDataAttributeSetter />
+            <AppContent />
+          </EditModeProvider>
+        </AssetProvider>
       </AuthProvider>
     </ThemeProvider>
   );

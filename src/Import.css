@@ -38,6 +38,9 @@
 @import url(./components/pages/PageHistory/PageHistory.css);
 @import url(./components/pages/NotFound/NotFoundPage.css);
 
+/* Assets */
+@import url(./FaShared/Css/assets.css);
+
 /* States & Utilities */
 @import url(./FaShared/Css/BgColors.css);
 @import url(./FaShared/Css/links.css);
