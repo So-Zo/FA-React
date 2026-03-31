@@ -19,7 +19,7 @@ class SimpleCache {
   async get<T>(
     key: string,
     fetchFn: () => Promise<T>,
-    ttl: number = this.defaultTTL
+    ttl: number = this.defaultTTL,
   ): Promise<T> {
     const now = Date.now();
     const cached = this.cache.get(key);
@@ -103,6 +103,32 @@ class SimpleCache {
       console.debug(`Cache CLEANUP: removed ${cleaned} expired entries`);
     }
   }
+
+  /**
+   * Invalidate all sections for a specific wiki page
+   */
+  invalidateWikiPageSections(pageId: string): void {
+    this.invalidatePattern(`wiki-section-${pageId}`);
+  }
+
+  /**
+   * Invalidate a specific wiki page section
+   */
+  invalidateWikiPageSection(pageId: string, sectionId: string): void {
+    this.invalidate(`wiki-section-${pageId}-${sectionId}`);
+  }
+
+  /**
+   * Invalidate wiki page and all its sections
+   */
+  invalidateWikiPage(pageIdOrPath: string): void {
+    // Invalidate the page itself
+    this.invalidate(`wiki-page-${pageIdOrPath}`);
+    // Invalidate all sections
+    this.invalidatePattern(`wiki-section-${pageIdOrPath}`);
+    // Invalidate contributors
+    this.invalidate(`wiki-contributors-${pageIdOrPath}`);
+  }
 }
 
 // Export singleton instance
@@ -117,7 +143,7 @@ setInterval(() => cache.cleanup(), 10 * 60 * 1000);
 export const withCache = <T>(
   key: string,
   fetchFn: () => Promise<T>,
-  ttl?: number
+  ttl?: number,
 ): Promise<T> => {
   return cache.get(key, fetchFn, ttl);
 };

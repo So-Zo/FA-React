@@ -42,7 +42,7 @@ const WorldsUniversesDirectory: React.FC = () => {
         // You might want to show a toast notification here
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for worlds & universes directory
@@ -117,6 +117,14 @@ const WorldsUniversesDirectory: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/worlds-universes/directory"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

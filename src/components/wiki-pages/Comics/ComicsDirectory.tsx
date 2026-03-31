@@ -42,7 +42,7 @@ const ComicsDirectory: React.FC = () => {
         // You might want to show a toast notification here
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for comics directory
@@ -135,6 +135,14 @@ const ComicsDirectory: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/comics/directory"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

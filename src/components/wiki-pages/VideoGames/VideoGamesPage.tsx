@@ -40,7 +40,7 @@ const VideoGamesPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   const tocSections: TocSectionProps[] = [
@@ -124,6 +124,14 @@ const VideoGamesPage: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/video-games"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

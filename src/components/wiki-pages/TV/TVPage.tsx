@@ -41,7 +41,7 @@ const TVPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for TV content
@@ -140,6 +140,14 @@ const TVPage: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/tv"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

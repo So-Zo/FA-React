@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { WikiPage } from "../../types";
-import { WikiPageLoader } from "../../services/WikiPageLoader";
+import { WikiPageService } from "../../services/WikiPageService";
 
 /**
  * Hook to load wiki page content with loading states
- * Uses WikiPageLoader with built-in caching
+ * Uses WikiPageService with built-in caching
  */
 export const useWikiPage = (fullPath: string | null) => {
   const [page, setPage] = useState<WikiPage | null>(null);
@@ -22,7 +22,7 @@ export const useWikiPage = (fullPath: string | null) => {
       setError(null);
 
       try {
-        const pageData = await WikiPageLoader.loadWikiPage(fullPath);
+        const pageData = await WikiPageService.loadWikiPage(fullPath);
         setPage(pageData);
       } catch (err) {
         console.error("Failed to load wiki page:", err);
@@ -43,7 +43,7 @@ export const useWikiPage = (fullPath: string | null) => {
     setError(null);
 
     try {
-      const pageData = await WikiPageLoader.loadWikiPage(fullPath);
+      const pageData = await WikiPageService.loadWikiPage(fullPath);
       setPage(pageData);
     } catch (err) {
       console.error("Failed to refresh wiki page:", err);

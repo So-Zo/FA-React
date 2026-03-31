@@ -1,43 +1,66 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
 import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
+import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useWikiPageSections } from "../../../FaShared/hooks/useWikiPageSections";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
+import { TipTapContent } from "../../../types";
 
 const AnimePage: React.FC = () => {
-  // Load dynamic content from database
+  // Load page metadata (for ID and basic info)
   const {
     page: wikiPage,
     loading: pageLoading,
     error: pageError,
-    refreshPage,
   } = useWikiPage("/anime");
 
   // Get current user for saving
   const { user } = useAuth();
 
-  // Handle content updates from WikiEditor
-  const handleContentUpdate = useCallback(
-    async (newContent: any) => {
-      if (!wikiPage?.id) {
-        console.warn("Cannot save: no page ID available");
-        return;
-      }
+  // Define sections - order controlled here, not in database
+  // Memoized to prevent infinite render loops
+  const sections = useMemo(
+    () => [
+      { id: "the-basics", title: "The Basics" },
+      { id: "history-of-anime", title: "History of Anime" },
+      { id: "terminology-guide", title: "Terminology Guide" },
+      { id: "anime-genres", title: "Anime Genres" },
+      { id: "anime-worlds", title: "Anime Worlds" },
+      { id: "audience-categories", title: "Audience Categories" },
+      { id: "production-process", title: "Production Process" },
+      { id: "cultural-impact", title: "Cultural Impact" },
+      { id: "learning-resources", title: "Learning Resources" },
+    ],
+    []
+  );
 
+  // Load individual sections
+  const {
+    sectionContent,
+    loading: sectionsLoading,
+    error: sectionsError,
+    saveSectionContent,
+  } = useWikiPageSections(wikiPage?.id || null, sections, user?.id);
+
+  // Get page contributors
+  const { contributors } = usePageContributors("/anime");
+
+  // Handle content updates for individual sections
+  const handleSectionUpdate = useCallback(
+    (sectionId: string) => async (newContent: TipTapContent) => {
       try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
-        // Refresh the page data to show updated content
-        await refreshPage();
+        await saveSectionContent(sectionId, newContent);
       } catch (error) {
-        console.error("Failed to save wiki page:", error);
+        console.error(`Failed to save section ${sectionId}:`, error);
         // You might want to show a toast notification here
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [saveSectionContent],
   );
 
   // Define TOC sections for anime content
@@ -97,49 +120,62 @@ const AnimePage: React.FC = () => {
           description="Use this table of contents to navigate through the anime guide."
         />
 
-        {/* Dynamic Wiki Content - Loads from Database */}
-        {pageLoading ? (
+        {/* Dynamic Wiki Content - Section-Based Architecture */}
+        {pageLoading || sectionsLoading ? (
           <div className="section-content loading">
             <h2>📚 Loading Anime Content...</h2>
             <p>Fetching the latest content from the database...</p>
           </div>
-        ) : pageError ? (
+        ) : pageError || sectionsError ? (
           <div className="section-content error">
             <h2>⚠️ Error Loading Content</h2>
-            <p>Failed to load page content: {pageError}</p>
-            <button onClick={refreshPage} className="retry-button">
-              Try Again
-            </button>
+            <p>Failed to load page content: {pageError || sectionsError}</p>
           </div>
-        ) : wikiPage?.content ? (
-          <WikiEditor
-            className="section-content"
-            content={wikiPage.content}
-            onUpdate={handleContentUpdate}
-          />
-        ) : (
+        ) : !wikiPage?.id ? (
           <div className="section-content placeholder">
-            <h2>📄 No Database Content Yet</h2>
+            <h2>📄 No Database Page Found</h2>
             <p>
-              <strong>This page is fully dynamic!</strong> Content will be
-              loaded from the database once it's added.
+              <strong>
+                This page needs to be created in the database first.
+              </strong>
             </p>
             <p>
-              To add content:
+              To add this page:
               <br />
-              1. Run the SQL migration: <code>insert_anime_page.sql</code>
+              1. Run the SQL migration to create the wiki_pages entry
               <br />
-              2. Enable edit mode to start adding content
+              2. Enable edit mode to start adding section content
               <br />
-              3. Use the WikiEditor to create and edit content
-            </p>
-            <p>
-              Page ID: <code>{wikiPage?.id || "Not found"}</code>
+              3. Each section is saved independently
             </p>
           </div>
+        ) : (
+          <>
+            {/* Render each section with full HTML control */}
+            {sections.map((section) => (
+              <section
+                key={section.id}
+                id={section.id}
+                className="section-content"
+              >
+                <WikiEditor
+                  content={sectionContent[section.id] || ""}
+                  onUpdate={handleSectionUpdate(section.id)}
+                />
+              </section>
+            ))}
+          </>
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/anime"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

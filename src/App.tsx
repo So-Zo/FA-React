@@ -112,6 +112,20 @@ const PageDataAttributeSetter = () => {
 const AppPageContributor = () => {
   const location = useLocation();
 
+  // Determine page ID from route
+  const getPageId = () => {
+    const pathname = location.pathname;
+
+    // Use the full_path directly as it matches the wiki_pages table
+    // This should match the full_path column in wiki_pages table
+    return pathname === "/" ? "/" : pathname;
+  };
+
+  const pageId = getPageId();
+
+  // Call hooks unconditionally at the top level
+  const { contributors } = usePageContributors(pageId);
+
   // Pages that should NOT have contributors
   const excludedPaths = ["/profile", "/user", "/community", "/login", "/post"];
 
@@ -125,18 +139,6 @@ const AppPageContributor = () => {
   if (shouldExclude) {
     return null;
   }
-
-  // Determine page ID from route
-  const getPageId = () => {
-    const pathname = location.pathname;
-
-    // Use the full_path directly as it matches the wiki_pages table
-    // This should match the full_path column in wiki_pages table
-    return pathname === "/" ? "/" : pathname;
-  };
-
-  const pageId = getPageId();
-  const { contributors } = usePageContributors(pageId);
 
   if (!pageId) {
     return null;
@@ -189,7 +191,7 @@ const AppContent = () => {
               <Routes>
                 {/* Define routes for all pages */}
                 <Route path="/" element={<HomePage />} />
-                {<Route path="/anime" element={<AnimePage />} />}
+                <Route path="/anime" element={<AnimePage />} />
                 <Route path="/anime/history" element={<AnimeHistory />} />
                 <Route path="/anime/directory" element={<AnimeDirectory />} />
                 <Route path="/manga" element={<MangaPage />} />

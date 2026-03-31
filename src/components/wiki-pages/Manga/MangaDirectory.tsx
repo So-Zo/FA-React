@@ -42,7 +42,7 @@ const MangaDirectory: React.FC = () => {
         // You might want to show a toast notification here
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for manga directory
@@ -111,6 +111,14 @@ const MangaDirectory: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/manga/directory"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

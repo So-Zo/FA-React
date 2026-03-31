@@ -35,7 +35,7 @@ const WorldsUniversesPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   const tocSections: TocSectionProps[] = [

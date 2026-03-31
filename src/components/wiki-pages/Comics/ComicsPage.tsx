@@ -41,7 +41,7 @@ const ComicsPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for comics content
@@ -145,6 +145,14 @@ const ComicsPage: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/comics"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

@@ -42,7 +42,7 @@ const VideoGamesDirectory: React.FC = () => {
         // You might want to show a toast notification here
       }
     },
-    [wikiPage?.id, user?.id, refreshPage]
+    [wikiPage, user, refreshPage],
   );
 
   // Define TOC sections for video games directory
@@ -122,6 +122,14 @@ const VideoGamesDirectory: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/video-games/directory"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { WikiContributor } from "../../types";
-import { dataService } from "../../services/dataService";
-import { withCache } from "../../utils/cache";
+import { WikiContributorService } from "../../services/WikiContributorService";
 
 export const usePageContributors = (pageId: string | null) => {
   const [contributors, setContributors] = useState<WikiContributor[]>([]);
@@ -19,18 +18,15 @@ export const usePageContributors = (pageId: string | null) => {
       setError(null);
 
       try {
-        // Fetch contributors with improved caching
-        const data = await withCache(
-          `page-contributors-${pageId}`,
-          () => dataService.getPageContributors(pageId),
-          15 * 60 * 1000 // 15 minute cache (increased from 5)
-        );
+        // Use WikiContributorService's caching built-in
+        const data =
+          await WikiContributorService.getPageContributorsById(pageId);
 
         setContributors(data || []);
       } catch (err) {
         console.error("Failed to fetch page contributors:", err);
         setError(
-          err instanceof Error ? err.message : "Failed to load contributors"
+          err instanceof Error ? err.message : "Failed to load contributors",
         );
         setContributors([]);
       } finally {

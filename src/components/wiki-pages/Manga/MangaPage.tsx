@@ -44,7 +44,7 @@ const MangaPage: React.FC = () => {
         console.error("Failed to save wiki page:", error);
       }
     },
-    [wikiPage?.id, user?.id, refreshPage],
+    [wikiPage, user, refreshPage],
   );
 
   const tocSections: TocSectionProps[] = [
@@ -129,6 +129,14 @@ const MangaPage: React.FC = () => {
         )}
 
         <hr />
+
+        {/* Page Contributors */}
+        <PageContributor
+          pageId="/manga"
+          contributors={contributors}
+          className="page-footer"
+          showHistoryLink={true}
+        />
       </main>
     </div>
   );

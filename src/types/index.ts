@@ -18,6 +18,10 @@ export type PageType =
   | "community";
 export type UserRole = "user" | "moderator" | "admin";
 
+// TipTap editor content type (JSON representation)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TipTapContent = any;
+
 // ============= AUTH TYPES =============
 
 export interface AuthContextType {
@@ -322,10 +326,12 @@ export interface WikiPage {
 export interface WikiSection {
   id: string;
   wiki_page_id: string;
+  section_id: string; // Text slug like "the-basics", "history-of-anime"
   title: string;
   content: string;
   order_index: number;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface WikiRevision {
