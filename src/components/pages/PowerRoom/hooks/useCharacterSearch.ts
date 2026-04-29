@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CharacterSearchResult, UniverseType } from "../../../../types";
-import { dataService } from "../../../../services/dataService";
+import { CharacterService } from "../../../../services/CharacterService";
 import { withCache } from "../../../../utils/cache";
 
 export const useCharacterSearch = () => {
@@ -26,11 +26,11 @@ export const useCharacterSearch = () => {
           data = await withCache(
             cacheKey,
             () =>
-              dataService.searchCharacters(
+              CharacterService.searchCharacters(
                 searchQuery.trim(),
-                selectedUniverse !== "all" ? selectedUniverse : undefined
+                selectedUniverse !== "all" ? selectedUniverse : undefined,
               ),
-            2 * 60 * 1000 // 2 minute cache for searches
+            2 * 60 * 1000,
           );
         } else {
           // Get default preview characters (2-3 alphabetically)
@@ -43,26 +43,24 @@ export const useCharacterSearch = () => {
             cacheKey,
             async () => {
               if (selectedUniverse === "all") {
-                // Get a few characters from all universes, sorted alphabetically
-                const allCharacters = await dataService.searchCharacters(
+                const allCharacters = await CharacterService.searchCharacters(
                   "",
-                  undefined
+                  undefined,
                 );
                 return allCharacters
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .slice(0, 3);
               } else {
-                // Get characters for selected universe, sorted alphabetically
                 const universeCharacters =
-                  await dataService.getCharactersByUniverse(
-                    selectedUniverse as UniverseType
+                  await CharacterService.getCharactersByUniverse(
+                    selectedUniverse as UniverseType,
                   );
                 return universeCharacters
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .slice(0, 3);
               }
             },
-            10 * 60 * 1000 // 10 minute cache for preview listings
+            10 * 60 * 1000,
           );
         }
 

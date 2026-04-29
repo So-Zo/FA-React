@@ -1,7 +1,43 @@
 import React from "react";
-import { PowerRoomCharacter } from "../../../../types";
+import WikiEditor from "../../../../FaShared/Components/Editor";
+import { useTipTapEditor } from "../../../../FaShared/hooks/TipTapContext";
+import { PowerRoomCharacter, TipTapContent } from "../../../../types";
 
-interface TimelineTabProps {
+interface EditableTabProps {
+  leftEditable: boolean;
+  rightEditable: boolean;
+  leftContent: TipTapContent;
+  rightContent: TipTapContent;
+  onLeftUpdate: (content: TipTapContent, html: string) => void;
+  onRightUpdate: (content: TipTapContent, html: string) => void;
+}
+
+const renderSectionHtml = (character: PowerRoomCharacter | null) => {
+  if (!character) {
+    return (
+      <div className="no-character-selected">
+        <p>Select a character to view timeline</p>
+      </div>
+    );
+  }
+
+  if (!character.timeline.content_html) {
+    return (
+      <div className="empty-state">
+        <p>No timeline content yet</p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="wiki-content character-section-content"
+      dangerouslySetInnerHTML={{ __html: character.timeline.content_html }}
+    />
+  );
+};
+
+interface TimelineTabProps extends EditableTabProps {
   leftCharacter: PowerRoomCharacter | null;
   rightCharacter: PowerRoomCharacter | null;
 }
@@ -9,34 +45,19 @@ interface TimelineTabProps {
 export const TimelineTab: React.FC<TimelineTabProps> = ({
   leftCharacter,
   rightCharacter,
+  leftEditable,
+  rightEditable,
+  leftContent,
+  rightContent,
+  onLeftUpdate,
+  onRightUpdate,
 }) => {
-  // Debug: Check individual timeline events
-  if (leftCharacter?.timeline && leftCharacter.timeline.length > 0) {
-    console.log(
-      "🕒 TimelineTab - First left event:",
-      leftCharacter.timeline[0]
-    );
-  }
-  if (rightCharacter?.timeline && rightCharacter.timeline.length > 0) {
-    console.log(
-      "🕒 TimelineTab - First right event:",
-      rightCharacter.timeline[0]
-    );
-  }
+  const { setEditor } = useTipTapEditor();
 
   return (
     <div className="comparison-panel active" id="timeline-panel">
       <div className="comparison-panel-header">
-        <h3>
-          Timeline & Events{" "}
-          <a
-            href="#edit-timeline"
-            className="section-edit-control"
-            data-section="timeline"
-          >
-            Edit
-          </a>
-        </h3>
+        <h3>Timeline & Events</h3>
       </div>
       <div
         className="comparison-panel-content editable-content"
@@ -45,76 +66,29 @@ export const TimelineTab: React.FC<TimelineTabProps> = ({
         <div className="comparison-split">
           <div className="left-content">
             <h4>Major Events</h4>
-            {leftCharacter ? (
-              <div className="character-timeline">
-                {leftCharacter.timeline && leftCharacter.timeline.length > 0 ? (
-                  <div className="timeline-events">
-                    {leftCharacter.timeline
-                      .sort((a: any, b: any) => a.order_index - b.order_index)
-                      .map((event: any) => (
-                        <div key={event.id} className="timeline-event">
-                          <div className="event-header">
-                            <h5 className="event-title">{event.title}</h5>
-                            {event.category && (
-                              <span className="event-category">
-                                ({event.category})
-                              </span>
-                            )}
-                          </div>
-                          <p className="event-description">
-                            DEBUG: {event.description}
-                          </p>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No major events recorded</p>
-                  </div>
-                )}
-              </div>
+            {leftEditable ? (
+              <WikiEditor
+                content={leftContent}
+                onUpdate={onLeftUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view timeline</p>
-              </div>
+              renderSectionHtml(leftCharacter)
             )}
           </div>
 
           <div className="right-content">
             <h4>Major Events</h4>
-            {rightCharacter ? (
-              <div className="character-timeline">
-                {rightCharacter.timeline &&
-                rightCharacter.timeline.length > 0 ? (
-                  <div className="timeline-events">
-                    {rightCharacter.timeline
-                      .sort((a, b) => a.order_index - b.order_index)
-                      .map((event: any) => (
-                        <div key={event.id} className="timeline-event">
-                          <div className="event-header">
-                            <h5 className="event-title">{event.title}</h5>
-                            {event.category && (
-                              <span className="event-category">
-                                ({event.category})
-                              </span>
-                            )}
-                          </div>
-                          <p className="event-description">
-                            DEBUG: {event.description}
-                          </p>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No major events recorded</p>
-                  </div>
-                )}
-              </div>
+            {rightEditable ? (
+              <WikiEditor
+                content={rightContent}
+                onUpdate={onRightUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view timeline</p>
-              </div>
+              renderSectionHtml(rightCharacter)
             )}
           </div>
         </div>

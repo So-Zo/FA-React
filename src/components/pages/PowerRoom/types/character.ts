@@ -5,21 +5,17 @@
 
 import {
   Character as BaseCharacter,
-  CharacterAbilities,
-  CharacterEvent,
-  WorldInfo,
-  NotableFeat,
+  CharacterCategoryContent,
 } from "../../../../types";
 
 // PowerRoom-specific Character type with required relationships
-export interface Character
-  extends Omit<
-    BaseCharacter,
-    "abilities" | "timeline" | "world_info" | "notable_feats"
-  > {
+export interface Character extends Omit<
+  BaseCharacter,
+  "abilities" | "timeline" | "world_info" | "notable_feats"
+> {
   // These are required for character comparison
-  abilities: CharacterAbilities;
-  timeline: CharacterEvent[];
-  world_info: WorldInfo;
-  notable_feats: NotableFeat[];
+  abilities: CharacterCategoryContent;
+  timeline: CharacterCategoryContent;
+  world_info: CharacterCategoryContent;
+  notable_feats: CharacterCategoryContent;
 }

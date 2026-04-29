@@ -1,7 +1,43 @@
 import React from "react";
-import { PowerRoomCharacter } from "../../../../types";
+import WikiEditor from "../../../../FaShared/Components/Editor";
+import { useTipTapEditor } from "../../../../FaShared/hooks/TipTapContext";
+import { PowerRoomCharacter, TipTapContent } from "../../../../types";
 
-interface FeatsTabProps {
+interface EditableTabProps {
+  leftEditable: boolean;
+  rightEditable: boolean;
+  leftContent: TipTapContent;
+  rightContent: TipTapContent;
+  onLeftUpdate: (content: TipTapContent, html: string) => void;
+  onRightUpdate: (content: TipTapContent, html: string) => void;
+}
+
+const renderSectionHtml = (character: PowerRoomCharacter | null) => {
+  if (!character) {
+    return (
+      <div className="no-character-selected">
+        <p>Select a character to view feats</p>
+      </div>
+    );
+  }
+
+  if (!character.notable_feats.content_html) {
+    return (
+      <div className="empty-state">
+        <p>No feats content yet</p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="wiki-content character-section-content"
+      dangerouslySetInnerHTML={{ __html: character.notable_feats.content_html }}
+    />
+  );
+};
+
+interface FeatsTabProps extends EditableTabProps {
   leftCharacter: PowerRoomCharacter | null;
   rightCharacter: PowerRoomCharacter | null;
 }
@@ -9,20 +45,19 @@ interface FeatsTabProps {
 export const FeatsTab: React.FC<FeatsTabProps> = ({
   leftCharacter,
   rightCharacter,
+  leftEditable,
+  rightEditable,
+  leftContent,
+  rightContent,
+  onLeftUpdate,
+  onRightUpdate,
 }) => {
+  const { setEditor } = useTipTapEditor();
+
   return (
     <div className="comparison-panel active" id="feats-panel">
       <div className="comparison-panel-header">
-        <h3>
-          Notable Feats{" "}
-          <a
-            href="#edit-feats"
-            className="section-edit-control"
-            data-section="feats"
-          >
-            Edit
-          </a>
-        </h3>
+        <h3>Notable Feats</h3>
       </div>
       <div
         className="comparison-panel-content editable-content"
@@ -31,88 +66,29 @@ export const FeatsTab: React.FC<FeatsTabProps> = ({
         <div className="comparison-split">
           <div className="left-content">
             <h4>Achievement Highlights</h4>
-            {leftCharacter ? (
-              <div className="character-feats">
-                {leftCharacter.notable_feats &&
-                leftCharacter.notable_feats.length > 0 ? (
-                  <div className="feats-list">
-                    {leftCharacter.notable_feats.map((feat) => (
-                      <div key={feat.id} className="feat-entry">
-                        <div className="feat-header">
-                          <h5 className="feat-title">{feat.title}</h5>
-                          <span className="feat-category">
-                            {feat.power_level}
-                          </span>
-                        </div>
-                        <p className="feat-description">{feat.description}</p>
-                        {feat.power_level && (
-                          <div className="feat-power">
-                            <strong>Power Level:</strong> {feat.power_level}
-                          </div>
-                        )}
-                        {feat.context && (
-                          <div className="feat-context">
-                            <em>Context:</em> {feat.context}
-                          </div>
-                        )}
-                        <div className="feat-difficulty">
-                          <strong>Difficulty:</strong> {feat.difficulty}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No notable feats recorded</p>
-                  </div>
-                )}
-              </div>
+            {leftEditable ? (
+              <WikiEditor
+                content={leftContent}
+                onUpdate={onLeftUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view feats</p>
-              </div>
+              renderSectionHtml(leftCharacter)
             )}
           </div>
 
           <div className="right-content">
             <h4>Achievement Highlights</h4>
-            {rightCharacter ? (
-              <div className="character-feats">
-                {rightCharacter.notable_feats &&
-                rightCharacter.notable_feats.length > 0 ? (
-                  <div className="feats-list">
-                    {rightCharacter.notable_feats.map((feat) => (
-                      <div key={feat.id} className="feat-entry">
-                        <div className="feat-header">
-                          <h5 className="feat-title">{feat.title}</h5>
-                          <span className="feat-category">
-                            {feat.power_level}
-                          </span>
-                        </div>
-                        <p className="feat-description">{feat.description}</p>
-                        {feat.power_level && (
-                          <div className="feat-power">
-                            <strong>Power Level:</strong> {feat.power_level}
-                          </div>
-                        )}
-                        {feat.context && (
-                          <div className="feat-context">
-                            <em>Context:</em> {feat.context}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No notable feats recorded</p>
-                  </div>
-                )}
-              </div>
+            {rightEditable ? (
+              <WikiEditor
+                content={rightContent}
+                onUpdate={onRightUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view feats</p>
-              </div>
+              renderSectionHtml(rightCharacter)
             )}
           </div>
         </div>

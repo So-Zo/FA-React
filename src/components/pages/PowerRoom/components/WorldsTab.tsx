@@ -1,7 +1,43 @@
 import React from "react";
-import { PowerRoomCharacter } from "../../../../types";
+import WikiEditor from "../../../../FaShared/Components/Editor";
+import { useTipTapEditor } from "../../../../FaShared/hooks/TipTapContext";
+import { PowerRoomCharacter, TipTapContent } from "../../../../types";
 
-interface WorldsTabProps {
+interface EditableTabProps {
+  leftEditable: boolean;
+  rightEditable: boolean;
+  leftContent: TipTapContent;
+  rightContent: TipTapContent;
+  onLeftUpdate: (content: TipTapContent, html: string) => void;
+  onRightUpdate: (content: TipTapContent, html: string) => void;
+}
+
+const renderSectionHtml = (character: PowerRoomCharacter | null) => {
+  if (!character) {
+    return (
+      <div className="no-character-selected">
+        <p>Select a character to view world information</p>
+      </div>
+    );
+  }
+
+  if (!character.world_info.content_html) {
+    return (
+      <div className="empty-state">
+        <p>No world content yet</p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="wiki-content character-section-content"
+      dangerouslySetInnerHTML={{ __html: character.world_info.content_html }}
+    />
+  );
+};
+
+interface WorldsTabProps extends EditableTabProps {
   leftCharacter: PowerRoomCharacter | null;
   rightCharacter: PowerRoomCharacter | null;
 }
@@ -9,20 +45,19 @@ interface WorldsTabProps {
 export const WorldsTab: React.FC<WorldsTabProps> = ({
   leftCharacter,
   rightCharacter,
+  leftEditable,
+  rightEditable,
+  leftContent,
+  rightContent,
+  onLeftUpdate,
+  onRightUpdate,
 }) => {
+  const { setEditor } = useTipTapEditor();
+
   return (
     <div className="comparison-panel active" id="worlds-panel">
       <div className="comparison-panel-header">
-        <h3>
-          Worlds & Universes{" "}
-          <a
-            href="#edit-worlds"
-            className="section-edit-control"
-            data-section="worlds"
-          >
-            Edit
-          </a>
-        </h3>
+        <h3>Worlds & Universes</h3>
       </div>
       <div
         className="comparison-panel-content editable-content"
@@ -31,89 +66,29 @@ export const WorldsTab: React.FC<WorldsTabProps> = ({
         <div className="comparison-split">
           <div className="left-content">
             <h4>World Information</h4>
-            {leftCharacter ? (
-              <div className="character-worlds">
-                {leftCharacter.world_info ? (
-                  <div className="world-entries">
-                    <div className="world-entry">
-                      <h5 className="world-type">
-                        {leftCharacter.world_info.universe_name}
-                      </h5>
-                      <div className="world-details">
-                        <p className="world-description">
-                          {leftCharacter.world_info.universe_description}
-                        </p>
-                        {leftCharacter.world_info.notable_locations &&
-                          leftCharacter.world_info.notable_locations.length >
-                            0 && (
-                            <div className="world-rules">
-                              <strong>Notable Locations:</strong>
-                              <ul>
-                                {leftCharacter.world_info.notable_locations.map(
-                                  (location, locationIndex) => (
-                                    <li key={locationIndex}>{location}</li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                          )}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No world information available</p>
-                  </div>
-                )}
-              </div>
+            {leftEditable ? (
+              <WikiEditor
+                content={leftContent}
+                onUpdate={onLeftUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view world information</p>
-              </div>
+              renderSectionHtml(leftCharacter)
             )}
           </div>
 
           <div className="right-content">
             <h4>World Information</h4>
-            {rightCharacter ? (
-              <div className="character-worlds">
-                {rightCharacter.world_info ? (
-                  <div className="world-entries">
-                    <div className="world-entry">
-                      <h5 className="world-type">
-                        {rightCharacter.world_info.universe_name}
-                      </h5>
-                      <div className="world-details">
-                        <p className="world-description">
-                          {rightCharacter.world_info.universe_description}
-                        </p>
-                        {rightCharacter.world_info.notable_locations &&
-                          rightCharacter.world_info.notable_locations.length >
-                            0 && (
-                            <div className="world-rules">
-                              <strong>Notable Locations:</strong>
-                              <ul>
-                                {rightCharacter.world_info.notable_locations.map(
-                                  (location, locationIndex) => (
-                                    <li key={locationIndex}>{location}</li>
-                                  )
-                                )}
-                              </ul>
-                            </div>
-                          )}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="empty-state">
-                    <p>No world information available</p>
-                  </div>
-                )}
-              </div>
+            {rightEditable ? (
+              <WikiEditor
+                content={rightContent}
+                onUpdate={onRightUpdate}
+                editable={true}
+                onEditorChange={setEditor}
+              />
             ) : (
-              <div className="no-character-selected">
-                <p>Select a character to view world information</p>
-              </div>
+              renderSectionHtml(rightCharacter)
             )}
           </div>
         </div>
