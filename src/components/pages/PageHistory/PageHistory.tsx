@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { WikiContributor } from "../../../types";
-import { dataService } from "../../../services/dataService";
+import { WikiPageService } from "../../../services/WikiPageService";
 
 const PageHistory: React.FC = () => {
   const { pageId } = useParams<{ pageId: string }>();
@@ -26,7 +26,8 @@ const PageHistory: React.FC = () => {
         setError(null);
 
         // Get page info and contributors in one optimized call
-        const result = await dataService.getPageWithContributors(decodedPageId);
+        const result =
+          await WikiPageService.getPageWithContributors(decodedPageId);
 
         setContributors(result.contributors || []);
 

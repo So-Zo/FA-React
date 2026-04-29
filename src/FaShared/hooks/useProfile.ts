@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { dataService } from "../../services/dataService";
+import { profileService } from "../../components/pages/Profile/services/profileService";
 
 /**
  * Hook that fetches user profile data with automatic caching
@@ -25,8 +25,7 @@ export const useProfile = (userId: string | null) => {
       setError(null);
 
       try {
-        // This call is automatically cached by dataService
-        const profileData = await dataService.getUserProfileComplete(userId);
+        const profileData = await profileService.getUserProfileComplete(userId);
 
         if (!cancelled) {
           setData(profileData);
@@ -34,7 +33,7 @@ export const useProfile = (userId: string | null) => {
       } catch (err) {
         if (!cancelled) {
           setError(
-            err instanceof Error ? err : new Error("Failed to fetch profile")
+            err instanceof Error ? err : new Error("Failed to fetch profile"),
           );
         }
       } finally {
@@ -60,11 +59,11 @@ export const useProfile = (userId: string | null) => {
     setError(null);
 
     try {
-      const profileData = await dataService.getUserProfileComplete(userId);
+      const profileData = await profileService.getUserProfileComplete(userId);
       setData(profileData);
     } catch (err) {
       setError(
-        err instanceof Error ? err : new Error("Failed to fetch profile")
+        err instanceof Error ? err : new Error("Failed to fetch profile"),
       );
     } finally {
       setLoading(false);

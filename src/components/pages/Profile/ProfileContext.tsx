@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import { profileService } from "./services/profileService";
-import { dataService } from "../../../services/dataService";
 import { useProfile } from "../../../FaShared/hooks/useProfile";
 import {
   ProfileState,
@@ -68,7 +67,7 @@ type ProfileAction =
 // Reducer
 function profileReducer(
   state: ProfileState,
-  action: ProfileAction
+  action: ProfileAction,
 ): ProfileState {
   switch (action.type) {
     case "SET_LOADING":
@@ -123,7 +122,7 @@ interface ProfileContextType extends ProfileState {
   fetchUserComments: (page: number, limit: number) => Promise<void>;
   updateProfileData: (data: Partial<ProfileData>) => Promise<void>;
   createPost: (
-    post: Omit<UserPost, "id" | "created_at" | "updated_at">
+    post: Omit<UserPost, "id" | "created_at" | "updated_at">,
   ) => Promise<void>;
   isOwnProfile: boolean; // Add this to help components know if viewing own profile
 }
@@ -140,7 +139,7 @@ export const ProfileProvider: React.FC<{
 
   const targetUserId = userId !== undefined ? userId : user?.id;
   const isOwnProfile = Boolean(
-    user && targetUserId && user.id === targetUserId
+    user && targetUserId && user.id === targetUserId,
   );
 
   const {
@@ -206,7 +205,7 @@ export const ProfileProvider: React.FC<{
         const { posts, total } = await profileService.getPosts(
           targetUserId, // Use dynamic user ID instead of hardcoded user.id
           page,
-          limit
+          limit,
         );
 
         dispatch({
@@ -231,7 +230,7 @@ export const ProfileProvider: React.FC<{
         });
       }
     },
-    [targetUserId] // Update dependency to targetUserId instead of user
+    [targetUserId], // Update dependency to targetUserId instead of user
   );
 
   const fetchUserComments = useCallback(
@@ -247,7 +246,7 @@ export const ProfileProvider: React.FC<{
         const { comments, total } = await profileService.getUserComments(
           targetUserId,
           page,
-          limit
+          limit,
         );
 
         dispatch({
@@ -272,7 +271,7 @@ export const ProfileProvider: React.FC<{
         });
       }
     },
-    [targetUserId]
+    [targetUserId],
   );
 
   const refreshProfileData = useCallback(async () => {
@@ -286,7 +285,7 @@ export const ProfileProvider: React.FC<{
       }
 
       try {
-        await dataService.updateUserProfile(user.id, data);
+        await profileService.updateUserProfile(user.id, data);
         // Refresh to get updated data (cache was invalidated)
         await refresh();
       } catch (error) {
@@ -299,7 +298,7 @@ export const ProfileProvider: React.FC<{
         });
       }
     },
-    [user, isOwnProfile, refresh]
+    [user, isOwnProfile, refresh],
   );
 
   const createPost = useCallback(
@@ -327,7 +326,7 @@ export const ProfileProvider: React.FC<{
         });
       }
     },
-    [user, refreshProfileData, fetchProfilePosts]
+    [user, refreshProfileData, fetchProfilePosts],
   );
 
   return (

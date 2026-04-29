@@ -166,40 +166,42 @@ export const AdminAssetsPage = () => {
         <h1>Site Assets Manager</h1>
         <p>Manage images and media for your site</p>
       </header>
-
       {/* View Mode Toggle */}
-      <nav className="admin-nav">
+      <nav className="admin-nav filter-buttons">
         <button
-          className={viewMode === "gallery" ? "active" : ""}
+          className={`filter-btn ${viewMode === "gallery" ? "active" : ""}`}
           onClick={() => setViewMode("gallery")}
         >
           All Assets ({assets.length})
         </button>
         <button
-          className={viewMode === "upload" ? "active" : ""}
+          className={`filter-btn ${viewMode === "upload" ? "active" : ""}`}
           onClick={() => setViewMode("upload")}
         >
           Upload New
         </button>
         <button
-          className={viewMode === "assigned" ? "active" : ""}
+          className={`filter-btn ${viewMode === "assigned" ? "active" : ""}`}
           onClick={() => setViewMode("assigned")}
         >
           Assigned ({assignedAssets.length})
         </button>
       </nav>
-
       {/* Error Display */}
       {error && (
-        <div className="error-message">
+        <div
+          className="error-message info-card"
+          style={{ borderLeftColor: "#dc2626" }}
+        >
           <strong>Error:</strong> {error}
-          <button onClick={() => setError(null)}>×</button>
+          <button className="btn btn-outline" onClick={() => setError(null)}>
+            ×
+          </button>
         </div>
       )}
-
       {/* Gallery View */}
       {viewMode === "gallery" && (
-        <div className="gallery-view">
+        <div className="gallery-view section-content">
           <h2>All Assets</h2>
 
           {loading ? (
@@ -210,11 +212,11 @@ export const AdminAssetsPage = () => {
             </p>
           ) : (
             <>
-              <div className="assets-grid">
+              <div className="assets-grid profile-card-grid">
                 {assets.map((asset) => (
                   <div
                     key={asset.id}
-                    className={`asset-card ${selectedAsset?.id === asset.id ? "selected" : ""}`}
+                    className={`asset-card info-card ${selectedAsset?.id === asset.id ? "selected" : ""}`}
                     onClick={() => handleAssetClick(asset)}
                   >
                     <div className="asset-image">
@@ -236,7 +238,7 @@ export const AdminAssetsPage = () => {
                       )}
                     </div>
                     <button
-                      className="delete-btn"
+                      className="btn btn-danger"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDelete(asset.id);
@@ -250,7 +252,7 @@ export const AdminAssetsPage = () => {
 
               {/* Asset Assignment Panel */}
               {selectedAsset && (
-                <div className="assignment-panel">
+                <div className="assignment-panel info-card">
                   <h3>Assign to Page Section</h3>
                   <p>
                     Selected: <strong>{selectedAsset.file_name}</strong>
@@ -262,8 +264,9 @@ export const AdminAssetsPage = () => {
                     </p>
                   )}
 
-                  <div className="assignment-form">
+                  <div className="assignment-form form-container">
                     <select
+                      className="form-select"
                       value={assigningSection}
                       onChange={(e) => setAssigningSection(e.target.value)}
                     >
@@ -298,35 +301,44 @@ export const AdminAssetsPage = () => {
                         </option>
                       </optgroup>
                     </select>
-                    <button
-                      onClick={handleAssignToSection}
-                      disabled={!assigningSection}
-                    >
-                      Assign
-                    </button>
-                    <button onClick={() => setSelectedAsset(null)}>
-                      Cancel
-                    </button>
+                    <div className="form-row">
+                      <button
+                        className="btn btn-primary"
+                        onClick={handleAssignToSection}
+                        disabled={!assigningSection}
+                      >
+                        Assign
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => setSelectedAsset(null)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
             </>
           )}
         </div>
-      )}
-
+      )}{" "}
+      section-content
       {/* Upload View */}
       {viewMode === "upload" && (
-        <div className="upload-view">
+        <div className="upload-view section-content">
           <h2>Upload New Asset</h2>
 
-          <form onSubmit={handleUpload}>
+          <form onSubmit={handleUpload} className="form-container">
             <div className="form-group">
-              <label htmlFor="file-upload">Select Image</label>
+              <label htmlFor="file-upload" className="form-label">
+                Select Image
+              </label>
               <input
                 id="file-upload"
                 type="file"
                 accept="image/*"
+                className="form-input"
                 onChange={handleFileSelect}
                 disabled={uploading}
               />
@@ -339,9 +351,12 @@ export const AdminAssetsPage = () => {
             )}
 
             <div className="form-group">
-              <label htmlFor="asset-type">Asset Type</label>
+              <label htmlFor="asset-type" className="form-label">
+                Asset Type
+              </label>
               <select
                 id="asset-type"
+                className="form-select"
                 value={uploadAssetType}
                 onChange={(e) =>
                   setUploadAssetType(e.target.value as AssetType)
@@ -358,10 +373,13 @@ export const AdminAssetsPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="alt-text">Alt Text (Optional)</label>
+              <label htmlFor="alt-text" className="form-label">
+                Alt Text (Optional)
+              </label>
               <input
                 id="alt-text"
                 type="text"
+                className="form-input"
                 value={uploadAltText}
                 onChange={(e) => setUploadAltText(e.target.value)}
                 placeholder="Describe the image for accessibility"
@@ -369,11 +387,12 @@ export const AdminAssetsPage = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="page-section">
+              <label htmlFor="page-section" className="form-label">
                 Assign to Page Section (Optional)
               </label>
               <select
                 id="page-section"
+                className="form-select"
                 value={uploadPageSection}
                 onChange={(e) => setUploadPageSection(e.target.value)}
               >
@@ -396,43 +415,53 @@ export const AdminAssetsPage = () => {
               </select>
             </div>
 
-            <div className="form-actions">
-              <button type="submit" disabled={!uploadFile || uploading}>
+            <div className="form-actions form-row">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={!uploadFile || uploading}
+              >
                 {uploading ? "Uploading..." : "Upload Asset"}
               </button>
-              <button type="button" onClick={() => setViewMode("gallery")}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setViewMode("gallery")}
+              >
                 Cancel
               </button>
             </div>
           </form>
         </div>
       )}
-
       {/* Assigned View */}
       {viewMode === "assigned" && (
-        <div className="assigned-view">
+        <div className="assigned-view section-content">
           <h2>Assigned Assets</h2>
 
           {assignedAssets.length === 0 ? (
             <p>No assets assigned to page sections yet.</p>
           ) : (
-            <div className="assigned-list">
+            <div className="assigned-list profile-card-grid">
               {assignedAssets.map((asset) => (
-                <div key={asset.id} className="assigned-item">
-                  <div className="assigned-image">
+                <div key={asset.id} className="assigned-item profile-card">
+                  <div className="assigned-image profile-card-image">
                     <img
                       src={asset.public_url}
                       alt={asset.alt_text || asset.file_name}
                     />
                   </div>
-                  <div className="assigned-details">
-                    <h3>{asset.page_section}</h3>
+                  <div className="assigned-details profile-card-content">
+                    <h3 className="profile-card-title">{asset.page_section}</h3>
                     <p>{asset.file_name}</p>
-                    <p className="assigned-meta">
+                    <p className="assigned-meta card-subtext">
                       {asset.asset_type} • {asset.width} × {asset.height}
                     </p>
                   </div>
-                  <button onClick={() => handleAssetClick(asset)}>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleAssetClick(asset)}
+                  >
                     Edit Assignment
                   </button>
                 </div>
@@ -442,11 +471,11 @@ export const AdminAssetsPage = () => {
 
           <h3>Unassigned Assets ({unassignedAssets.length})</h3>
           {unassignedAssets.length > 0 && (
-            <div className="unassigned-grid">
+            <div className="unassigned-grid profile-card-grid">
               {unassignedAssets.map((asset) => (
                 <div
                   key={asset.id}
-                  className="asset-card-small"
+                  className="asset-card-small info-card"
                   onClick={() => handleAssetClick(asset)}
                 >
                   <img
