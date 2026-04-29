@@ -50,3 +50,5 @@ export const useHasEditableContent = (): boolean => {
     return true;
   }, [location.pathname]);
 };
+
+//this should be a service of some sort no? belong with the context layer

@@ -1,5 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
-import { WikiSectionService } from "../../services/WikiSectionService";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import {
+  SectionRenderMeta,
+  WikiSectionService,
+} from "../../services/WikiSectionService";
 import { TipTapContent } from "../../types";
 
 export interface SectionDefinition {
@@ -9,13 +12,25 @@ export interface SectionDefinition {
 
 export interface UseWikiPageSectionsReturn {
   sectionContent: Record<string, TipTapContent>;
+  sectionHtml: Record<string, string>;
+  sectionMeta: Record<string, SectionRenderMeta>;
   loading: boolean;
   error: string | null;
-  saveSectionContent: (
+  updateSectionContent: (
     sectionId: string,
     content: TipTapContent,
-  ) => Promise<void>;
+    html: string,
+  ) => void;
+  saveAllSections: () => Promise<void>;
+  discardChanges: () => void;
+  hasPendingChanges: boolean;
+  hasRenderMismatch: boolean;
   refreshSections: () => Promise<void>;
+}
+
+interface PendingSectionChange {
+  content: TipTapContent;
+  html: string;
 }
 
 /**
@@ -34,6 +49,13 @@ export const useWikiPageSections = (
   const [sectionContent, setSectionContent] = useState<
     Record<string, TipTapContent>
   >({});
+  const [sectionHtml, setSectionHtml] = useState<Record<string, string>>({});
+  const [sectionMeta, setSectionMeta] = useState<
+    Record<string, SectionRenderMeta>
+  >({});
+  const [pendingChanges, setPendingChanges] = useState<
+    Record<string, PendingSectionChange>
+  >({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,6 +63,8 @@ export const useWikiPageSections = (
   const fetchSections = useCallback(async () => {
     if (!pageId || sections.length === 0) {
       setSectionContent({});
+      setSectionHtml({});
+      setSectionMeta({});
       return;
     }
 
@@ -49,15 +73,21 @@ export const useWikiPageSections = (
 
     try {
       const sectionIds = sections.map((s) => s.id);
-      const content = await WikiSectionService.loadWikiPageSections(
-        pageId,
-        sectionIds,
-      );
+      const [content, html, meta] = await Promise.all([
+        WikiSectionService.loadWikiPageSections(pageId, sectionIds),
+        WikiSectionService.loadWikiPageSectionsHtml(pageId, sectionIds),
+        WikiSectionService.loadWikiPageSectionsMeta(pageId, sectionIds),
+      ]);
+
       setSectionContent(content);
+      setSectionHtml(html);
+      setSectionMeta(meta);
     } catch (err) {
       console.error("Failed to load wiki page sections:", err);
       setError(err instanceof Error ? err.message : "Failed to load sections");
       setSectionContent({});
+      setSectionHtml({});
+      setSectionMeta({});
     } finally {
       setLoading(false);
     }
@@ -68,51 +98,115 @@ export const useWikiPageSections = (
     fetchSections();
   }, [fetchSections]);
 
-  // Save individual section content
-  const saveSectionContent = useCallback(
-    async (sectionId: string, content: TipTapContent) => {
-      if (!pageId) {
-        console.warn("Cannot save: no page ID available");
-        return;
-      }
-
-      const section = sections.find((s) => s.id === sectionId);
-      if (!section) {
-        console.warn(`Cannot save: section ${sectionId} not found`);
-        return;
-      }
-
-      try {
-        await WikiSectionService.saveWikiPageSection(
-          pageId,
-          sectionId,
-          content,
-          userId,
-        );
-
-        // Update local state
-        setSectionContent((prev) => ({
+  // NEW: Update local state only (no DB save)
+  const updateSectionContent = useCallback(
+    (sectionId: string, content: TipTapContent, html: string) => {
+      console.log("📋 updateSectionContent called", {
+        sectionId,
+        content,
+        html,
+      });
+      setPendingChanges((prev) => {
+        const updated = {
           ...prev,
-          [sectionId]: content,
-        }));
-      } catch (err) {
-        console.error("Failed to save section:", err);
-        throw err;
-      }
+          [sectionId]: {
+            content,
+            html,
+          },
+        };
+        console.log("📋 pendingChanges updated", { prev, updated });
+        return updated;
+      });
     },
-    [pageId, sections, userId],
+    [],
   );
+
+  // NEW: Save all pending changes to DB
+  const saveAllSections = useCallback(async () => {
+    console.log("💾 saveAllSections called", {
+      pageId,
+      pendingChangesCount: Object.keys(pendingChanges).length,
+      pendingChanges,
+    });
+
+    if (!pageId || Object.keys(pendingChanges).length === 0) {
+      console.warn("⚠️ Save skipped - no pageId or no pending changes");
+      return;
+    }
+
+    try {
+      console.log("💾 Saving to DB...");
+      // Save all sections in parallel (much faster than sequential)
+      await Promise.all(
+        Object.entries(pendingChanges).map(([sectionId, change]) =>
+          WikiSectionService.saveWikiPageSection(
+            pageId,
+            sectionId,
+            change.content,
+            change.html,
+            userId,
+          ),
+        ),
+      );
+
+      console.log("✅ DB save complete, merging into local state");
+      // Merge pending into saved state
+      setSectionContent((prev) => {
+        const merged = { ...prev };
+        Object.entries(pendingChanges).forEach(([sectionId, change]) => {
+          merged[sectionId] = change.content;
+        });
+        return merged;
+      });
+      setSectionHtml((prev) => {
+        const merged = { ...prev };
+        Object.entries(pendingChanges).forEach(([sectionId, change]) => {
+          merged[sectionId] = change.html;
+        });
+        return merged;
+      });
+      setPendingChanges({}); // Clear pending changes
+    } catch (err) {
+      console.error("❌ Failed to save sections:", err);
+      throw err;
+    }
+  }, [pageId, pendingChanges, userId]);
+
+  // NEW: Discard pending changes
+  const discardChanges = useCallback(() => {
+    setPendingChanges({});
+  }, []);
+
+  // Merged content for display (saved + pending overrides)
+  const displayContent = useMemo(() => {
+    const merged = { ...sectionContent };
+    Object.entries(pendingChanges).forEach(([sectionId, change]) => {
+      merged[sectionId] = change.content;
+    });
+    return merged;
+  }, [sectionContent, pendingChanges]);
 
   // Refresh sections manually
   const refreshSections = useCallback(async () => {
     await fetchSections();
+    setPendingChanges({}); // Clear pending on refresh
   }, [fetchSections]);
 
+  const hasRenderMismatch = useMemo(() => {
+    return Object.values(sectionMeta).some((meta) => meta?.status !== "ready");
+  }, [sectionMeta]);
+
   return {
-    sectionContent,
+    sectionContent: displayContent,
+    sectionHtml,
+    sectionMeta,
     loading,
     error,
-    saveSectionContent,
+    updateSectionContent,
+    saveAllSections,
+    discardChanges,
+    hasPendingChanges: Object.keys(pendingChanges).length > 0,
+    hasRenderMismatch,
     refreshSections,
   };
 };

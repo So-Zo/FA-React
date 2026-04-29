@@ -1,20 +1,33 @@
 import React, { useState, useCallback } from "react";
-import { EditModeContext } from "../types/editMode";
+import { ActiveEditController, EditModeContext } from "../types/editMode";
 
 export const EditModeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [activeController, setActiveController] =
+    useState<ActiveEditController | null>(null);
 
-  const toggle = useCallback(() => setIsEditing((v) => !v), []);
+  const toggle = useCallback(() => {
+    activeController?.toggle();
+  }, [activeController]);
 
-  // Simple saveAll that just logs for now - TipTap will handle actual saving
-  const saveAll = useCallback(async () => {
-    // Individual WikiEditor components will handle their own saving
-  }, []);
+  const save = useCallback(async () => {
+    await activeController?.save();
+  }, [activeController]);
+
+  const canEdit = activeController?.canEdit ?? false;
+  const isEditing = activeController?.isEditing ?? false;
 
   return (
-    <EditModeContext.Provider value={{ isEditing, toggle, saveAll }}>
+    <EditModeContext.Provider
+      value={{
+        canEdit,
+        isEditing,
+        toggle,
+        save,
+        setActiveController,
+      }}
+    >
       {children}
     </EditModeContext.Provider>
   );

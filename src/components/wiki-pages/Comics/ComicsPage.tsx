@@ -1,48 +1,88 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
+import {
+  WikiContentState,
+  WikiRendererWarning,
+  WikiSection,
+} from "../../../FaShared/Components";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
-import WikiEditor from "../../../FaShared/Components/WikiEditor";
 import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
 import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useWikiPageSections } from "../../../FaShared/hooks/useWikiPageSections";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
+import { usePageEditController } from "../../../FaShared/hooks/usePageEditController";
+import { TipTapProvider } from "../../../FaShared/hooks/TipTapContext";
+import { PageEditContext } from "../../../FaShared/types/pageEdit";
+import { TipTapContent } from "../../../types";
 
 const ComicsPage: React.FC = () => {
-  // Load dynamic content from database
+  // Load page metadata (for ID and basic info)
   const {
     page: wikiPage,
     loading: pageLoading,
     error: pageError,
-    refreshPage,
   } = useWikiPage("/comics");
-
-  // Get page contributors
-  const { contributors } = usePageContributors("/comics");
 
   // Get current user for saving
   const { user } = useAuth();
 
-  // Handle content updates from WikiEditor
-  const handleContentUpdate = useCallback(
-    async (newContent: any) => {
-      if (!wikiPage?.id) {
-        console.warn("Cannot save: no page ID available");
-        return;
-      }
-
-      try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
-        // Refresh the page data to show updated content
-        await refreshPage();
-      } catch (error) {
-        console.error("Failed to save wiki page:", error);
-      }
-    },
-    [wikiPage, user, refreshPage],
+  // Define sections - order controlled here, not in database
+  const sections = useMemo(
+    () => [
+      { id: "the-basics", title: "The Basics" },
+      { id: "history-of-comics", title: "History of Comics" },
+      { id: "terminology-guide", title: "Terminology Guide" },
+      { id: "comics-genres", title: "Comics Genres" },
+      { id: "comics-worlds", title: "Comics Worlds" },
+      { id: "audience-categories", title: "Audience Categories" },
+      { id: "creation-process", title: "Creation Process" },
+      { id: "cultural-impact", title: "Cultural Impact" },
+      { id: "learning-resources", title: "Learning Resources" },
+    ],
+    [],
   );
+
+  // Load individual sections
+  const {
+    sectionContent,
+    sectionHtml,
+    sectionMeta,
+    loading: sectionsLoading,
+    error: sectionsError,
+    updateSectionContent,
+    saveAllSections,
+    discardChanges,
+    hasPendingChanges,
+  } = useWikiPageSections(wikiPage?.id || null, sections, user?.id);
+
+  // Get page contributors
+  const { contributors } = usePageContributors(wikiPage?.id || null);
+
+  // Discard pending changes on unmount if user navigates away
+  useEffect(() => {
+    return () => {
+      if (hasPendingChanges) {
+        discardChanges();
+      }
+    };
+  }, [hasPendingChanges, discardChanges]);
+
+  // Handle content updates - LOCAL ONLY (no DB save until Save button)
+  const handleSectionUpdate = useCallback(
+    (sectionId: string) => (newContent: TipTapContent, html: string) => {
+      updateSectionContent(sectionId, newContent, html);
+    },
+    [updateSectionContent],
+  );
+
+  const pageEditValue = usePageEditController({
+    canEdit: Boolean(wikiPage?.id),
+    onSave: saveAllSections,
+    onDiscard: discardChanges,
+  });
 
   // Define TOC sections for comics content
   const tocSections: TocSectionProps[] = [
@@ -80,81 +120,93 @@ const ComicsPage: React.FC = () => {
   ];
 
   return (
-    <div className="comics-page">
-      <header>
-        <div className="image-header">
-          <img src="/images/comics/ComicsHeader.jpg" alt="Comics Overview" />
+    <PageEditContext.Provider value={pageEditValue}>
+      <TipTapProvider>
+        <div className="comics-page">
+          <header>
+            <div className="image-header">
+              <img
+                src="/images/comics/ComicsHeader.jpg"
+                alt="Comics Overview"
+              />
+            </div>
+
+            <WikiSearchBar
+              placeholder="Search for Characters, Universes, etc."
+              className="comics-search-bar"
+            />
+          </header>
+
+          <main id="main-content">
+            <hr />
+
+            <TableOfContents
+              sections={tocSections}
+              title="Comics Encyclopedia"
+              description="Use this table of contents to navigate through the comics guide."
+            />
+
+            {/* Dynamic Wiki Content - Section-Based Architecture */}
+            {pageLoading || sectionsLoading ? (
+              <WikiContentState
+                variant="loading"
+                title="📚 Loading Comics Content..."
+              >
+                <p>Fetching the latest content from the database...</p>
+              </WikiContentState>
+            ) : pageError || sectionsError ? (
+              <WikiContentState
+                variant="error"
+                title="⚠️ Error Loading Content"
+              >
+                <p>Failed to load page content: {pageError || sectionsError}</p>
+              </WikiContentState>
+            ) : !wikiPage?.id ? (
+              <WikiContentState
+                variant="placeholder"
+                title="📄 Page Not Found in Database"
+              >
+                <p>
+                  <strong>
+                    The /comics page doesn't exist in the wiki_pages table yet.
+                  </strong>
+                </p>
+              </WikiContentState>
+            ) : (
+              <>
+                {Object.values(sectionMeta).some(
+                  (meta) => meta?.status !== "ready",
+                ) && <WikiRendererWarning />}
+
+                {sections.map((section) => {
+                  const content = sectionContent[section.id] || "";
+                  const html = sectionHtml[section.id] || "";
+                  return (
+                    <WikiSection
+                      key={section.id}
+                      sectionId={section.id}
+                      content={content}
+                      html={html}
+                      onUpdate={handleSectionUpdate(section.id)}
+                    />
+                  );
+                })}
+              </>
+            )}
+
+            <hr />
+
+            {/* Page Contributors */}
+            <PageContributor
+              pageId="/comics"
+              contributors={contributors}
+              className="page-footer"
+              showHistoryLink={true}
+            />
+          </main>
         </div>
-
-        <WikiSearchBar
-          placeholder="Search for Characters, Universes, etc."
-          className="comics-search-bar"
-        />
-      </header>
-
-      <main id="main-content">
-        <hr />
-
-        <TableOfContents
-          sections={tocSections}
-          title="Comics Encyclopedia"
-          description="Use this table of contents to navigate through the comics guide."
-        />
-
-        {/* Dynamic Wiki Content - Loads from Database */}
-        {pageLoading ? (
-          <div className="section-content loading">
-            <h2>📚 Loading Comics Content...</h2>
-            <p>Fetching the latest content from the database...</p>
-          </div>
-        ) : pageError ? (
-          <div className="section-content error">
-            <h2>⚠️ Error Loading Content</h2>
-            <p>Failed to load page content: {pageError}</p>
-            <button onClick={refreshPage} className="retry-button">
-              Try Again
-            </button>
-          </div>
-        ) : wikiPage?.content ? (
-          <WikiEditor
-            className="section-content"
-            content={wikiPage.content}
-            onUpdate={handleContentUpdate}
-          />
-        ) : (
-          <div className="section-content placeholder">
-            <h2>📄 No Database Content Yet</h2>
-            <p>
-              <strong>This page is fully dynamic!</strong> Content will be
-              loaded from the database once it's added.
-            </p>
-            <p>
-              To add content:
-              <br />
-              1. Run the SQL migration:{" "}
-              <code>complete_comics_page_insert.sql</code>
-              <br />
-              2. Enable edit mode to start adding content
-              <br />
-              3. Use the WikiEditor to create and edit content
-            </p>
-            <p>
-              Page ID: <code>{wikiPage?.id || "Not found"}</code>
-            </p>
-          </div>
-        )}
-
-        <hr />
-
-        {/* Page Contributors */}
-        <PageContributor
-          pageId="/comics"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
-      </main>
-    </div>
+      </TipTapProvider>
+    </PageEditContext.Provider>
   );
 };
 

@@ -1,9 +1,18 @@
 import { createContext, useContext } from "react";
 
-export type EditModeContextType = {
+export type ActiveEditController = {
+  canEdit: boolean;
   isEditing: boolean;
   toggle: () => void;
-  saveAll: () => Promise<void>;
+  save: () => Promise<void>;
+};
+
+export type EditModeContextType = {
+  canEdit: boolean;
+  isEditing: boolean;
+  toggle: () => void;
+  save: () => Promise<void>;
+  setActiveController: (controller: ActiveEditController | null) => void;
 };
 
 export const EditModeContext = createContext<EditModeContextType | null>(null);

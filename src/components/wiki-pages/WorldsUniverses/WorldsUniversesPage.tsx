@@ -1,42 +1,80 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
+import {
+  WikiContentState,
+  WikiRendererWarning,
+  WikiSection,
+} from "../../../FaShared/Components";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
-import WikiEditor from "../../../FaShared/Components/WikiEditor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useWikiPageSections } from "../../../FaShared/hooks/useWikiPageSections";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
+import { usePageEditController } from "../../../FaShared/hooks/usePageEditController";
+import { TipTapProvider } from "../../../FaShared/hooks/TipTapContext";
+import { PageEditContext } from "../../../FaShared/types/pageEdit";
+import { TipTapContent } from "../../../types";
 
 const WorldsUniversesPage: React.FC = () => {
-  // Load dynamic content from database
+  // Load page metadata (for ID and basic info)
   const {
     page: wikiPage,
     loading: pageLoading,
     error: pageError,
-    refreshPage,
   } = useWikiPage("/worlds-universes");
 
   // Get current user for saving
   const { user } = useAuth();
 
-  // Handle content updates from WikiEditor
-  const handleContentUpdate = useCallback(
-    async (newContent: any) => {
-      if (!wikiPage?.id) {
-        console.warn("Cannot save: no page ID available");
-        return;
-      }
-
-      try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
-        await refreshPage();
-      } catch (error) {
-        console.error("Failed to save wiki page:", error);
-      }
-    },
-    [wikiPage, user, refreshPage],
+  // Define sections - order controlled here, not in database
+  const sections = useMemo(
+    () => [
+      { id: "overview", title: "Overview" },
+      { id: "world-categories", title: "World Categories" },
+      { id: "world-building", title: "World Building" },
+      { id: "anime-worlds", title: "Anime Worlds" },
+      { id: "comic-worlds", title: "Comic Worlds" },
+      { id: "game-worlds", title: "Game Worlds" },
+    ],
+    [],
   );
+
+  // Load individual sections
+  const {
+    sectionContent,
+    sectionHtml,
+    sectionMeta,
+    loading: sectionsLoading,
+    error: sectionsError,
+    updateSectionContent,
+    saveAllSections,
+    discardChanges,
+    hasPendingChanges,
+  } = useWikiPageSections(wikiPage?.id || null, sections, user?.id);
+
+  // Discard pending changes on unmount if user navigates away
+  useEffect(() => {
+    return () => {
+      if (hasPendingChanges) {
+        discardChanges();
+      }
+    };
+  }, [hasPendingChanges, discardChanges]);
+
+  // Handle content updates - LOCAL ONLY (no DB save until Save button)
+  const handleSectionUpdate = useCallback(
+    (sectionId: string) => (newContent: TipTapContent, html: string) => {
+      updateSectionContent(sectionId, newContent, html);
+    },
+    [updateSectionContent],
+  );
+
+  const pageEditValue = usePageEditController({
+    canEdit: Boolean(wikiPage?.id),
+    onSave: saveAllSections,
+    onDiscard: discardChanges,
+  });
 
   const tocSections: TocSectionProps[] = [
     {
@@ -66,63 +104,83 @@ const WorldsUniversesPage: React.FC = () => {
   ];
 
   return (
-    <div className="worldsuniverses-page">
-      <header>
-        <div className="image-header">
-          <img
-            src="/images/worlds-universes/WorldsUniversesHeader.jpg"
-            alt="Worlds & Universes Overview"
-          />
+    <PageEditContext.Provider value={pageEditValue}>
+      <TipTapProvider>
+        <div className="worldsuniverses-page">
+          <header>
+            <div className="image-header">
+              <img
+                src="/images/worlds-universes/WorldsUniversesHeader.jpg"
+                alt="Worlds & Universes Overview"
+              />
+            </div>
+            <WikiSearchBar
+              placeholder="Search for Worlds, Universes, etc."
+              className="worldsuniverses-search-bar"
+            />
+          </header>
+
+          <main id="main-content">
+            <hr />
+            <TableOfContents
+              sections={tocSections}
+              title="Worlds & Universes Encyclopedia"
+              description="Explore the vast multiverse of fictional worlds and universes."
+            />
+
+            {pageLoading || sectionsLoading ? (
+              <WikiContentState
+                variant="loading"
+                title="📚 Loading Worlds & Universes Content..."
+              >
+                <p>Fetching the latest content from the database...</p>
+              </WikiContentState>
+            ) : pageError || sectionsError ? (
+              <WikiContentState
+                variant="error"
+                title="⚠️ Error Loading Content"
+              >
+                <p>Failed to load page content: {pageError || sectionsError}</p>
+              </WikiContentState>
+            ) : !wikiPage?.id ? (
+              <WikiContentState
+                variant="placeholder"
+                title="📄 Page Not Found in Database"
+              >
+                <p>
+                  <strong>
+                    The /worlds-universes page doesn't exist in the wiki_pages
+                    table yet.
+                  </strong>
+                </p>
+              </WikiContentState>
+            ) : (
+              <>
+                {Object.values(sectionMeta).some(
+                  (meta) => meta?.status !== "ready",
+                ) && <WikiRendererWarning />}
+
+                {sections.map((section) => {
+                  const content = sectionContent[section.id] || "";
+                  const html = sectionHtml[section.id] || "";
+                  return (
+                    <WikiSection
+                      key={section.id}
+                      sectionId={section.id}
+                      content={content}
+                      html={html}
+                      onUpdate={handleSectionUpdate(section.id)}
+                    />
+                  );
+                })}
+              </>
+            )}
+
+            <hr />
+          </main>
         </div>
-        <WikiSearchBar
-          placeholder="Search for Worlds, Universes, etc."
-          className="worldsuniverses-search-bar"
-        />
-      </header>
-
-      <main id="main-content">
-        <hr />
-        <TableOfContents
-          sections={tocSections}
-          title="Worlds & Universes Encyclopedia"
-          description="Explore the vast multiverse of fictional worlds and universes."
-        />
-
-        {pageLoading ? (
-          <div className="section-content loading">
-            <h2>📚 Loading Worlds & Universes Content...</h2>
-            <p>Fetching the latest content from the database...</p>
-          </div>
-        ) : pageError ? (
-          <div className="section-content error">
-            <h2>⚠️ Error Loading Content</h2>
-            <p>Failed to load page content: {pageError}</p>
-            <button onClick={refreshPage} className="retry-button">
-              Try Again
-            </button>
-          </div>
-        ) : wikiPage?.content ? (
-          <WikiEditor
-            className="section-content"
-            content={wikiPage.content}
-            onUpdate={handleContentUpdate}
-          />
-        ) : (
-          <div className="section-content placeholder">
-            <h2>📄 No Database Content Yet</h2>
-            <p>
-              <strong>This page is fully dynamic!</strong> Content will be
-              loaded from the database once it's added.
-            </p>
-            <p>
-              Page ID: <code>{wikiPage?.id || "Not found"}</code>
-            </p>
-          </div>
-        )}
-
-        <hr />
-      </main>
-    </div>
+      </TipTapProvider>
+    </PageEditContext.Provider>
   );
 };
 

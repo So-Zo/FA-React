@@ -1,7 +1,20 @@
 import { supabase } from "../lib/supabaseClient";
-import { WikiPage, TipTapContent } from "../types";
+import { WikiContributor, WikiPage, TipTapContent } from "../types";
 import { withCache, cache } from "../utils/cache";
 import { WikiContributorService } from "./WikiContributorService";
+
+interface WikiPageHistoryInfo {
+  page_id: string;
+  page_title: string;
+  page_slug: string;
+  page_path: string;
+  page_type: string;
+  genre: string | null;
+  page_created_at: string;
+  page_updated_at: string;
+  page_creator_name: string | null;
+  page_creator_avatar: string | null;
+}
 
 /**
  * Service for core wiki page CRUD operations
@@ -27,7 +40,6 @@ export class WikiPageService {
               full_path,
               page_type,
               genre,
-              content,
               created_at,
               updated_at,
               created_by
@@ -51,7 +63,6 @@ export class WikiPageService {
             full_path: data.full_path,
             page_type: data.page_type,
             genre: data.genre,
-            content: data.content,
             created_at: data.created_at,
             updated_at: data.updated_at,
             created_by: data.created_by,
@@ -66,19 +77,76 @@ export class WikiPageService {
   }
 
   /**
+   * Load page-history metadata and contributors for a wiki page path.
+   */
+  static async getPageWithContributors(fullPath: string): Promise<{
+    page: WikiPageHistoryInfo | null;
+    contributors: WikiContributor[];
+  }> {
+    return withCache(
+      `page-with-contributors-${fullPath}`,
+      async () => {
+        try {
+          const [page, contributors] = await Promise.all([
+            supabase
+              .from("wiki_master_view")
+              .select(
+                `
+                page_id,
+                page_title,
+                page_slug,
+                page_path,
+                page_type,
+                genre,
+                page_created_at,
+                page_updated_at,
+                page_creator_name,
+                page_creator_avatar
+              `,
+              )
+              .eq("page_path", fullPath)
+              .is("contributor_id", null)
+              .single(),
+            WikiContributorService.getPageContributors(fullPath),
+          ]);
+
+          if (page.error) {
+            if (page.error.code === "PGRST116") {
+              return {
+                page: null,
+                contributors,
+              };
+            }
+
+            throw page.error;
+          }
+
+          return {
+            page: page.data as WikiPageHistoryInfo,
+            contributors,
+          };
+        } catch (error) {
+          console.error("Failed to load page history data:", error);
+          throw error;
+        }
+      },
+      10 * 60 * 1000,
+    );
+  }
+
+  /**
    * Save wiki page content
    * Invalidates cache and optionally tracks contributor
    */
   static async saveWikiPage(
     pageId: string,
-    content: TipTapContent,
+    _content: TipTapContent,
     userId?: string,
   ): Promise<void> {
     try {
       const { error } = await supabase
         .from("wiki_pages")
         .update({
-          content,
           updated_at: new Date().toISOString(),
         })
         .eq("id", pageId);

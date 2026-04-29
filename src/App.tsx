@@ -5,8 +5,6 @@ import { ThemeProvider } from "./FaShared/hooks/ThemeContext";
 import { AssetProvider } from "./context/AssetContext";
 import Footer from "./FaShared/Components/Footer";
 import BottomNavigation from "./FaShared/Components/BottomNavigation";
-import { PageContributor } from "./FaShared/Components/PageContributor";
-import { usePageContributors } from "./FaShared/hooks/usePageContributors";
 import "./Import.css";
 import { EditModeProvider } from "./FaShared/hooks/EditModeContext";
 import { TipTapProvider } from "./FaShared/hooks/TipTapContext";
@@ -108,64 +106,6 @@ const PageDataAttributeSetter = () => {
   return null;
 };
 
-// Component to handle page contributors at app level
-const AppPageContributor = () => {
-  const location = useLocation();
-
-  // Determine page ID from route
-  const getPageId = () => {
-    const pathname = location.pathname;
-
-    // Use the full_path directly as it matches the wiki_pages table
-    // This should match the full_path column in wiki_pages table
-    return pathname === "/" ? "/" : pathname;
-  };
-
-  const pageId = getPageId();
-
-  // Call hooks unconditionally at the top level
-  const { contributors } = usePageContributors(pageId);
-
-  // Pages that should NOT have contributors
-  const excludedPaths = ["/profile", "/user", "/community", "/login", "/post"];
-
-  // Check if current path should be excluded
-  const shouldExclude = excludedPaths.some(
-    (excludedPath) =>
-      location.pathname === excludedPath ||
-      location.pathname.startsWith(excludedPath + "/"),
-  );
-
-  if (shouldExclude) {
-    return null;
-  }
-
-  if (!pageId) {
-    return null;
-  }
-
-  // Determine history path for "View Page History" link
-  const getHistoryPath = () => {
-    const pathname = location.pathname;
-
-    if (pathname === "/anime") return "/anime/history";
-    if (pathname === "/manga") return "/manga/history";
-    if (pathname === "/comics") return "/comics/history";
-    if (pathname === "/tv") return "/tv/history";
-    if (pathname === "/video-games") return "/video-games/history";
-
-    return undefined; // No history link for other pages
-  };
-
-  return (
-    <PageContributor
-      pageId={pageId}
-      contributors={contributors}
-      historyPath={getHistoryPath()}
-    />
-  );
-};
-
 const AppContent = () => {
   const location = useLocation();
 
@@ -243,7 +183,6 @@ const AppContent = () => {
               </Routes>
             </Suspense>
           </main>
-          <AppPageContributor />
           {location.pathname !== "/profile" &&
             !location.pathname.startsWith("/user/") && <Footer />}
         </div>

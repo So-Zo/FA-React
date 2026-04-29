@@ -131,13 +131,6 @@ export interface Post {
   }>;
 }
 
-export interface PostLike {
-  id: string;
-  post_id: string;
-  user_id: string;
-  created_at: string;
-}
-
 // ============= COMMENT TYPES =============
 
 export interface Comment {
@@ -159,11 +152,6 @@ export interface Comment {
     avatar_url?: string;
     is_verified: boolean;
   };
-}
-
-export interface CommentForm {
-  content: string;
-  parent_comment_id?: string;
 }
 
 // User comment with post context for profile page
@@ -259,18 +247,13 @@ export interface CharacterSearchResult {
   image_url?: string;
 }
 
-export interface CharacterForm {
-  name: string;
-  universe: string;
-  universe_type: UniverseType;
-  description?: string;
-  image_url?: string;
-  abilities: {
-    primary_powers: string[];
-    special_techniques: string[];
-    weaknesses: string[];
-    power_description?: string;
-  };
+export interface CharacterCategoryContent {
+  id: string;
+  character_id: string;
+  content: TipTapContent;
+  content_html: string;
+  created_at: string;
+  updated_at: string;
 }
 
 // ============= POWERROOM CHARACTER TYPES =============
@@ -281,27 +264,10 @@ export interface PowerRoomCharacter extends Omit<
   "abilities" | "timeline" | "world_info" | "notable_feats"
 > {
   // These are REQUIRED for character comparison
-  abilities: CharacterAbilities;
-  timeline: CharacterEvent[];
-  world_info: WorldInfo;
-  notable_feats: NotableFeat[];
-}
-
-export interface CharacterComparison {
-  leftCharacter: PowerRoomCharacter | null;
-  rightCharacter: PowerRoomCharacter | null;
-  activeTab: "abilities" | "timelines" | "worlds" | "feats";
-}
-
-export interface CharacterComparisonProps {
-  leftCharacter: PowerRoomCharacter | null;
-  rightCharacter: PowerRoomCharacter | null;
-  activeTab: "abilities" | "timeline" | "worlds" | "feats";
-}
-
-export interface TabComponentProps {
-  leftCharacter: PowerRoomCharacter | null;
-  rightCharacter: PowerRoomCharacter | null;
+  abilities: CharacterCategoryContent;
+  timeline: CharacterCategoryContent;
+  world_info: CharacterCategoryContent;
+  notable_feats: CharacterCategoryContent;
 }
 
 // ============= WIKI TYPES =============
@@ -313,7 +279,8 @@ export interface WikiPage {
   full_path: string;
   page_type: string;
   genre?: string;
-  content: string;
+  /** @deprecated Dropped in migration 006. Use sections JSONB instead. */
+  content?: string;
   summary?: string;
   created_at: string;
   updated_at: string;
@@ -360,28 +327,6 @@ export interface WikiContributor {
     display_name: string;
     avatar_url?: string;
   };
-}
-
-export interface WikiSearchResult {
-  id: string;
-  name: string;
-  type: "character" | "world" | "series";
-  description?: string;
-  tags?: string[];
-  created_at: string;
-  full_path: string;
-}
-
-export interface WikiSearchOptions {
-  type?: "character" | "world" | "series" | "all";
-  tags?: string[];
-  limit?: number;
-}
-
-export interface WikiEditorRef {
-  getContent: () => string;
-  setContent: (content: string) => void;
-  focus: () => void;
 }
 
 // ============= PAGE/CONTENT TYPES =============
@@ -586,68 +531,6 @@ export interface UpdateReportRequest {
 export interface ReportSubmission {
   reason: string;
   description?: string;
-}
-
-// ============= SEARCH TYPES =============
-
-export interface SearchResult {
-  character?: CharacterSearchResult[];
-  page?: Pick<
-    Page,
-    "id" | "title" | "description" | "universe_type" | "page_type"
-  >[];
-  wiki?: Pick<WikiPage, "id" | "title" | "summary" | "slug">[];
-  post?: Pick<Post, "id" | "title" | "content">[];
-}
-
-export interface SearchParams {
-  query: string;
-  contentTypes?: ("character" | "page" | "wiki" | "post")[];
-  universeType?: UniverseType;
-  limit?: number;
-  offset?: number;
-}
-
-// ============= API RESPONSE TYPES =============
-
-export interface ApiResponse<T> {
-  data: T;
-  error: null;
-  status: number;
-}
-
-export interface ApiError {
-  data: null;
-  error: {
-    message: string;
-    code?: string;
-    details?: any;
-  };
-  status: number;
-}
-
-// ============= HOOK RETURN TYPES =============
-
-export interface DataHookReturn<T> {
-  data: T | null;
-  loading: boolean;
-  error: string | null;
-  refetch?: () => void;
-}
-
-export interface PaginatedDataHookReturn<T> extends DataHookReturn<T[]> {
-  hasMore: boolean;
-  loadMore: () => void;
-  page: number;
-}
-
-// ============= FORM TYPES =============
-
-export interface PostForm {
-  title: string;
-  content: string;
-  universe_type?: UniverseType;
-  is_pinned?: boolean;
 }
 
 // ============= ADMIN / SITE ASSETS TYPES =============

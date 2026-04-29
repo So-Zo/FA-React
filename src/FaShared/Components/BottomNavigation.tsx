@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../hooks/ThemeContext";
 import { useEditMode } from "../types/editMode";
+import { AuthContext } from "../hooks/AuthContext";
 import {
   FaHome,
   FaUsers,
@@ -32,13 +33,44 @@ const BottomNavigation: React.FC = () => {
 
   // Header controls
   const { currentTheme, toggleTheme } = useTheme();
-  const { isEditing, toggle: toggleEdit, saveAll } = useEditMode();
+  const { canEdit, isEditing, toggle: toggleEdit, save } = useEditMode();
+  const authContext = useContext(AuthContext);
+  const isLoggedIn = authContext?.user !== null;
 
   const handleEditSaveClick = async () => {
-    if (isEditing) {
-      await saveAll();
+    if (!canEdit) {
+      return;
     }
+
+    console.log("🔘 BOTTOM NAV: Edit/Save clicked", {
+      canEdit,
+      isEditing,
+      willSave: isEditing,
+      isLoggedIn,
+    });
+
+    // Check auth BEFORE entering edit mode
+    if (!isEditing && !isLoggedIn) {
+      alert(
+        "⚠️ You must be logged in to edit wiki pages. Please log in first.",
+      );
+      return;
+    }
+
+    if (isEditing) {
+      console.log("💾 BOTTOM NAV: Calling saveAll()");
+      try {
+        await save();
+        console.log("✅ BOTTOM NAV: save() complete");
+      } catch (error) {
+        console.error("❌ Save failed:", error);
+        alert("⚠️ Failed to save changes. Make sure you're logged in.");
+        return; // Don't toggle edit mode if save failed
+      }
+    }
+    console.log("🔄 BOTTOM NAV: Calling toggleEdit()");
     toggleEdit();
+    console.log("✅ BOTTOM NAV: toggleEdit() called");
   };
 
   const toggleMenu = () => {
@@ -145,6 +177,7 @@ const BottomNavigation: React.FC = () => {
           onClick={handleEditSaveClick}
           aria-label={isEditing ? "Save changes" : "Enter edit mode"}
           title={isEditing ? "Save" : "Edit"}
+          disabled={!canEdit}
         >
           {isEditing ? <FaSave /> : <FaEdit />}
         </button>

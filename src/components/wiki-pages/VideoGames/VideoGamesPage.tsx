@@ -1,47 +1,85 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
+import {
+  WikiContentState,
+  WikiRendererWarning,
+  WikiSection,
+} from "../../../FaShared/Components";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
-import WikiEditor from "../../../FaShared/Components/WikiEditor";
 import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
 import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { useWikiPageSections } from "../../../FaShared/hooks/useWikiPageSections";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
+import { usePageEditController } from "../../../FaShared/hooks/usePageEditController";
+import { TipTapProvider } from "../../../FaShared/hooks/TipTapContext";
+import { PageEditContext } from "../../../FaShared/types/pageEdit";
+import { TipTapContent } from "../../../types";
 
 const VideoGamesPage: React.FC = () => {
-  // Load dynamic content from database
+  // Load page metadata (for ID and basic info)
   const {
     page: wikiPage,
     loading: pageLoading,
     error: pageError,
-    refreshPage,
   } = useWikiPage("/video-games");
-
-  // Get page contributors
-  const { contributors } = usePageContributors("/video-games");
 
   // Get current user for saving
   const { user } = useAuth();
 
-  // Handle content updates from WikiEditor
-  const handleContentUpdate = useCallback(
-    async (newContent: any) => {
-      if (!wikiPage?.id) {
-        console.warn("Cannot save: no page ID available");
-        return;
-      }
-
-      try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
-        await refreshPage();
-      } catch (error) {
-        console.error("Failed to save wiki page:", error);
-      }
-    },
-    [wikiPage, user, refreshPage],
+  // Define sections - order controlled here, not in database
+  const sections = useMemo(
+    () => [
+      { id: "the-basics", title: "The Basics" },
+      { id: "history-of-videogames", title: "History of Video Games" },
+      { id: "terminology-guide", title: "Terminology Guide" },
+      { id: "videogame-genres", title: "Video Game Genres" },
+      { id: "videogame-worlds", title: "Video Game Worlds" },
+      { id: "platforms", title: "Platforms" },
+    ],
+    [],
   );
+
+  // Load individual sections
+  const {
+    sectionContent,
+    sectionHtml,
+    sectionMeta,
+    loading: sectionsLoading,
+    error: sectionsError,
+    updateSectionContent,
+    saveAllSections,
+    discardChanges,
+    hasPendingChanges,
+  } = useWikiPageSections(wikiPage?.id || null, sections, user?.id);
+
+  // Get page contributors
+  const { contributors } = usePageContributors(wikiPage?.id || null);
+
+  // Discard pending changes on unmount if user navigates away
+  useEffect(() => {
+    return () => {
+      if (hasPendingChanges) {
+        discardChanges();
+      }
+    };
+  }, [hasPendingChanges, discardChanges]);
+
+  // Handle content updates - LOCAL ONLY (no DB save until Save button)
+  const handleSectionUpdate = useCallback(
+    (sectionId: string) => (newContent: TipTapContent, html: string) => {
+      updateSectionContent(sectionId, newContent, html);
+    },
+    [updateSectionContent],
+  );
+
+  const pageEditValue = usePageEditController({
+    canEdit: Boolean(wikiPage?.id),
+    onSave: saveAllSections,
+    onDiscard: discardChanges,
+  });
 
   const tocSections: TocSectionProps[] = [
     {
@@ -69,71 +107,91 @@ const VideoGamesPage: React.FC = () => {
   ];
 
   return (
-    <div className="video-games-page">
-      <header>
-        <div className="image-header">
-          <img
-            src="/images/video-games/VideoGamesHeader.jpg"
-            alt="Video Games Overview"
-          />
+    <PageEditContext.Provider value={pageEditValue}>
+      <TipTapProvider>
+        <div className="video-games-page">
+          <header>
+            <div className="image-header">
+              <img
+                src="/images/video-games/VideoGamesHeader.jpg"
+                alt="Video Games Overview"
+              />
+            </div>
+            <WikiSearchBar
+              placeholder="Search for Characters, Universes, etc."
+              className="video-games-search-bar"
+            />
+          </header>
+
+          <main id="main-content">
+            <hr />
+            <TableOfContents
+              sections={tocSections}
+              title="Video Games Encyclopedia"
+              description="Use this table of contents to navigate through the video games guide."
+            />
+
+            {pageLoading || sectionsLoading ? (
+              <WikiContentState
+                variant="loading"
+                title="📚 Loading Video Games Content..."
+              >
+                <p>Fetching the latest content from the database...</p>
+              </WikiContentState>
+            ) : pageError || sectionsError ? (
+              <WikiContentState
+                variant="error"
+                title="⚠️ Error Loading Content"
+              >
+                <p>Failed to load page content: {pageError || sectionsError}</p>
+              </WikiContentState>
+            ) : !wikiPage?.id ? (
+              <WikiContentState
+                variant="placeholder"
+                title="📄 Page Not Found in Database"
+              >
+                <p>
+                  <strong>
+                    The /video-games page doesn't exist in the wiki_pages table
+                    yet.
+                  </strong>
+                </p>
+              </WikiContentState>
+            ) : (
+              <>
+                {Object.values(sectionMeta).some(
+                  (meta) => meta?.status !== "ready",
+                ) && <WikiRendererWarning />}
+
+                {sections.map((section) => {
+                  const content = sectionContent[section.id] || "";
+                  const html = sectionHtml[section.id] || "";
+                  return (
+                    <WikiSection
+                      key={section.id}
+                      sectionId={section.id}
+                      content={content}
+                      html={html}
+                      onUpdate={handleSectionUpdate(section.id)}
+                    />
+                  );
+                })}
+              </>
+            )}
+
+            <hr />
+
+            {/* Page Contributors */}
+            <PageContributor
+              pageId="/video-games"
+              contributors={contributors}
+              className="page-footer"
+              showHistoryLink={true}
+            />
+          </main>
         </div>
-        <WikiSearchBar
-          placeholder="Search for Characters, Universes, etc."
-          className="video-games-search-bar"
-        />
-      </header>
-
-      <main id="main-content">
-        <hr />
-        <TableOfContents
-          sections={tocSections}
-          title="Video Games Encyclopedia"
-          description="Use this table of contents to navigate through the video games guide."
-        />
-
-        {pageLoading ? (
-          <div className="section-content loading">
-            <h2>📚 Loading Video Games Content...</h2>
-            <p>Fetching the latest content from the database...</p>
-          </div>
-        ) : pageError ? (
-          <div className="section-content error">
-            <h2>⚠️ Error Loading Content</h2>
-            <p>Failed to load page content: {pageError}</p>
-            <button onClick={refreshPage} className="retry-button">
-              Try Again
-            </button>
-          </div>
-        ) : wikiPage?.content ? (
-          <WikiEditor
-            className="section-content"
-            content={wikiPage.content}
-            onUpdate={handleContentUpdate}
-          />
-        ) : (
-          <div className="section-content placeholder">
-            <h2>📄 No Database Content Yet</h2>
-            <p>
-              <strong>This page is fully dynamic!</strong> Content will be
-              loaded from the database once it's added.
-            </p>
-            <p>
-              Page ID: <code>{wikiPage?.id || "Not found"}</code>
-            </p>
-          </div>
-        )}
-
-        <hr />
-
-        {/* Page Contributors */}
-        <PageContributor
-          pageId="/video-games"
-          contributors={contributors}
-          className="page-footer"
-          showHistoryLink={true}
-        />
-      </main>
-    </div>
+      </TipTapProvider>
+    </PageEditContext.Provider>
   );
 };
 

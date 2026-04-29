@@ -3,11 +3,11 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
-import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import WikiEditor from "../../../FaShared/Components/Editor";
 import { usePageContributors } from "../../../FaShared/hooks/usePageContributors";
 import { PageContributor } from "../../../FaShared/Components/PageContributor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { WikiPageService } from "../../../services/WikiPageService";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
 
 const VideoGamesHistory: React.FC = () => {
@@ -34,7 +34,7 @@ const VideoGamesHistory: React.FC = () => {
       }
 
       try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
+        await WikiPageService.saveWikiPage(wikiPage.id, newContent, user?.id);
         // Refresh the page data to show updated content
         await refreshPage();
       } catch (error) {

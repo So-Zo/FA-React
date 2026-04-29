@@ -3,9 +3,9 @@ import TableOfContents, {
   TocSectionProps,
 } from "../../PageUIs/TableOfContents";
 import WikiSearchBar from "../../../FaShared/Components/WikiSearchBar";
-import WikiEditor from "../../../FaShared/Components/WikiEditor";
+import WikiEditor from "../../../FaShared/Components/Editor";
 import { useWikiPage } from "../../../FaShared/hooks/useWikiPage";
-import { WikiPageLoader } from "../../../services/WikiPageLoader";
+import { WikiPageService } from "../../../services/WikiPageService";
 import { useAuth } from "../../../FaShared/hooks/useAuth";
 
 const AnimeDirectory: React.FC = () => {
@@ -29,7 +29,7 @@ const AnimeDirectory: React.FC = () => {
       }
 
       try {
-        await WikiPageLoader.saveWikiPage(wikiPage.id, newContent, user?.id);
+        await WikiPageService.saveWikiPage(wikiPage.id, newContent, user?.id);
         // Refresh the page data to show updated content
         await refreshPage();
       } catch (error) {

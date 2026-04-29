@@ -26,12 +26,10 @@ class SimpleCache {
 
     // Return cached data if still valid
     if (cached && now < cached.expires) {
-      console.debug(`Cache HIT: ${key}`);
       return cached.data;
     }
 
     // Fetch fresh data
-    console.debug(`Cache MISS: ${key}`);
     try {
       const data = await fetchFn();
       this.cache.set(key, {
@@ -124,10 +122,14 @@ class SimpleCache {
   invalidateWikiPage(pageIdOrPath: string): void {
     // Invalidate the page itself
     this.invalidate(`wiki-page-${pageIdOrPath}`);
-    // Invalidate all sections
-    this.invalidatePattern(`wiki-section-${pageIdOrPath}`);
-    // Invalidate contributors
+    // Invalidate all sections (both singular and plural patterns)
+    this.invalidatePattern(`wiki-sections-${pageIdOrPath}`); // Plural for loadWikiPageSections
+    this.invalidatePattern(`wiki-sections-html-${pageIdOrPath}`); // Rendered HTML cache
+    this.invalidatePattern(`wiki-sections-meta-${pageIdOrPath}`); // Render metadata cache
+    this.invalidatePattern(`wiki-section-${pageIdOrPath}`); // Singular for individual sections
+    // Invalidate contributors (both path-based and id-based)
     this.invalidate(`wiki-contributors-${pageIdOrPath}`);
+    this.invalidate(`wiki-contributors-id-${pageIdOrPath}`);
   }
 }
 
@@ -136,6 +138,11 @@ export const cache = new SimpleCache();
 
 // Auto-cleanup every 10 minutes
 setInterval(() => cache.cleanup(), 10 * 60 * 1000);
+
+// Expose cache globally for debugging (only in development)
+if (typeof window !== "undefined" && import.meta.env.DEV) {
+  (window as any).__cache = cache;
+}
 
 /**
  * Helper function for easy caching

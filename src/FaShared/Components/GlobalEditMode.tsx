@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useEditMode } from "../types/editMode";
 
-export default function GlobalEditMode() {
+export default function PageEditMode() {
   const { isEditing } = useEditMode();
   const location = useLocation();
 
@@ -14,7 +14,7 @@ export default function GlobalEditMode() {
 
     const apply = () => {
       document
-        .querySelectorAll<HTMLElement>(".section-content")
+        .querySelectorAll<HTMLElement>('[data-page-editable="true"]')
         .forEach((el) => {
           if (isEditing) {
             el.setAttribute("contenteditable", "true");
@@ -39,7 +39,7 @@ export default function GlobalEditMode() {
     return () => {
       mo.disconnect();
       document
-        .querySelectorAll<HTMLElement>(".section-content")
+        .querySelectorAll<HTMLElement>('[data-page-editable="true"]')
         .forEach((el) => {
           el.removeEventListener("input", markEdited);
         });
@@ -48,3 +48,5 @@ export default function GlobalEditMode() {
 
   return null;
 }
+
+//pretty sure we determined this isnt being used right now

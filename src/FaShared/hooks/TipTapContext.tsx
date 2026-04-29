@@ -27,3 +27,6 @@ export const useTipTapEditor = () => {
   }
   return context;
 };
+
+
+//has a fast refresh error, need to rewrite sonewhere else for best practices.

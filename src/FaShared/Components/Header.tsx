@@ -5,13 +5,25 @@ import { useEditMode } from "../types/editMode";
 
 const Header: React.FC = () => {
   const { effectiveTheme, toggleTheme } = useTheme();
-  const { isEditing, toggle, saveAll } = useEditMode();
+  const { canEdit, isEditing, toggle, save } = useEditMode();
 
   const handleEditSaveClick = async () => {
+    if (!canEdit) {
+      return;
+    }
+
+    console.log("🔘 Edit/Save button clicked", {
+      canEdit,
+      isEditing,
+      willSave: isEditing,
+    });
     if (isEditing) {
-      await saveAll();
+      console.log("💾 Calling save()...");
+      await save();
+      console.log("✅ save() complete");
     }
     toggle();
+    console.log("🔄 Edit mode toggled, new state will be:", !isEditing);
   };
 
   return (
@@ -44,6 +56,7 @@ const Header: React.FC = () => {
             onClick={handleEditSaveClick}
             aria-label={isEditing ? "Save changes" : "Enter edit mode"}
             style={{ marginLeft: "12px", padding: "6px 10px" }}
+            disabled={!canEdit}
           >
             {isEditing ? "Save" : "Edit"}
           </button>
