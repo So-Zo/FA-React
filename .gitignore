@@ -18,6 +18,11 @@ dist-ssr
 
 # Local AI/debug artifacts
 .agents/
+.qodo/
+migrations/
+ContentPLan.md
+FinalCleanup.md
+Roadplan.md
 skills-lock.json
 securityadvisorwarnings.md
 .github/copilot-instructions.md
@@ -25,6 +30,7 @@ debug_anime_page.js
 debug-timeline.js
 debug-mobile.css
 debug-targeted.css
+
 
 # Editor directories and files
 .vscode/*
