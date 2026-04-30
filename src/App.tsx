@@ -9,6 +9,7 @@ import "./Import.css";
 import { EditModeProvider } from "./FaShared/hooks/EditModeContext";
 import { TipTapProvider } from "./FaShared/hooks/TipTapContext";
 import { ProfileProvider } from "./components/pages/Profile/ProfileContext";
+import { ErrorBoundary } from "./components/pages/Profile/components/ErrorBoundary";
 
 // 🚀 LAZY LOADED PAGE COMPONENTS - No more loading everything at once!
 const HomePage = lazy(() => import("./components/pages/Home/HomePage"));
@@ -197,8 +198,17 @@ function App() {
       <AuthProvider>
         <AssetProvider>
           <EditModeProvider>
-            <PageDataAttributeSetter />
-            <AppContent />
+            <ErrorBoundary
+              fallback={
+                <main className="page-loading" role="alert">
+                  <h2>FanArcs hit an unexpected error.</h2>
+                  <p>Refresh the page and try again.</p>
+                </main>
+              }
+            >
+              <PageDataAttributeSetter />
+              <AppContent />
+            </ErrorBoundary>
           </EditModeProvider>
         </AssetProvider>
       </AuthProvider>

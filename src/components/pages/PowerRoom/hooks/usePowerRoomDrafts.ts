@@ -159,7 +159,7 @@ export const usePowerRoomDrafts = ({
         console.error("Failed to save Power Room drafts:", error);
         setSaveError("Save failed. Your changes are still in the editor.");
         setIsSaving(false);
-        return;
+        throw error;
       }
 
       setDraftChanges((current) => {

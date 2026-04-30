@@ -31,6 +31,55 @@ Creates an optimized PostgreSQL RPC function `update_wiki_section()` for atomic 
 
 **Performance:** Used by WikiSectionService for efficient section updates without client-side round-trips.
 
+### 004_wiki_rls_and_view.sql
+
+Sets up Row Level Security (RLS) policies for the wiki_pages table. Allows public read access but restricts write operations to authenticated users.
+
+### 005_update_section_rpc_with_result.sql
+
+**CRITICAL:** Updates the `update_wiki_section()` RPC to return a boolean indicating success/failure. This prevents silent failures when RLS blocks unauthenticated updates.
+
+**Before:** RPC returned void, causing silent failures when users weren't logged in (RLS blocked write but no error was thrown).
+
+**After:** RPC returns `true` if rows were updated, `false` if blocked by RLS. Client can now detect and show meaningful error messages.
+
+**Fixes:** "Content not saving after edit" issue caused by hard refresh clearing session tokens, leaving users logged out without knowing it.
+
+### 006_add_section_render_columns.sql
+
+Adds `sections_html` and `sections_meta` JSONB columns to `wiki_pages`.
+
+- `sections_html`: pre-rendered HTML for each section (reader path)
+- `sections_meta`: renderer metadata (signature/hash/status timestamps)
+
+This enables dual rendering paths where readers can consume static HTML without mounting TipTap.
+
+### 007_update_section_rpc_for_render_cache.sql
+
+Upgrades `update_wiki_section()` to atomically persist:
+
+- section JSON (`sections`)
+- rendered section HTML (`sections_html`)
+- render metadata (`sections_meta`)
+
+Returns boolean success/failure so auth/RLS failures remain detectable.
+
+### 008_restructure_character_category_tables.sql
+
+Converts the character detail tables from row-per-item structures into one row per character per category using the wiki-style storage contract:
+
+- `content`: TipTap JSON source
+- `content_html`: rendered HTML
+
+The migration:
+
+- drops the old row-based category tables outright
+- creates new one-to-one category tables for abilities, world info, timeline, and feats
+- does not migrate legacy category content
+- rebuilds `character_master_view` as a one-row-per-character read model
+
+**Critical rollout note:** This is a hard cutover migration. Do not run it until the matching app-side `CharacterService` / hook / Power Room updates are ready. The new `character_master_view` no longer matches the current row-based `dataService` expectations.
+
 ## Running Migrations
 
 ### Option 1: Supabase CLI
@@ -52,6 +101,8 @@ supabase db push
 psql -h your-db-host -U your-user -d your-database -f migrations/001_add_sections_jsonb.sql
 psql -h your-db-host -U your-user -d your-database -f migrations/002_populate_anime_sections.sql
 psql -h your-db-host -U your-user -d your-database -f migrations/003_add_update_section_rpc.sql
+psql -h your-db-host -U your-user -d your-database -f migrations/006_add_section_render_columns.sql
+psql -h your-db-host -U your-user -d your-database -f migrations/007_update_section_rpc_for_render_cache.sql
 ```
 
 ## Architecture Notes

@@ -94,6 +94,22 @@ const PowerRoomPage: React.FC = () => {
 
   const { activeTarget, isEditing, selectTarget } = pageEditValue;
 
+  const handleEditSaveClick = useCallback(async () => {
+    if (!pageEditValue.canEdit) {
+      return;
+    }
+
+    if (pageEditValue.isEditing) {
+      try {
+        await pageEditValue.save();
+      } catch {
+        return;
+      }
+    }
+
+    pageEditValue.toggleEditMode();
+  }, [pageEditValue]);
+
   const isEditingTarget = useCallback(
     (characterId: string | undefined) =>
       Boolean(characterId) &&
@@ -192,6 +208,22 @@ const PowerRoomPage: React.FC = () => {
           />
 
           <section className="comparison-content-section">
+            <div className="wiki-controls-container">
+              <button
+                type="button"
+                className="wiki-edit-button"
+                onClick={handleEditSaveClick}
+                disabled={!pageEditValue.canEdit || isSaving}
+                aria-label={
+                  isEditing
+                    ? "Save Power Room changes"
+                    : "Enter Power Room edit mode"
+                }
+              >
+                {isSaving ? "Saving..." : isEditing ? "Save" : "Edit"}
+              </button>
+            </div>
+
             <PowerRoomStatusStack
               pendingSwap={pendingSwap}
               pageLoadError={pageLoadError}

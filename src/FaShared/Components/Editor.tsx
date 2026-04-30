@@ -99,14 +99,7 @@ const WikiEditor = forwardRef<WikiEditorRef, WikiEditorProps>(
     // Update editability when edit mode changes
     useEffect(() => {
       if (editor) {
-        console.log("🔧 WikiEditor: Setting editable", {
-          isEditing: resolvedEditable,
-          editorBefore: editor.isEditable,
-        });
         editor.setEditable(resolvedEditable);
-        console.log("🔧 WikiEditor: Editable set", {
-          editorAfter: editor.isEditable,
-        });
       }
     }, [resolvedEditable, editor]);
 

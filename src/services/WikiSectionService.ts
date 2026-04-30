@@ -157,15 +157,6 @@ export class WikiSectionService {
     try {
       const contentHash = hashTipTapContent(content);
 
-      console.log("💾 WikiSectionService.saveWikiPageSection", {
-        pageId,
-        sectionId,
-        content,
-        html,
-        contentHash,
-        rendererSig: WIKI_RENDERER_SIG,
-      });
-
       // Use PostgreSQL's jsonb_set to update just this section atomically
       const { data, error } = await supabase.rpc("update_wiki_section", {
         page_id: pageId,
@@ -178,11 +169,8 @@ export class WikiSectionService {
         updated_by: userId ?? null,
       });
 
-      console.log("💾 RPC response", { data, error, errorCode: error?.code });
-
       // Fallback: if RPC doesn't exist, use client-side merge
       if (error?.code === "42883") {
-        console.warn("⚠️ RPC not found, using fallback");
         await this.saveWikiPageSectionFallback(
           pageId,
           sectionId,
@@ -195,7 +183,6 @@ export class WikiSectionService {
       }
 
       if (error) {
-        console.error("❌ RPC error:", error);
         throw new Error(`Failed to save section: ${error.message}`);
       }
 
@@ -206,8 +193,6 @@ export class WikiSectionService {
         );
       }
 
-      console.log("✅ RPC succeeded");
-
       // Track contributor if user is logged in
       if (userId) {
         await WikiContributorService.trackContributor(pageId, userId);
@@ -216,7 +201,7 @@ export class WikiSectionService {
       // Invalidate ALL caches for this page
       cache.invalidateWikiPage(pageId);
     } catch (error) {
-      console.error("❌ Failed to save wiki page section:", error);
+      console.error("Failed to save wiki page section:", error);
       throw error;
     }
   }

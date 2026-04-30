@@ -101,21 +101,14 @@ export const useWikiPageSections = (
   // NEW: Update local state only (no DB save)
   const updateSectionContent = useCallback(
     (sectionId: string, content: TipTapContent, html: string) => {
-      console.log("📋 updateSectionContent called", {
-        sectionId,
-        content,
-        html,
-      });
       setPendingChanges((prev) => {
-        const updated = {
+        return {
           ...prev,
           [sectionId]: {
             content,
             html,
           },
         };
-        console.log("📋 pendingChanges updated", { prev, updated });
-        return updated;
       });
     },
     [],
@@ -123,19 +116,11 @@ export const useWikiPageSections = (
 
   // NEW: Save all pending changes to DB
   const saveAllSections = useCallback(async () => {
-    console.log("💾 saveAllSections called", {
-      pageId,
-      pendingChangesCount: Object.keys(pendingChanges).length,
-      pendingChanges,
-    });
-
     if (!pageId || Object.keys(pendingChanges).length === 0) {
-      console.warn("⚠️ Save skipped - no pageId or no pending changes");
       return;
     }
 
     try {
-      console.log("💾 Saving to DB...");
       // Save all sections in parallel (much faster than sequential)
       await Promise.all(
         Object.entries(pendingChanges).map(([sectionId, change]) =>
@@ -149,7 +134,6 @@ export const useWikiPageSections = (
         ),
       );
 
-      console.log("✅ DB save complete, merging into local state");
       // Merge pending into saved state
       setSectionContent((prev) => {
         const merged = { ...prev };
@@ -167,7 +151,7 @@ export const useWikiPageSections = (
       });
       setPendingChanges({}); // Clear pending changes
     } catch (err) {
-      console.error("❌ Failed to save sections:", err);
+      console.error("Failed to save sections:", err);
       throw err;
     }
   }, [pageId, pendingChanges, userId]);

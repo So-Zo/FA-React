@@ -24,6 +24,15 @@ const WikiSection: React.FC<WikiSectionProps> = ({
   const pageEdit = usePageEdit();
   const { setEditor } = useTipTapEditor();
 
+  const handleSaveClick = async () => {
+    try {
+      await pageEdit.save();
+      pageEdit.toggleEditMode();
+    } catch {
+      return;
+    }
+  };
+
   const isSectionEditing =
     pageEdit.isEditing &&
     (pageEdit.activeTarget?.kind !== "section" ||
@@ -42,7 +51,7 @@ const WikiSection: React.FC<WikiSectionProps> = ({
         className="section-button"
         type="button"
         onClick={() => {
-          void pageEdit.save();
+          void handleSaveClick();
         }}
         disabled={!pageEdit.isEditing}
       >
