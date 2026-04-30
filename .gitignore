@@ -15,7 +15,16 @@ dist-ssr
 # Environment files
 .env
 .env.*
-!.env.production.example
+
+# Local AI/debug artifacts
+.agents/
+skills-lock.json
+securityadvisorwarnings.md
+.github/copilot-instructions.md
+debug_anime_page.js
+debug-timeline.js
+debug-mobile.css
+debug-targeted.css
 
 # Editor directories and files
 .vscode/*
